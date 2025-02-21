@@ -1,8 +1,8 @@
 {
     "names": {
-	    	"dtk":     "192f8a8c137cec912092ffba747a0860593b7843fae1a22bd2f47348bdac5006", // "npub1ryhc4rqn0nkfzgyjl7a8g7sgvpvnk7zrlts6y27j73e530dv2qrq2wa9r7",
-    		"TaMeR":   "54a58131aad8a0b25c75d1d24ec3cc16e1ba35468ad94f95796680f976d62b64", // "npub12jjczvd2mzstyhr468fyas7vzmsm5d2x3tv5l9tev6q0jakk9djqx4uk7x",
-        	"code":    "c7fe02b1e5d54edd83f263c157e4df78276cedb0d9f321885a5e6fb78a3ab71c", // "npub1cllq9v09648dmqljv0q40exl0qnkemdsm8ejrzz6tehm0z36kuwqjqamxs",
-        	"dtamerk": "ba2ee399cb355d63b718111b04f935e8608162ef5d19c6f7bd55973c6ec0de75"  // "npub1hghw8xwtx4wk8dcczydsf7f4apsgzch0t5vudaaa2ktncmkqme6sge4ze7"
+       "dtamerk": "ba2ee399cb355d63b718111b04f935e8608162ef5d19c6f7bd55973c6ec0de75",
+	   "dtk":     "192f8a8c137cec912092ffba747a0860593b7843fae1a22bd2f47348bdac5006",
+	   "TaMeR":   "54a58131aad8a0b25c75d1d24ec3cc16e1ba35468ad94f95796680f976d62b64",
+       "code":    "c7fe02b1e5d54edd83f263c157e4df78276cedb0d9f321885a5e6fb78a3ab71c",
          }
 }
