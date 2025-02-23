@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/robotamer
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://tamer.pw
+  * I am robotamer (https://keybase.io/robotamer) on keybase.
+  * I have a public key ASC2fWT19JtezAZacQxGlJJj4Hepj1p4_9juTTHRAZMmiwo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "012013d04c2a1bde336a205fc1842cffca601b14d704045d45bd68d76943b20c942b0a",
+      "host": "keybase.io",
+      "kid": "0120b67d64f5f49b5ecc065a710c46949263e077a98f5a78ffd8ee4d31d10193268b0a",
+      "uid": "521d2e8f4ce1bca37583cc74a1aee219",
+      "username": "robotamer"
+    },
+    "merkle_root": {
+      "ctime": 1740304449,
+      "hash": "c84806b5a5e9c9254c0ffb0aca3941d728ad5abb68c238d836d337ca040f3ab7834d793f3a85c72891ed0d5ef42945b9cd4235d7f0373169daff0abec6c12802",
+      "hash_meta": "a1b6eb8f4dc6c8ad7feda7d50e8b72d0ac65baa64f53e0d55170d713b34c5f81",
+      "seqno": 26569066
+    },
+    "service": {
+      "entropy": "cJS75hc9LHjJhOdBuW2HgTW7",
+      "hostname": "tamer.pw",
+      "protocol": "http:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "6.2.8"
+  },
+  "ctime": 1740304508,
+  "expire_in": 504576000,
+  "prev": "046c822a999299d964bd539ddc18ef6fb629f6b1ac3f966956a312cf2b70dd47",
+  "seqno": 46,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgtn1k9fSbXswGWnEMRpSSY+B3qY9aeP/Y7k0x0QGTJosKp3BheWxvYWTESpcCLsQgBGyCKpmSmdlkvVOd3Bjvb7Yp9rGsP5ZpVqMSzytw3UfEIMRMNxYEEYqQz7vlCEt8MJEIRH2v1cKnBISfqDIMWh4GAgHCo3NpZ8RALacxQaBkPwF9F6O7c/CuycSsF0MguV3Up5CS4e1Mlg1FtVWr0aswaHjICAvcL5e/bv57Oj58AKBCsYhQ/x1rBahzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIIpMznX8z0V6Bqa5kvoMuZyu1G5/u73x9vEe4bBYe6j0o3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/robotamer
+
+==================================================================
