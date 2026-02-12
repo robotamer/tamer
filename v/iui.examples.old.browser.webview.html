@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="x-ua-compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>iui.examples.old.browser.webview | vdoc</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+		<link rel="manifest" href="site.webmanifest" />
+		<link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5" />
+		<meta name="msapplication-TileColor" content="#da532c" />
+		<meta name="theme-color" content="#ffffff" />
+		<link rel="stylesheet" href="doc.css" />
+		<link rel="stylesheet" href="normalize.css" />
+		<script src="dark-mode.js"></script>
+	</head>
+
+	<body>
+		<div><a id="skip-to-content-link" href="#main-content">Skip to content</a></div>
+		<div id="page">
+			<header class="doc-nav hidden">
+				<div class="heading-container">
+					<div class="heading">
+						<div class="info">
+							<div class="module">vmodules</div>
+							<div class="toggle-version-container">
+								<span> e2f6f08</span>
+								<div
+									id="dark-mode-toggle"
+									role="switch"
+									aria-checked="false"
+									aria-label="Toggle dark mode"
+								>
+									<svg xmlns="http://www.w3.org/2000/svg" class="light-icon" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9.95h-2V3.5h2V.55zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.7l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zM20 10.5v2h3v-2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95h2V19.5h-2v2.95zm-7.45-3.91l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" class="dark-icon" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24"><g><rect fill="none" height="24" width="24"/></g><g><g><g><path d="M11.1,12.08C8.77,7.57,10.6,3.6,11.63,2.01C6.27,2.2,1.98,6.59,1.98,12c0,0.14,0.02,0.28,0.02,0.42 C2.62,12.15,3.29,12,4,12c1.66,0,3.18,0.83,4.1,2.15C9.77,14.63,11,16.17,11,18c0,1.52-0.87,2.83-2.12,3.51 c0.98,0.32,2.03,0.5,3.11,0.5c3.5,0,6.58-1.8,8.37-4.52C18,17.72,13.38,16.52,11.1,12.08z"/></g><path d="M7,16l-0.18,0C6.4,14.84,5.3,14,4,14c-1.66,0-3,1.34-3,3s1.34,3,3,3c0.62,0,2.49,0,3,0c1.1,0,2-0.9,2-2 C9,16.9,8.1,16,7,16z"/></g></g></svg>
+
+								</div>
+							</div>
+							<svg xmlns="http://www.w3.org/2000/svg" id="toggle-menu" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+
+						</div>
+						<div id="search">
+							<input type="text" placeholder="Search... (beta)" autocomplete="off" />
+						</div>
+					</div>
+				</div>
+				<nav class="search hidden"></nav>
+				<nav class="content hidden">
+					<ul>
+						<li class="open">
+<div class="menu-row"><a href="./index.html">README</a></div>
+</li>
+<li class="open">
+<div class="menu-row"><a href="./nix.html">nix</a></div>
+</li>
+<li class="open">
+<div class="menu-row"><a href="./main.html">main</a></div>
+</li>
+<li class="open">
+<div class="menu-row"><svg xmlns="http://www.w3.org/2000/svg" class="dropdown-arrow" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7 10l5 5 5-5z"/></svg><a href="./iui.dialogs.html">iui</a></div>
+<ul>
+<li><a href="./iui.dialogs.html">dialogs</a></li>
+<li class="active"><a href="./iui.examples.old.browser.webview.html">examples.old.browser.webview</a></li>
+<li><a href="./iui.src.extra.html">src.extra</a></li>
+<li><a href="./iui.src.extra.dialogs.html">src.extra.dialogs</a></li>
+<li><a href="./iui.src.extra.dialogs.html">src.extra.dialogs</a></li>
+<li><a href="./iui.src.extra.file_dialog.html">src.extra.file_dialog</a></li>
+<li><a href="./iui.src.hc.html">src.hc</a></li>
+<li><a href="./iui.themes.html">themes</a></li>
+<li><a href="./iui.x.imagex.html">x.imagex</a></li>
+<li><a href="./iui.x.svg.html">x.svg</a></li>
+</ul>
+</li>
+<li class="open">
+<div class="menu-row"><a href="./markdown.html">markdown</a></div>
+</li>
+<li class="open">
+<div class="menu-row"><a href="./vin.html">vin</a></div>
+</li>
+<li class="open">
+<div class="menu-row"><svg xmlns="http://www.w3.org/2000/svg" class="dropdown-arrow" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7 10l5 5 5-5z"/></svg><a href="#">zztkm</a></div>
+<ul>
+<li><a href="./zztkm.vdotenv.html">vdotenv</a></li>
+</ul>
+</li>
+
+					</ul>
+				</nav>
+			</header>
+			<div class="doc-scrollview" tabindex="-1" id="main-content">
+				<div class="doc-container">
+					<div class="doc-content">
+								<section id="readme_iui.examples.old.browser.webview" class="doc-node">
+			<div class="title"><h1> iui.examples.old.browser.webview <a href="#readme_iui.examples.old.browser.webview">#</a></h1></div>
+
+
+</section>
+
+		<section id="bg_area" class="doc-node">
+			<div class="title"><h2>fn bg_area <a href="#bg_area">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">bg_area</span><span class="token punctuation">(</span>win <span class="token operator">&</span>ui<span class="token punctuation">.</span>Window<span class="token punctuation">)</span> <span class="token operator">&</span>BackgroundBox</code></pre>
+
+
+</section>
+
+		<section id="box_draw_fn" class="doc-node">
+			<div class="title"><h2>fn box_draw_fn <a href="#box_draw_fn">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">box_draw_fn</span><span class="token punctuation">(</span><span class="token keyword">mut</span> win ui<span class="token punctuation">.</span>Window<span class="token punctuation">,</span> com <span class="token operator">&</span>ui<span class="token punctuation">.</span>Component<span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+		<section id="btn_href_click" class="doc-node">
+			<div class="title"><h2>fn btn_href_click <a href="#btn_href_click">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">btn_href_click</span><span class="token punctuation">(</span>a <span class="token builtin">voidptr</span><span class="token punctuation">,</span> b <span class="token builtin">voidptr</span><span class="token punctuation">,</span> c <span class="token builtin">voidptr</span><span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+		<section id="create_hyperlink_label" class="doc-node">
+			<div class="title"><h2>fn create_hyperlink_label <a href="#create_hyperlink_label">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">create_hyperlink_label</span><span class="token punctuation">(</span>win <span class="token operator">&</span>ui<span class="token punctuation">.</span>Window<span class="token punctuation">,</span> content <span class="token builtin">string</span><span class="token punctuation">,</span> conf DocConfig<span class="token punctuation">)</span> <span class="token operator">&</span>ui<span class="token punctuation">.</span>Hyperlink</code></pre>
+
+
+</section>
+
+		<section id="em" class="doc-node">
+			<div class="title"><h2>fn em <a href="#em">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">em</span><span class="token punctuation">(</span>val <span class="token builtin">f32</span><span class="token punctuation">)</span> <span class="token builtin">f32</span></code></pre>
+
+
+</section>
+
+		<section id="form_submit" class="doc-node">
+			<div class="title"><h2>fn form_submit <a href="#form_submit">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">form_submit</span><span class="token punctuation">(</span>win_ptr <span class="token builtin">voidptr</span><span class="token punctuation">,</span> btn_ptr <span class="token builtin">voidptr</span><span class="token punctuation">,</span> data <span class="token builtin">voidptr</span><span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+		<section id="format_url" class="doc-node">
+			<div class="title"><h2>fn format_url <a href="#format_url">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">format_url</span><span class="token punctuation">(</span>ref <span class="token builtin">string</span><span class="token punctuation">,</span> page_url <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
+<p>Eg: /test -&gt; <a href="https://example.com/test">https://example.com/test</a></p>
+
+</section>
+
+		<section id="handle_form_tags" class="doc-node">
+			<div class="title"><h2>fn handle_form_tags <a href="#handle_form_tags">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">handle_form_tags</span><span class="token punctuation">(</span><span class="token keyword">mut</span> win ui<span class="token punctuation">.</span>Window<span class="token punctuation">,</span> <span class="token keyword">mut</span> box ui<span class="token punctuation">.</span>Box<span class="token punctuation">,</span> sub <span class="token operator">&</span>html<span class="token punctuation">.</span>Tag<span class="token punctuation">,</span> <span class="token keyword">mut</span> conf DocConfig<span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+		<section id="handle_image" class="doc-node">
+			<div class="title"><h2>fn handle_image <a href="#handle_image">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">handle_image</span><span class="token punctuation">(</span><span class="token keyword">mut</span> win ui<span class="token punctuation">.</span>Window<span class="token punctuation">,</span> tag <span class="token operator">&</span>html<span class="token punctuation">.</span>Tag<span class="token punctuation">,</span> conf DocConfig<span class="token punctuation">)</span> <span class="token operator">&</span>ui<span class="token punctuation">.</span>Image</code></pre>
+
+
+</section>
+
+		<section id="iem" class="doc-node">
+			<div class="title"><h2>fn iem <a href="#iem">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">iem</span><span class="token punctuation">(</span>val <span class="token builtin">f32</span><span class="token punctuation">)</span> <span class="token builtin">int</span></code></pre>
+
+
+</section>
+
+		<section id="load_url" class="doc-node">
+			<div class="title"><h2>fn load_url <a href="#load_url">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function">load_url</span><span class="token punctuation">(</span><span class="token keyword">mut</span> win ui<span class="token punctuation">.</span>Window<span class="token punctuation">,</span> url <span class="token builtin">string</span><span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+		<section id="parse_color" class="doc-node">
+			<div class="title"><h2>fn parse_color <a href="#parse_color">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">parse_color</span><span class="token punctuation">(</span>val <span class="token builtin">string</span><span class="token punctuation">)</span> gx<span class="token punctuation">.</span>Color</code></pre>
+<p>Parses a CSS color string to gx.Color</p>
+
+</section>
+
+		<section id="parse_css" class="doc-node">
+			<div class="title"><h2>fn parse_css <a href="#parse_css">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">parse_css</span><span class="token punctuation">(</span>val <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">&</span>StyleSheet</code></pre>
+<p>Parse CSS content into a StyleSheet</p>
+
+</section>
+
+		<section id="parse_min_css" class="doc-node">
+			<div class="title"><h2>fn parse_min_css <a href="#parse_min_css">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">parse_min_css</span><span class="token punctuation">(</span>val <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">&</span>StyleSheet</code></pre>
+
+
+</section>
+
+		<section id="render_tag_and_children" class="doc-node">
+			<div class="title"><h2>fn render_tag_and_children <a href="#render_tag_and_children">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">render_tag_and_children</span><span class="token punctuation">(</span><span class="token keyword">mut</span> win ui<span class="token punctuation">.</span>Window<span class="token punctuation">,</span> <span class="token keyword">mut</span> box ui<span class="token punctuation">.</span>Box<span class="token punctuation">,</span> tag <span class="token operator">&</span>html<span class="token punctuation">.</span>Tag<span class="token punctuation">,</span> <span class="token keyword">mut</span> conf DocConfig<span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+		<section id="set_conf_size" class="doc-node">
+			<div class="title"><h2>fn set_conf_size <a href="#set_conf_size">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">set_conf_size</span><span class="token punctuation">(</span>nam <span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token keyword">mut</span> config DocConfig<span class="token punctuation">)</span></code></pre>
+<p>Todo: CSS</p>
+
+</section>
+
+		<section id="set_status" class="doc-node">
+			<div class="title"><h2>fn set_status <a href="#set_status">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">set_status</span><span class="token punctuation">(</span><span class="token keyword">mut</span> win ui<span class="token punctuation">.</span>Window<span class="token punctuation">,</span> text <span class="token builtin">string</span><span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+		<section id="unescape" class="doc-node">
+			<div class="title"><h2>fn unescape <a href="#unescape">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">unescape</span><span class="token punctuation">(</span>text <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
+
+
+</section>
+
+		<section id="width_draw_fn" class="doc-node">
+			<div class="title"><h2>fn width_draw_fn <a href="#width_draw_fn">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">width_draw_fn</span><span class="token punctuation">(</span><span class="token keyword">mut</span> win ui<span class="token punctuation">.</span>Window<span class="token punctuation">,</span> com <span class="token operator">&</span>ui<span class="token punctuation">.</span>Component<span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+		<section id="BackgroundBox" class="doc-node">
+			<div class="title"><h2>struct BackgroundBox <a href="#BackgroundBox">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">struct</span> <span class="token symbol">BackgroundBox</span> <span class="token punctuation">{</span>
+	ui<span class="token punctuation">.</span>Component_A
+	win <span class="token operator">&</span>ui<span class="token punctuation">.</span>Window
+<span class="token keyword">pub</span> <span class="token keyword">mut</span><span class="token punctuation">:</span>
+	background gx<span class="token punctuation">.</span>Color
+<span class="token punctuation">}</span></code></pre>
+<p>Background component.</p>
+
+</section>
+
+		<section id="BackgroundBox.draw" class="doc-node">
+			<div class="title"><h2>fn (BackgroundBox) draw <a href="#BackgroundBox.draw">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> this BackgroundBox<span class="token punctuation">)</span> <span class="token function">draw</span><span class="token punctuation">(</span>ctx <span class="token operator">&</span>ui<span class="token punctuation">.</span>GraphicsContext<span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+		<section id="DocConfig" class="doc-node">
+			<div class="title"><h2>struct DocConfig <a href="#DocConfig">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">struct</span> <span class="token symbol">DocConfig</span> <span class="token punctuation">{</span>
+<span class="token keyword">mut</span><span class="token punctuation">:</span>
+	stylesheets   <span class="token punctuation">[</span><span class="token punctuation">]</span>StyleSheet
+	page_url      <span class="token builtin">string</span>
+	bold          <span class="token builtin">bool</span>
+	size          <span class="token builtin">int</span>
+	href          <span class="token builtin">string</span>
+	centered      <span class="token builtin">bool</span>
+	action        <span class="token builtin">string</span>
+	last_need     <span class="token builtin">voidptr</span>
+	margin_top    <span class="token builtin">int</span>
+	margin_bottom <span class="token builtin">int</span>
+<span class="token punctuation">}</span></code></pre>
+
+
+</section>
+
+		<section id="DocConfig.get_css_val" class="doc-node">
+			<div class="title"><h2>fn (DocConfig) get_css_val <a href="#DocConfig.get_css_val">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span>this <span class="token operator">&</span>DocConfig<span class="token punctuation">)</span> <span class="token function">get_css_val</span><span class="token punctuation">(</span>element <span class="token builtin">string</span><span class="token punctuation">,</span> key <span class="token builtin">string</span><span class="token punctuation">,</span> def <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
+
+
+</section>
+
+		<section id="Rule" class="doc-node">
+			<div class="title"><h2>struct Rule <a href="#Rule">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">struct</span> <span class="token symbol">Rule</span> <span class="token punctuation">{</span>
+<span class="token keyword">pub</span> <span class="token keyword">mut</span><span class="token punctuation">:</span>
+	key   <span class="token builtin">string</span>
+	value <span class="token builtin">string</span>
+<span class="token punctuation">}</span></code></pre>
+
+
+</section>
+
+		<section id="StringPtr" class="doc-node">
+			<div class="title"><h2>struct StringPtr <a href="#StringPtr">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">struct</span> <span class="token symbol">StringPtr</span> <span class="token punctuation">{</span>
+	val <span class="token builtin">string</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Todo: how to cast voidptr to string?</p>
+
+</section>
+
+		<section id="StyleSheet" class="doc-node">
+			<div class="title"><h2>struct StyleSheet <a href="#StyleSheet">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">struct</span> <span class="token symbol">StyleSheet</span> <span class="token punctuation">{</span>
+<span class="token keyword">pub</span> <span class="token keyword">mut</span><span class="token punctuation">:</span>
+	rules <span class="token builtin">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">string</span>
+<span class="token punctuation">}</span></code></pre>
+
+
+</section>
+
+
+						<div class="footer">Powered by vdoc. Generated on: 9 Feb 2026 15:26:23</div>
+					</div>
+					<div class="doc-toc"><ul><li class="open"><a href="#bg_area">fn bg_area</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#box_draw_fn">fn box_draw_fn</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#btn_href_click">fn btn_href_click</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#create_hyperlink_label">fn create_hyperlink_label</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#em">fn em</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#form_submit">fn form_submit</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#format_url">fn format_url</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#handle_form_tags">fn handle_form_tags</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#handle_image">fn handle_image</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#iem">fn iem</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#load_url">fn load_url</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#parse_color">fn parse_color</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#parse_css">fn parse_css</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#parse_min_css">fn parse_min_css</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#render_tag_and_children">fn render_tag_and_children</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#set_conf_size">fn set_conf_size</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#set_status">fn set_status</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#unescape">fn unescape</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#width_draw_fn">fn width_draw_fn</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#BackgroundBox">struct BackgroundBox</a>        <ul>
+<li><a href="#BackgroundBox.draw">fn draw</a></li>
+</ul>
+</li>
+<li class="open"><a href="#DocConfig">struct DocConfig</a>        <ul>
+<li><a href="#DocConfig.get_css_val">fn get_css_val</a></li>
+</ul>
+</li>
+<li class="open"><a href="#Rule">struct Rule</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#StringPtr">struct StringPtr</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#StyleSheet">struct StyleSheet</a>        <ul>
+</ul>
+</li>
+</ul></div>
+				</div>
+			</div>
+		</div>
+		<script src="doc.js"></script>
+		<script async src="search_index.js"></script>
+	</body>
+</html>

@@ -1,0 +1,1177 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="x-ua-compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>markdown | vdoc</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+		<link rel="manifest" href="site.webmanifest" />
+		<link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5" />
+		<meta name="msapplication-TileColor" content="#da532c" />
+		<meta name="theme-color" content="#ffffff" />
+		<link rel="stylesheet" href="doc.css" />
+		<link rel="stylesheet" href="normalize.css" />
+		<script src="dark-mode.js"></script>
+	</head>
+
+	<body>
+		<div><a id="skip-to-content-link" href="#main-content">Skip to content</a></div>
+		<div id="page">
+			<header class="doc-nav hidden">
+				<div class="heading-container">
+					<div class="heading">
+						<div class="info">
+							<div class="module">vmodules</div>
+							<div class="toggle-version-container">
+								<span> e2f6f08</span>
+								<div
+									id="dark-mode-toggle"
+									role="switch"
+									aria-checked="false"
+									aria-label="Toggle dark mode"
+								>
+									<svg xmlns="http://www.w3.org/2000/svg" class="light-icon" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9.95h-2V3.5h2V.55zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.7l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zM20 10.5v2h3v-2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95h2V19.5h-2v2.95zm-7.45-3.91l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" class="dark-icon" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24"><g><rect fill="none" height="24" width="24"/></g><g><g><g><path d="M11.1,12.08C8.77,7.57,10.6,3.6,11.63,2.01C6.27,2.2,1.98,6.59,1.98,12c0,0.14,0.02,0.28,0.02,0.42 C2.62,12.15,3.29,12,4,12c1.66,0,3.18,0.83,4.1,2.15C9.77,14.63,11,16.17,11,18c0,1.52-0.87,2.83-2.12,3.51 c0.98,0.32,2.03,0.5,3.11,0.5c3.5,0,6.58-1.8,8.37-4.52C18,17.72,13.38,16.52,11.1,12.08z"/></g><path d="M7,16l-0.18,0C6.4,14.84,5.3,14,4,14c-1.66,0-3,1.34-3,3s1.34,3,3,3c0.62,0,2.49,0,3,0c1.1,0,2-0.9,2-2 C9,16.9,8.1,16,7,16z"/></g></g></svg>
+
+								</div>
+							</div>
+							<svg xmlns="http://www.w3.org/2000/svg" id="toggle-menu" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+
+						</div>
+						<div id="search">
+							<input type="text" placeholder="Search... (beta)" autocomplete="off" />
+						</div>
+					</div>
+				</div>
+				<nav class="search hidden"></nav>
+				<nav class="content hidden">
+					<ul>
+						<li class="open">
+<div class="menu-row"><a href="./index.html">README</a></div>
+</li>
+<li class="open">
+<div class="menu-row"><a href="./nix.html">nix</a></div>
+</li>
+<li class="open">
+<div class="menu-row"><a href="./main.html">main</a></div>
+</li>
+<li class="open">
+<div class="menu-row"><svg xmlns="http://www.w3.org/2000/svg" class="dropdown-arrow" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7 10l5 5 5-5z"/></svg><a href="./iui.dialogs.html">iui</a></div>
+<ul>
+<li><a href="./iui.dialogs.html">dialogs</a></li>
+<li><a href="./iui.examples.old.browser.webview.html">examples.old.browser.webview</a></li>
+<li><a href="./iui.src.extra.html">src.extra</a></li>
+<li><a href="./iui.src.extra.dialogs.html">src.extra.dialogs</a></li>
+<li><a href="./iui.src.extra.dialogs.html">src.extra.dialogs</a></li>
+<li><a href="./iui.src.extra.file_dialog.html">src.extra.file_dialog</a></li>
+<li><a href="./iui.src.hc.html">src.hc</a></li>
+<li><a href="./iui.themes.html">themes</a></li>
+<li><a href="./iui.x.imagex.html">x.imagex</a></li>
+<li><a href="./iui.x.svg.html">x.svg</a></li>
+</ul>
+</li>
+<li class="open active">
+<div class="menu-row"><a href="./markdown.html">markdown</a></div>
+</li>
+<li class="open">
+<div class="menu-row"><a href="./vin.html">vin</a></div>
+</li>
+<li class="open">
+<div class="menu-row"><svg xmlns="http://www.w3.org/2000/svg" class="dropdown-arrow" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7 10l5 5 5-5z"/></svg><a href="#">zztkm</a></div>
+<ul>
+<li><a href="./zztkm.vdotenv.html">vdotenv</a></li>
+</ul>
+</li>
+
+					</ul>
+				</nav>
+			</header>
+			<div class="doc-scrollview" tabindex="-1" id="main-content">
+				<div class="doc-container">
+					<div class="doc-content">
+								<section id="readme_markdown" class="doc-node">
+			<div class="title"><h1> markdown <a href="#readme_markdown">#</a></h1></div>
+<h1 id="markdown">markdown</h1>
+<p>Markdown module for V. For now, it uses the <a href="https://github.com/mity/md4c">md4c</a> library for parsing markdown files to HTML and soon it will be rewritten from scratch to pure V.</p>
+<h2 id="usage">Usage</h2>
+<pre><code class="language-v"><span class="token keyword">module</span> main
+<span class="token keyword">import</span> markdown
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    text <span class="token operator">:=</span> <span class="token string">'# Markdown Rocks!'</span>
+    output <span class="token operator">:=</span> markdown<span class="token punctuation">.</span><span class="token function">to_html</span><span class="token punctuation">(</span>text<span class="token punctuation">)</span>
+    <span class="token function">println</span><span class="token punctuation">(</span>output<span class="token punctuation">)</span> <span class="token comment">// <h1>Markdown Rocks!</h1></span>
+<span class="token punctuation">}</span></code></pre>
+<h2 id="installation">Installation</h2>
+<p>Install and use markdown module via VPM:</p>
+<pre><code>v install markdown
+</code></pre>
+<p>Or via <a href="https://github.com/vpkg-project/vpkg">vpkg</a>:</p>
+<pre><code>vpkg get https://github.com/vlang/markdown --global
+</code></pre>
+<p>Or through Git:</p>
+<pre><code>git clone https://github.com/vlang/markdown.git ~/.vmodules/markdown
+</code></pre>
+<h2 id="contributors">Contributors</h2>
+<ul>
+<li>Ned Palacios (<a href="https://github.com/nedpals">@nedpals</a>)</li></ul>
+
+</section>
+
+		<section id="Constants" class="doc-node const">
+			<div class="title"><h2>Constants <a href="#Constants">#</a></h2></div>
+
+
+</section>
+
+		<section id="" class="doc-node const">
+<pre class="signature">
+<code><span class="token keyword">const</span> need_url_esc_flag <span class="token operator">=</span> <span class="token number">0x2</span></code></pre>
+
+
+</section>
+
+		<section id="" class="doc-node const">
+<pre class="signature">
+<code><span class="token keyword">const</span> need_html_esc_flag <span class="token operator">=</span> <span class="token number">0x1</span></code></pre>
+
+
+</section>
+
+		<section id="" class="doc-node const">
+<pre class="signature">
+<code><span class="token keyword">const</span> md_html_flag_verbatim_entities <span class="token operator">=</span> <span class="token number">0x0002</span></code></pre>
+
+
+</section>
+
+		<section id="" class="doc-node const">
+<pre class="signature">
+<code><span class="token keyword">const</span> md_html_flag_debug <span class="token operator">=</span> <span class="token number">0x0001</span></code></pre>
+
+
+</section>
+
+		<section id="" class="doc-node const">
+<pre class="signature">
+<code><span class="token keyword">const</span> html_block_tag_names <span class="token operator">=</span> <span class="token punctuation">{</span>
+	MD_BLOCKTYPE<span class="token punctuation">.</span>md_block_quote<span class="token punctuation">:</span> <span class="token string">'blockquote'</span>
+	<span class="token punctuation">.</span>md_block_ul<span class="token punctuation">:</span>                <span class="token string">'ul'</span>
+	<span class="token punctuation">.</span>md_block_ol<span class="token punctuation">:</span>                <span class="token string">'ol'</span>
+	<span class="token punctuation">.</span>md_block_li<span class="token punctuation">:</span>                <span class="token string">'li'</span>
+	<span class="token punctuation">.</span>md_block_hr<span class="token punctuation">:</span>                <span class="token string">'hr'</span>
+	<span class="token punctuation">.</span>md_block_h<span class="token punctuation">:</span>                 <span class="token string">'h'</span>
+	<span class="token punctuation">.</span>md_block_p<span class="token punctuation">:</span>                 <span class="token string">'p'</span>
+	<span class="token punctuation">.</span>md_block_code<span class="token punctuation">:</span>              <span class="token string">'pre'</span>
+	<span class="token punctuation">.</span>md_block_table<span class="token punctuation">:</span>             <span class="token string">'table'</span>
+	<span class="token punctuation">.</span>md_block_thead<span class="token punctuation">:</span>             <span class="token string">'thead'</span>
+	<span class="token punctuation">.</span>md_block_tbody<span class="token punctuation">:</span>             <span class="token string">'tbody'</span>
+	<span class="token punctuation">.</span>md_block_tr<span class="token punctuation">:</span>                <span class="token string">'tr'</span>
+	<span class="token punctuation">.</span>md_block_th<span class="token punctuation">:</span>                <span class="token string">'th'</span>
+	<span class="token punctuation">.</span>md_block_td<span class="token punctuation">:</span>                <span class="token string">'td'</span>
+<span class="token punctuation">}</span></code></pre>
+
+
+</section>
+
+		<section id="" class="doc-node const">
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">const</span> default_html_transformer <span class="token operator">=</span> <span class="token operator">&</span><span class="token symbol">DefaultHtmlTransformer</span><span class="token punctuation">{</span><span class="token punctuation">}</span></code></pre>
+
+
+</section>
+
+		<section id="" class="doc-node const">
+<pre class="signature">
+<code><span class="token keyword">const</span> self_closing_block_types <span class="token operator">=</span> <span class="token punctuation">[</span>MD_BLOCKTYPE<span class="token punctuation">.</span>md_block_hr<span class="token punctuation">]</span></code></pre>
+
+
+</section>
+
+		<section id="" class="doc-node const">
+<pre class="signature">
+<code><span class="token keyword">const</span> md_html_flag_skip_utf8_bom <span class="token operator">=</span> <span class="token number">0x0004</span></code></pre>
+
+
+</section>
+
+		<section id="" class="doc-node const">
+<pre class="signature">
+<code><span class="token keyword">const</span> html_span_tag_names <span class="token operator">=</span> <span class="token punctuation">{</span>
+	MD_SPANTYPE<span class="token punctuation">.</span>md_span_em<span class="token punctuation">:</span>     <span class="token string">'em'</span>
+	<span class="token punctuation">.</span>md_span_strong<span class="token punctuation">:</span>            <span class="token string">'strong'</span>
+	<span class="token punctuation">.</span>md_span_a<span class="token punctuation">:</span>                 <span class="token string">'a'</span>
+	<span class="token punctuation">.</span>md_span_img<span class="token punctuation">:</span>               <span class="token string">'img'</span>
+	<span class="token punctuation">.</span>md_span_code<span class="token punctuation">:</span>              <span class="token string">'code'</span>
+	<span class="token punctuation">.</span>md_span_del<span class="token punctuation">:</span>               <span class="token string">'del'</span>
+	<span class="token punctuation">.</span>md_span_latexmath<span class="token punctuation">:</span>         <span class="token string">'x-equation'</span>
+	<span class="token punctuation">.</span>md_span_latexmath_display<span class="token punctuation">:</span> <span class="token string">'x-equation'</span>
+	<span class="token punctuation">.</span>md_span_wikilink<span class="token punctuation">:</span>          <span class="token string">'x-wikilink'</span>
+	<span class="token punctuation">.</span>md_span_u<span class="token punctuation">:</span>                 <span class="token string">'u'</span>
+<span class="token punctuation">}</span></code></pre>
+
+
+</section>
+
+		<section id="C.md_html" class="doc-node">
+			<div class="title"><h2>fn C.md_html <a href="#C.md_html">#</a></h2></div>
+<div class="attributes"><div class="attribute">unsafe</div></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> C<span class="token punctuation">.</span><span class="token function">md_html</span><span class="token punctuation">(</span>orig_input <span class="token operator">&</span><span class="token builtin">char</span><span class="token punctuation">,</span> orig_input_size <span class="token builtin">u32</span><span class="token punctuation">,</span> process_output ProcessFn<span class="token punctuation">,</span> userdata <span class="token builtin">voidptr</span><span class="token punctuation">,</span> parser_flags <span class="token builtin">u32</span><span class="token punctuation">,</span> renderer_flags <span class="token builtin">u32</span><span class="token punctuation">)</span> <span class="token builtin">int</span></code></pre>
+
+
+</section>
+
+		<section id="C.md_parse" class="doc-node">
+			<div class="title"><h2>fn C.md_parse <a href="#C.md_parse">#</a></h2></div>
+<div class="attributes"><div class="attribute">unsafe</div></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> C<span class="token punctuation">.</span><span class="token function">md_parse</span><span class="token punctuation">(</span>text <span class="token operator">&</span><span class="token builtin">char</span><span class="token punctuation">,</span> size <span class="token builtin">u32</span><span class="token punctuation">,</span> parser <span class="token operator">&</span>C<span class="token punctuation">.</span>MD_PARSER<span class="token punctuation">,</span> userdata <span class="token builtin">voidptr</span><span class="token punctuation">)</span> <span class="token builtin">int</span></code></pre>
+
+
+</section>
+
+		<section id="new" class="doc-node">
+			<div class="title"><h2>fn new <a href="#new">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function">new</span><span class="token punctuation">(</span>parser_flags <span class="token builtin">u32</span><span class="token punctuation">,</span> enter_block_cb BlockFn<span class="token punctuation">,</span> leave_block_cb BlockFn<span class="token punctuation">,</span> enter_span_cb SpanFn<span class="token punctuation">,</span> leave_span_cb SpanFn<span class="token punctuation">,</span> text_cb TextFn<span class="token punctuation">,</span> debug_cb DebugFn<span class="token punctuation">)</span> C<span class="token punctuation">.</span>MD_PARSER</code></pre>
+
+
+</section>
+
+		<section id="parse" class="doc-node">
+			<div class="title"><h2>fn parse <a href="#parse">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">parse</span><span class="token punctuation">(</span>text <span class="token operator">&</span><span class="token builtin">char</span><span class="token punctuation">,</span> size <span class="token builtin">u32</span><span class="token punctuation">,</span> parser <span class="token operator">&</span>C<span class="token punctuation">.</span>MD_PARSER<span class="token punctuation">,</span> userdata <span class="token builtin">voidptr</span><span class="token punctuation">)</span> <span class="token builtin">int</span></code></pre>
+
+
+</section>
+
+		<section id="render" class="doc-node">
+			<div class="title"><h2>fn render <a href="#render">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function">render</span><span class="token punctuation">(</span>src <span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token keyword">mut</span> renderer Renderer<span class="token punctuation">)</span> <span class="token operator">!</span><span class="token builtin">string</span></code></pre>
+<p>render parses and renders a given markdown string based on the renderer.</p>
+
+</section>
+
+		<section id="renderer_debug_log_cb" class="doc-node">
+			<div class="title"><h2>fn renderer_debug_log_cb <a href="#renderer_debug_log_cb">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">renderer_debug_log_cb</span><span class="token punctuation">(</span>msg <span class="token operator">&</span><span class="token builtin">char</span><span class="token punctuation">,</span> <span class="token keyword">mut</span> renderer Renderer<span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+		<section id="renderer_enter_block_cb" class="doc-node">
+			<div class="title"><h2>fn renderer_enter_block_cb <a href="#renderer_enter_block_cb">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">renderer_enter_block_cb</span><span class="token punctuation">(</span>typ MD_BLOCKTYPE<span class="token punctuation">,</span> detail <span class="token builtin">voidptr</span><span class="token punctuation">,</span> <span class="token keyword">mut</span> renderer Renderer<span class="token punctuation">)</span> <span class="token builtin">int</span></code></pre>
+
+
+</section>
+
+		<section id="renderer_enter_span_cb" class="doc-node">
+			<div class="title"><h2>fn renderer_enter_span_cb <a href="#renderer_enter_span_cb">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">renderer_enter_span_cb</span><span class="token punctuation">(</span>typ MD_SPANTYPE<span class="token punctuation">,</span> detail <span class="token builtin">voidptr</span><span class="token punctuation">,</span> <span class="token keyword">mut</span> renderer Renderer<span class="token punctuation">)</span> <span class="token builtin">int</span></code></pre>
+
+
+</section>
+
+		<section id="renderer_handle_error" class="doc-node">
+			<div class="title"><h2>fn renderer_handle_error <a href="#renderer_handle_error">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">renderer_handle_error</span><span class="token punctuation">(</span>err <span class="token builtin">IError</span><span class="token punctuation">)</span> <span class="token builtin">int</span></code></pre>
+
+
+</section>
+
+		<section id="renderer_leave_block_cb" class="doc-node">
+			<div class="title"><h2>fn renderer_leave_block_cb <a href="#renderer_leave_block_cb">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">renderer_leave_block_cb</span><span class="token punctuation">(</span>typ MD_BLOCKTYPE<span class="token punctuation">,</span> detail <span class="token builtin">voidptr</span><span class="token punctuation">,</span> <span class="token keyword">mut</span> renderer Renderer<span class="token punctuation">)</span> <span class="token builtin">int</span></code></pre>
+
+
+</section>
+
+		<section id="renderer_leave_span_cb" class="doc-node">
+			<div class="title"><h2>fn renderer_leave_span_cb <a href="#renderer_leave_span_cb">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">renderer_leave_span_cb</span><span class="token punctuation">(</span>typ MD_SPANTYPE<span class="token punctuation">,</span> detail <span class="token builtin">voidptr</span><span class="token punctuation">,</span> <span class="token keyword">mut</span> renderer Renderer<span class="token punctuation">)</span> <span class="token builtin">int</span></code></pre>
+
+
+</section>
+
+		<section id="renderer_text_cb" class="doc-node">
+			<div class="title"><h2>fn renderer_text_cb <a href="#renderer_text_cb">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">renderer_text_cb</span><span class="token punctuation">(</span>typ MD_TEXTTYPE<span class="token punctuation">,</span> text <span class="token operator">&</span><span class="token builtin">char</span><span class="token punctuation">,</span> size <span class="token builtin">u32</span><span class="token punctuation">,</span> <span class="token keyword">mut</span> renderer Renderer<span class="token punctuation">)</span> <span class="token builtin">int</span></code></pre>
+
+
+</section>
+
+		<section id="title_to_id" class="doc-node">
+			<div class="title"><h2>fn title_to_id <a href="#title_to_id">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">title_to_id</span><span class="token punctuation">(</span>title <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
+
+
+</section>
+
+		<section id="to_html" class="doc-node">
+			<div class="title"><h2>fn to_html <a href="#to_html">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function">to_html</span><span class="token punctuation">(</span>input <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
+
+
+</section>
+
+		<section id="to_html_experimental" class="doc-node">
+			<div class="title"><h2>fn to_html_experimental <a href="#to_html_experimental">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function">to_html_experimental</span><span class="token punctuation">(</span>input <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
+
+
+</section>
+
+		<section id="to_plain" class="doc-node">
+			<div class="title"><h2>fn to_plain <a href="#to_plain">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function">to_plain</span><span class="token punctuation">(</span>input <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
+
+
+</section>
+
+		<section id="tos_attribute" class="doc-node">
+			<div class="title"><h2>fn tos_attribute <a href="#tos_attribute">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">tos_attribute</span><span class="token punctuation">(</span>attr <span class="token operator">&</span>C<span class="token punctuation">.</span>MD_ATTRIBUTE<span class="token punctuation">,</span> <span class="token keyword">mut</span> wr strings<span class="token punctuation">.</span>Builder<span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+		<section id="write_data_cb" class="doc-node">
+			<div class="title"><h2>fn write_data_cb <a href="#write_data_cb">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">write_data_cb</span><span class="token punctuation">(</span>txt <span class="token operator">&</span><span class="token builtin">char</span><span class="token punctuation">,</span> size <span class="token builtin">u32</span><span class="token punctuation">,</span> <span class="token keyword">mut</span> sb strings<span class="token punctuation">.</span>Builder<span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+		<section id="HtmlTransformer" class="doc-node">
+			<div class="title"><h2>interface HtmlTransformer <a href="#HtmlTransformer">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">interface</span> <span class="token symbol">HtmlTransformer</span> <span class="token punctuation">{</span>
+	<span class="token function">transform_attribute</span><span class="token punctuation">(</span>parent ParentType<span class="token punctuation">,</span> name <span class="token builtin">string</span><span class="token punctuation">,</span> value <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span>
+	<span class="token function">transform_content</span><span class="token punctuation">(</span>parent ParentType<span class="token punctuation">,</span> text <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span>
+<span class="token keyword">mut</span><span class="token punctuation">:</span>
+	<span class="token function">config_set</span><span class="token punctuation">(</span>key <span class="token builtin">string</span><span class="token punctuation">,</span> value <span class="token builtin">string</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre>
+<p>HtmlTransformer transforms converted HTML elements (limited to attribute and content for now) from markdown before incorporated into the final output.</p>
+<p>When implementing an HtmlTransformer, escaping the content is up to you. However, it is best to wrap the values you don't need with <code>markdown.default_html_transformer.transform_{attribute|content}</code></p>
+
+</section>
+
+		<section id="Renderer" class="doc-node">
+			<div class="title"><h2>interface Renderer <a href="#Renderer">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">interface</span> <span class="token symbol">Renderer</span> <span class="token punctuation">{</span>
+<span class="token keyword">mut</span><span class="token punctuation">:</span>
+	<span class="token function">str</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span>
+	<span class="token function">enter_block</span><span class="token punctuation">(</span>typ MD_BLOCKTYPE<span class="token punctuation">,</span> detail <span class="token builtin">voidptr</span><span class="token punctuation">)</span> <span class="token operator">?</span>
+	<span class="token function">leave_block</span><span class="token punctuation">(</span>typ MD_BLOCKTYPE<span class="token punctuation">,</span> detail <span class="token builtin">voidptr</span><span class="token punctuation">)</span> <span class="token operator">?</span>
+	<span class="token function">enter_span</span><span class="token punctuation">(</span>typ MD_SPANTYPE<span class="token punctuation">,</span> detail <span class="token builtin">voidptr</span><span class="token punctuation">)</span> <span class="token operator">?</span>
+	<span class="token function">leave_span</span><span class="token punctuation">(</span>typ MD_SPANTYPE<span class="token punctuation">,</span> detail <span class="token builtin">voidptr</span><span class="token punctuation">)</span> <span class="token operator">?</span>
+	<span class="token function">text</span><span class="token punctuation">(</span>typ MD_TEXTTYPE<span class="token punctuation">,</span> content <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">?</span>
+	<span class="token function">debug_log</span><span class="token punctuation">(</span>msg <span class="token builtin">string</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Renderer represents an entity that accepts incoming data and renders the content.</p>
+
+</section>
+
+		<section id="AttrTransformerFn" class="doc-node">
+			<div class="title"><h2>type AttrTransformerFn <a href="#AttrTransformerFn">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">type</span> AttrTransformerFn <span class="token operator">=</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span>ParentType<span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
+
+
+</section>
+
+		<section id="BlockFn" class="doc-node">
+			<div class="title"><h2>type BlockFn <a href="#BlockFn">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">type</span> BlockFn <span class="token operator">=</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span>t MD_BLOCKTYPE<span class="token punctuation">,</span> d <span class="token builtin">voidptr</span><span class="token punctuation">,</span> u <span class="token builtin">voidptr</span><span class="token punctuation">)</span> <span class="token builtin">int</span></code></pre>
+
+
+</section>
+
+		<section id="ContentTransformerFn" class="doc-node">
+			<div class="title"><h2>type ContentTransformerFn <a href="#ContentTransformerFn">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">type</span> ContentTransformerFn <span class="token operator">=</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span>ParentType<span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
+
+
+</section>
+
+		<section id="ContentTransformerFn.transform_attribute" class="doc-node">
+			<div class="title"><h2>fn (ContentTransformerFn) transform_attribute <a href="#ContentTransformerFn.transform_attribute">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span>t ContentTransformerFn<span class="token punctuation">)</span> <span class="token function">transform_attribute</span><span class="token punctuation">(</span>parent ParentType<span class="token punctuation">,</span> name <span class="token builtin">string</span><span class="token punctuation">,</span> value <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
+
+
+</section>
+
+		<section id="ContentTransformerFn.transform_content" class="doc-node">
+			<div class="title"><h2>fn (ContentTransformerFn) transform_content <a href="#ContentTransformerFn.transform_content">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span>t ContentTransformerFn<span class="token punctuation">)</span> <span class="token function">transform_content</span><span class="token punctuation">(</span>parent ParentType<span class="token punctuation">,</span> text <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
+
+
+</section>
+
+		<section id="ContentTransformerFn.config_set" class="doc-node">
+			<div class="title"><h2>fn (ContentTransformerFn) config_set <a href="#ContentTransformerFn.config_set">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> t ContentTransformerFn<span class="token punctuation">)</span> <span class="token function">config_set</span><span class="token punctuation">(</span>key <span class="token builtin">string</span><span class="token punctuation">,</span> val <span class="token builtin">string</span><span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+		<section id="DebugFn" class="doc-node">
+			<div class="title"><h2>type DebugFn <a href="#DebugFn">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">type</span> DebugFn <span class="token operator">=</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span>m <span class="token operator">&</span><span class="token builtin">char</span><span class="token punctuation">,</span> u <span class="token builtin">voidptr</span><span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+		<section id="ParentType" class="doc-node">
+			<div class="title"><h2>type ParentType <a href="#ParentType">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">type</span> ParentType <span class="token operator">=</span> MD_BLOCKTYPE <span class="token operator">|</span> MD_SPANTYPE</code></pre>
+
+
+</section>
+
+		<section id="ProcessFn" class="doc-node">
+			<div class="title"><h2>type ProcessFn <a href="#ProcessFn">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">type</span> ProcessFn <span class="token operator">=</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span>t <span class="token operator">&</span><span class="token builtin">char</span><span class="token punctuation">,</span> s <span class="token builtin">u32</span><span class="token punctuation">,</span> x <span class="token builtin">voidptr</span><span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+		<section id="SpanFn" class="doc-node">
+			<div class="title"><h2>type SpanFn <a href="#SpanFn">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">type</span> SpanFn <span class="token operator">=</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span>t MD_SPANTYPE<span class="token punctuation">,</span> d <span class="token builtin">voidptr</span><span class="token punctuation">,</span> u <span class="token builtin">voidptr</span><span class="token punctuation">)</span> <span class="token builtin">int</span></code></pre>
+
+
+</section>
+
+		<section id="TextFn" class="doc-node">
+			<div class="title"><h2>type TextFn <a href="#TextFn">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">type</span> TextFn <span class="token operator">=</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span>t MD_TEXTTYPE<span class="token punctuation">,</span> tx <span class="token operator">&</span><span class="token builtin">char</span><span class="token punctuation">,</span> s <span class="token builtin">u32</span><span class="token punctuation">,</span> u <span class="token builtin">voidptr</span><span class="token punctuation">)</span> <span class="token builtin">int</span></code></pre>
+
+
+</section>
+
+		<section id="MD_ALIGN" class="doc-node">
+			<div class="title"><h2>enum MD_ALIGN <a href="#MD_ALIGN">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">enum</span> <span class="token symbol">MD_ALIGN</span> <span class="token punctuation">{</span>
+	md_align_default <span class="token operator">=</span> <span class="token number">0</span>
+	md_align_left
+	md_align_center
+	md_align_right
+<span class="token punctuation">}</span></code></pre>
+
+
+</section>
+
+		<section id="MD_BLOCKTYPE" class="doc-node">
+			<div class="title"><h2>enum MD_BLOCKTYPE <a href="#MD_BLOCKTYPE">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">enum</span> <span class="token symbol">MD_BLOCKTYPE</span> <span class="token punctuation">{</span>
+	md_block_doc <span class="token operator">=</span> <span class="token number">0</span>
+	md_block_quote
+	md_block_ul
+	md_block_ol
+	md_block_li
+	md_block_hr
+	md_block_h
+	md_block_code
+	md_block_html
+	md_block_p
+	md_block_table
+	md_block_thead
+	md_block_tbody
+	md_block_tr
+	md_block_th
+	md_block_td
+<span class="token punctuation">}</span></code></pre>
+
+
+</section>
+
+		<section id="MD_SPANTYPE" class="doc-node">
+			<div class="title"><h2>enum MD_SPANTYPE <a href="#MD_SPANTYPE">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">enum</span> <span class="token symbol">MD_SPANTYPE</span> <span class="token punctuation">{</span>
+	md_span_em
+	md_span_strong
+	md_span_a
+	md_span_img
+	md_span_code
+	md_span_del
+	md_span_latexmath
+	md_span_latexmath_display
+	md_span_wikilink
+	md_span_u
+<span class="token punctuation">}</span></code></pre>
+
+
+</section>
+
+		<section id="MD_TEXTTYPE" class="doc-node">
+			<div class="title"><h2>enum MD_TEXTTYPE <a href="#MD_TEXTTYPE">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">enum</span> <span class="token symbol">MD_TEXTTYPE</span> <span class="token punctuation">{</span>
+	md_text_normal <span class="token operator">=</span> <span class="token number">0</span>
+	md_text_null_char
+	md_text_br
+	md_text_softbr
+	md_text_entity
+	md_text_code
+	md_text_html
+	md_text_latexmath
+<span class="token punctuation">}</span></code></pre>
+
+
+</section>
+
+		<section id="AttrTransformer" class="doc-node">
+			<div class="title"><h2>struct AttrTransformer <a href="#AttrTransformer">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">struct</span> <span class="token symbol">AttrTransformer</span> <span class="token punctuation">{</span>
+<span class="token keyword">pub</span> <span class="token keyword">mut</span><span class="token punctuation">:</span>
+	callback AttrTransformerFn <span class="token operator">=</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span>_ ParentType<span class="token punctuation">,</span> _ <span class="token builtin">string</span><span class="token punctuation">,</span> _ <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">{</span>
+		<span class="token keyword">return</span> <span class="token string">''</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+
+
+</section>
+
+		<section id="AttrTransformer.transform_attribute" class="doc-node">
+			<div class="title"><h2>fn (AttrTransformer) transform_attribute <a href="#AttrTransformer.transform_attribute">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span>t AttrTransformer<span class="token punctuation">)</span> <span class="token function">transform_attribute</span><span class="token punctuation">(</span>parent ParentType<span class="token punctuation">,</span> name <span class="token builtin">string</span><span class="token punctuation">,</span> value <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
+
+
+</section>
+
+		<section id="AttrTransformer.transform_content" class="doc-node">
+			<div class="title"><h2>fn (AttrTransformer) transform_content <a href="#AttrTransformer.transform_content">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span>t AttrTransformer<span class="token punctuation">)</span> <span class="token function">transform_content</span><span class="token punctuation">(</span>parent ParentType<span class="token punctuation">,</span> text <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
+
+
+</section>
+
+		<section id="AttrTransformer.config_set" class="doc-node">
+			<div class="title"><h2>fn (AttrTransformer) config_set <a href="#AttrTransformer.config_set">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> t AttrTransformer<span class="token punctuation">)</span> <span class="token function">config_set</span><span class="token punctuation">(</span>key <span class="token builtin">string</span><span class="token punctuation">,</span> val <span class="token builtin">string</span><span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+		<section id="C.MD_ATTRIBUTE" class="doc-node">
+			<div class="title"><h2>struct C.MD_ATTRIBUTE <a href="#C.MD_ATTRIBUTE">#</a></h2></div>
+<div class="attributes"><div class="attribute">@[typedef]</div></div>
+<pre class="signature">
+<code>@<span class="token punctuation">[</span>typedef<span class="token punctuation">]</span>
+<span class="token keyword">pub</span> <span class="token keyword">struct</span> C<span class="token punctuation">.</span><span class="token symbol">MD_ATTRIBUTE</span> <span class="token punctuation">{</span>
+<span class="token keyword">pub</span><span class="token punctuation">:</span>
+	text           <span class="token operator">&</span><span class="token builtin">char</span>
+	size           <span class="token builtin">u32</span>
+	substr_types   <span class="token operator">&</span>MD_TEXTTYPE
+	substr_offsets <span class="token operator">&</span><span class="token builtin">u32</span>
+<span class="token punctuation">}</span></code></pre>
+
+
+</section>
+
+		<section id="C.MD_BLOCK_CODE_DETAIL" class="doc-node">
+			<div class="title"><h2>struct C.MD_BLOCK_CODE_DETAIL <a href="#C.MD_BLOCK_CODE_DETAIL">#</a></h2></div>
+<div class="attributes"><div class="attribute">@[typedef]</div></div>
+<pre class="signature">
+<code>@<span class="token punctuation">[</span>typedef<span class="token punctuation">]</span>
+<span class="token keyword">pub</span> <span class="token keyword">struct</span> C<span class="token punctuation">.</span><span class="token symbol">MD_BLOCK_CODE_DETAIL</span> <span class="token punctuation">{</span>
+<span class="token keyword">pub</span><span class="token punctuation">:</span>
+	info       C<span class="token punctuation">.</span>MD_ATTRIBUTE
+	lang       C<span class="token punctuation">.</span>MD_ATTRIBUTE
+	fence_char <span class="token builtin">u8</span>
+<span class="token punctuation">}</span></code></pre>
+
+
+</section>
+
+		<section id="C.MD_BLOCK_H_DETAIL" class="doc-node">
+			<div class="title"><h2>struct C.MD_BLOCK_H_DETAIL <a href="#C.MD_BLOCK_H_DETAIL">#</a></h2></div>
+<div class="attributes"><div class="attribute">@[typedef]</div></div>
+<pre class="signature">
+<code>@<span class="token punctuation">[</span>typedef<span class="token punctuation">]</span>
+<span class="token keyword">pub</span> <span class="token keyword">struct</span> C<span class="token punctuation">.</span><span class="token symbol">MD_BLOCK_H_DETAIL</span> <span class="token punctuation">{</span>
+<span class="token keyword">pub</span><span class="token punctuation">:</span>
+	level <span class="token builtin">u32</span>
+<span class="token punctuation">}</span></code></pre>
+
+
+</section>
+
+		<section id="C.MD_BLOCK_LI_DETAIL" class="doc-node">
+			<div class="title"><h2>struct C.MD_BLOCK_LI_DETAIL <a href="#C.MD_BLOCK_LI_DETAIL">#</a></h2></div>
+<div class="attributes"><div class="attribute">@[typedef]</div></div>
+<pre class="signature">
+<code>@<span class="token punctuation">[</span>typedef<span class="token punctuation">]</span>
+<span class="token keyword">pub</span> <span class="token keyword">struct</span> C<span class="token punctuation">.</span><span class="token symbol">MD_BLOCK_LI_DETAIL</span> <span class="token punctuation">{</span>
+<span class="token keyword">pub</span><span class="token punctuation">:</span>
+	is_task          <span class="token builtin">bool</span>
+	task_mark        <span class="token builtin">u8</span>
+	task_mark_offset <span class="token builtin">u32</span>
+<span class="token punctuation">}</span></code></pre>
+
+
+</section>
+
+		<section id="C.MD_BLOCK_OL_DETAIL" class="doc-node">
+			<div class="title"><h2>struct C.MD_BLOCK_OL_DETAIL <a href="#C.MD_BLOCK_OL_DETAIL">#</a></h2></div>
+<div class="attributes"><div class="attribute">@[typedef]</div></div>
+<pre class="signature">
+<code>@<span class="token punctuation">[</span>typedef<span class="token punctuation">]</span>
+<span class="token keyword">pub</span> <span class="token keyword">struct</span> C<span class="token punctuation">.</span><span class="token symbol">MD_BLOCK_OL_DETAIL</span> <span class="token punctuation">{</span>
+<span class="token keyword">pub</span><span class="token punctuation">:</span>
+	start          <span class="token builtin">u32</span>
+	is_tight       <span class="token builtin">int</span>
+	mark_delimiter <span class="token builtin">u8</span>
+<span class="token punctuation">}</span></code></pre>
+
+
+</section>
+
+		<section id="C.MD_BLOCK_TD_DETAIL" class="doc-node">
+			<div class="title"><h2>struct C.MD_BLOCK_TD_DETAIL <a href="#C.MD_BLOCK_TD_DETAIL">#</a></h2></div>
+<div class="attributes"><div class="attribute">@[typedef]</div></div>
+<pre class="signature">
+<code>@<span class="token punctuation">[</span>typedef<span class="token punctuation">]</span>
+<span class="token keyword">pub</span> <span class="token keyword">struct</span> C<span class="token punctuation">.</span><span class="token symbol">MD_BLOCK_TD_DETAIL</span> <span class="token punctuation">{</span>
+<span class="token keyword">pub</span><span class="token punctuation">:</span>
+	align MD_ALIGN
+<span class="token punctuation">}</span></code></pre>
+
+
+</section>
+
+		<section id="C.MD_BLOCK_UL_DETAIL" class="doc-node">
+			<div class="title"><h2>struct C.MD_BLOCK_UL_DETAIL <a href="#C.MD_BLOCK_UL_DETAIL">#</a></h2></div>
+<div class="attributes"><div class="attribute">@[typedef]</div></div>
+<pre class="signature">
+<code>@<span class="token punctuation">[</span>typedef<span class="token punctuation">]</span>
+<span class="token keyword">pub</span> <span class="token keyword">struct</span> C<span class="token punctuation">.</span><span class="token symbol">MD_BLOCK_UL_DETAIL</span> <span class="token punctuation">{</span>
+<span class="token keyword">pub</span><span class="token punctuation">:</span>
+	is_tight <span class="token builtin">int</span>
+	mark     <span class="token builtin">u8</span>
+<span class="token punctuation">}</span></code></pre>
+
+
+</section>
+
+		<section id="C.MD_PARSER" class="doc-node">
+			<div class="title"><h2>struct C.MD_PARSER <a href="#C.MD_PARSER">#</a></h2></div>
+<div class="attributes"><div class="attribute">@[typedef]</div></div>
+<pre class="signature">
+<code>@<span class="token punctuation">[</span>typedef<span class="token punctuation">]</span>
+<span class="token keyword">pub</span> <span class="token keyword">struct</span> C<span class="token punctuation">.</span><span class="token symbol">MD_PARSER</span> <span class="token punctuation">{</span>
+<span class="token keyword">pub</span><span class="token punctuation">:</span>
+	abi_version <span class="token builtin">u32</span>
+	flags       <span class="token builtin">u32</span>
+	enter_block BlockFn
+	leave_block BlockFn
+	enter_span  SpanFn
+	leave_span  SpanFn
+	text        TextFn
+	debug_log   DebugFn
+<span class="token punctuation">}</span></code></pre>
+
+
+</section>
+
+		<section id="C.MD_SPAN_A_DETAIL" class="doc-node">
+			<div class="title"><h2>struct C.MD_SPAN_A_DETAIL <a href="#C.MD_SPAN_A_DETAIL">#</a></h2></div>
+<div class="attributes"><div class="attribute">@[typedef]</div></div>
+<pre class="signature">
+<code>@<span class="token punctuation">[</span>typedef<span class="token punctuation">]</span>
+<span class="token keyword">pub</span> <span class="token keyword">struct</span> C<span class="token punctuation">.</span><span class="token symbol">MD_SPAN_A_DETAIL</span> <span class="token punctuation">{</span>
+<span class="token keyword">pub</span><span class="token punctuation">:</span>
+	href  C<span class="token punctuation">.</span>MD_ATTRIBUTE
+	title C<span class="token punctuation">.</span>MD_ATTRIBUTE
+<span class="token punctuation">}</span></code></pre>
+
+
+</section>
+
+		<section id="C.MD_SPAN_IMG_DETAIL" class="doc-node">
+			<div class="title"><h2>struct C.MD_SPAN_IMG_DETAIL <a href="#C.MD_SPAN_IMG_DETAIL">#</a></h2></div>
+<div class="attributes"><div class="attribute">@[typedef]</div></div>
+<pre class="signature">
+<code>@<span class="token punctuation">[</span>typedef<span class="token punctuation">]</span>
+<span class="token keyword">pub</span> <span class="token keyword">struct</span> C<span class="token punctuation">.</span><span class="token symbol">MD_SPAN_IMG_DETAIL</span> <span class="token punctuation">{</span>
+<span class="token keyword">pub</span><span class="token punctuation">:</span>
+	src   C<span class="token punctuation">.</span>MD_ATTRIBUTE
+	title C<span class="token punctuation">.</span>MD_ATTRIBUTE
+<span class="token punctuation">}</span></code></pre>
+
+
+</section>
+
+		<section id="C.MD_SPAN_WIKILINK_DETAIL" class="doc-node">
+			<div class="title"><h2>struct C.MD_SPAN_WIKILINK_DETAIL <a href="#C.MD_SPAN_WIKILINK_DETAIL">#</a></h2></div>
+<div class="attributes"><div class="attribute">@[typedef]</div></div>
+<pre class="signature">
+<code>@<span class="token punctuation">[</span>typedef<span class="token punctuation">]</span>
+<span class="token keyword">pub</span> <span class="token keyword">struct</span> C<span class="token punctuation">.</span><span class="token symbol">MD_SPAN_WIKILINK_DETAIL</span> <span class="token punctuation">{</span>
+<span class="token keyword">pub</span><span class="token punctuation">:</span>
+	target C<span class="token punctuation">.</span>MD_ATTRIBUTE
+<span class="token punctuation">}</span></code></pre>
+
+
+</section>
+
+		<section id="DefaultHtmlTransformer" class="doc-node">
+			<div class="title"><h2>struct DefaultHtmlTransformer <a href="#DefaultHtmlTransformer">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">struct</span> <span class="token symbol">DefaultHtmlTransformer</span> <span class="token punctuation">{</span><span class="token punctuation">}</span></code></pre>
+
+
+</section>
+
+		<section id="DefaultHtmlTransformer.transform_attribute" class="doc-node">
+			<div class="title"><h2>fn (DefaultHtmlTransformer) transform_attribute <a href="#DefaultHtmlTransformer.transform_attribute">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span>t <span class="token operator">&</span>DefaultHtmlTransformer<span class="token punctuation">)</span> <span class="token function">transform_attribute</span><span class="token punctuation">(</span>parent ParentType<span class="token punctuation">,</span> name <span class="token builtin">string</span><span class="token punctuation">,</span> value <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
+
+
+</section>
+
+		<section id="DefaultHtmlTransformer.transform_content" class="doc-node">
+			<div class="title"><h2>fn (DefaultHtmlTransformer) transform_content <a href="#DefaultHtmlTransformer.transform_content">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span>t <span class="token operator">&</span>DefaultHtmlTransformer<span class="token punctuation">)</span> <span class="token function">transform_content</span><span class="token punctuation">(</span>parent ParentType<span class="token punctuation">,</span> text <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
+
+
+</section>
+
+		<section id="DefaultHtmlTransformer.config_set" class="doc-node">
+			<div class="title"><h2>fn (DefaultHtmlTransformer) config_set <a href="#DefaultHtmlTransformer.config_set">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> t DefaultHtmlTransformer<span class="token punctuation">)</span> <span class="token function">config_set</span><span class="token punctuation">(</span>key <span class="token builtin">string</span><span class="token punctuation">,</span> val <span class="token builtin">string</span><span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+		<section id="HtmlRenderer" class="doc-node">
+			<div class="title"><h2>struct HtmlRenderer <a href="#HtmlRenderer">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">struct</span> <span class="token symbol">HtmlRenderer</span> <span class="token punctuation">{</span>
+<span class="token keyword">pub</span> <span class="token keyword">mut</span><span class="token punctuation">:</span>
+	transformer HtmlTransformer <span class="token operator">=</span> default_html_transformer
+<span class="token keyword">mut</span><span class="token punctuation">:</span>
+	parent_stack        Stack<span class="token punctuation">[</span>ParentType<span class="token punctuation">]</span>
+	content_writer      strings<span class="token punctuation">.</span>Builder <span class="token operator">=</span> strings<span class="token punctuation">.</span><span class="token function">new_builder</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span>
+	writer              strings<span class="token punctuation">.</span>Builder <span class="token operator">=</span> strings<span class="token punctuation">.</span><span class="token function">new_builder</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span>
+	image_nesting_level <span class="token builtin">int</span>
+	last_htag_open_pos  <span class="token builtin">int</span>
+<span class="token punctuation">}</span></code></pre>
+
+
+</section>
+
+		<section id="HtmlRenderer.str" class="doc-node">
+			<div class="title"><h2>fn (HtmlRenderer) str <a href="#HtmlRenderer.str">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> ht HtmlRenderer<span class="token punctuation">)</span> <span class="token function">str</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
+
+
+</section>
+
+		<section id="HtmlRenderer.render_opening_attribute" class="doc-node">
+			<div class="title"><h2>fn (HtmlRenderer) render_opening_attribute <a href="#HtmlRenderer.render_opening_attribute">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> ht HtmlRenderer<span class="token punctuation">)</span> <span class="token function">render_opening_attribute</span><span class="token punctuation">(</span>key <span class="token builtin">string</span><span class="token punctuation">,</span> with_str_opening <span class="token builtin">bool</span><span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+		<section id="HtmlRenderer.render_closing_attribute" class="doc-node">
+			<div class="title"><h2>fn (HtmlRenderer) render_closing_attribute <a href="#HtmlRenderer.render_closing_attribute">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> ht HtmlRenderer<span class="token punctuation">)</span> <span class="token function">render_closing_attribute</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+		<section id="HtmlRenderer.render_md_attribute" class="doc-node">
+			<div class="title"><h2>fn (HtmlRenderer) render_md_attribute <a href="#HtmlRenderer.render_md_attribute">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> ht HtmlRenderer<span class="token punctuation">)</span> <span class="token function">render_md_attribute</span><span class="token punctuation">(</span>key <span class="token builtin">string</span><span class="token punctuation">,</span> attr <span class="token operator">&</span>C<span class="token punctuation">.</span>MD_ATTRIBUTE<span class="token punctuation">,</span> cfg MdAttributeConfig<span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+		<section id="HtmlRenderer.render_attribute" class="doc-node">
+			<div class="title"><h2>fn (HtmlRenderer) render_attribute <a href="#HtmlRenderer.render_attribute">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> ht HtmlRenderer<span class="token punctuation">)</span> <span class="token function">render_attribute</span><span class="token punctuation">(</span>key <span class="token builtin">string</span><span class="token punctuation">,</span> value <span class="token builtin">string</span><span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+		<section id="HtmlRenderer.render_content" class="doc-node">
+			<div class="title"><h2>fn (HtmlRenderer) render_content <a href="#HtmlRenderer.render_content">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> ht HtmlRenderer<span class="token punctuation">)</span> <span class="token function">render_content</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+		<section id="HtmlRenderer.enter_block" class="doc-node">
+			<div class="title"><h2>fn (HtmlRenderer) enter_block <a href="#HtmlRenderer.enter_block">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> ht HtmlRenderer<span class="token punctuation">)</span> <span class="token function">enter_block</span><span class="token punctuation">(</span>typ MD_BLOCKTYPE<span class="token punctuation">,</span> detail <span class="token builtin">voidptr</span><span class="token punctuation">)</span> <span class="token operator">?</span></code></pre>
+
+
+</section>
+
+		<section id="HtmlRenderer.leave_block" class="doc-node">
+			<div class="title"><h2>fn (HtmlRenderer) leave_block <a href="#HtmlRenderer.leave_block">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> ht HtmlRenderer<span class="token punctuation">)</span> <span class="token function">leave_block</span><span class="token punctuation">(</span>typ MD_BLOCKTYPE<span class="token punctuation">,</span> detail <span class="token builtin">voidptr</span><span class="token punctuation">)</span> <span class="token operator">?</span></code></pre>
+
+
+</section>
+
+		<section id="HtmlRenderer.enter_span" class="doc-node">
+			<div class="title"><h2>fn (HtmlRenderer) enter_span <a href="#HtmlRenderer.enter_span">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> ht HtmlRenderer<span class="token punctuation">)</span> <span class="token function">enter_span</span><span class="token punctuation">(</span>typ MD_SPANTYPE<span class="token punctuation">,</span> detail <span class="token builtin">voidptr</span><span class="token punctuation">)</span> <span class="token operator">?</span></code></pre>
+
+
+</section>
+
+		<section id="HtmlRenderer.leave_span" class="doc-node">
+			<div class="title"><h2>fn (HtmlRenderer) leave_span <a href="#HtmlRenderer.leave_span">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> ht HtmlRenderer<span class="token punctuation">)</span> <span class="token function">leave_span</span><span class="token punctuation">(</span>typ MD_SPANTYPE<span class="token punctuation">,</span> detail <span class="token builtin">voidptr</span><span class="token punctuation">)</span> <span class="token operator">?</span></code></pre>
+
+
+</section>
+
+		<section id="HtmlRenderer.text" class="doc-node">
+			<div class="title"><h2>fn (HtmlRenderer) text <a href="#HtmlRenderer.text">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> ht HtmlRenderer<span class="token punctuation">)</span> <span class="token function">text</span><span class="token punctuation">(</span>typ MD_TEXTTYPE<span class="token punctuation">,</span> text <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">?</span></code></pre>
+
+
+</section>
+
+		<section id="HtmlRenderer.debug_log" class="doc-node">
+			<div class="title"><h2>fn (HtmlRenderer) debug_log <a href="#HtmlRenderer.debug_log">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> ht HtmlRenderer<span class="token punctuation">)</span> <span class="token function">debug_log</span><span class="token punctuation">(</span>msg <span class="token builtin">string</span><span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+		<section id="MdAttributeConfig" class="doc-node">
+			<div class="title"><h2>struct MdAttributeConfig <a href="#MdAttributeConfig">#</a></h2></div>
+<div class="attributes"><div class="attribute">@[params]</div></div>
+<pre class="signature">
+<code>@<span class="token punctuation">[</span>params<span class="token punctuation">]</span>
+<span class="token keyword">struct</span> <span class="token symbol">MdAttributeConfig</span> <span class="token punctuation">{</span>
+	prefix      <span class="token builtin">string</span>
+	suffix      <span class="token builtin">string</span>
+	setting_key <span class="token builtin">string</span>
+<span class="token punctuation">}</span></code></pre>
+
+
+</section>
+
+		<section id="PlaintextRenderer" class="doc-node">
+			<div class="title"><h2>struct PlaintextRenderer <a href="#PlaintextRenderer">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">struct</span> <span class="token symbol">PlaintextRenderer</span> <span class="token punctuation">{</span>
+<span class="token keyword">mut</span><span class="token punctuation">:</span>
+	writer strings<span class="token punctuation">.</span>Builder <span class="token operator">=</span> strings<span class="token punctuation">.</span><span class="token function">new_builder</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre>
+
+
+</section>
+
+		<section id="PlaintextRenderer.str" class="doc-node">
+			<div class="title"><h2>fn (PlaintextRenderer) str <a href="#PlaintextRenderer.str">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> pt PlaintextRenderer<span class="token punctuation">)</span> <span class="token function">str</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
+
+
+</section>
+
+		<section id="PlaintextRenderer.enter_block" class="doc-node">
+			<div class="title"><h2>fn (PlaintextRenderer) enter_block <a href="#PlaintextRenderer.enter_block">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> pt PlaintextRenderer<span class="token punctuation">)</span> <span class="token function">enter_block</span><span class="token punctuation">(</span>typ MD_BLOCKTYPE<span class="token punctuation">,</span> detail <span class="token builtin">voidptr</span><span class="token punctuation">)</span> <span class="token operator">?</span></code></pre>
+
+
+</section>
+
+		<section id="PlaintextRenderer.leave_block" class="doc-node">
+			<div class="title"><h2>fn (PlaintextRenderer) leave_block <a href="#PlaintextRenderer.leave_block">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> pt PlaintextRenderer<span class="token punctuation">)</span> <span class="token function">leave_block</span><span class="token punctuation">(</span>typ MD_BLOCKTYPE<span class="token punctuation">,</span> _ <span class="token builtin">voidptr</span><span class="token punctuation">)</span> <span class="token operator">?</span></code></pre>
+
+
+</section>
+
+		<section id="PlaintextRenderer.enter_span" class="doc-node">
+			<div class="title"><h2>fn (PlaintextRenderer) enter_span <a href="#PlaintextRenderer.enter_span">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> pt PlaintextRenderer<span class="token punctuation">)</span> <span class="token function">enter_span</span><span class="token punctuation">(</span>typ MD_SPANTYPE<span class="token punctuation">,</span> detail <span class="token builtin">voidptr</span><span class="token punctuation">)</span> <span class="token operator">?</span></code></pre>
+
+
+</section>
+
+		<section id="PlaintextRenderer.leave_span" class="doc-node">
+			<div class="title"><h2>fn (PlaintextRenderer) leave_span <a href="#PlaintextRenderer.leave_span">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> pt PlaintextRenderer<span class="token punctuation">)</span> <span class="token function">leave_span</span><span class="token punctuation">(</span>typ MD_SPANTYPE<span class="token punctuation">,</span> detail <span class="token builtin">voidptr</span><span class="token punctuation">)</span> <span class="token operator">?</span></code></pre>
+
+
+</section>
+
+		<section id="PlaintextRenderer.text" class="doc-node">
+			<div class="title"><h2>fn (PlaintextRenderer) text <a href="#PlaintextRenderer.text">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> pt PlaintextRenderer<span class="token punctuation">)</span> <span class="token function">text</span><span class="token punctuation">(</span>typ MD_TEXTTYPE<span class="token punctuation">,</span> text <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">?</span></code></pre>
+
+
+</section>
+
+		<section id="PlaintextRenderer.debug_log" class="doc-node">
+			<div class="title"><h2>fn (PlaintextRenderer) debug_log <a href="#PlaintextRenderer.debug_log">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> pt PlaintextRenderer<span class="token punctuation">)</span> <span class="token function">debug_log</span><span class="token punctuation">(</span>msg <span class="token builtin">string</span><span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+
+						<div class="footer">Powered by vdoc. Generated on: 9 Feb 2026 15:26:24</div>
+					</div>
+					<div class="doc-toc"><ul><li class="open"><a href="#readme_markdown">README</a></li>
+<li class="open"><a href="#Constants">Constants</a></li>
+<li class="open"><a href="#C.md_html">fn C.md_html</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#C.md_parse">fn C.md_parse</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#new">fn new</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#parse">fn parse</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#render">fn render</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#renderer_debug_log_cb">fn renderer_debug_log_cb</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#renderer_enter_block_cb">fn renderer_enter_block_cb</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#renderer_enter_span_cb">fn renderer_enter_span_cb</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#renderer_handle_error">fn renderer_handle_error</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#renderer_leave_block_cb">fn renderer_leave_block_cb</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#renderer_leave_span_cb">fn renderer_leave_span_cb</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#renderer_text_cb">fn renderer_text_cb</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#title_to_id">fn title_to_id</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#to_html">fn to_html</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#to_html_experimental">fn to_html_experimental</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#to_plain">fn to_plain</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#tos_attribute">fn tos_attribute</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#write_data_cb">fn write_data_cb</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#HtmlTransformer">interface HtmlTransformer</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#Renderer">interface Renderer</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#AttrTransformerFn">type AttrTransformerFn</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#BlockFn">type BlockFn</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#ContentTransformerFn">type ContentTransformerFn</a>        <ul>
+<li><a href="#ContentTransformerFn.transform_attribute">fn transform_attribute</a></li>
+<li><a href="#ContentTransformerFn.transform_content">fn transform_content</a></li>
+<li><a href="#ContentTransformerFn.config_set">fn config_set</a></li>
+</ul>
+</li>
+<li class="open"><a href="#DebugFn">type DebugFn</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#ParentType">type ParentType</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#ProcessFn">type ProcessFn</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#SpanFn">type SpanFn</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#TextFn">type TextFn</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#MD_ALIGN">enum MD_ALIGN</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#MD_BLOCKTYPE">enum MD_BLOCKTYPE</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#MD_SPANTYPE">enum MD_SPANTYPE</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#MD_TEXTTYPE">enum MD_TEXTTYPE</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#AttrTransformer">struct AttrTransformer</a>        <ul>
+<li><a href="#AttrTransformer.transform_attribute">fn transform_attribute</a></li>
+<li><a href="#AttrTransformer.transform_content">fn transform_content</a></li>
+<li><a href="#AttrTransformer.config_set">fn config_set</a></li>
+</ul>
+</li>
+<li class="open"><a href="#C.MD_ATTRIBUTE">struct C.MD_ATTRIBUTE</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#C.MD_BLOCK_CODE_DETAIL">struct C.MD_BLOCK_CODE_DETAIL</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#C.MD_BLOCK_H_DETAIL">struct C.MD_BLOCK_H_DETAIL</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#C.MD_BLOCK_LI_DETAIL">struct C.MD_BLOCK_LI_DETAIL</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#C.MD_BLOCK_OL_DETAIL">struct C.MD_BLOCK_OL_DETAIL</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#C.MD_BLOCK_TD_DETAIL">struct C.MD_BLOCK_TD_DETAIL</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#C.MD_BLOCK_UL_DETAIL">struct C.MD_BLOCK_UL_DETAIL</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#C.MD_PARSER">struct C.MD_PARSER</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#C.MD_SPAN_A_DETAIL">struct C.MD_SPAN_A_DETAIL</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#C.MD_SPAN_IMG_DETAIL">struct C.MD_SPAN_IMG_DETAIL</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#C.MD_SPAN_WIKILINK_DETAIL">struct C.MD_SPAN_WIKILINK_DETAIL</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#DefaultHtmlTransformer">struct DefaultHtmlTransformer</a>        <ul>
+<li><a href="#DefaultHtmlTransformer.transform_attribute">fn transform_attribute</a></li>
+<li><a href="#DefaultHtmlTransformer.transform_content">fn transform_content</a></li>
+<li><a href="#DefaultHtmlTransformer.config_set">fn config_set</a></li>
+</ul>
+</li>
+<li class="open"><a href="#HtmlRenderer">struct HtmlRenderer</a>        <ul>
+<li><a href="#HtmlRenderer.str">fn str</a></li>
+<li><a href="#HtmlRenderer.render_opening_attribute">fn render_opening_attribute</a></li>
+<li><a href="#HtmlRenderer.render_closing_attribute">fn render_closing_attribute</a></li>
+<li><a href="#HtmlRenderer.render_md_attribute">fn render_md_attribute</a></li>
+<li><a href="#HtmlRenderer.render_attribute">fn render_attribute</a></li>
+<li><a href="#HtmlRenderer.render_content">fn render_content</a></li>
+<li><a href="#HtmlRenderer.enter_block">fn enter_block</a></li>
+<li><a href="#HtmlRenderer.leave_block">fn leave_block</a></li>
+<li><a href="#HtmlRenderer.enter_span">fn enter_span</a></li>
+<li><a href="#HtmlRenderer.leave_span">fn leave_span</a></li>
+<li><a href="#HtmlRenderer.text">fn text</a></li>
+<li><a href="#HtmlRenderer.debug_log">fn debug_log</a></li>
+</ul>
+</li>
+<li class="open"><a href="#MdAttributeConfig">struct MdAttributeConfig</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#PlaintextRenderer">struct PlaintextRenderer</a>        <ul>
+<li><a href="#PlaintextRenderer.str">fn str</a></li>
+<li><a href="#PlaintextRenderer.enter_block">fn enter_block</a></li>
+<li><a href="#PlaintextRenderer.leave_block">fn leave_block</a></li>
+<li><a href="#PlaintextRenderer.enter_span">fn enter_span</a></li>
+<li><a href="#PlaintextRenderer.leave_span">fn leave_span</a></li>
+<li><a href="#PlaintextRenderer.text">fn text</a></li>
+<li><a href="#PlaintextRenderer.debug_log">fn debug_log</a></li>
+</ul>
+</li>
+</ul></div>
+				</div>
+			</div>
+		</div>
+		<script src="doc.js"></script>
+		<script async src="search_index.js"></script>
+	</body>
+</html>
