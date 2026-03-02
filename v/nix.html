@@ -34,7 +34,7 @@
 				<div class="heading-container">
 					<div class="heading">
 						<div class="info">
-							<div class="module">vmodules</div>
+							<div class="module">tamer</div>
 							<div class="toggle-version-container">
 								<span> e2f6f08</span>
 								<div
@@ -62,6 +62,9 @@
 						<li class="open">
 <div class="menu-row"><a href="./index.html">README</a></div>
 </li>
+<li class="open">
+<div class="menu-row"><a href="./example.html">example</a></div>
+</li>
 <li class="open active">
 <div class="menu-row"><a href="./nix.html">nix</a></div>
 </li>
@@ -69,31 +72,7 @@
 <div class="menu-row"><a href="./main.html">main</a></div>
 </li>
 <li class="open">
-<div class="menu-row"><svg xmlns="http://www.w3.org/2000/svg" class="dropdown-arrow" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7 10l5 5 5-5z"/></svg><a href="./iui.dialogs.html">iui</a></div>
-<ul>
-<li><a href="./iui.dialogs.html">dialogs</a></li>
-<li><a href="./iui.examples.old.browser.webview.html">examples.old.browser.webview</a></li>
-<li><a href="./iui.src.extra.html">src.extra</a></li>
-<li><a href="./iui.src.extra.dialogs.html">src.extra.dialogs</a></li>
-<li><a href="./iui.src.extra.dialogs.html">src.extra.dialogs</a></li>
-<li><a href="./iui.src.extra.file_dialog.html">src.extra.file_dialog</a></li>
-<li><a href="./iui.src.hc.html">src.hc</a></li>
-<li><a href="./iui.themes.html">themes</a></li>
-<li><a href="./iui.x.imagex.html">x.imagex</a></li>
-<li><a href="./iui.x.svg.html">x.svg</a></li>
-</ul>
-</li>
-<li class="open">
-<div class="menu-row"><a href="./markdown.html">markdown</a></div>
-</li>
-<li class="open">
-<div class="menu-row"><a href="./vin.html">vin</a></div>
-</li>
-<li class="open">
-<div class="menu-row"><svg xmlns="http://www.w3.org/2000/svg" class="dropdown-arrow" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7 10l5 5 5-5z"/></svg><a href="#">zztkm</a></div>
-<ul>
-<li><a href="./zztkm.vdotenv.html">vdotenv</a></li>
-</ul>
+<div class="menu-row"><a href="./service.html">service</a></div>
 </li>
 
 					</ul>
@@ -104,11 +83,9 @@
 					<div class="doc-content">
 								<section id="readme_nix" class="doc-node">
 			<div class="title"><h1> nix <a href="#readme_nix">#</a></h1></div>
-<h1 id="vtamernix-is-linuxbsd-related-code">vtamer/nix is Linux/BSD related code</h1>
-<h4 id="etcpasswd">/etc/passwd</h4>
-<p>|  Code  | Field	  |	Description |--------|----------|------------------------------------------------------ |	0	|	Username	 | The unique name used for logging in (1-32 characters). |	1	|	Password	 | An 'x' indicates the password is stored in the /etc/shadow file. |	2	|	UID	User  | Identifier, a unique number assigned to each user. |	3	|	GID	Group | Identifier, indicating the user's primary group. |	4	|	GECOS		  | General information about the user, often the full name. |	5	|	Home		   | Directory	The path to the user's home directory. |	6	|	Shell		  | The default shell that starts upon login.</p>
-<h4 id="etcgroup">/etc/group</h4>
-<p>|  Code  | Field      |	Description  ||--------|------------|-----------------| 	0  	| group_name | The name of the group, which must be unique. ||	 1  	| password	 | This field can contain an encrypted password. If it shows an 'x', shadow passwords are used. ||	 2  	| GID        | The Group ID, a unique numerical identifier for the group. ||	 3  	| user_list  | A comma-separated list of usernames that are members of the group. |</p>
+<h1 id="tamernix-is-linuxbsd-related-code">tamer/nix is Linux/BSD related code</h1>
+<h2 id="docs">Docs:</h2>
+<p><a href="http://tamer.pw/v/nix/nix.html">module docs</a></p>
 
 </section>
 
@@ -137,7 +114,7 @@
 
 		<section id="" class="doc-node const">
 <pre class="signature">
-<code><span class="token keyword">const</span> err_bad_error <span class="token operator">=</span> <span class="token function">error_with_code</span><span class="token punctuation">(</span><span class="token string">'Unknowm Error'</span><span class="token punctuation">,</span> <span class="token number">999</span><span class="token punctuation">)</span></code></pre>
+<code><span class="token keyword">const</span> err_not_symlink <span class="token operator">=</span> <span class="token function">error_with_code</span><span class="token punctuation">(</span><span class="token string">'Path should be a symlink'</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span></code></pre>
 
 
 </section>
@@ -145,13 +122,6 @@
 		<section id="" class="doc-node const">
 <pre class="signature">
 <code><span class="token keyword">const</span> err_need_root <span class="token operator">=</span> <span class="token function">error_with_code</span><span class="token punctuation">(</span><span class="token string">'Need admin privilages'</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span></code></pre>
-
-
-</section>
-
-		<section id="" class="doc-node const">
-<pre class="signature">
-<code><span class="token keyword">const</span> file_sys_group <span class="token operator">=</span> <span class="token string">'/etc/group'</span></code></pre>
 
 
 </section>
@@ -167,6 +137,41 @@
 <pre class="signature">
 <code><span class="token keyword">const</span> dir_db <span class="token operator">=</span> <span class="token string">'/var/db/nix'</span></code></pre>
 <p>const dir_error_cache = '/var/cache/error'</p>
+
+</section>
+
+		<section id="" class="doc-node const">
+<pre class="signature">
+<code><span class="token keyword">const</span> file_sys_group <span class="token operator">=</span> <span class="token string">'/etc/group'</span></code></pre>
+
+
+</section>
+
+		<section id="" class="doc-node const">
+<pre class="signature">
+<code><span class="token keyword">const</span> err_bad_error <span class="token operator">=</span> <span class="token function">error_with_code</span><span class="token punctuation">(</span><span class="token string">'Unknowm Error'</span><span class="token punctuation">,</span> <span class="token number">999</span><span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+		<section id="" class="doc-node const">
+<pre class="signature">
+<code><span class="token keyword">const</span> file_json_users <span class="token operator">=</span> os<span class="token punctuation">.</span><span class="token function">join_path</span><span class="token punctuation">(</span>dir_db<span class="token punctuation">,</span> <span class="token string">'users.json'</span><span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+		<section id="" class="doc-node const">
+<pre class="signature">
+<code><span class="token keyword">const</span> file_json_group <span class="token operator">=</span> <span class="token function">json_path</span><span class="token punctuation">(</span>file_sys_group<span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+		<section id="" class="doc-node const">
+<pre class="signature">
+<code><span class="token keyword">const</span> file_json_passwd <span class="token operator">=</span> <span class="token function">json_path</span><span class="token punctuation">(</span>file_sys_passwd<span class="token punctuation">)</span></code></pre>
+
 
 </section>
 
@@ -205,7 +210,7 @@
 		<section id="get_users" class="doc-node">
 			<div class="title"><h2>fn get_users <a href="#get_users">#</a></h2></div>
 <pre class="signature">
-<code><span class="token keyword">fn</span> <span class="token function">get_users</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">?</span><span class="token punctuation">[</span><span class="token punctuation">]</span>User</code></pre>
+<code><span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function">get_users</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">?</span><span class="token punctuation">[</span><span class="token punctuation">]</span>User</code></pre>
 
 
 </section>
@@ -230,7 +235,7 @@
 			<div class="title"><h2>fn json_name <a href="#json_name">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">fn</span> <span class="token function">json_name</span><span class="token punctuation">(</span>path_sys <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
-<p>convert system abs path to json name (/etc/passwd &gt; etc_passwd.json)</p>
+<p>convert system abs path to json name (/etc/passwd &gt; _etc_passwd.json)</p>
 
 </section>
 
@@ -246,7 +251,7 @@
 			<div class="title"><h2>fn setup <a href="#setup">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">fn</span> <span class="token function">setup</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
-
+<p>Todo: Add code for json group and json_user</p>
 
 </section>
 
@@ -274,6 +279,14 @@
 
 </section>
 
+		<section id="user_home" class="doc-node">
+			<div class="title"><h2>fn user_home <a href="#user_home">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function">user_home</span><span class="token punctuation">(</span>username <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">?</span><span class="token builtin">string</span></code></pre>
+
+
+</section>
+
 		<section id="user_id" class="doc-node">
 			<div class="title"><h2>fn user_id <a href="#user_id">#</a></h2></div>
 <pre class="signature">
@@ -292,7 +305,7 @@
 	gid        <span class="token builtin">u16</span>
 	user_list  <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span>
 <span class="token punctuation">}</span></code></pre>
-<p>json representation of the /etc/group file|  Code  | Field      |	Description  ||--------|------------|-----------------|   0    | group_name | The name of the group, which must be unique. ||   1    | password   | This field can contain an encrypted password. If it shows an 'x', shadow passwords are used. ||   2    | GID        | The Group ID, a unique numerical identifier for the group. ||   3    | user_list  | A comma-separated list of usernames that are members of the group. |</p>
+<p>Group is the representation of the /etc/group file</p>
 
 </section>
 
@@ -309,14 +322,14 @@
 	home     <span class="token builtin">string</span>
 	shell    <span class="token builtin">string</span>
 <span class="token punctuation">}</span></code></pre>
-<p>json representation of the /etc/passwd file | Code | Field	|	Description |------|----------|------------------------------------------------------ |  0   | Username | The unique name used for logging in (1-32 characters). |  1   | Password | An 'x' indicates the password is stored in the /etc/shadow file. |  2   | UID      | User Identifier, a unique number assigned to each user. |  3   | GID      | Group Identifier, indicating the user's primary group. |  4   | GECOS    | General information about the user, often the full name. |  5   | Home     | Directory	The path to the user's home directory. |  6   | Shell    | The default shell that starts upon login.</p>
+<p>Passwd is the representation of the /etc/passwd file</p>
 
 </section>
 
 		<section id="User" class="doc-node">
 			<div class="title"><h2>struct User <a href="#User">#</a></h2></div>
 <pre class="signature">
-<code><span class="token keyword">struct</span> <span class="token symbol">User</span> <span class="token punctuation">{</span>
+<code><span class="token keyword">pub</span> <span class="token keyword">struct</span> <span class="token symbol">User</span> <span class="token punctuation">{</span>
 <span class="token keyword">pub</span><span class="token punctuation">:</span>
 	username   <span class="token builtin">string</span>
 	password   <span class="token builtin">string</span>
@@ -338,7 +351,7 @@
 </section>
 
 
-						<div class="footer">Powered by vdoc. Generated on: 9 Feb 2026 15:26:23</div>
+						<div class="footer">Powered by vdoc. Generated on: 13 Feb 2026 00:08:22</div>
 					</div>
 					<div class="doc-toc"><ul><li class="open"><a href="#readme_nix">README</a></li>
 <li class="open"><a href="#Constants">Constants</a></li>
@@ -379,6 +392,9 @@
 </ul>
 </li>
 <li class="open"><a href="#user_by_name">fn user_by_name</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#user_home">fn user_home</a>        <ul>
 </ul>
 </li>
 <li class="open"><a href="#user_id">fn user_id</a>        <ul>
