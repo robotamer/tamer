@@ -1,4 +1,5 @@
 var searchModuleIndex = [
+"README",
 "nix",
 ];
 
@@ -33,7 +34,8 @@ var searchIndex = [
 ];
 
 var searchModuleData = [
-["","nix.html"],
+["tamer/nix","index.html"],
+["tamer/nix","nix.html"],
 ];
 
 var searchData = [
