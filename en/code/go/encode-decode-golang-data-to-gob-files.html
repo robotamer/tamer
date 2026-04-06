@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/css/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-dark.min.css">
+
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/en/rss.xml">
+    <title>Encode/Decode Golang data to Gob files</title>
+</head>
+<body class="w3-light-grey">
+    <div class="w3-bar w3-black w3-card">
+        <a href="/en/index.html" class="w3-bar-item w3-button">Home</a><a href="/en/code/go/smtp.html" class="w3-bar-item w3-button">Smtp</a><a href="/en/code/go/﻿sometimes-i-fall-in-love-with-code.html" class="w3-bar-item w3-button">﻿Sometimes I fall in love with code</a><a href="/en/code/go/jgdb.html" class="w3-bar-item w3-button">jgdb</a><a href="/en/code/go/a-gopher-named-gophy.html" class="w3-bar-item w3-button">A Gopher named Gophy</a><a href="/en/code/go/gowatch.html" class="w3-bar-item w3-button">GoWatch</a><a href="/en/code/go/cfg.html" class="w3-bar-item w3-button">Cfg</a><a href="/en/code/go/file-access-and-create-time.html" class="w3-bar-item w3-button">File Access and Create Time</a><a href="/en/code/go/go-snippets.html" class="w3-bar-item w3-button">Go Snippets</a><a href="/en/code/go/ping.html" class="w3-bar-item w3-button">Ping</a><a href="/en/code/go/citadel-vcard-sync.html" class="w3-bar-item w3-button">Citadel vCard Sync</a><a href="/en/code/go/your-everyday-go-tools.html" class="w3-bar-item w3-button">Your Everyday Go Tools</a><a href="/en/code/go/cases.html" class="w3-bar-item w3-button">Cases</a><a href="/en/code/go/conv.html" class="w3-bar-item w3-button">Conv</a><a href="/en/code/go/go-jkl.html" class="w3-bar-item w3-button">Go jkl</a><a href="/en/code/go/encode-decode-between-struct-and-byte-slice.html" class="w3-bar-item w3-button">Encode/Decode between struct and byte slice</a><a href="/en/code/go/crypt.html" class="w3-bar-item w3-button">Crypt</a>
+        <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
+        <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
+    </div>
+    <div class="w3-content" style="max-width:1400px; margin:20px auto">
+        <div class="w3-container w3-white w3-card-4 w3-padding-32"><a href="/en/code/index.html" class="w3-button w3-light-grey">&laquo; Back</a><h1>Encode/Decode Golang data to Gob files</h1><div class="w3-justify"><p>Golang has a package called Gob to encode and decode values in to go specific binary format for transmiting as streams or for saving to file.</p>
+<p>Below are two functions, Load and Save to encode/decode go values including struct's in to files.</p>
+<pre><code class="language-go">
+package main
+
+import (
+    &quot;encoding/gob&quot;
+    &quot;fmt&quot;
+    &quot;os&quot;
+    &quot;runtime&quot;
+)
+
+const file = &quot;/tmp/test.gob&quot;
+
+type User struct {
+    Name, Pass string
+}
+
+func main(){
+    var datato = &amp;User{&quot;Donald&quot;,&quot;DuckPass&quot;}
+    var datafrom = new(User)
+
+    err := Save(file, datato)
+    Check(err)
+    err = Load(file, datafrom)
+    Check(err)
+    fmt.Println(datafrom)
+}
+
+// Encode via Gob to file
+func Save(path string, object interface{}) error {
+    file, err := os.Create(path)
+    if err == nil {
+        encoder := gob.NewEncoder(file)
+        encoder.Encode(object)
+    }
+    file.Close()
+    return err
+ }
+
+// Decode Gob file
+func Load(path string, object interface{}) error {
+    file, err := os.Open(path)
+    if err == nil {
+        decoder := gob.NewDecoder(file)
+        err = decoder.Decode(object)
+    }
+    file.Close()
+    return err
+}
+
+func Check(e error) {
+    if e != nil {
+        _, file, line, _ := runtime.Caller(1)
+        fmt.Println(line, &quot;\t&quot;, file, &quot;\n&quot;, e)
+        os.Exit(1)
+    }
+}
+
+</code></pre></div><hr><p class="w3-small w3-text-grey">Last Modified: 2015-01-02T12:50:00Z</p></div>
+    </div>
+    <script>
+    let idx = [];
+    async function init() { const r = await fetch("/en/search.json"); idx = await r.json(); }
+    init();
+    function search() {
+        const q = document.getElementById("si").value.toLowerCase();
+        const r = document.getElementById("sr");
+        if (q.length < 2) { r.style.display="none"; return; }
+        const m = idx.filter(i => i.t.toLowerCase().includes(q)).slice(0, 5);
+        if (m.length > 0) {
+            r.innerHTML = m.map(i => `<a href="${i.u}" class="w3-bar-item w3-button w3-white">${i.t}</a>`).join("");
+            r.style.display="block";
+        } else { r.style.display="none"; }
+    }
+    </script>
+
+<!-- Prism.js Core -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
+<!-- Autoloader: Automatically loads languages  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

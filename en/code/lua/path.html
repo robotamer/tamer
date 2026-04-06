@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/css/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-dark.min.css">
+
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/en/rss.xml">
+    <title>Lua Path</title>
+</head>
+<body class="w3-light-grey">
+    <div class="w3-bar w3-black w3-card">
+        <a href="/en/index.html" class="w3-bar-item w3-button">Home</a>
+        <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
+        <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
+    </div>
+    <div class="w3-content" style="max-width:1400px; margin:20px auto">
+        <div class="w3-container w3-white w3-card-4 w3-padding-32"><a href="/en/code/index.html" class="w3-button w3-light-grey">&laquo; Back</a><h1>Lua Path</h1><div class="w3-justify"><p><a href="https://github.com/luatamer/path">Git Path</a></p>
+<p>Currently works only on NIX (Linux, BSD, UNIX etc.)
+Maybe it will work on Mac since Mac is based on BSD, I have no way of testing.
+It will for sure not work on Windows currently.
+If you need it to work, let me know I can probably make that happen.</p>
+<p>Module depands on nix commands <code>test</code> and <code>realpath</code></p>
+<p>There are tests for all commands. One test appears to fail even know the result is as
+expected. Still working on figuring that out; any help would be welcome.</p>
+<hr>
+<h1>Disclaimer</h1>
+<p>This is my first Lua program/module, well right after <code>Hello World</code>.
+Any suggestions are more then welcome.</p>
+<hr>
+<h1>Documentation</h1>
+<h3>NAME is.string</h3>
+<h4>DESCRIPTION</h4>
+<p>filepath is.string
+All args in this module must be a string, if unsure check first with is.string</p>
+<hr>
+<h3>NAME path.append</h3>
+<h4>DESCRIPTION</h4>
+<p>Append file or folder to path, adds seperator if needed</p>
+<hr>
+<h3>NAME path.exists</h3>
+<h4>DESCRIPTION</h4>
+<p>checks if filepath exists</p>
+<hr>
+<h3>NAME is.dir</h3>
+<h4>DESCRIPTION</h4>
+<p>filepath exists and is a filesytem directory/folder</p>
+<hr>
+<h3>NAME is.folder</h3>
+<h4>ALIAS</h4>
+<p>alias for is.dir</p>
+<hr>
+<h3>NAME is.file</h3>
+<h4>DESCRIPTION</h4>
+<p>filepath exists and is a filesytem file</p>
+<hr>
+<h3>NAME is.symlink</h3>
+<h4>DESCRIPTION</h4>
+<p>filepath exists and is symbolic link</p>
+<hr>
+<h3>NAME is.pipe</h3>
+<h4>DESCRIPTION</h4>
+<p>filepath exists and is a pipe</p>
+<hr>
+<h3>NAME is.socket</h3>
+<h4>DESCRIPTION</h4>
+<p>filepath exists and is socket</p>
+<hr>
+<h3>NAME is.character</h3>
+<h4>DESCRIPTION</h4>
+<p>filepath exists and is character special</p>
+<hr>
+<h3>NAME is.block</h3>
+<h4>DESCRIPTION</h4>
+<p>filepath exists and is block special</p>
+<hr>
+<h3>NAME can.read</h3>
+<h4>DESCRIPTION</h4>
+<p>filepath exists and we can read the filepath</p>
+<hr>
+<h3>NAME can.write</h3>
+<h4>DESCRIPTION</h4>
+<p>filepath exists and we can write to the filepath</p>
+<hr>
+<h3>NAME can.run</h3>
+<h4>DESCRIPTION</h4>
+<p>filepath exists and we can run/execute the filepath</p>
+<hr>
+<h3>NAME list.all</h3>
+<h4>DESCRIPTION</h4>
+<p>list all files and folders at given filepath</p>
+<hr>
+<h3>NAME list.files</h3>
+<h4>DESCRIPTION</h4>
+<p>list all files at given filepath</p>
+<hr>
+<h3>NAME list.by_ext</h3>
+<h4>DESCRIPTION</h4>
+<p>list all files at given filepath by extention</p>
+<hr>
+<h3>NAME list.folders</h3>
+<h4>DESCRIPTION</h4>
+<p>list all folders at given filepath</p>
+<hr>
+<h3>NAME path.split</h3>
+<h4>DESCRIPTION</h4>
+<p>Will return 3 items, works also on windows
+folder, filename, extention
+path.spilt(&quot;/tmp/test.lua.txt&quot;)
+-&gt; /tmp/ test.lua.txt txt</p>
+<hr>
+<h3>NAME path.filename</h3>
+<h4>DESCRIPTION</h4>
+<p>returns filename including extention discarding folder/directory
+Returned value will be a filesystem file OR NIL</p>
+<hr>
+<h3>NAME path.ext</h3>
+<h4>DESCRIPTION</h4>
+<p>Returns the file extention from the given filepath if exists</p>
+<hr>
+<h3>NAME path.dirname</h3>
+<h4>DESCRIPTION</h4>
+<p>returns absolute directory/folder path discarding filename.
+Returned value will be a filesystem directory/folder OR NIL</p>
+<hr>
+<h3>NAME path.realpath</h3>
+<h4>DESCRIPTION</h4>
+<p>Print the resolved absolute file name; all but the last component must exist</p>
+<h4>ERROR</h4>
+<p>realpath: [filepath]: No such file or directory     ]]</p>
+<hr></div><hr><p class="w3-small w3-text-grey">Last Modified: 2022-06-19T03:43:44+03:00</p></div>
+    </div>
+    <script>
+    let idx = [];
+    async function init() { const r = await fetch("/en/search.json"); idx = await r.json(); }
+    init();
+    function search() {
+        const q = document.getElementById("si").value.toLowerCase();
+        const r = document.getElementById("sr");
+        if (q.length < 2) { r.style.display="none"; return; }
+        const m = idx.filter(i => i.t.toLowerCase().includes(q)).slice(0, 5);
+        if (m.length > 0) {
+            r.innerHTML = m.map(i => `<a href="${i.u}" class="w3-bar-item w3-button w3-white">${i.t}</a>`).join("");
+            r.style.display="block";
+        } else { r.style.display="none"; }
+    }
+    </script>
+
+<!-- Prism.js Core -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
+<!-- Autoloader: Automatically loads languages  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

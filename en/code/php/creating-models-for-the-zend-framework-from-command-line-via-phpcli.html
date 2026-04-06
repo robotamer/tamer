@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/css/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-dark.min.css">
+
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/en/rss.xml">
+    <title>Creating models for the Zend Framework from command line via phpcli</title>
+</head>
+<body class="w3-light-grey">
+    <div class="w3-bar w3-black w3-card">
+        <a href="/en/index.html" class="w3-bar-item w3-button">Home</a><a href="/en/code/php/load-functions-and-arrays.html" class="w3-bar-item w3-button">Load functions and array's</a><a href="/en/code/php/zend-acl.html" class="w3-bar-item w3-button">Zend ACL</a><a href="/en/code/php/num_row-with-pdo.html" class="w3-bar-item w3-button">num_row with PDO</a><a href="/en/code/php/autoload.html" class="w3-bar-item w3-button">Autoload</a><a href="/en/code/php/multiple-php-installations.html" class="w3-bar-item w3-button">Multiple PHP installations</a><a href="/en/code/php/e-for-echo.html" class="w3-bar-item w3-button">e() for echo</a><a href="/en/code/php/fixing-phps-gettype-function.html" class="w3-bar-item w3-button">fixing php's gettype function</a><a href="/en/code/php/read-folder.html" class="w3-bar-item w3-button">Read Folder</a><a href="/en/code/php/php-goto-statement.html" class="w3-bar-item w3-button">PHP goto statement</a><a href="/en/code/php/PHPTamer/index.html" class="w3-bar-item w3-button w3-blue">📁 PHPTamer</a>
+        <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
+        <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
+    </div>
+    <div class="w3-content" style="max-width:1400px; margin:20px auto">
+        <div class="w3-container w3-white w3-card-4 w3-padding-32"><a href="/en/code/index.html" class="w3-button w3-light-grey">&laquo; Back</a><h1>Creating models for the Zend Framework from command line via phpcli</h1><div class="w3-justify"><p>This is a php cli script that will create a database model from the database provided</p>
+<p>Download via git from <a href="http://github.com/pzzazz/phpcli">github -&gt; phpcli</a></p>
+<pre><code class="language-php">    php zend/model.php -h
+    
+    This is a command line PHP script.
+    
+    Set table
+    
+    Options:
+    -path=[ ]
+    -table=[ ]
+    
+    Usage:
+    php zend/model.php -arg=value
+</code></pre>
+<p><strong>Database Structure:</strong></p>
+<pre><code class="language-sql">    CREATE TABLE users (
+          Alias TEXT UNIQUE,
+          Password TEXT,
+          eMail TEXT,
+          Avatar TEXT,
+          Timezone TEXT,
+          IP TEXT,
+          count INTEGER,
+          cookie TEXT,
+          vars TEXT,
+          status INTEGER DEFAULT 1,
+          added date,
+          updated datetime,
+          PRIMARY KEY(Alias)
+    );
+</code></pre>
+<p><strong>Sample Output:</strong></p>
+<pre><code class="language-sh">    
+    $ php zend/model.php -path=/var/www/TaMeR/data/tmp.db3 -table=users
+
+
+
+    
+    
+    
+    class _Model_users
+    {
+        protected $_Alias;
+        protected $_Password;
+        protected $_eMail;
+        protected $_Avatar;
+        protected $_Timezone;
+        protected $_IP;
+        protected $_count;
+        protected $_cookie;
+        protected $_vars;
+        protected $_status;
+        protected $_added;
+        protected $_updated;
+    
+    
+        public function setAlias($Alias){
+            $this-&gt;_Alias = (string) $Alias;
+            return $this;
+        }
+    
+        public function getAlias($Alias){
+            return $this-&gt;_Alias;
+        }
+    
+        public function setPassword($Password){
+            $this-&gt;_Password = (string) $Password;
+            return $this;
+        }
+    
+        public function getPassword($Password){
+            return $this-&gt;_Password;
+        }
+    
+        public function seteMail($eMail){
+            $this-&gt;_eMail = (string) $eMail;
+            return $this;
+        }
+    
+        public function geteMail($eMail){
+            return $this-&gt;_eMail;
+        }
+    
+        public function setAvatar($Avatar){
+            $this-&gt;_Avatar = (string) $Avatar;
+            return $this;
+        }
+    
+        public function getAvatar($Avatar){
+            return $this-&gt;_Avatar;
+        }
+    
+        public function setTimezone($Timezone){
+            $this-&gt;_Timezone = (string) $Timezone;
+            return $this;
+        }
+    
+        public function getTimezone($Timezone){
+            return $this-&gt;_Timezone;
+        }
+    
+        public function setIP($IP){
+            $this-&gt;_IP = (string) $IP;
+            return $this;
+        }
+    
+        public function getIP($IP){
+            return $this-&gt;_IP;
+        }
+    
+        public function setcount($count){
+            $this-&gt;_count = (int) $count;
+            return $this;
+        }
+    
+        public function getcount($count){
+            return $this-&gt;_count;
+        }
+    
+        public function setcookie($cookie){
+            $this-&gt;_cookie = (string) $cookie;
+            return $this;
+        }
+    
+        public function getcookie($cookie){
+            return $this-&gt;_cookie;
+        }
+    
+        public function setvars($vars){
+            $this-&gt;_vars = (string) $vars;
+            return $this;
+        }
+    
+        public function getvars($vars){
+            return $this-&gt;_vars;
+        }
+    
+        public function setstatus($status){
+            $this-&gt;_status = (int) $status;
+            return $this;
+        }
+    
+        public function getstatus($status){
+            return $this-&gt;_status;
+        }
+    
+        public function setadded($added){
+            $this-&gt;_added = (string) $added;
+            return $this;
+        }
+    
+        public function getadded($added){
+            return $this-&gt;_added;
+        }
+    
+        public function setupdated($updated){
+            $this-&gt;_updated = (string) $updated;
+            return $this;
+        }
+    
+        public function getupdated($updated){
+            return $this-&gt;_updated;
+        }
+    }
+    
+</code></pre></div><hr><p class="w3-small w3-text-grey">Last Modified: 2010-03-18T22:07:15Z</p></div>
+    </div>
+    <script>
+    let idx = [];
+    async function init() { const r = await fetch("/en/search.json"); idx = await r.json(); }
+    init();
+    function search() {
+        const q = document.getElementById("si").value.toLowerCase();
+        const r = document.getElementById("sr");
+        if (q.length < 2) { r.style.display="none"; return; }
+        const m = idx.filter(i => i.t.toLowerCase().includes(q)).slice(0, 5);
+        if (m.length > 0) {
+            r.innerHTML = m.map(i => `<a href="${i.u}" class="w3-bar-item w3-button w3-white">${i.t}</a>`).join("");
+            r.style.display="block";
+        } else { r.style.display="none"; }
+    }
+    </script>
+
+<!-- Prism.js Core -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
+<!-- Autoloader: Automatically loads languages  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

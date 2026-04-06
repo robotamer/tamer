@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/css/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-dark.min.css">
+
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/en/rss.xml">
+    <title>Multiple PHP installations</title>
+</head>
+<body class="w3-light-grey">
+    <div class="w3-bar w3-black w3-card">
+        <a href="/en/index.html" class="w3-bar-item w3-button">Home</a><a href="/en/code/php/creating-models-for-the-zend-framework-from-command-line-via-phpcli.html" class="w3-bar-item w3-button">Creating models for the Zend Framework from command line via phpcli</a><a href="/en/code/php/load-functions-and-arrays.html" class="w3-bar-item w3-button">Load functions and array's</a><a href="/en/code/php/zend-acl.html" class="w3-bar-item w3-button">Zend ACL</a><a href="/en/code/php/num_row-with-pdo.html" class="w3-bar-item w3-button">num_row with PDO</a><a href="/en/code/php/autoload.html" class="w3-bar-item w3-button">Autoload</a><a href="/en/code/php/e-for-echo.html" class="w3-bar-item w3-button">e() for echo</a><a href="/en/code/php/fixing-phps-gettype-function.html" class="w3-bar-item w3-button">fixing php's gettype function</a><a href="/en/code/php/read-folder.html" class="w3-bar-item w3-button">Read Folder</a><a href="/en/code/php/php-goto-statement.html" class="w3-bar-item w3-button">PHP goto statement</a><a href="/en/code/php/PHPTamer/index.html" class="w3-bar-item w3-button w3-blue">📁 PHPTamer</a>
+        <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
+        <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
+    </div>
+    <div class="w3-content" style="max-width:1400px; margin:20px auto">
+        <div class="w3-container w3-white w3-card-4 w3-padding-32"><a href="/en/code/index.html" class="w3-button w3-light-grey">&laquo; Back</a><h1>Multiple PHP installations</h1><div class="w3-justify"><p>How to install <strong>PHP 5.3.X</strong> as secondary php version from source</p>
+<pre><code>PHPV=5.3.6
+cd /usr/local/src
+wget http://us.php.net/get/php-$PHPV.tar.gz/from/this/mirror
+mv mirror php-$PHPV.tar.gz
+tar xzvf php-$PHPV.tar.gz
+chown -R $USER:$USER php-$PHPV/
+cd php-$PHPV/
+
+apt-get install libxml2-dev libssl-dev libcurl4-gnutls-dev libjpeg62-dev libpng12-dev libfreetype6-dev unixodbc-dev
+
+./configure 
+  --prefix=/usr/local/php5.3 
+  --with-config-file-path=/usr/local/etc/php5.3 
+  --with-config-file-scan-dir=/usr/local/etc/php5.3/$SAPIconf.d 
+  --with-libdir=/lib 
+  --disable-cgi 
+  --with-libxml-dir=/usr/ 
+  --with-mysql=/usr/ 
+  --enable-pdo 
+  --with-pdo-mysql 
+  --with-mysqli 
+  --with-zlib-dir=/usr 
+  --with-curl 
+  --with-gd 
+  --with-jpeg-dir=/usr/lib 
+  --with-png-dir=/usr/lib 
+  --with-freetype-dir=/usr/lib 
+  --with-gettext 
+  --enable-mbstring 
+  --enable-soap 
+  --enable-ftp 
+  --enable-fpm 
+  --with-openssl
+
+make
+make test
+make install
+</code></pre>
+<p>More help in case you have errors:
+<a href="http://www.robo47.net/text/6-PHP-Configure-und-Compile-Fehler">PHP-Configure-und-Compile-Fehler</a></p></div><hr><p class="w3-small w3-text-grey">Last Modified: 2011-06-20T11:58:00.00Z</p></div>
+    </div>
+    <script>
+    let idx = [];
+    async function init() { const r = await fetch("/en/search.json"); idx = await r.json(); }
+    init();
+    function search() {
+        const q = document.getElementById("si").value.toLowerCase();
+        const r = document.getElementById("sr");
+        if (q.length < 2) { r.style.display="none"; return; }
+        const m = idx.filter(i => i.t.toLowerCase().includes(q)).slice(0, 5);
+        if (m.length > 0) {
+            r.innerHTML = m.map(i => `<a href="${i.u}" class="w3-bar-item w3-button w3-white">${i.t}</a>`).join("");
+            r.style.display="block";
+        } else { r.style.display="none"; }
+    }
+    </script>
+
+<!-- Prism.js Core -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
+<!-- Autoloader: Automatically loads languages  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

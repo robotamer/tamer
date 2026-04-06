@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/css/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-dark.min.css">
+
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/en/rss.xml">
+    <title>Go jkl</title>
+</head>
+<body class="w3-light-grey">
+    <div class="w3-bar w3-black w3-card">
+        <a href="/en/index.html" class="w3-bar-item w3-button">Home</a><a href="/en/code/go/smtp.html" class="w3-bar-item w3-button">Smtp</a><a href="/en/code/go/﻿sometimes-i-fall-in-love-with-code.html" class="w3-bar-item w3-button">﻿Sometimes I fall in love with code</a><a href="/en/code/go/jgdb.html" class="w3-bar-item w3-button">jgdb</a><a href="/en/code/go/a-gopher-named-gophy.html" class="w3-bar-item w3-button">A Gopher named Gophy</a><a href="/en/code/go/encode-decode-golang-data-to-gob-files.html" class="w3-bar-item w3-button">Encode/Decode Golang data to Gob files</a><a href="/en/code/go/gowatch.html" class="w3-bar-item w3-button">GoWatch</a><a href="/en/code/go/cfg.html" class="w3-bar-item w3-button">Cfg</a><a href="/en/code/go/file-access-and-create-time.html" class="w3-bar-item w3-button">File Access and Create Time</a><a href="/en/code/go/go-snippets.html" class="w3-bar-item w3-button">Go Snippets</a><a href="/en/code/go/ping.html" class="w3-bar-item w3-button">Ping</a><a href="/en/code/go/citadel-vcard-sync.html" class="w3-bar-item w3-button">Citadel vCard Sync</a><a href="/en/code/go/your-everyday-go-tools.html" class="w3-bar-item w3-button">Your Everyday Go Tools</a><a href="/en/code/go/cases.html" class="w3-bar-item w3-button">Cases</a><a href="/en/code/go/conv.html" class="w3-bar-item w3-button">Conv</a><a href="/en/code/go/encode-decode-between-struct-and-byte-slice.html" class="w3-bar-item w3-button">Encode/Decode between struct and byte slice</a><a href="/en/code/go/crypt.html" class="w3-bar-item w3-button">Crypt</a>
+        <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
+        <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
+    </div>
+    <div class="w3-content" style="max-width:1400px; margin:20px auto">
+        <div class="w3-container w3-white w3-card-4 w3-padding-32"><a href="/en/code/index.html" class="w3-button w3-light-grey">&laquo; Back</a><h1>Go jkl</h1><div class="w3-justify"><p>I just dumped my home made php script md2html and switched to <a href="https://github.com/gotamer/jkl">jkl</a>.<br>
+This is basiclly my test post!<br>
+jkl is a static site generator written in Go, based on Jekyll.</p>
+<p>All I had to do was convert my template to <a href="http://www.golang.org">Go</a> tempates, and add the YAML
+front matter to my markdown files.</p>
+<ul>
+<li>jkl is by far faster then md2html</li>
+<li>provides a build in server</li>
+<li>The <a href="http://www.golang.org">Go</a> templates are a bid easier to work with.</li>
+</ul>
+<p>I still have to figure out a way to deploy my site, since <a href="https://github.com/gotamer/jkl">jkl</a> only provides S3, but that shouldn't be to hard; meanwhile rsync will do.</p></div><hr><p class="w3-small w3-text-grey">Last Modified: 2013-11-27T19:50:00Z</p></div>
+    </div>
+    <script>
+    let idx = [];
+    async function init() { const r = await fetch("/en/search.json"); idx = await r.json(); }
+    init();
+    function search() {
+        const q = document.getElementById("si").value.toLowerCase();
+        const r = document.getElementById("sr");
+        if (q.length < 2) { r.style.display="none"; return; }
+        const m = idx.filter(i => i.t.toLowerCase().includes(q)).slice(0, 5);
+        if (m.length > 0) {
+            r.innerHTML = m.map(i => `<a href="${i.u}" class="w3-bar-item w3-button w3-white">${i.t}</a>`).join("");
+            r.style.display="block";
+        } else { r.style.display="none"; }
+    }
+    </script>
+
+<!-- Prism.js Core -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
+<!-- Autoloader: Automatically loads languages  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

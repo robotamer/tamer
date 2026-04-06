@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/css/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-dark.min.css">
+
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/en/rss.xml">
+    <title>jgdb</title>
+</head>
+<body class="w3-light-grey">
+    <div class="w3-bar w3-black w3-card">
+        <a href="/en/index.html" class="w3-bar-item w3-button">Home</a><a href="/en/code/go/smtp.html" class="w3-bar-item w3-button">Smtp</a><a href="/en/code/go/﻿sometimes-i-fall-in-love-with-code.html" class="w3-bar-item w3-button">﻿Sometimes I fall in love with code</a><a href="/en/code/go/a-gopher-named-gophy.html" class="w3-bar-item w3-button">A Gopher named Gophy</a><a href="/en/code/go/encode-decode-golang-data-to-gob-files.html" class="w3-bar-item w3-button">Encode/Decode Golang data to Gob files</a><a href="/en/code/go/gowatch.html" class="w3-bar-item w3-button">GoWatch</a><a href="/en/code/go/cfg.html" class="w3-bar-item w3-button">Cfg</a><a href="/en/code/go/file-access-and-create-time.html" class="w3-bar-item w3-button">File Access and Create Time</a><a href="/en/code/go/go-snippets.html" class="w3-bar-item w3-button">Go Snippets</a><a href="/en/code/go/ping.html" class="w3-bar-item w3-button">Ping</a><a href="/en/code/go/citadel-vcard-sync.html" class="w3-bar-item w3-button">Citadel vCard Sync</a><a href="/en/code/go/your-everyday-go-tools.html" class="w3-bar-item w3-button">Your Everyday Go Tools</a><a href="/en/code/go/cases.html" class="w3-bar-item w3-button">Cases</a><a href="/en/code/go/conv.html" class="w3-bar-item w3-button">Conv</a><a href="/en/code/go/go-jkl.html" class="w3-bar-item w3-button">Go jkl</a><a href="/en/code/go/encode-decode-between-struct-and-byte-slice.html" class="w3-bar-item w3-button">Encode/Decode between struct and byte slice</a><a href="/en/code/go/crypt.html" class="w3-bar-item w3-button">Crypt</a>
+        <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
+        <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
+    </div>
+    <div class="w3-content" style="max-width:1400px; margin:20px auto">
+        <div class="w3-container w3-white w3-card-4 w3-padding-32"><a href="/en/code/index.html" class="w3-button w3-light-grey">&laquo; Back</a><h1>jgdb</h1><div class="w3-justify"><h2>About the implementation:</h2>
+<p>This project is in alha state!</p>
+<h3>Object Types</h3>
+<ul>
+<li>Tuple (In Memory Database) <em>Beta</em></li>
+<li>List (Single file persistent database) <em>Beta</em></li>
+<li>Object (Multi file persistent database) <em>Alpha</em></li>
+<li>Cache (Cache for Tuple) <em>Not yet implemented</em></li>
+</ul>
+<h3>Backends</h3>
+<ul>
+<li>Json</li>
+<li>Glob <em>Not yet implemented</em></li>
+</ul>
+<p>The major distinction between <em>List</em> and <em>Object</em> is that one, the <em>List type</em> uses a single file as backend with each record placed in one line.<br>
+Where as the <em>Object</em> type keeps each record in a separate file. The object type will keep track of these records with an index file, and also optionally with a strtree for fast in memory access.</p>
+<h4>How the List type works:</h4>
+<ol>
+<li>The user creates a struct to his/her needs</li>
+<li>The database inherits that struct via an <em>Interface</em></li>
+<li>The database converts that struct to include the map id using <em>jsonListStruct</em></li>
+<li>jsonListStruct struct is used to Marshal the data in to a json file</li>
+</ol>
+<h4>What is planed so far:</h4>
+<ol>
+<li>Create a cache system with a user defined limit that keeps the most asked for items in a Tuple, as of now all data is being imported in to a Tuple.</li>
+<li>Create the vcs (git) backup store for the json backend</li>
+<li>Distribute with git push and pull</li>
+<li>Keep an open line of communication with glob between nodes</li>
+</ol>
+<h4>Disadvantage:</h4>
+<ul>
+<li>git is not the fastest distribution system</li>
+</ul>
+<h4>Advantage:</h4>
+<ol>
+<li>All data is kept in plain text/json</li>
+<li>Backups are incremental, distributed and under version control.</li>
+<li>Distributed system. without the need for the master and slave concept.</li>
+<li>Every node is independent of the overall system, and can function even if all others fail.</li>
+<li>Database can get very big, bigger then what the memory can hold, and we will read less active data with io.Reader and bufio</li>
+</ol>
+<h3>FAQ</h3>
+<blockquote>
+<p>To get a proper distributed system you need a merge strategy for your git repositories. How would you solve conflicts?</p>
+</blockquote>
+<p>As with everything I am open to suggestions, meanwhile I am planing following:<br>
+The strategy will differ by List or Object type database.<br>
+For example the List type database will not have any update only insert and delete.
+The insert operation will easily be resolved by git, when nodes do their pull, save, add, commit and push cycle.</p>
+<p>When it comes to the delete operation, every node will before deleting a record, add lock on the file it plans to modify. Each node will be able to lock a file at pull time.
+This means other nodes can still modify and commit all other files, just not the one locked by a node.
+The lock will have a time limit as it does only takes a short time to perform a full cycle of pull, save, add, commit and push with git.</p>
+<h3>Links</h3>
+<ul>
+<li><a href="http://www.robotamer.com/code/go/gotamer/jgdb.html" title="Website">Website</a></li>
+<li><a href="http://go.pkgdoc.org/bitbucket.org/gotamer/jgdb" title="GoTamer Pkg Documentation">Pkg Documantation</a></li>
+<li><a href="https://bitbucket.org/gotamer/jgdb" title="GoTamer Repository">Repository</a></li>
+<li><a href="https://bitbucket.org/gotamer/jgdb/issues" title="Bug Tracking">Bug Tracking</a></li>
+</ul></div><hr><p class="w3-small w3-text-grey">Last Modified: 2015-01-28T19:54:59Z</p></div>
+    </div>
+    <script>
+    let idx = [];
+    async function init() { const r = await fetch("/en/search.json"); idx = await r.json(); }
+    init();
+    function search() {
+        const q = document.getElementById("si").value.toLowerCase();
+        const r = document.getElementById("sr");
+        if (q.length < 2) { r.style.display="none"; return; }
+        const m = idx.filter(i => i.t.toLowerCase().includes(q)).slice(0, 5);
+        if (m.length > 0) {
+            r.innerHTML = m.map(i => `<a href="${i.u}" class="w3-bar-item w3-button w3-white">${i.t}</a>`).join("");
+            r.style.display="block";
+        } else { r.style.display="none"; }
+    }
+    </script>
+
+<!-- Prism.js Core -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
+<!-- Autoloader: Automatically loads languages  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

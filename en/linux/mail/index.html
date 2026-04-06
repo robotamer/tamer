@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-dark.min.css">
+
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/en/rss.xml">
+    <title>Index</title>
+</head>
+<body class="w3-light-grey">
+    <div class="w3-bar w3-black w3-card">
+        
+        <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
+        <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
+    </div>
+    <div class="w3-content" style="max-width:1400px; margin:20px auto">
+        <div class="w3-container w3-white w3-card-4 w3-padding-32"><a href="/en/linux/index.html" class="w3-button w3-light-grey">&laquo; Back</a><h2>Folder: en/linux/mail</h2><ul><li><a href="/en/linux/mail/msmtp-install-config-and-test.html">msmtp install, config and test</a> <span class="w3-tiny w3-text-grey">(2011-06-26T10:24:08Z)</span></li><li><a href="/en/linux/mail/imap.html">IMAP mail server</a> <span class="w3-tiny w3-text-grey">(2025-04-06)</span></li><li><a href="/en/linux/mail/msmtp.html">msmtp</a> <span class="w3-tiny w3-text-grey">(2015-01-28T22:38:12Z)</span></li><li><a href="/en/linux/mail/telnet.html">Telnet to mail server</a> <span class="w3-tiny w3-text-grey">(2025-04-04)</span></li><li><a href="/en/linux/mail/send-mail-with-sendmail.html">Send mail with sendmail</a> <span class="w3-tiny w3-text-grey">(2015-01-28T22:38:12Z)</span></li></ul></div>
+    </div>
+    <script>
+    let idx = [];
+    async function init() { const r = await fetch("/en/search.json"); idx = await r.json(); }
+    init();
+    function search() {
+        const q = document.getElementById("si").value.toLowerCase();
+        const r = document.getElementById("sr");
+        if (q.length < 2) { r.style.display="none"; return; }
+        const m = idx.filter(i => i.t.toLowerCase().includes(q)).slice(0, 5);
+        if (m.length > 0) {
+            r.innerHTML = m.map(i => `<a href="${i.u}" class="w3-bar-item w3-button w3-white">${i.t}</a>`).join("");
+            r.style.display="block";
+        } else { r.style.display="none"; }
+    }
+    </script>
+
+<!-- Prism.js Core -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
+<!-- Autoloader: Automatically loads languages  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

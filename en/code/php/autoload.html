@@ -1,0 +1,376 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/css/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-dark.min.css">
+
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/en/rss.xml">
+    <title>Autoload</title>
+</head>
+<body class="w3-light-grey">
+    <div class="w3-bar w3-black w3-card">
+        <a href="/en/index.html" class="w3-bar-item w3-button">Home</a><a href="/en/code/php/creating-models-for-the-zend-framework-from-command-line-via-phpcli.html" class="w3-bar-item w3-button">Creating models for the Zend Framework from command line via phpcli</a><a href="/en/code/php/load-functions-and-arrays.html" class="w3-bar-item w3-button">Load functions and array's</a><a href="/en/code/php/zend-acl.html" class="w3-bar-item w3-button">Zend ACL</a><a href="/en/code/php/num_row-with-pdo.html" class="w3-bar-item w3-button">num_row with PDO</a><a href="/en/code/php/multiple-php-installations.html" class="w3-bar-item w3-button">Multiple PHP installations</a><a href="/en/code/php/e-for-echo.html" class="w3-bar-item w3-button">e() for echo</a><a href="/en/code/php/fixing-phps-gettype-function.html" class="w3-bar-item w3-button">fixing php's gettype function</a><a href="/en/code/php/read-folder.html" class="w3-bar-item w3-button">Read Folder</a><a href="/en/code/php/php-goto-statement.html" class="w3-bar-item w3-button">PHP goto statement</a><a href="/en/code/php/PHPTamer/index.html" class="w3-bar-item w3-button w3-blue">📁 PHPTamer</a>
+        <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
+        <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
+    </div>
+    <div class="w3-content" style="max-width:1400px; margin:20px auto">
+        <div class="w3-container w3-white w3-card-4 w3-padding-32"><a href="/en/code/index.html" class="w3-button w3-light-grey">&laquo; Back</a><h1>Autoload</h1><div class="w3-justify"><p>I have been looking around for some good examples to use the new PHP autoloader interoperability standard according to the PHP Standards Recommendation #0 (PSR-0).</p>
+<p>And since I could find anything good, I had to figure it out by my self, here is the result.</p>
+<p><a href="https://gist.github.com/robotamer/3027247">gist id=3027247</a></p>
+<p>HowTo:</p>
+<pre><code class="language-php">    &lt;?php
+    # Adds your library to the beginning of the php include path
+    addInclude('~/code/libs', FALSE);
+
+    $loader = new SplClassLoader();
+
+    # adds the php include path to the class
+    $loader-&gt;setIncludePathLookup(true);
+
+    $loader-&gt;add('Zend');
+    $loader-&gt;add('PEAR');
+
+    # Give the path if it isn't in the php include path like this
+    $loader-&gt;add('Symfony', '/path/to/symfony');
+
+    $loader -&gt; register();
+    ?&gt;
+</code></pre>
+<pre><code class="language-php">&lt;?php
+/**
+ * SplClassLoader implementation that implements the technical interoperability
+ * standards for PHP 5.3 namespaces and class names.
+ *
+ * https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md
+ *
+ * Example usage:
+ *
+ *     $classLoader = new \SplClassLoader();
+ *
+ *     // Configure the SplClassLoader to act normally or silently
+ *     $classLoader-&gt;setMode(\SplClassLoader::MODE_NORMAL);
+ *
+ *     // Add a namespace of classes
+ *     $classLoader-&gt;add('Doctrine', array(
+ *         '/path/to/doctrine-common', '/path/to/doctrine-dbal', '/path/to/doctrine-orm'
+ *     ));
+ *
+ *     // Add a prefix
+ *     $classLoader-&gt;add('Swift', '/path/to/swift');
+ *
+ *     // Add a prefix through PEAR1 convention, requiring include_path lookup
+ *     $classLoader-&gt;add('PEAR');
+ *
+ *     // Allow to PHP use the include_path for file path lookup
+ *     $classLoader-&gt;setIncludePathLookup(true);
+ *
+ *     // Possibility to change the default php file extension
+ *     $classLoader-&gt;setFileExtension('.php');
+ *
+ *     // Register the autoloader, prepending it in the stack
+ *     $classLoader-&gt;register(true);
+ *
+ * @author Guilherme Blanco &lt;guilhermeblanco@php.net&gt;
+ * @author Jonathan H. Wage &lt;jonwage@gmail.com&gt;
+ * @author Roman S. Borschel &lt;roman@code-factory.org&gt;
+ * @author Matthew Weier O'Phinney &lt;matthew@zend.com&gt;
+ * @author Kris Wallsmith &lt;kris.wallsmith@gmail.com&gt;
+ * @author Fabien Potencier &lt;fabien.potencier@symfony-project.org&gt;
+ */
+ 
+include 'SplAutoloader.php';
+class SplClassLoader implements SplAutoloader
+{
+    /**
+     * @var string
+     */
+    private $fileExtension = '.php';
+ 
+    /**
+     * @var boolean
+     */
+    private $includePathLookup = false;
+ 
+    /**
+     * @var array
+     */
+    private $resources = array();
+ 
+    /**
+     * @var integer
+     */
+    private $mode = self::MODE_NORMAL;
+ 
+    /**
+     * {@inheritdoc}
+     */
+    public function setMode($mode)
+    {
+        if ($mode &amp; self::MODE_SILENT &amp;&amp; $mode &amp; self::MODE_NORMAL) {
+            throw new \InvalidArgumentException(
+                sprintf('Cannot have %s working normally and silently at the same time!', __CLASS__)
+            );
+        }
+ 
+        $this-&gt;mode = $mode;
+    }
+ 
+    /**
+     * Define the file extension of resource files in the path of this class loader.
+     *
+     * @param string $fileExtension
+     */
+    public function setFileExtension($fileExtension)
+    {
+        $this-&gt;fileExtension = $fileExtension;
+    }
+ 
+    /**
+     * Retrieve the file extension of resource files in the path of this class loader.
+     *
+     * @return string
+     */
+    public function getFileExtension()
+    {
+        return $this-&gt;fileExtension;
+    }
+ 
+    /**
+     * Turns on searching the include for class files. Allows easy loading installed PEAR packages.
+     *
+     * @param boolean $includePathLookup
+     */
+    public function setIncludePathLookup($includePathLookup)
+    {
+        $this-&gt;includePathLookup = $includePathLookup;
+    }
+ 
+    /**
+     * Gets the base include path for all class files in the namespace of this class loader.
+     *
+     * @return boolean
+     */
+    public function getIncludePathLookup()
+    {
+        return $this-&gt;includePathLookup;
+    }
+ 
+    /**
+     * {@inheritdoc}
+     */
+    public function register($prepend = false)
+    {
+        spl_autoload_register(array($this, 'load'), true, $prepend);
+    }
+ 
+    /**
+     * {@inheritdoc}
+     */
+    public function unregister()
+    {
+        spl_autoload_unregister(array($this, 'load'));
+    }
+ 
+    /**
+     * {@inheritdoc}
+     */
+    public function add($resource, $resourcePath = null)
+    {
+        $this-&gt;resources[$resource] = (array) $resourcePath;
+    }
+ 
+    /**
+     * {@inheritdoc}
+     */
+    public function load($resourceName)
+    {
+        $resourceAbsolutePath = $this-&gt;getResourceAbsolutePath($resourceName);
+ 
+        switch (true) {
+            case ($this-&gt;mode &amp; self::MODE_SILENT):
+                if ($resourceAbsolutePath !== false) {
+                    require $resourceAbsolutePath;
+                }
+                break;
+ 
+            case ($this-&gt;mode &amp; self::MODE_NORMAL):
+            default:
+                require $resourceAbsolutePath;
+                break;
+        }
+ 
+        if ($this-&gt;mode &amp; self::MODE_DEBUG &amp;&amp; ! $this-&gt;isResourceDeclared($resourceName)) {
+            throw new \RuntimeException(
+                sprintf('Autoloader expected resource &quot;%s&quot; to be declared in file &quot;%s&quot;.', $resourceName, $resourceAbsolutePath)
+            );
+        }
+    }
+ 
+    /**
+     * Transform resource name into its absolute resource path representation.
+     *
+     * @params string $resourceName
+     *
+     * @return string Resource absolute path.
+     */
+    private function getResourceAbsolutePath($resourceName)
+    {
+        $resourceRelativePath = $this-&gt;getResourceRelativePath($resourceName);
+ 
+        foreach ($this-&gt;resources as $resource =&gt; $resourcesPath) {
+            if (strpos($resourceName, $resource) !== 0) {
+                continue;
+            }
+ 
+            foreach ($resourcesPath as $resourcePath) {
+                $resourceAbsolutePath = $resourcePath . DIRECTORY_SEPARATOR . $resourceRelativePath;
+ 
+                if (is_file($resourceAbsolutePath)) {
+                    return $resourceAbsolutePath;
+                }
+            }
+        }
+ 
+        if ($this-&gt;includePathLookup &amp;&amp; ($resourceAbsolutePath = stream_resolve_include_path($resourceRelativePath)) !== false) {
+            return $resourceAbsolutePath;
+        }
+ 
+        return false;
+    }
+ 
+    /**
+     * Transform resource name into its relative resource path representation.
+     *
+     * @params string $resourceName
+     *
+     * @return string Resource relative path.
+     */
+    private function getResourceRelativePath($resourceName)
+    {
+        // We always work with FQCN in this context
+        $resourceName = ltrim($resourceName, '\\');
+        $resourcePath = '';
+ 
+        if (($lastNamespacePosition = strrpos($resourceName, '\\')) !== false) {
+            // Namespaced resource name
+            $resourceNamespace = substr($resourceName, 0, $lastNamespacePosition);
+            $resourceName      = substr($resourceName, $lastNamespacePosition + 1);
+            $resourcePath      =  str_replace('\\', DIRECTORY_SEPARATOR, $resourceNamespace) . DIRECTORY_SEPARATOR;
+        }
+ 
+        return $resourcePath . str_replace('_', DIRECTORY_SEPARATOR, $resourceName) . $this-&gt;fileExtension;
+    }
+ 
+    /**
+     * Check if resource is declared in user space.
+     *
+     * @params string $resourceName
+     *
+     * @return boolean
+     */
+    private function isResourceDeclared($resourceName)
+    {
+        return class_exists($resourceName, false)
+            || interface_exists($resourceName, false)
+            || (function_exists('trait_exists') &amp;&amp; trait_exists($resourceName, false));
+    }
+}
+
+?&gt;
+</code></pre>
+<pre><code class="language-php">
+&lt;?php
+/**
+ * Adds a directory to the php include path
+ */
+
+/**
+ * @category   RoboTamer
+ * @package    Functions
+ * @subpackage File
+ * @author     Dennis T Kaplan
+ * @copyright  Copyright (c) 2008 - 2012 Dennis T Kaplan
+ * @license    http://www.opensource.org/licenses/MIT
+ * @link       http://blog.robotamer.com
+ *
+ * @param string  $dir The directory to add to the path
+ * @param boolean $at_end If true, place this directory at the end of the include path. Otherwise, place it at the beginning.
+ */
+function addInclude($dir, $at_end = TRUE)
+{
+    $exist = file_exists($dir);
+    if ( ! $exist || ($exist &amp;&amp; filetype($dir) != 'dir'))
+    {
+        trigger_error(&quot;Include path '{$dir}' does not exist&quot;, E_USER_WARNING);
+        echo '&lt;pre&gt;'; print_r(debug_backtrace()); echo '&lt;/pre&gt;';
+        exit;
+    }
+    $dir   = rtrim($dir, &quot;/&quot;);
+    $paths = ltrim(get_include_path(), &quot;.&quot;.PATH_SEPARATOR);
+    $paths = explode(PATH_SEPARATOR, $paths);
+    $ds    = '.'.PATH_SEPARATOR;
+    if (strlen($paths[0]) &amp;&amp; array_search($dir, $paths) === false) {
+        $at_end ? array_push($paths, $dir) : array_unshift($paths, $dir);
+        $paths = implode(PATH_SEPARATOR, $paths);
+        set_include_path($ds.$paths);
+    } else {
+        set_include_path($ds.$dir);
+    }
+}
+/* #Test it
+echo get_include_path();
+echo '&lt;br /&gt;';
+addInclude('/var/www/library/');
+echo get_include_path();
+echo '&lt;br /&gt;';
+*/
+?&gt;
+
+</code></pre>
+<pre><code class="language-php">&lt;?php
+
+function autoload($className)
+{
+    $className = ltrim($className, '\\');
+    $fileName  = '';
+    $namespace = '';
+ 
+    if ($lastNsPos = strripos($className, '\\')) {
+        $namespace = substr($className, 0, $lastNsPos);
+        $className = substr($className, $lastNsPos + 1);
+        $fileName  = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
+    }
+ 
+    $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
+ 
+    require $fileName;
+}
+?&gt;
+</code></pre></div><hr><p class="w3-small w3-text-grey">Last Modified: 2012-07-01T07:37:41.00Z</p></div>
+    </div>
+    <script>
+    let idx = [];
+    async function init() { const r = await fetch("/en/search.json"); idx = await r.json(); }
+    init();
+    function search() {
+        const q = document.getElementById("si").value.toLowerCase();
+        const r = document.getElementById("sr");
+        if (q.length < 2) { r.style.display="none"; return; }
+        const m = idx.filter(i => i.t.toLowerCase().includes(q)).slice(0, 5);
+        if (m.length > 0) {
+            r.innerHTML = m.map(i => `<a href="${i.u}" class="w3-bar-item w3-button w3-white">${i.t}</a>`).join("");
+            r.style.display="block";
+        } else { r.style.display="none"; }
+    }
+    </script>
+
+<!-- Prism.js Core -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
+<!-- Autoloader: Automatically loads languages  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

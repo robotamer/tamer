@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/css/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-dark.min.css">
+
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/en/rss.xml">
+    <title>msmtp</title>
+</head>
+<body class="w3-light-grey">
+    <div class="w3-bar w3-black w3-card">
+        <a href="/en/index.html" class="w3-bar-item w3-button">Home</a><a href="/en/linux/mail/msmtp-install-config-and-test.html" class="w3-bar-item w3-button">msmtp install, config and test</a><a href="/en/linux/mail/imap.html" class="w3-bar-item w3-button">IMAP mail server</a><a href="/en/linux/mail/telnet.html" class="w3-bar-item w3-button">Telnet to mail server</a><a href="/en/linux/mail/send-mail-with-sendmail.html" class="w3-bar-item w3-button">Send mail with sendmail</a>
+        <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
+        <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
+    </div>
+    <div class="w3-content" style="max-width:1400px; margin:20px auto">
+        <div class="w3-container w3-white w3-card-4 w3-padding-32"><a href="/en/linux/index.html" class="w3-button w3-light-grey">&laquo; Back</a><h1>msmtp</h1><div class="w3-justify"><h1>/etc/msmtprc</h1>
+<pre><code class="language-sh">defaults
+maildomain      example.net
+syslog          LOG_MAIL
+aliases         /etc/aliases
+
+account         default
+host            mail.example.net
+port            587
+from            srv7@example.net
+auth            on
+user            user@example.net
+password        ********
+tls             on
+tls_starttls    on
+#tls_certcheck   off
+tls_fingerprint DB:A0:2A:07:00:F9:E3:23:7D:07:E7:52:3C:95:9D:E6:7E:12:54:3F
+</code></pre>
+<p>You may need a manual for a <a href="/linux/openssl/mail-server-fingerprint">tls fingerprint</a></p>
+<p>Your alias file</p>
+<pre><code># /etc/aliases 
+default: me@example.net
+</code></pre>
+<p>A php script to send mail</p>
+<pre><code>#!/usr/bin/php
+&lt;?php
+ 
+define('TAB',&quot;\t&quot;);
+ 
+$user = $_SERVER['LOGNAME'];
+$host = exec(&quot;hostname -f&quot;);
+$from = $user.'@'.$host;
+ 
+$to      = 'sweety@example.net';
+$subject = 'Testing msmtp';
+$message = 'hello from '. $host;
+$headers = 'From: '.$from.PHP_EOL;
+$headers .= 'X-Mailer: msmtp + PHP '.phpversion();
+ 
+if(mail($to, $subject, $message, $headers))
+{
+     echo PHP_EOL.TAB.'Your message was successfully accepted for delivery'.PHP_EOL.PHP_EOL;
+}else{
+     echo PHP_EOL.TAB.'Your message was not accepted for delivery!'.PHP_EOL.PHP_EOL;
+}
+ 
+?&gt;
+</code></pre></div><hr><p class="w3-small w3-text-grey">Last Modified: 2015-01-28T22:38:12Z</p></div>
+    </div>
+    <script>
+    let idx = [];
+    async function init() { const r = await fetch("/en/search.json"); idx = await r.json(); }
+    init();
+    function search() {
+        const q = document.getElementById("si").value.toLowerCase();
+        const r = document.getElementById("sr");
+        if (q.length < 2) { r.style.display="none"; return; }
+        const m = idx.filter(i => i.t.toLowerCase().includes(q)).slice(0, 5);
+        if (m.length > 0) {
+            r.innerHTML = m.map(i => `<a href="${i.u}" class="w3-bar-item w3-button w3-white">${i.t}</a>`).join("");
+            r.style.display="block";
+        } else { r.style.display="none"; }
+    }
+    </script>
+
+<!-- Prism.js Core -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
+<!-- Autoloader: Automatically loads languages  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

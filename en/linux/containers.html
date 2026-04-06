@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/css/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-dark.min.css">
+
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/en/rss.xml">
+    <title>Linux Containers</title>
+</head>
+<body class="w3-light-grey">
+    <div class="w3-bar w3-black w3-card">
+        <a href="/en/index.html" class="w3-bar-item w3-button">Home</a><a href="/en/linux/log-rotate.html" class="w3-bar-item w3-button">Log Rotate</a><a href="/en/linux/markdown.html" class="w3-bar-item w3-button">Markdown Syntax</a><a href="/en/linux/snippets.html" class="w3-bar-item w3-button">Linux Snippets</a><a href="/en/linux/backround-process.html" class="w3-bar-item w3-button">Linux backround process</a><a href="/en/linux/network-safety-restart-bash-script.html" class="w3-bar-item w3-button">Network Safety Restart Bash Script</a><a href="/en/linux/git-howto.html" class="w3-bar-item w3-button">Git Howto</a><a href="/en/linux/utf-8-character-list.html" class="w3-bar-item w3-button">UTF-8 Character List</a><a href="/en/linux/bridge-utils-for-lxc.html" class="w3-bar-item w3-button">Bridge-Utils for LXC</a><a href="/en/linux/netbeans-error.html" class="w3-bar-item w3-button">Netbeans error</a><a href="/en/linux/caldav-and-carddav-server.html" class="w3-bar-item w3-button">CalDAV and CardDAV Server</a><a href="/en/linux/git-alias.html" class="w3-bar-item w3-button">Git Alias</a><a href="/en/linux/bash/index.html" class="w3-bar-item w3-button w3-blue">📁 bash</a><a href="/en/linux/mail/index.html" class="w3-bar-item w3-button w3-blue">📁 mail</a><a href="/en/linux/openssl/index.html" class="w3-bar-item w3-button w3-blue">📁 openssl</a><a href="/en/linux/citadel/index.html" class="w3-bar-item w3-button w3-blue">📁 citadel</a>
+        <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
+        <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
+    </div>
+    <div class="w3-content" style="max-width:1400px; margin:20px auto">
+        <div class="w3-container w3-white w3-card-4 w3-padding-32"><a href="/en/index.html" class="w3-button w3-light-grey">&laquo; Back</a><h1>Linux Containers</h1><div class="w3-justify"><p>Linux Containers provide a Free Software virtualization system for computers running GNU/Linux. This is accomplished through kernel level isolation. It allows one to run multiple virtual units simultaneously. Those units, similar to chroots, are sufficiently isolated to guarantee the required security, but utilize available resources efficiently, as they run on the same kernel.</p>
+<pre><code>apt-get install lxc bridge-utils debootstrap
+</code></pre>
+<p>First we will setup our Bridge: <a href="Bridge-Utils.html">Linux:bridge-utils</a></p>
+<p>/etc/fstab</p>
+<pre><code>cgroup          /sys/fs/cgroup         cgroup  defaults        0       0
+
+mount -a
+
+
+LXCDIR=/var/lib/lxc
+cd $LXCDIR
+nano vm0.cfg
+</code></pre>
+<p>Following is a template config file. If you are also looking at other howto's, don't get coughed up at the fstab mount option. The debian script takes care of that. You will at leased have to change the IP address.</p>
+<p><strong>vm0.cfg</strong></p>
+<pre><code>lxc.utsname = vm0
+lxc.rootfs = /var/lib/lxc/vm0/rootfs
+
+lxc.tty = 4
+lxc.network.type = veth
+lxc.network.flags = up
+lxc.network.link = br0
+lxc.network.name = eth0
+lxc.network.mtu = 1500
+
+# security parameter
+lxc.cgroup.devices.deny = a # Deny all access to devices
+lxc.cgroup.devices.allow = c 1:3 rwm   # dev/null
+lxc.cgroup.devices.allow = c 1:5 rwm   # dev/zero
+lxc.cgroup.devices.allow = c 5:1 rwm   # dev/console
+lxc.cgroup.devices.allow = c 5:0 rwm   # dev/tty
+lxc.cgroup.devices.allow = c 4:0 rwm   # dev/tty0
+lxc.cgroup.devices.allow = c 4:1 rwm   # dev/tty1
+lxc.cgroup.devices.allow = c 4:2 rwm   # dev/tty2
+lxc.cgroup.devices.allow = c 1:9 rwm   # dev/urandon
+lxc.cgroup.devices.allow = c 1:8 rwm   # dev/random
+lxc.cgroup.devices.allow = c 136:* rwm # dev/pts/*
+lxc.cgroup.devices.allow = c 5:2 rwm   # dev/pts/ptmx
+lxc.cgroup.devices.allow = c 254:0 rwm # dev/rtc
+
+# mounts point
+lxc.mount.entry=proc   /var/lib/lxc/vm0/rootfs/proc proc nodev,noexec,nosuid 0 0
+lxc.mount.entry=devpts /var/lib/lxc/vm0/rootfs/dev/pts devpts defaults 0 0
+lxc.mount.entry=sysfs  /var/lib/lxc/vm0/rootfs/sys sysfs defaults  0 0
+</code></pre>
+<p>Command</p>
+<pre><code>lxc-create -f $LXCDIR/vm0.cfg -n vm0
+cp /usr/lib/lxc/templates/lxc-debian $LXCDIR
+</code></pre>
+<p>At this point you might wont to make lxc-debian your own. At leased change the release from Lenny to Squeeze</p>
+<pre><code>./lxc-debian -p vm0
+</code></pre>
+<p>The vm0 should have been created now. Your root password is root.
+Before we start it up we will make some config changes.</p>
+<p>First edit your network config</p>
+<pre><code>nano $LXCDIR/vm0/rootfs/etc/network/interfaces
+</code></pre>
+<p>File needs to look like this: // Note change the IP addresses to yours, if you don't know how, you know you shouldn't be here //</p>
+<pre><code># The loopback network interface
+auto lo
+iface lo inet loopback
+up route add -net 127.0.0.0 netmask 255.0.0.0 dev lo
+down route add -net 127.0.0.0 netmask 255.0.0.0 dev lo
+
+auto eth0
+iface eth0 inet static
+address 70.22.189.59
+netmask 255.255.255.248
+gateway 70.22.189.57
+</code></pre>
+<p>Now we will try to boot the system.</p>
+<pre><code>cd $LXCDIR
+lxc-start -n vm0
+</code></pre>
+<p>default password:</p>
+<ul>
+<li>user: root</li>
+<li>password: root</li>
+</ul>
+<p>Tip: copy your ~/.ssh folder to each server for passwordless login</p>
+<pre><code>nano /etc/default/locale
+</code></pre>
+<p>And add:</p>
+<pre><code>LANG=en_US.UTF-8
+</code></pre>
+<p>Configure locales</p>
+<pre><code>dpkg-reconfigure locales
+</code></pre>
+<p>Open  /etc/inittab and make sure you comment out like this:</p>
+<pre><code>1:2345:respawn:/sbin/getty 38400 console
+#c1:12345:respawn:/sbin/getty 38400 tty1 linux
+#c2:12345:respawn:/sbin/getty 38400 tty2 linux
+#c3:12345:respawn:/sbin/getty 38400 tty3 linux
+#c4:12345:respawn:/sbin/getty 38400 tty4 linux
+</code></pre>
+<p>Now you should be at the vm0 login, try user root with pass root<br>
+Try to ping a domain you know works, and it should give you a response otherwise your network setup failed.</p>
+<p>Assuming it worked, let's make it permanent.</p>
+<pre><code>ln -s $LXCDIR/vm0/config /etc/lxc/vm0.conf
+</code></pre>
+<p>Turn this on and add vm0 to the container variable.</p>
+<pre><code>cd /etc/default/
+nano lxc
+</code></pre>
+<p>Next we will setup the server:</p>
+<h2>LXC Debian Server Setup</h2>
+<hr>
+<p>Useful Resources:</p>
+<p><a href="http://lxc.teegra.net">teegra.net</a></p>
+<p><a href="http://www.linuxfoundation.org/collaborate/workgroups/networking">linuxfoundation.org</a></p>
+<p><a href="http://wiki.debian.org/HighPerformanceComputing">wiki.debian.org</a></p>
+<p><a href="http://qemu-buch.de">qemu-buch.de</a></p>
+<p><a href="http://nigel.mcnie.name/blog/a-five-minute-guide-to-linux-containers-for-debian">nigel.mcnie.name</a></p>
+<p>Found another approach which looks interesting<br>
+<a href="http://wiki.pcprobleemloos.nl/using_lxc_linux_containers_on_debian_squeeze/creating_a_lxc_virtual_machine_template">wiki.pcprobleemloos.nl</a></p></div><hr><p class="w3-small w3-text-grey">Last Modified: 2015-01-28T20:07:00Z</p></div>
+    </div>
+    <script>
+    let idx = [];
+    async function init() { const r = await fetch("/en/search.json"); idx = await r.json(); }
+    init();
+    function search() {
+        const q = document.getElementById("si").value.toLowerCase();
+        const r = document.getElementById("sr");
+        if (q.length < 2) { r.style.display="none"; return; }
+        const m = idx.filter(i => i.t.toLowerCase().includes(q)).slice(0, 5);
+        if (m.length > 0) {
+            r.innerHTML = m.map(i => `<a href="${i.u}" class="w3-bar-item w3-button w3-white">${i.t}</a>`).join("");
+            r.style.display="block";
+        } else { r.style.display="none"; }
+    }
+    </script>
+
+<!-- Prism.js Core -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
+<!-- Autoloader: Automatically loads languages  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

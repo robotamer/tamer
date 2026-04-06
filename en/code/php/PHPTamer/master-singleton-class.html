@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/css/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-dark.min.css">
+
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/en/rss.xml">
+    <title>Master Singleton Class</title>
+</head>
+<body class="w3-light-grey">
+    <div class="w3-bar w3-black w3-card">
+        <a href="/en/index.html" class="w3-bar-item w3-button">Home</a><a href="/en/code/php/PHPTamer/rtcrypter.html" class="w3-bar-item w3-button">RTCrypter</a><a href="/en/code/php/PHPTamer/phptamer.html" class="w3-bar-item w3-button">PHPTamer</a><a href="/en/code/php/PHPTamer/facade.html" class="w3-bar-item w3-button">Facade</a><a href="/en/code/php/PHPTamer/index.html" class="w3-bar-item w3-button">PHPTamer</a>
+        <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
+        <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
+    </div>
+    <div class="w3-content" style="max-width:1400px; margin:20px auto">
+        <div class="w3-container w3-white w3-card-4 w3-padding-32"><a href="/en/code/php/index.html" class="w3-button w3-light-grey">&laquo; Back</a><h1>Master Singleton Class</h1><div class="w3-justify"><h4>Via the factory</h4>
+<pre><code>$l = RTSingleton::factory('Translate');
+</code></pre>
+<h4>Directs call</h4>
+<pre><code>$view = RTSingleton::Template();
+</code></pre>
+<h4>Class Alias</h4>
+<pre><code>RTSingleton::alias(string $className, string $alias);
+
+RTSingleton::alias('Template', 'V');
+</code></pre>
+<h4>Aliased call <em>RTSingleton has an S alias by default</em></h4>
+<pre><code>$view = S::V();
+</code></pre>
+<h4>Set Object  <em>Not available in version 0.0.1</em></h4>
+<pre><code>RTSingleton::set(object $class [, string $alias = NULL ] );
+
+RTSingleton::set(new Aura\View\Template(), 'View');
+</code></pre>
+<h4>Actually:</h4>
+<pre><code> RTSingleton::set(require __dir__ . '/../libs/composer/vendor/Aura/View/scripts/instance.php','V');
+</code></pre>
+<h4>No need for global variables</h4>
+<pre><code>S::V()-&gt;var = 'Master RTSingleton Class';
+</code></pre>
+<h4>Use original class or alias or switch back and forth</h4>
+<pre><code>echo RTSingleton::Template()-&gt;fetch(__dir__ .'/gui/layout.php');
+echo S::V()-&gt;fetch(__dir__ .'/gui/otherlayout.php');
+</code></pre>
+<h4>See all the registered classes</h4>
+<pre><code>print_r(S::getClasses());
+</code></pre></div><hr><p class="w3-small w3-text-grey">Last Modified: 2015-01-28T19:54:59Z</p></div>
+    </div>
+    <script>
+    let idx = [];
+    async function init() { const r = await fetch("/en/search.json"); idx = await r.json(); }
+    init();
+    function search() {
+        const q = document.getElementById("si").value.toLowerCase();
+        const r = document.getElementById("sr");
+        if (q.length < 2) { r.style.display="none"; return; }
+        const m = idx.filter(i => i.t.toLowerCase().includes(q)).slice(0, 5);
+        if (m.length > 0) {
+            r.innerHTML = m.map(i => `<a href="${i.u}" class="w3-bar-item w3-button w3-white">${i.t}</a>`).join("");
+            r.style.display="block";
+        } else { r.style.display="none"; }
+    }
+    </script>
+
+<!-- Prism.js Core -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
+<!-- Autoloader: Automatically loads languages  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

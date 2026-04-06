@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/css/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-dark.min.css">
+
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/en/rss.xml">
+    <title>Netbeans error</title>
+</head>
+<body class="w3-light-grey">
+    <div class="w3-bar w3-black w3-card">
+        <a href="/en/index.html" class="w3-bar-item w3-button">Home</a><a href="/en/linux/containers.html" class="w3-bar-item w3-button">Linux Containers</a><a href="/en/linux/log-rotate.html" class="w3-bar-item w3-button">Log Rotate</a><a href="/en/linux/markdown.html" class="w3-bar-item w3-button">Markdown Syntax</a><a href="/en/linux/snippets.html" class="w3-bar-item w3-button">Linux Snippets</a><a href="/en/linux/backround-process.html" class="w3-bar-item w3-button">Linux backround process</a><a href="/en/linux/network-safety-restart-bash-script.html" class="w3-bar-item w3-button">Network Safety Restart Bash Script</a><a href="/en/linux/git-howto.html" class="w3-bar-item w3-button">Git Howto</a><a href="/en/linux/utf-8-character-list.html" class="w3-bar-item w3-button">UTF-8 Character List</a><a href="/en/linux/bridge-utils-for-lxc.html" class="w3-bar-item w3-button">Bridge-Utils for LXC</a><a href="/en/linux/caldav-and-carddav-server.html" class="w3-bar-item w3-button">CalDAV and CardDAV Server</a><a href="/en/linux/git-alias.html" class="w3-bar-item w3-button">Git Alias</a><a href="/en/linux/bash/index.html" class="w3-bar-item w3-button w3-blue">📁 bash</a><a href="/en/linux/mail/index.html" class="w3-bar-item w3-button w3-blue">📁 mail</a><a href="/en/linux/openssl/index.html" class="w3-bar-item w3-button w3-blue">📁 openssl</a><a href="/en/linux/citadel/index.html" class="w3-bar-item w3-button w3-blue">📁 citadel</a>
+        <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
+        <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
+    </div>
+    <div class="w3-content" style="max-width:1400px; margin:20px auto">
+        <div class="w3-container w3-white w3-card-4 w3-padding-32"><a href="/en/index.html" class="w3-button w3-light-grey">&laquo; Back</a><h1>Netbeans error</h1><div class="w3-justify"><p>I been using Netbeans and following solved the problem:</p>
+<pre><code>    manticore:/etc/sysctl.d# telnet ::ffff:192.168.1.1
+    Trying ::ffff:192.168.1.1...
+    telnet: Unable to connect to remote host: Network is unreachable
+    manticore:/etc/sysctl.d# sysctl net.ipv6.bindv6only
+    net.ipv6.bindv6only = 1
+    manticore:/etc/sysctl.d# sysctl net.ipv6.bindv6only=0
+    net.ipv6.bindv6only = 0
+    manticore:/etc/sysctl.d# telnet ::ffff:192.168.1.1
+    Trying ::ffff:192.168.1.1...
+    Connected to ::ffff:192.168.1.1.
+    Escape character is '^]'.
+</code></pre></div><hr><p class="w3-small w3-text-grey">Last Modified: 2010-03-07T19:21:00Z</p></div>
+    </div>
+    <script>
+    let idx = [];
+    async function init() { const r = await fetch("/en/search.json"); idx = await r.json(); }
+    init();
+    function search() {
+        const q = document.getElementById("si").value.toLowerCase();
+        const r = document.getElementById("sr");
+        if (q.length < 2) { r.style.display="none"; return; }
+        const m = idx.filter(i => i.t.toLowerCase().includes(q)).slice(0, 5);
+        if (m.length > 0) {
+            r.innerHTML = m.map(i => `<a href="${i.u}" class="w3-bar-item w3-button w3-white">${i.t}</a>`).join("");
+            r.style.display="block";
+        } else { r.style.display="none"; }
+    }
+    </script>
+
+<!-- Prism.js Core -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
+<!-- Autoloader: Automatically loads languages  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,430 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/css/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-dark.min.css">
+
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/en/rss.xml">
+    <title>Zend ACL</title>
+</head>
+<body class="w3-light-grey">
+    <div class="w3-bar w3-black w3-card">
+        <a href="/en/index.html" class="w3-bar-item w3-button">Home</a><a href="/en/code/php/creating-models-for-the-zend-framework-from-command-line-via-phpcli.html" class="w3-bar-item w3-button">Creating models for the Zend Framework from command line via phpcli</a><a href="/en/code/php/load-functions-and-arrays.html" class="w3-bar-item w3-button">Load functions and array's</a><a href="/en/code/php/num_row-with-pdo.html" class="w3-bar-item w3-button">num_row with PDO</a><a href="/en/code/php/autoload.html" class="w3-bar-item w3-button">Autoload</a><a href="/en/code/php/multiple-php-installations.html" class="w3-bar-item w3-button">Multiple PHP installations</a><a href="/en/code/php/e-for-echo.html" class="w3-bar-item w3-button">e() for echo</a><a href="/en/code/php/fixing-phps-gettype-function.html" class="w3-bar-item w3-button">fixing php's gettype function</a><a href="/en/code/php/read-folder.html" class="w3-bar-item w3-button">Read Folder</a><a href="/en/code/php/php-goto-statement.html" class="w3-bar-item w3-button">PHP goto statement</a><a href="/en/code/php/PHPTamer/index.html" class="w3-bar-item w3-button w3-blue">📁 PHPTamer</a>
+        <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
+        <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
+    </div>
+    <div class="w3-content" style="max-width:1400px; margin:20px auto">
+        <div class="w3-container w3-white w3-card-4 w3-padding-32"><a href="/en/code/index.html" class="w3-button w3-light-grey">&laquo; Back</a><h1>Zend ACL</h1><div class="w3-justify"><p>Tamer_ACL is a simple Zend Framework ACL plugin that uses the sqlite backend to store all the data.</p>
+<h4>How To Inatall</h4>
+<p>Make sure you have a table called <strong>role</strong> in your authentication table and a table called <strong>alias</strong> you may change that to username if you like. The sql code is below.<br>
+Below are the files.<br>
+Before each file you will find installation instructions that should work even for the most novice Linux / Zend Framework developer.</p>
+<h4>Resources</h4>
+<ul>
+<li><a href="http://www.phpclasses.org/browse/package/4100.html">phpclasses.org</a></li>
+<li><a href="http://code.google.com/p/tamer">Google code / REPO</a></li>
+</ul>
+<h4>Todo</h4>
+<ul>
+<li>Admin Backend</li>
+</ul>
+<hr>
+<h4>ZEND_ROOT/backstrap.php</h4>
+<p>Create acl object</p>
+<pre><code class="language-php">include_once &quot;Tamer/Acl.php&quot;;
+$acl = new Tamer_Acl();
+</code></pre>
+<p>Add the Tamer_Plugin_Auth to the Zend Front Controller</p>
+<pre><code class="language-php">$front-&gt;setControllerDirectory(APPS . '/default/controllers')
+        -&gt;setBaseUrl($cfg-&gt;baseUrl)
+        -&gt;registerPlugin(new Tamer_Plugin_Auth($auth, $acl))
+</code></pre>
+<h4>ZEND_ROOT/library/Tamer/Acl.php</h4>
+<pre><code class="language-php">
+&lt;?php
+require_once 'Zend/Acl.php';
+require_once 'Zend/Acl/Role.php';
+require_once 'Zend/Acl/Resource.php';
+require_once 'Zend/Db/Adapter/Pdo/Sqlite.php';
+
+class Tamer_ACL extends Zend_ACL 
+{
+        public $alias;
+        public $role;
+        
+        public function __construct($alias, $role)
+        {       
+                $this-&gt;alias = $alias;
+                $this-&gt;role = $role;
+                $sqlite = new TamerLiteACL($alias, $role);
+                $result = $sqlite-&gt;getAclRows();
+                foreach($result['roles'] as $v){
+                        $this-&gt;addRoles($v);
+                }
+                $this-&gt;addResources($result['resources']);
+                $this-&gt;addAccess($result['access']);
+        }
+        
+        private function addRoles($rows)
+        {
+                foreach($rows as $v){
+                        if($v['parent'] == ''){
+                                $this-&gt;addRole(new Zend_Acl_Role($v['role']));
+                        }else{
+                                $this-&gt;addRole(new Zend_Acl_Role($v['role']), $v['parent']);
+                        }
+                }
+        }
+        
+        private function addResources($rows)
+        {
+                foreach($rows as $v){
+                        if($v['parent'] == ''){
+                                $this-&gt;add(new Zend_Acl_Resource($v['resource']));
+                        }else{
+                                $this-&gt;add(new Zend_Acl_Resource($v['resource']), $v['parent']);
+                        }
+                }
+        }
+
+        private function addAccess($rows)
+        {
+                foreach($rows as $v){
+                        if($v['allow'] == 1){
+                                $this-&gt;allow($v['role'], $v['resource'], $v['privilege']);
+                        }else{
+                                $this-&gt;deny($v['role'], $v['resource'], $v['privilege']);
+                        }
+                }
+        }
+}
+
+
+class TamerLiteACL 
+{
+        private $_sqlite_name = '/db/config.db';
+        private $_alias;
+        private $_role;
+        private $_result;
+        
+        public function __construct($alias, $role)
+        {       
+                $this-&gt;_alias = $alias;
+                $this-&gt;_role = $role;
+                
+                try{
+                        $this-&gt;_sqliteAdapter = new Zend_Db_Adapter_Pdo_Sqlite(array('dbname' =&gt; ROOT.$this-&gt;_sqlite_name));
+                        $this-&gt;_sqliteAdapter-&gt;getConnection();
+                } catch (Zend_Db_Adapter_Exception $e) {
+                        echo 'adapter&lt;pre&gt;'.$e-&gt;getMessage().'&lt;/pre&gt;';
+                } catch (Zend_Exception $e) {
+                        echo 'adapter&lt;pre&gt;'.$e-&gt;getMessage().'&lt;/pre&gt;';
+                }
+                $this-&gt;_sqliteAdapter-&gt;getProfiler()-&gt;setEnabled(true);
+
+                $select = $this-&gt;_sqliteAdapter-&gt;select()
+                                        -&gt;from('acl_roles', array('role', 'parent'))
+                                        -&gt;where('type = ?', 1);
+                
+                $stmt = $this-&gt;_sqliteAdapter-&gt;query($select);
+                $this-&gt;_result['roles']['system'] = $stmt-&gt;fetchAll();
+                
+                $select = $this-&gt;_sqliteAdapter-&gt;select()
+                                        -&gt;from('acl_roles', array('role', 'parent'))
+                                        -&gt;where('role = ?', $this-&gt;_alias)
+                                        -&gt;orwhere('parent = ?', $this-&gt;_alias);
+                
+                $stmt = $this-&gt;_sqliteAdapter-&gt;query($select);
+                $this-&gt;_result['roles']['alias'] = $stmt-&gt;fetchAll();
+                
+                $stmt = $this-&gt;_sqliteAdapter-&gt;query(
+                &quot;SELECT resource, parent FROM acl_resources WHERE owner = 'system' OR owner = ?&quot;, $this-&gt;_alias);
+                $this-&gt;_result['resources'] = $rows = $stmt-&gt;fetchAll();
+                
+                $stmt = $this-&gt;_sqliteAdapter-&gt;query('SELECT allow, role, resource, privilege FROM acl_access WHERE type = 1 ORDER BY chain');
+                $this-&gt;_result['access'] = $rows = $stmt-&gt;fetchAll();
+
+                $this-&gt;_sqliteAdapter-&gt;closeConnection();
+        }
+        
+        public function getAclRows()
+        {
+                return $this-&gt;_result;
+        }
+}
+
+
+
+
+class aclCreate extends Zend_ACL 
+{
+        public function __construct()
+        {
+                $this-&gt;add(new Zend_Acl_Resource('index'));
+                $this-&gt;add(new Zend_Acl_Resource('safe'));
+                $this-&gt;add(new Zend_Acl_Resource('login'), 'safe');
+                $this-&gt;add(new Zend_Acl_Resource('registration'), 'safe');
+                $this-&gt;add(new Zend_Acl_Resource('password'), 'safe');
+                
+                $this-&gt;addRole(new Zend_Acl_Role('guest'));
+                $this-&gt;deny('guest', 'safe', NULL);
+                $this-&gt;allow('guest', 'registration');
+                $this-&gt;allow('guest', 'login');
+                $this-&gt;deny('guest', 'password');
+                $this-&gt;allow('guest','index');
+                
+                $this-&gt;addRole(new Zend_Acl_Role('member'));
+                $this-&gt;allow('member', 'safe', NULL);
+                
+                $this-&gt;addRole(new Zend_Acl_Role('admin'));
+                $this-&gt;allow('admin');
+        }
+
+}
+
+class TamerFile_ACL
+{
+        /*
+        @ Call like this from bootstrap
+                include_once &quot;Tamer/Acl.php&quot;;
+                $acl = new Tamer_Acl();
+                $acl = new aclCreate();
+                $acl = $acl-&gt;aclCheck();
+        */
+        protected $aclCfg;
+        
+        private $_sqlite_name = '/db/config.db';
+        private $_sqliteAdapter;
+        private $_table; //Sqlite Table
+        
+        public $old = FALSE;
+
+        public function __construct()
+        {
+                $this-&gt;aclCfg = ROOT.'/library/Tamer/Acl.php';
+
+                try{
+                        $this-&gt;_sqliteAdapter = new Zend_Db_Adapter_Pdo_Sqlite(array('dbname' =&gt; ROOT.$this-&gt;_sqlite_name));
+                        $this-&gt;_sqliteAdapter-&gt;getConnection();
+                } catch (Zend_Db_Adapter_Exception $e) {
+                        echo 'adapter&lt;pre&gt;'.$e-&gt;getMessage().'&lt;/pre&gt;';
+                } catch (Zend_Exception $e) {
+                        echo 'adapter&lt;pre&gt;'.$e-&gt;getMessage().'&lt;/pre&gt;';
+                }
+                //$this-&gt;dropTable();
+                //$this-&gt;makeTable();
+                //$this-&gt;aclCheck();
+        }
+        
+        public function aclCheck()
+        {
+                $ftime = filemtime($this-&gt;aclCfg);
+                $sql = 'SELECT time FROM acl_array WHERE time = ?';
+                if($this-&gt;_result = $this-&gt;_sqliteAdapter-&gt;fetchRow($sql, $ftime)){     
+                        return  $this-&gt;aclGet();
+                }else{
+                        $acl = new aclCreate();
+                        $this-&gt;aclDelete();
+                        $this-&gt;aclSave($acl);
+                        return $acl;
+                }
+        }
+
+        public function aclGet()
+        {
+                $sql = 'SELECT acl FROM acl_array WHERE time = ?';
+                $ftime = filemtime($this-&gt;aclCfg);
+                $this-&gt;_result = $this-&gt;_sqliteAdapter-&gt;fetchRow($sql, $ftime);
+                $this-&gt;_sqliteAdapter-&gt;closeConnection();
+                
+                return unserialize($this-&gt;_result['acl']);
+        }
+        
+        public function aclSave($array)
+        {
+                $filemtime = filemtime($this-&gt;aclCfg);
+                $array = serialize($array);
+                $data = array('time'=&gt;$filemtime,'acl'=&gt;$array);
+                $this-&gt;_sqliteAdapter-&gt;insert('acl_array', $data);
+                $this-&gt;_sqliteAdapter-&gt;closeConnection();
+        }
+
+        public function aclDelete()
+        {
+                $this-&gt;_sqliteAdapter-&gt;delete('acl_array');
+                $this-&gt;_sqliteAdapter-&gt;closeConnection();
+        }
+
+        
+        /**
+         * creates the db table
+         *
+         * @param array $fields
+         */
+        public function dropTable()
+        {
+            $this-&gt;_result = $this-&gt;_sqliteAdapter-&gt;getConnection()-&gt;exec('DROP TABLE acl_array');
+                $this-&gt;_sqliteAdapter-&gt;closeConnection();
+        }
+        
+        /**
+         * creates the db table
+         *
+         * @param array $fields
+         */
+        public function makeTable()
+        {
+                $sql[] = 'CREATE TABLE IF NOT EXISTS acl_roles (role TEXT(50) NOT NULL,parent TEXT(50) default NULL)';
+                $sql[] = 'CREATE TABLE IF NOT EXISTS acl_resources (resource TEXT(50) NOT NULL,parent TEXT(50) default NULL)';
+                $sql[] = 'CREATE TABLE IF NOT EXISTS acl_access (role TEXT(50) NOT NULL,resource  Text(50) NOT NULL,privilege Text(50),allow Boolean NOT NULL DEFAULT 0)';
+                $sql[] = 'CREATE table IF NOT EXISTS acl_array(time INTEGER PRIMARY KEY, acl TEXT)';
+                foreach($sql as $v){
+                        $this-&gt;_sqliteAdapter-&gt;query($v);
+                }
+                $this-&gt;_table = true;
+                $this-&gt;_sqliteAdapter-&gt;closeConnection();
+        }       
+}
+?&gt;
+</code></pre>
+<h4>ZEND_ROOT/library/Tamer/Plugin/Auth.php</h4>
+<pre><code class="language-php">&lt;?php
+
+class Tamer_Plugin_Auth extends Zend_Controller_Plugin_Abstract
+{
+        private $_auth;
+        private $_acl;
+        
+        private $_noauth = array('module' =&gt; 'safe',
+                                                        'controller' =&gt; 'login',
+                                                        'action' =&gt; 'index');
+        
+        private $_noacl = array('module' =&gt; 'default',
+                                                        'controller' =&gt; 'error',
+                                                        'action' =&gt; 'privileges');
+        
+        public function __construct($auth, $acl)
+        {
+                $this-&gt;_auth = $auth;
+                $this-&gt;_acl = $acl;
+        }
+        
+        public function preDispatch(Zend_Controller_Request_Abstract $request)
+        {
+                if ($this-&gt;_auth-&gt;hasIdentity()) {
+                        $role = $this-&gt;_auth-&gt;getIdentity()-&gt;role;
+                } else {
+                        $role = 'guest';
+                }
+
+                $controller = $request-&gt;controller;
+                $action         = $request-&gt;action;
+                $module         = $request-&gt;module;
+                $resource       = $controller;
+                
+                if (!$this-&gt;_acl-&gt;has($resource)) {
+                        $resource = null;
+                }
+                
+                if (!$this-&gt;_acl-&gt;isAllowed($role, $resource, $action)) {
+                        if (!$this-&gt;_auth-&gt;hasIdentity()) {
+                                $module = $this-&gt;_noauth['module'];
+                                $controller = $this-&gt;_noauth['controller'];
+                                $action = $this-&gt;_noauth['action'];
+                        } else {
+                                $module = $this-&gt;_noacl['module'];
+                                $controller = $this-&gt;_noacl['controller'];
+                                $action = $this-&gt;_noacl['action'];
+                        }
+                }
+                
+                $request-&gt;setModuleName($module);
+                $request-&gt;setControllerName($controller);
+                $request-&gt;setActionName($action);
+        }
+}
+?&gt;
+</code></pre>
+<h4>ZEND_ROOT/db/config.sql</h4>
+<pre><code class="language-sql">DROP TABLE IF EXISTS acl_array;
+DROP TABLE IF EXISTS acl_roles;
+DROP TABLE IF EXISTS acl_resources;
+DROP TABLE IF EXISTS acl_access;
+DROP TRIGGER IF EXISTS update_acl_roles;
+DROP TRIGGER IF EXISTS update_acl_roles_access;
+DROP TRIGGER IF EXISTS update_acl_roles_parent;
+DROP TRIGGER IF EXISTS update_acl_resources_owner;
+DROP TRIGGER IF EXISTS update_acl_access_role;
+
+PRAGMA auto_vacuum = 1;
+PRAGMA encoding = &quot;UTF-8&quot;;
+
+BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS acl_roles (role TEXT(50) NOT NULL,parent TEXT(50) default NULL, type Boolean DEFAULT NULL);
+
+CREATE TABLE IF NOT EXISTS acl_resources (owner TEXT(50) NOT NULL,
+resource TEXT(50) NOT NULL,parent TEXT(50) default NULL);
+
+CREATE TABLE IF NOT EXISTS acl_access (role TEXT(50) NOT NULL,
+resource TEXT(50) DEFAULT NULL, privilege Text(50) DEFAULT NULL, 
+allow Boolean DEFAULT NULL, chain INTEGER DEFAULT NULL, type Boolean DEFAULT NULL);
+
+CREATE TRIGGER update_acl_roles_parent UPDATE OF parent ON acl_roles 
+        BEGIN UPDATE acl_roles SET parent = new.role WHERE parent = old.role;
+        END;
+CREATE TRIGGER update_acl_resources_owner UPDATE OF owner ON acl_resources 
+        BEGIN UPDATE acl_resources SET owner = new.role WHERE owner = old.role; 
+        END;
+CREATE TRIGGER update_acl_access_role UPDATE OF role ON acl_access 
+        BEGIN UPDATE acl_access SET role = new.role WHERE role = old.role; 
+        END;
+
+
+INSERT INTO &quot;acl_roles&quot; VALUES ('admin',NULL,1);
+INSERT INTO &quot;acl_roles&quot; VALUES ('guest',NULL,1);
+INSERT INTO &quot;acl_roles&quot; VALUES ('member',NULL,1);
+INSERT INTO &quot;acl_roles&quot; VALUES ('developer','member',1);
+
+INSERT INTO &quot;acl_resources&quot; VALUES ('system','index',NULL);
+INSERT INTO &quot;acl_resources&quot; VALUES ('system','safe',NULL);
+INSERT INTO &quot;acl_resources&quot; VALUES ('system','login','safe');
+INSERT INTO &quot;acl_resources&quot; VALUES ('system','registration','safe');
+INSERT INTO &quot;acl_resources&quot; VALUES ('system','admin','safe');
+
+INSERT INTO &quot;acl_access&quot; VALUES ('admin',NULL,NULL,1,NULL,1);
+INSERT INTO &quot;acl_access&quot; VALUES ('guest','index',NULL,1,1,1);
+INSERT INTO &quot;acl_access&quot; VALUES ('guest','safe',NULL,NULL,2,1);
+INSERT INTO &quot;acl_access&quot; VALUES ('guest','login',NULL,1,3,1);
+INSERT INTO &quot;acl_access&quot; VALUES ('guest','registration',NULL,1,4,1);
+INSERT INTO &quot;acl_access&quot; VALUES ('member','safe',NULL,1,1,1);
+INSERT INTO &quot;acl_access&quot; VALUES ('member','login',NULL,NULL,2,1);
+INSERT INTO &quot;acl_access&quot; VALUES ('member','registration',NULL,NULL,3,1);
+COMMIT;
+</code></pre></div><hr><p class="w3-small w3-text-grey">Last Modified: 2008-04-27T19:50:00Z</p></div>
+    </div>
+    <script>
+    let idx = [];
+    async function init() { const r = await fetch("/en/search.json"); idx = await r.json(); }
+    init();
+    function search() {
+        const q = document.getElementById("si").value.toLowerCase();
+        const r = document.getElementById("sr");
+        if (q.length < 2) { r.style.display="none"; return; }
+        const m = idx.filter(i => i.t.toLowerCase().includes(q)).slice(0, 5);
+        if (m.length > 0) {
+            r.innerHTML = m.map(i => `<a href="${i.u}" class="w3-bar-item w3-button w3-white">${i.t}</a>`).join("");
+            r.style.display="block";
+        } else { r.style.display="none"; }
+    }
+    </script>
+
+<!-- Prism.js Core -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
+<!-- Autoloader: Automatically loads languages  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

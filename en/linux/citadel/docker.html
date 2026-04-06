@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/css/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-dark.min.css">
+
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/en/rss.xml">
+    <title>Citadel Docker</title>
+</head>
+<body class="w3-light-grey">
+    <div class="w3-bar w3-black w3-card">
+        <a href="/en/index.html" class="w3-bar-item w3-button">Home</a><a href="/en/linux/citadel/certbot.html" class="w3-bar-item w3-button">Citadel Let's Encrypt certificate authority setup</a><a href="/en/linux/citadel/tricks.html" class="w3-bar-item w3-button">Citadel QnA & Tricks</a><a href="/en/linux/citadel/change-domain.html" class="w3-bar-item w3-button">Change Citadel Domain</a><a href="/en/linux/citadel/lighttpd.html" class="w3-bar-item w3-button">Lighttpd Webserver for Citadel</a>
+        <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
+        <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
+    </div>
+    <div class="w3-content" style="max-width:1400px; margin:20px auto">
+        <div class="w3-container w3-white w3-card-4 w3-padding-32"><a href="/en/linux/index.html" class="w3-button w3-light-grey">&laquo; Back</a><h1>Citadel Docker</h1><div class="w3-justify"><p>We will use <code>mail</code> as hostname, <code>mail.example.net</code> as our domain,
+and <code>203.0.113.1</code> as our public facing IP address on this page for the citadel server.
+Replace with your own.</p>
+<h2>Pre-Install</h2>
+<ul>
+<li><p>Before you start set your DNS to point your domain to the servers IP.
+How to do that is out of this manuals scope.</p>
+</li>
+<li><p>Make sure docker is installed already.
+Installation of docker is a prerequisite that is out of scope of this documentation.</p>
+</li>
+</ul>
+<hr>
+<h2>Installation</h2>
+<p>Next we will set some variables, <em>replace</em> with your domain and IP address then execute following in your servers shell.</p>
+<pre><code class="language-sh">export CIT_HOST_NAME=mail
+export CIT_DOMAIN_NAME=mail.example.net
+export CIT_IP_ADDRESS=203.0.113.1
+</code></pre>
+<pre><code class="language-sh">mkdir -p /usr/local/citadel
+mkdir -p /usr/local/webcit/.well-known
+mkdir -p /usr/local/webcit/static.local/t
+echo &quot;127.0.1.1   $CIT_DOMAIN_NAME   $CIT_HOST_NAME&quot;&gt;&gt;/etc/hosts
+echo &quot;$CIT_IP_ADDRESS   $CIT_DOMAIN_NAME   $CIT_HOST_NAME&quot;&gt;&gt;/etc/hosts
+</code></pre>
+<p>Now your <em>/etc/hosts</em> file should look something like following. We only added the last two lines. Make sure <code>127.0.1.1</code> is a unique IP address in the first column. If you have a IP6 address you may add it as well.</p>
+<pre><code class="language-sh">#
+# /etc/hosts: static lookup table for host names
+#
+
+#&lt;ip-address&gt;		&lt;hostname.domain.tld&gt;	&lt;hostname&gt;
+127.0.0.1		localhost.local		localhost
+::1				localhost.local		localhost ip6-localhost
+
+127.0.1.1		mail.example.net		mail
+203.0.113.1		mail.example.net		mail
+</code></pre>
+<h2>Create Docker</h2>
+<ul>
+<li>Choice 1: Bind to IP 0.0.0.0</li>
+</ul>
+<pre><code class="language-sh">docker run -d --restart=unless-stopped --network host \
+    --volume=/usr/local/citadel:/citadel-data \
+    --volume=/usr/local/webcit/.well-known:/usr/local/webcit/.well-known \ 
+    --name=citadel citadeldotorg/citadel
+</code></pre>
+<ul>
+<li>Choice 2: Bind to <code>0.0.0.0</code> except change port 80 to 8080.</li>
+</ul>
+<pre><code class="language-sh">docker run -d --restart=unless-stopped --network host \
+    --volume=/usr/local/citadel:/citadel-data \
+    --volume=/usr/local/webcit/.well-known:/usr/local/webcit/.well-known \
+    --volume=/usr/local/webcit/static.local:/usr/local/webcit/static.local \
+    --name=citadel citadeldotorg/citadel --http-port=8080 --https-port=8443
+</code></pre>
+<h2>Stop</h2>
+<pre><code class="language-sh">docker stop citadel
+</code></pre>
+<h2>Start</h2>
+<pre><code class="language-sh">docker start citadel
+</code></pre>
+<h2>Restart</h2>
+<pre><code class="language-sh">docker restart citadel
+</code></pre>
+<h2>Upgrade</h2>
+<pre><code class="language-sh">docker stop citadel
+docker rm citadel
+docker pull citadeldotorg/citadel
+-- Create (see above))
+</code></pre>
+<h2>Backup</h2>
+<pre><code class="language-sh">docker stop citadel
+docker rename citadel citadel_02
+-- Create (see above))
+</code></pre>
+<h2>Attach will attach to ctdlvisor</h2>
+<pre><code class="language-sh"># /usr/local/bin/ctdlvisor
+docker attach citadel
+</code></pre>
+<h2>Enter the container as root</h2>
+<pre><code class="language-sh">docker exec -it citadel sh
+ls -alh
+exit
+</code></pre>
+<h2>List all running containers</h2>
+<pre><code class="language-sh">docker container ls
+OR
+docker ps
+</code></pre>
+<h2>List the content of a folder in the container</h2>
+<pre><code class="language-sh">docker exec -it citadel ls -al /usr/local/webcit/static
+</code></pre>
+<h2>Other helpful commands you can try to understand what goes on</h2>
+<pre><code class="language-sh">docker --help
+docker exec -it citadel  cat /etc/hosts
+docker container ls
+docker ps
+docker ps -a
+docker ps citadel
+docker exec -it citadel cat /etc/hosts
+docker inspect --format '{{ .NetworkSettings.IPAddress }}' citadel
+docker inspect --format '{{ .Config.Hostname  }}' citadel
+</code></pre>
+<h2>Citadel Repo</h2>
+<p><a href="https://code.citadel.org">https://code.citadel.org</a></p></div><hr><p class="w3-small w3-text-grey">Last Modified: 2025-04-04</p></div>
+    </div>
+    <script>
+    let idx = [];
+    async function init() { const r = await fetch("/en/search.json"); idx = await r.json(); }
+    init();
+    function search() {
+        const q = document.getElementById("si").value.toLowerCase();
+        const r = document.getElementById("sr");
+        if (q.length < 2) { r.style.display="none"; return; }
+        const m = idx.filter(i => i.t.toLowerCase().includes(q)).slice(0, 5);
+        if (m.length > 0) {
+            r.innerHTML = m.map(i => `<a href="${i.u}" class="w3-bar-item w3-button w3-white">${i.t}</a>`).join("");
+            r.style.display="block";
+        } else { r.style.display="none"; }
+    }
+    </script>
+
+<!-- Prism.js Core -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
+<!-- Autoloader: Automatically loads languages  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

@@ -34,9 +34,9 @@
 				<div class="heading-container">
 					<div class="heading">
 						<div class="info">
-							<div class="module">tamer</div>
+							<div class="module">nix</div>
 							<div class="toggle-version-container">
-								<span> e2f6f08</span>
+								<span>v0.3.1 4ac610c</span>
 								<div
 									id="dark-mode-toggle"
 									role="switch"
@@ -63,16 +63,7 @@
 <div class="menu-row"><a href="./index.html">README</a></div>
 </li>
 <li class="open">
-<div class="menu-row"><a href="./example.html">example</a></div>
-</li>
-<li class="open">
 <div class="menu-row"><a href="./nix.html">nix</a></div>
-</li>
-<li class="open">
-<div class="menu-row"><a href="./main.html">main</a></div>
-</li>
-<li class="open">
-<div class="menu-row"><a href="./service.html">service</a></div>
 </li>
 
 					</ul>
@@ -83,15 +74,28 @@
 					<div class="doc-content">
 								<section id="readme_README" class="doc-node">
 			<div class="title"><h1> README <a href="#readme_README">#</a></h1></div>
-<h2 id="here-is-my-advanture-in-to-v">Here is my advanture in to V</h2>
-<hr />
-<h2 id="perror">perror</h2>
-<p><strong><a href="main.html">perror</a></strong> is a linux program which takes the error numbers as input and prints the corosponding error in human readable format. Currently it only takes libc <a href="https://www.man7.org/linux/man-pages/man3/perror.3.html">perror</a> codes as input.</p>
+<h1 id="tamernix">tamer/nix</h1>
+<p>tamer/nix is Linux specific code, which some of it may run on bsd. It avoids distro and systemd specific code to be universaly Linux compadable.</p>
+<h1 id="alpha">alpha</h1>
+<p>This code is in alpha, do not use in production!</p>
+<h1 id="processes">processes()</h1>
+<p>Aggregates TCP and UDP listeners, then iterates to replace "inode=XXXX" with the process name if found. Returns an array of strings like "tcp 0.0.0.0:22 sshd", or leaves inode if not found; also leaves inode if execution isn't done by root. (check the cmd folder for more info on the command, and the docs folder for the module manual)</p>
+<h1 id="cmdtimezone-dsttimezone-dstv">cmd/timezone-dst/timezone-dst.v</h1>
+<p>Prints out timezone without considering dst; and N for North, S for South of equator. example output <code>+03:00N</code></p>
+<h1 id="userv">user.v</h1>
+<p>user dives in to /etc/passwd and /etc/group to get info. It has many helper functions such as:- <code>fn user_has_home(username string) bool</code> checks if the username has a home directory according to /etc/passwd</p>
+<ul>
+<li><code>fn user_in_group(username string, group_name string) bool</code> checks if the user has given group privliages</li>
+<li>check the docs in the doc folder ...</li></ul>
+<h2 id="install">Install:</h2>
+<p>v install --git <a href="https://codeberg.org/tamer/nix">https://codeberg.org/tamer/nix</a></p>
+<h2 id="docs">Docs:</h2>
+<p><a href="http://tamer.pw/v/nix/nix.html">module docs</a></p>
 
 </section>
 
 
-						<div class="footer">Powered by vdoc. Generated on: 13 Feb 2026 00:08:22</div>
+						<div class="footer">Powered by vdoc. Generated on: 5 Apr 2026 17:59:04</div>
 					</div>
 					
 				</div>

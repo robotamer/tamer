@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/css/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-dark.min.css">
+
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/en/rss.xml">
+    <title>Lighttpd Webserver for Citadel</title>
+</head>
+<body class="w3-light-grey">
+    <div class="w3-bar w3-black w3-card">
+        <a href="/en/index.html" class="w3-bar-item w3-button">Home</a><a href="/en/linux/citadel/docker.html" class="w3-bar-item w3-button">Citadel Docker</a><a href="/en/linux/citadel/certbot.html" class="w3-bar-item w3-button">Citadel Let's Encrypt certificate authority setup</a><a href="/en/linux/citadel/tricks.html" class="w3-bar-item w3-button">Citadel QnA & Tricks</a><a href="/en/linux/citadel/change-domain.html" class="w3-bar-item w3-button">Change Citadel Domain</a>
+        <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
+        <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
+    </div>
+    <div class="w3-content" style="max-width:1400px; margin:20px auto">
+        <div class="w3-container w3-white w3-card-4 w3-padding-32"><a href="/en/linux/index.html" class="w3-button w3-light-grey">&laquo; Back</a><h1>Lighttpd Webserver for Citadel</h1><div class="w3-justify"><p>Lighttpd is a free and open-source web server, designed for speed, efficiency, and flexibility.</p>
+<p>This tutorial is designed to work hand in glove with our <a href="/linux/citadel/">citadel docker</a> installation tutorial.
+We will install this on Void Linux but besides the lighttpd installation, everything should work on any NIX.</p>
+<h2>Void Linux Installation</h2>
+<pre><code class="language-sh">xbps-install -Suv
+xbps-install -S lighttpd
+</code></pre>
+<ul>
+<li>configuration file location</li>
+</ul>
+<pre><code>/etc/lighttpd/lighttpd.conf
+</code></pre>
+<ul>
+<li>Check that your configuration is ok:</li>
+</ul>
+<pre><code class="language-sh">lighttpd -tt -f /etc/lighttpd/lighttpd.conf
+</code></pre>
+<ul>
+<li>start the server for testing:</li>
+</ul>
+<pre><code class="language-sh">lighttpd -D -f /etc/lighttpd/lighttpd.conf
+</code></pre>
+<ul>
+<li>Enable Lighttpd to start automatically at boot time (This is <em>Void linux</em>/<em>runit init</em> specific. Check your distros init system documentation):</li>
+</ul>
+<pre><code class="language-sh">ln -s /etc/sv/lighttpd /var/service/
+</code></pre>
+<ul>
+<li>Start the Lighttpd service:</li>
+</ul>
+<pre><code class="language-sh">sv start lighttpd
+</code></pre>
+<ul>
+<li>/etc/lighttpd/lighttpd.conf</li>
+</ul>
+<pre><code class="language-sh"># See /usr/share/doc/lighttpd
+# and http://redmine.lighttpd.net/projects/lighttpd/wiki/Docs:ConfigurationOptions
+
+server.username       = &quot;_lighttpd&quot;
+server.groupname      = &quot;_lighttpd&quot;
+server.document-root  = &quot;/srv/www/lighttpd&quot;
+server.errorlog       = &quot;/var/log/lighttpd/error.log&quot;
+dir-listing.activate  = &quot;enable&quot;
+index-file.names      = ( &quot;index.html&quot; )
+
+server.modules += ( &quot;mod_proxy&quot;, &quot;mod_openssl&quot; )
+
+static-file.exclude-extensions = ( &quot;.fcgi&quot;, &quot;.php&quot;, &quot;.rb&quot;, &quot;~&quot;, &quot;.inc&quot; )
+
+$SERVER[&quot;socket&quot;] == &quot;:443&quot; {
+    ssl.engine = &quot;enable&quot;
+    ssl.pemfile = &quot;/etc/letsencrypt/live/srv.example.net/fullchain.pem&quot;
+    ssl.privkey = &quot;/etc/letsencrypt/live/srv.example.net/privkey.pem&quot;
+}
+
+
+$HTTP[&quot;host&quot;] == &quot;mail.example.net&quot; {
+    proxy.balance = &quot;hash&quot;
+    proxy.server = (
+        &quot;&quot; =&gt; (
+            &quot;citadel&quot; =&gt; (
+                &quot;host&quot; =&gt; &quot;127.0.1.2&quot;,
+                &quot;port&quot; =&gt; &quot;8080&quot;
+            )
+        )
+    )
+    ssl.pemfile = &quot;/etc/letsencrypt/live/mail.example.net/fullchain.pem&quot;
+    ssl.privkey = &quot;/etc/letsencrypt/live/mail.example.net/privkey.pem&quot;
+}
+
+</code></pre></div><hr><p class="w3-small w3-text-grey">Last Modified: 2025-04-04</p></div>
+    </div>
+    <script>
+    let idx = [];
+    async function init() { const r = await fetch("/en/search.json"); idx = await r.json(); }
+    init();
+    function search() {
+        const q = document.getElementById("si").value.toLowerCase();
+        const r = document.getElementById("sr");
+        if (q.length < 2) { r.style.display="none"; return; }
+        const m = idx.filter(i => i.t.toLowerCase().includes(q)).slice(0, 5);
+        if (m.length > 0) {
+            r.innerHTML = m.map(i => `<a href="${i.u}" class="w3-bar-item w3-button w3-white">${i.t}</a>`).join("");
+            r.style.display="block";
+        } else { r.style.display="none"; }
+    }
+    </script>
+
+<!-- Prism.js Core -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
+<!-- Autoloader: Automatically loads languages  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

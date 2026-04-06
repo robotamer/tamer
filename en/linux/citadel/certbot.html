@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/css/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-dark.min.css">
+
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/en/rss.xml">
+    <title>Citadel Let's Encrypt certificate authority setup</title>
+</head>
+<body class="w3-light-grey">
+    <div class="w3-bar w3-black w3-card">
+        <a href="/en/index.html" class="w3-bar-item w3-button">Home</a><a href="/en/linux/citadel/docker.html" class="w3-bar-item w3-button">Citadel Docker</a><a href="/en/linux/citadel/tricks.html" class="w3-bar-item w3-button">Citadel QnA & Tricks</a><a href="/en/linux/citadel/change-domain.html" class="w3-bar-item w3-button">Change Citadel Domain</a><a href="/en/linux/citadel/lighttpd.html" class="w3-bar-item w3-button">Lighttpd Webserver for Citadel</a>
+        <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
+        <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
+    </div>
+    <div class="w3-content" style="max-width:1400px; margin:20px auto">
+        <div class="w3-container w3-white w3-card-4 w3-padding-32"><a href="/en/linux/index.html" class="w3-button w3-light-grey">&laquo; Back</a><h1>Citadel Let's Encrypt certificate authority setup</h1><div class="w3-justify"><p>Signed TLS certificates are now available at no cost from the nonprofit <a href="https://letsencrypt.org/">Let's Encrypt Certificate Authority</a>.
+To use these on a Citadel system, you will need the <a href="https://certbot.eff.org">Certbot</a> utility installed.</p>
+<pre><code class="language-sh">export CIT_DOMAIN_NAME=mail.example.net
+
+certbot certonly --agree-tos --non-interactive --text --rsa-key-size 4096 \
+    --email admin@${CIT_DOMAIN_NAME} \
+    --webroot --webroot-path /usr/local/webcit \
+    --domains ${CIT_DOMAIN_NAME}
+cp /etc/letsencrypt/live/${CIT_DOMAIN_NAME}/privkey.pem /usr/local/citadel/keys/citadel.key 
+cp /etc/letsencrypt/live/${CIT_DOMAIN_NAME}/fullchain.pem /usr/local/citadel/keys/citadel.cer
+</code></pre>
+<h2>Now create these two files.</h2>
+<pre><code>cat /etc/letsencrypt/renewal-hooks/pre/citadel.sh
+</code></pre>
+<hr>
+<pre><code class="language-sh">#!/bin/sh
+docker stop citadel
+</code></pre>
+<pre><code># cat /etc/letsencrypt/renewal-hooks/post/citadel.sh
+</code></pre>
+<hr>
+<pre><code class="language-sh">#!/bin/sh
+cp /etc/letsencrypt/live/${CIT_DOMAIN_NAME}/fullchain.pem /usr/local/citadel/keys/citadel.cer
+cp /etc/letsencrypt/live/${CIT_DOMAIN_NAME}/privkey.pem /usr/local/citadel/keys/citadel.key
+wait
+docker start citadel
+</code></pre></div><hr><p class="w3-small w3-text-grey">Last Modified: 2025-04-12</p></div>
+    </div>
+    <script>
+    let idx = [];
+    async function init() { const r = await fetch("/en/search.json"); idx = await r.json(); }
+    init();
+    function search() {
+        const q = document.getElementById("si").value.toLowerCase();
+        const r = document.getElementById("sr");
+        if (q.length < 2) { r.style.display="none"; return; }
+        const m = idx.filter(i => i.t.toLowerCase().includes(q)).slice(0, 5);
+        if (m.length > 0) {
+            r.innerHTML = m.map(i => `<a href="${i.u}" class="w3-bar-item w3-button w3-white">${i.t}</a>`).join("");
+            r.style.display="block";
+        } else { r.style.display="none"; }
+    }
+    </script>
+
+<!-- Prism.js Core -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
+<!-- Autoloader: Automatically loads languages  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

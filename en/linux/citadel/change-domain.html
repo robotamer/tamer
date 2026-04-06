@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/css/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-dark.min.css">
+
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/en/rss.xml">
+    <title>Change Citadel Domain</title>
+</head>
+<body class="w3-light-grey">
+    <div class="w3-bar w3-black w3-card">
+        <a href="/en/index.html" class="w3-bar-item w3-button">Home</a><a href="/en/linux/citadel/docker.html" class="w3-bar-item w3-button">Citadel Docker</a><a href="/en/linux/citadel/certbot.html" class="w3-bar-item w3-button">Citadel Let's Encrypt certificate authority setup</a><a href="/en/linux/citadel/tricks.html" class="w3-bar-item w3-button">Citadel QnA & Tricks</a><a href="/en/linux/citadel/lighttpd.html" class="w3-bar-item w3-button">Lighttpd Webserver for Citadel</a>
+        <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
+        <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
+    </div>
+    <div class="w3-content" style="max-width:1400px; margin:20px auto">
+        <div class="w3-container w3-white w3-card-4 w3-padding-32"><a href="/en/linux/index.html" class="w3-button w3-light-grey">&laquo; Back</a><h1>Change Citadel Domain</h1><div class="w3-justify"><p>We will use <code>mail</code> as hostname, <code>mail.example.net</code> as our original domain, and <code>mail.example.com</code> as our new domain;
+and <code>203.0.113.1</code> as our public facing IP address on this page for the citadel server.
+Replace with your own.</p>
+<h2>Pre-Install</h2>
+<ul>
+<li>Before you start set your DNS to point your domain to the servers IP.
+How to do that is out of this manuals scope.</li>
+</ul>
+<hr>
+<p>Next we will set some variables, <em>replace</em> with your domain and IP address then execute following in your servers shell.</p>
+<pre><code class="language-sh">export CIT_DOMAIN_ORG=mail.example.net
+export CIT_DOMAIN_NEW=mail.example.com
+</code></pre>
+<p>Change your <em>/etc/hosts</em> &amp; <em>lighttpd.conf</em> file replace old with new domain</p>
+<pre><code class="language-sh"># Replace text in files
+sed -i &quot;s|$CIT_DOMAIN_ORG|$CIT_DOMAIN_NEW|g&quot; /etc/hosts
+sed -i &quot;s|$CIT_DOMAIN_ORG|$CIT_DOMAIN_NEW|g&quot; /etc/lighttpd/lighttpd.conf
+
+# Check config file
+lighttpd -tt -f /etc/lighttpd/lighttpd.conf
+</code></pre>
+<p>If there is an error at this point check your <em>/etc/lighttpd/lighttpd.conf</em> file. Fix the problem and run last command again.</p>
+<ul>
+<li>No error continue</li>
+</ul>
+<pre><code class="language-sh">certbot certonly --agree-tos --non-interactive --text --rsa-key-size 4096 \
+    --email webmaster@${CIT_DOMAIN_NEW} \
+    --webroot --webroot-path /srv/www/lighttpd \
+    --domains ${CIT_DOMAIN_NEW}
+</code></pre>
+<ul>
+<li>No error continue</li>
+</ul>
+<pre><code>sv stop lighttpd
+</code></pre>
+<ul>
+<li>No error continue</li>
+</ul>
+<pre><code>cp /etc/letsencrypt/live/${CIT_DOMAIN_NEW}/privkey.pem /usr/local/citadel/keys/citadel.key 
+cp /etc/letsencrypt/live/${CIT_DOMAIN_NEW}/fullchain.pem /usr/local/citadel/keys/citadel.cer
+</code></pre>
+<ul>
+<li>No error continue</li>
+</ul>
+<pre><code class="language-sh">docker stop citadel
+wait
+docker rename citadel citadel.net
+</code></pre>
+<ul>
+<li>No error continue</li>
+</ul>
+<pre><code class="language-sh">docker run -d --restart=unless-stopped --network host \
+    --volume=/usr/local/citadel:/citadel-data \
+    --volume=/usr/local/webcit/.well-known:/usr/local/webcit/.well-known \
+    --volume=/usr/local/webcit/static.local:/usr/local/webcit/static.local \
+    --name=citadel citadeldotorg/citadel --http-port=8080 --https-port=8443
+</code></pre>
+<ul>
+<li>No error continue</li>
+</ul>
+<pre><code class="language-sh">sv start lighttpd
+</code></pre>
+<ul>
+<li>Last we change the certbot post renewal hook</li>
+</ul>
+<pre><code class="language-sh">sed -i &quot;s|$CIT_DOMAIN_ORG|$CIT_DOMAIN_NEW|g&quot; /etc/letsencrypt/renewal-hooks/post/citadel.sh
+</code></pre>
+<p>All done check your new setup.<br>
+If you have a problem ask questions at <a href="https://uncensored.citadel.org/readfwd?go=Citadel%20Support">Citadel Support</a></p></div><hr><p class="w3-small w3-text-grey">Last Modified: 2025-04-04</p></div>
+    </div>
+    <script>
+    let idx = [];
+    async function init() { const r = await fetch("/en/search.json"); idx = await r.json(); }
+    init();
+    function search() {
+        const q = document.getElementById("si").value.toLowerCase();
+        const r = document.getElementById("sr");
+        if (q.length < 2) { r.style.display="none"; return; }
+        const m = idx.filter(i => i.t.toLowerCase().includes(q)).slice(0, 5);
+        if (m.length > 0) {
+            r.innerHTML = m.map(i => `<a href="${i.u}" class="w3-bar-item w3-button w3-white">${i.t}</a>`).join("");
+            r.style.display="block";
+        } else { r.style.display="none"; }
+    }
+    </script>
+
+<!-- Prism.js Core -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
+<!-- Autoloader: Automatically loads languages  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>
