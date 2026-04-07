@@ -1,7 +1,7 @@
 +++
 title = "Copyright"
 date = "2015-01-28T19:54:59Z"
-modified = "2022-06-17T02:23:18+03:00"
+modified = "2026-04-06T22:35:18+03:00"
 linktitle = "©"
 groups = ["meta"]
 groups_weight = 100
@@ -9,7 +9,7 @@ groups_weight = 100
 Following is the copyright on all code here on this blog as well as in the git repos.
 
 
-Copyright &copy; 1990-2022 GoTamer. All rights reserved.
+Copyright &copy; 1990-2026 TaMeR. All rights reserved.
 ---------------------------------------------------------------
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are

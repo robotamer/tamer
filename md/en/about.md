@@ -31,4 +31,3 @@ When it comes to manufacturing, I am knowledgeable in topics like.
  - Touch Probing
  - etc
 
-{{< lastmod >}}

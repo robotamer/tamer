@@ -6,7 +6,7 @@ linktitle = ""
 description = "My PGP key"
 keywords = ["robotamer", "gotamer", "phptamer", "tamer", "pgp"]
 language = "en"
-author = ""
+author = "TaMeR"
 tags = ["pgp"]
 categories = []
 +++
@@ -204,4 +204,3 @@ P2U8/goBc3NwfmpxFR+NRXZ9woRmEypSwQKMgQ==
 -----END PGP PUBLIC KEY BLOCK-----
 ```
 
-{{< lastmod >}}

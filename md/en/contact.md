@@ -9,8 +9,5 @@ author = "TaMeR"
 categories = []
 +++
 
-{{< social >}}
+My [PGP](/en/pgp.html) key
 
-My [PGP](/pgp.html) key
-
-{{< lastmod >}}

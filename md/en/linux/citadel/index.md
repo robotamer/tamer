@@ -1,7 +1,7 @@
----
-title: Citadel 
-description: Citadel notes
----
++++
+title = "Citadel" 
+description = "Citadel notes"
++++
 Email, collaboration, groupware, and content management -
 up and running in minutes, on your own hardware or in the cloud.
 
