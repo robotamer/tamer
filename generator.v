@@ -4,12 +4,15 @@ import os
 import toml
 import markdown
 import json
-import net.http.file // the server
+import net.http.file
 
-// Site Configuration
+// --- CONFIGURATION ---
 const site_url = 'http://tamer.pw'
-const content_root = os.join_path_single(os.getwd(), 'md') //  '/home/tamer/Public/tamer.pw/md'
+const content_root = os.join_path_single(os.getwd(), 'md')
 const output_root = os.getwd()
+const supported_langs = ['en', 'tr']
+
+// --- MODELS ---
 
 struct Page {
 mut:
@@ -21,272 +24,392 @@ mut:
 	tags        []string
 	lang        string
 	is_blog     bool
+	menu_html   string
 }
 
 struct SearchItem {
 	t string @[json: 't'] // title
 	u string @[json: 'u'] // url
 	c string @[json: 'c'] // description/content
+	g string @[json: 'g'] // tags (joined string)
 }
 
-fn main() {
-	if os.args.len == 1 {
-		eprintln('options: ${os.args[0]} run or serve')
-		exit(1)
-	} else {
-		match os.args[1] {
-			'serve' {
-				// --- SERVE OPTION ---
-				// Usage: v run main.v serve
-				println('Starting local server at http://localhost:8080')
-				println('Serving: ${output_root}')
-
-				// This starts a static server
-				file.serve(folder: output_root, on: ':8080')
-				return
-			}
-			'run' {
-				println('Creating html from markdown')
-			}
-			else {
-				eprintln('options: ${os.args[0]} run or serve')
-				exit(1)
-			}
-		}
-	}
-
-	mut lang_pages := map[string][]Page{}
-	mut lang_tags := map[string]map[string]int{}
-
-	// --- PASS 1: SCAN ---
-	files := os.walk_ext(content_root, '.md')
-
-	for path in files {
-		rel := path.all_after(content_root).trim_left('/')
-		lang := rel.all_before('/')
-		if lang !in ['en', 'tr'] {
-			continue
-		}
-
-		raw := os.read_file(path) or { continue }
-		content := raw.trim_space()
-		if !content.starts_with('+++') {
-			continue
-		}
-
-		parts := content.split('+++')
-		if parts.len < 3 {
-			continue
-		}
-
-		toml_doc := toml.parse_text(parts[1].trim_space()) or { continue }
-
-		mut tags := []string{}
-		tags_any := toml_doc.value('tags')
-		for t in tags_any.array() {
-			tags << t.string()
-		}
-
-		// Markdown conversion (using 1-argument signature common in standard vlib)
-		html_body := markdown.to_html(parts[2].trim_space())
-
-		p := Page{
-			url:         rel.replace('.md', '.html')
-			lang:        lang
-			title:       toml_doc.value('title').string()
-			date:        toml_doc.value('date').string()
-			description: toml_doc.value('description').string()
-			tags:        tags
-			content:     html_body
-			is_blog:     rel.contains('/blog/')
-		}
-
-		if lang !in lang_pages {
-			lang_pages[lang] = []Page{}
-		}
-		if lang !in lang_tags {
-			lang_tags[lang] = map[string]int{}
-		}
-
-		for tag in p.tags {
-			lang_tags[lang][tag]++
-		}
-		lang_pages[lang] << p
-		println('Parsed: ${p.url}')
-	}
-
-	// --- PASS 2: RENDER & GENERATE ASSETS ---
-	mut sitemap_urls := ''
-
-	for lang, pages in lang_pages {
-		// Identify unique directories for auto-indexing
-		mut all_dirs := map[string]bool{}
-		for p in pages {
-			all_dirs[os.dir(p.url)] = true
-		}
-
-		// 1. Generate Search Index
-		mut search_data := []SearchItem{}
-		for p in pages {
-			search_data << SearchItem{
-				t: p.title
-				u: '/${p.url}'
-				c: p.description
-			}
-		}
-		os.write_file('${output_root}/${lang}/search.json', json.encode(search_data)) or {}
-
-		// 2. Generate RSS Feed
-		mut rss_items := ''
-		mut feed_posts := pages.filter(it.is_blog)
-		feed_posts.sort(a.date > b.date)
-		for fp in feed_posts {
-			rss_items += '<item><title>${fp.title}</title><link>${site_url}/${fp.url}</link><description>${fp.description}</description><pubDate>${fp.date}T00:00:00Z</pubDate></item>/n'
-		}
-		rss_xml := '<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel>
-			<title>TaMeR - ${lang.to_upper()}</title>
-			<link>${site_url}/${lang}/</link>
-			<description>Latest posts</description>
-			${rss_items}
-		</channel></rss>'
-		os.write_file('${output_root}/${lang}/rss.xml', rss_xml) or {}
-
-		// 3. Render HTML Pages
-		for p in pages {
-			current_dir := os.dir(p.url)
-			parent_dir := os.dir(current_dir)
-
-			// Contextual Navigation
-			mut menu_links := []string{}
-			menu_links << '<a href="/${lang}/index.html" class="w3-bar-item w3-button">Home</a>'
-			for sib in pages.filter(os.dir(it.url) == current_dir && it.url != p.url) {
-				menu_links << '<a href="/${sib.url}" class="w3-bar-item w3-button">${sib.title}</a>'
-			}
-
-			// Subfolder discovery
-			mut seen_subs := map[string]bool{}
-			for pot in pages {
-				p_dir := os.dir(pot.url)
-				if p_dir.starts_with(current_dir) && p_dir != current_dir {
-					sub := p_dir.all_after(current_dir).trim('/').all_before('/')
-					if sub != '' && sub !in seen_subs {
-						menu_links << '<a href="/${current_dir}/${sub}/index.html" class="w3-bar-item w3-button w3-blue">📁 ${sub}</a>'
-						seen_subs[sub] = true
-					}
-				}
-			}
-
-			// Back button and content
-			back_btn := if current_dir != lang {
-				'<a href="/${parent_dir}/index.html" class="w3-button w3-light-grey">&laquo; Back</a>'
-			} else {
-				''
-			}
-			body := '${back_btn}<h1>${p.title}</h1><div class="w3-justify">${p.content}</div><hr><p class="w3-small w3-text-grey">Last Modified: ${p.date}</p>'
-
-			out_path := os.join_path(output_root, p.url)
-			os.mkdir_all(os.dir(out_path)) or { continue }
-			os.write_file(out_path, render_layout(p.title, body, menu_links.join(''),
-				p.lang)) or { continue }
-
-			sitemap_urls += '<url><loc>${site_url}/${p.url}</loc><lastmod>${p.date}</lastmod></url>'
-		}
-
-		// 4. Auto-generate Index pages if missing
-		for dir_path, _ in all_dirs {
-			// Check if a manual index.md exists in the source folder
-			// dir_path is like "en/blog", so we look in content_root/en/blog/index.md
-			manual_index_md := os.join_path(content_root, dir_path, 'index.md')
-
-			if os.exists(manual_index_md) {
-				println('Skipping auto-index for ${dir_path} (manual index.md found)')
-				continue
-			}
-
-			// Proceed to generate auto-index.html
-			index_path := os.join_path(output_root, dir_path, 'index.html')
-
-			mut dir_items := pages.filter(os.dir(it.url) == dir_path)
-
-			// Sort by date (descending) for blog paths
-			if dir_path.contains('/blog') || dir_items.any(it.is_blog) {
-				dir_items.sort(a.date > b.date)
-			} else {
-				dir_items.sort(a.title < b.title)
-			}
-
-			parent_dir := os.dir(dir_path)
-			back_btn := if dir_path != lang {
-				'<a href="/${parent_dir}/index.html" class="w3-button w3-light-grey">&laquo; Back</a>'
-			} else {
-				''
-			}
-
-			mut list := '<ul>'
-			for itm in dir_items {
-				list += '<li><a href="/${itm.url}">${itm.title}</a> <span class="w3-tiny w3-text-grey">(${itm.date})</span></li>'
-			}
-			list += '</ul>'
-
-			os.write_file(index_path, render_layout('Index', '${back_btn}<h2>Folder: ${dir_path}</h2>${list}',
-				'', lang)) or { continue }
-		}
-	}
-
-	// 5. Global Sitemap
-	sitemap := '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://sitemaps.org">${sitemap_urls}</urlset>'
-	os.write_file('${output_root}/sitemap.xml', sitemap) or { panic(err) }
-
-	// 6. Robots.txt
-	robots_txt := 'User-agent: *
-Allow: /
-Sitemap: ${site_url}/sitemap.xml'
-	os.write_file('${output_root}/robots.txt', robots_txt) or { panic(err) }
-
-	println('Done! Check: ${output_root}')
+struct Theme {
+	author string = 'TaMeR'
 }
 
-fn render_layout(title string, content string, menu_html string, lang string) string {
-	return '<!DOCTYPE html>
-<html lang="${lang}">
+// --- THEME METHODS ---
+
+fn (t Theme) header(p Page, keywords string) string {
+	return '
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
-    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/${lang}/rss.xml">
-    <title>${title}</title>
-</head>
-<body class="w3-light-grey">
-    <div class="w3-bar w3-black w3-card">
-        ${menu_html}
-        <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
-        <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
-    </div>
-    <div class="w3-content" style="max-width:1400px; margin:20px auto">
-        <div class="w3-container w3-white w3-card-4 w3-padding-32">${content}</div>
-    </div>
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/${p.lang}/rss.xml">
+    <title>${p.title}</title>
+    <meta name="author" content="${t.author}">
+    <meta name="description" content="${p.description}">
+    <meta name="keywords" content="${keywords}">
+    <style>
+        .tag-cloud { line-height: 2.5; padding: 40px; background: white; border-radius: 8px; text-align: center; }
+        .tag-item { transition: transform 0.2s; display: inline-block; text-decoration: none; margin: 0 10px; }
+        .tag-item:hover { transform: scale(1.1); color: #2196F3 !important; }
+        .tag-badge { 
+            font-size: 0.6rem; 
+            vertical-align: top; 
+            background: #e1e1e1; 
+            color: #555; 
+            padding: 2px 6px; 
+            border-radius: 10px; 
+            margin-left: 4px; 
+        }
+    </style>
+</head>'
+}
+
+fn (t Theme) scripts(lang string) string {
+	return '
     <script>
     let idx = [];
-    async function init() { const r = await fetch("/${lang}/search.json"); idx = await r.json(); }
+    async function init() { 
+        try {
+            const r = await fetch("/${lang}/search.json"); 
+            idx = await r.json(); 
+        } catch(e) { console.error("Search index failed", e); }
+    }
     init();
     function search() {
         const q = document.getElementById("si").value.toLowerCase();
         const r = document.getElementById("sr");
         if (q.length < 2) { r.style.display="none"; return; }
-        const m = idx.filter(i => i.t.toLowerCase().includes(q)).slice(0, 5);
+        const m = idx.filter(i => 
+            i.t.toLowerCase().includes(q) || 
+            (i.g && i.g.toLowerCase().includes(q))
+        ).slice(0, 5);
         if (m.length > 0) {
             r.innerHTML = m.map(i => `<a href="\${i.u}" class="w3-bar-item w3-button w3-white">\${i.t}</a>`).join("");
             r.style.display="block";
         } else { r.style.display="none"; }
     }
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>'
+}
 
-	<!-- Prism.js Core -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
-	<!-- Autoloader: Automatically loads languages  -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
+// --- PAGE METHODS ---
+
+fn (mut p Page) build_menu(all_pages []Page) {
+	current_dir := os.dir(p.url)
+	mut links := ['<a href="/${p.lang}/index.html" class="w3-bar-item w3-button">Home</a>']
+	for sib in all_pages {
+		if sib.lang == p.lang && os.dir(sib.url) == current_dir && sib.url != p.url {
+			links << '<a href="/${sib.url}" class="w3-bar-item w3-button">${sib.title}</a>'
+		}
+	}
+	p.menu_html = links.join('')
+}
+
+fn (p Page) render(t Theme) string {
+	keywords := p.tags.join(', ')
+
+    // Only create the date HTML if the date string isn't empty
+    date_html := if p.date != '' { 
+        '<hr>
+        <p class="w3-small w3-text-grey">Last Modified: ${p.date}</p>' 
+    } else { 
+        '' 
+    }
+
+
+	return '<!DOCTYPE html>
+<html lang="${p.lang}">
+${t.header(p, keywords)}
+<body class="w3-light-grey">
+    <div class="w3-bar w3-black w3-card">
+        ${p.menu_html}
+        <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
+        <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
+    </div>
+    <div class="w3-content" style="max-width:1400px; margin:20px auto">
+        <div class="w3-container w3-white w3-card-4 w3-padding-32">
+            <h1>${p.title}</h1>
+            ${p.content}
+            ${date_html}
+        </div>
+    </div>
+    ${t.scripts(p.lang)}
 </body>
 </html>'
+}
+
+// --- CORE GENERATOR LOGIC ---
+
+fn main() {
+	if os.args.len < 2 {
+		println('Usage: v run . [run|serve]')
+		return
+	}
+	match os.args[1] {
+		'serve' {
+			println('Serving at http://localhost:8080')
+			file.serve(folder: output_root, on: ':8080')
+		}
+		'run' {
+			generate_site()
+		}
+		else { println('Unknown command') }
+	}
+}
+
+fn generate_site() {
+	println('Scanning content...')
+	mut pages := scan_content()
+	
+	mut lang_map := map[string][]Page{}
+	for p in pages {
+		lang_map[p.lang] << p
+	}
+
+	mut total_sitemap := ''
+	for lang, mut lang_pages in lang_map {
+		println('Processing ${lang}...')
+		os.mkdir_all('${output_root}/${lang}') or {}
+    os.mkdir_all('${output_root}/${lang}/tags') or {} // Ensure tags dir exists
+
+		real_content := lang_pages.filter(!it.url.ends_with('index.html'))
+
+    generate_search_index(lang, real_content)
+
+    generate_tag_archive_pages(lang, real_content)
+    generate_tag_cloud(lang, real_content)
+
+		generate_rss_feed(lang, real_content)
+		
+		total_sitemap += render_pages(mut lang_pages)
+    // NEW: Create missing folder indices
+    generate_auto_indices(lang, lang_pages) 
+	}
+
+	generate_global_assets(total_sitemap)
+	println('Site generation complete.')
+}
+
+fn scan_content() []Page {
+	mut pages := []Page{}
+	files := os.walk_ext(content_root, '.md')
+	for path in files {
+		rel := path.all_after(content_root).trim_left('/')
+		lang := rel.all_before('/')
+		if lang !in supported_langs { continue }
+
+		raw := os.read_file(path) or { continue }
+		if !raw.starts_with('+++') { continue }
+		parts := raw.split('+++')
+		if parts.len < 3 { continue }
+
+
+		toml_doc := toml.parse_text(parts[1].trim_space()) or { continue }
+
+		// Safely extract tags: 
+		// 1. .array() converts the TOML value to []toml.Any
+		// 2. .as_strings() converts them to []string
+		// 3. .filter removes the Null artifact text and empty strings
+		mut raw_tags := toml_doc.value('tags').array().as_strings().filter(
+				it != '' && 
+				!it.contains('toml.Any') && 
+				!it.contains('toml.Null')
+		)
+
+		if raw_tags.len == 0 {
+				raw_tags = ['Uncategorized']
+		}
+
+		pages << Page{
+				url:         rel.replace('.md', '.html')
+				lang:        lang
+				title:       get_field(toml_doc, 'title')
+				date:        get_field(toml_doc, 'date')
+				description: get_field(toml_doc, 'description')
+				tags:        raw_tags
+				content:     markdown.to_html(parts[2].trim_space())
+				is_blog:     rel.contains('/blog/')
+		}
+
+	}
+	return pages
+}
+
+// Helper to get a field safely without the toml.Null artifact
+fn get_field(doc toml.Doc, key string) string {
+	// Use the Result guard '!'
+	// If the key is missing or there's an error, it goes to the 'else'
+	if val := doc.value_opt(key) {
+		// val is now toml.Any
+		str := val.string().trim_space()
+		// Final safety check against the internal string representation
+		if str.contains('toml.Null') || str.contains('toml.Any') {
+			return ''
+		}
+		return str
+	}
+	return ''
+}
+
+fn render_pages(mut pages []Page) string {
+	mut acc := ''
+	theme := Theme{}
+	for mut p in pages {
+		out_path := os.join_path(output_root, p.url)
+		
+		// Only render if source is newer than output
+		// We get source path by rebuilding from content_root
+		src_path := os.join_path(content_root, p.url.replace('.html', '.md'))
+		if os.exists(out_path) && os.file_last_mod_unix(src_path) <= os.file_last_mod_unix(out_path) {
+			acc += '<url><loc>${site_url}/${p.url}</loc><lastmod>${p.date}</lastmod></url>'
+			continue 
+		}
+
+		p.build_menu(pages)
+		os.mkdir_all(os.dir(out_path)) or { continue }
+		os.write_file(out_path, p.render(theme)) or { continue }
+		acc += '<url><loc>${site_url}/${p.url}</loc><lastmod>${p.date}</lastmod></url>'
+	}
+	return acc
+}
+
+
+fn generate_search_index(lang string, pages []Page) {
+	data := pages.map(SearchItem{
+		t: it.title
+		u: '/${it.url}'
+		c: it.description
+		g: it.tags.join(' ')
+	})
+	os.write_file('${output_root}/${lang}/search.json', json.encode(data)) or {}
+}
+
+fn generate_rss_feed(lang string, pages []Page) {
+	mut posts := pages.filter(it.is_blog)
+	posts.sort(a.date > b.date)
+	mut items := ''
+	for p in posts {
+		items += '<item><title>${p.title}</title><link>${site_url}/${p.url}</link><pubDate>${p.date}T00:00:00Z</pubDate></item>'
+	}
+	rss := '<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>TaMeR ${lang}</title>${items}</channel></rss>'
+	os.write_file('${output_root}/${lang}/rss.xml', rss) or {}
+}
+
+fn generate_tag_cloud(lang string, pages []Page) {
+	mut counts := map[string]int{}
+	for p in pages {
+		for tag in p.tags { counts[tag]++ }
+	}
+
+	mut max := 1
+	for _, count in counts { if count > max { max = count } }
+
+	mut cloud_html := '<div class="tag-cloud">'
+	for tag, count in counts {
+		size := 0.9 + (f64(count) / f64(max)) * 1.5
+		// Link to the tag-specific index page
+		cloud_html += '<a href="/${lang}/tags/${tag}.html" class="tag-item" style="font-size: ${size}rem;">
+            ${tag}<span class="tag-badge">${count}</span>
+        </a> '
+	}
+	cloud_html += '</div>'
+
+	mut p := Page{
+		title: 'Tag Cloud'
+		content: cloud_html
+		lang: lang
+		url: '${lang}/tags.html'
+	}
+	p.build_menu(pages) 
+	os.write_file(os.join_path(output_root, p.url), p.render(Theme{})) or {}
+}
+
+
+fn generate_global_assets(sitemap_urls string) {
+	sitemap := '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://sitemaps.org">${sitemap_urls}</urlset>'
+	os.write_file('${output_root}/sitemap.xml', sitemap) or {}
+	os.write_file('${output_root}/robots.txt', 'User-agent: *\nSitemap: ${site_url}/sitemap.xml') or {}
+}
+
+fn generate_tag_archive_pages(lang string, pages []Page) {
+	mut tag_map := map[string][]Page{}
+	
+	// Group pages by tag
+	for p in pages {
+		for tag in p.tags {
+			tag_map[tag] << p
+		}
+	}
+
+	theme := Theme{}
+	for tag, related_pages in tag_map {
+		mut list_html := '<h2>Posts tagged: ${tag}</h2><ul class="w3-ul w3-hoverable w3-white">'
+		for rp in related_pages {
+			list_html += '<li><a href="/${rp.url}" style="text-decoration:none">
+				<span class="w3-large">${rp.title}</span><br>
+				<span class="w3-small w3-text-grey">${rp.date}</span>
+			</a></li>'
+		}
+		list_html += '</ul>'
+
+		mut p := Page{
+			title: 'Tag: ${tag}'
+			content: list_html
+			lang: lang
+			url: '${lang}/tags/${tag}.html'
+		}
+		
+		// Build menu and render
+		p.build_menu(pages)
+		out_path := os.join_path(output_root, p.url)
+		os.mkdir_all(os.dir(out_path)) or { continue }
+		os.write_file(out_path, p.render(theme)) or { continue }
+	}
+}
+
+fn generate_auto_indices(lang string, all_pages []Page) {
+	mut all_dirs := map[string]bool{}
+	for p in all_pages {
+		all_dirs[os.dir(p.url)] = true
+	}
+
+	theme := Theme{}
+	for dir_path, _ in all_dirs {
+		// Check for manual source file
+		manual_src := os.join_path(content_root, dir_path, 'index.md')
+		if os.exists(manual_src) {
+			continue // Handled by render_pages
+		}
+
+		index_path := os.join_path(output_root, dir_path, 'index.html')
+		
+		// Logic: Always recreate auto-indices to ensure lists are fresh,
+		// OR check if any file inside this dir is newer than the index.html
+		mut dir_items := all_pages.filter(os.dir(it.url) == dir_path)
+		
+		// Build the HTML list... (same as previous block)
+		mut list := '<ul>'
+		for itm in dir_items {
+			list += '<li><a href="/${itm.url}">${itm.title}</a></li>'
+		}
+		list += '</ul>'
+
+		mut p := Page{
+			title: 'Index of ${dir_path}'
+			content: '${list}'
+			lang: lang
+			url: '${dir_path}/index.html'
+		}
+		
+		p.build_menu(all_pages)
+		os.mkdir_all(os.dir(index_path)) or { continue }
+		os.write_file(index_path, p.render(theme)) or { continue }
+	}
 }
 

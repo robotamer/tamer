@@ -1,6 +1,7 @@
 +++
 title = "Citadel" 
 description = "Citadel notes"
+tags = ["email", "citadel"]
 +++
 Email, collaboration, groupware, and content management -
 up and running in minutes, on your own hardware or in the cloud.

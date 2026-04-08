@@ -5,6 +5,7 @@ title = "Go Snippets"
 linktitle = ""
 description = ""
 keywords = ["code", "go"]
+tags = ["code", "go"]
 language = "en"
 author = ""
 groups = ["code", "go"]

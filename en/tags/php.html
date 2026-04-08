@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/en/rss.xml">
+    <title>Tag: php</title>
+    <meta name="author" content="TaMeR">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <style>
+        .tag-cloud { line-height: 2.5; padding: 40px; background: white; border-radius: 8px; text-align: center; }
+        .tag-item { transition: transform 0.2s; display: inline-block; text-decoration: none; margin: 0 10px; }
+        .tag-item:hover { transform: scale(1.1); color: #2196F3 !important; }
+        .tag-badge { 
+            font-size: 0.6rem; 
+            vertical-align: top; 
+            background: #e1e1e1; 
+            color: #555; 
+            padding: 2px 6px; 
+            border-radius: 10px; 
+            margin-left: 4px; 
+        }
+    </style>
+</head>
+<body class="w3-light-grey">
+    <div class="w3-bar w3-black w3-card">
+        <a href="/en/index.html" class="w3-bar-item w3-button">Home</a>
+        <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
+        <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
+    </div>
+    <div class="w3-content" style="max-width:1400px; margin:20px auto">
+        <div class="w3-container w3-white w3-card-4 w3-padding-32">
+            <h1>Tag: php</h1>
+            <h2>Posts tagged: php</h2><ul class="w3-ul w3-hoverable w3-white"><li><a href="/en/blog/code/php/messenger-laravel-framework.html" style="text-decoration:none">
+				<span class="w3-large">Messenger Laravel Framework</span><br>
+				<span class="w3-small w3-text-grey">2012-06-27T23:27:29Z</span>
+			</a></li><li><a href="/en/code/php/creating-models-for-the-zend-framework-from-command-line-via-phpcli.html" style="text-decoration:none">
+				<span class="w3-large">Creating models for the Zend Framework from command line via phpcli</span><br>
+				<span class="w3-small w3-text-grey">2010-03-18T22:07:15Z</span>
+			</a></li><li><a href="/en/code/php/zend-acl.html" style="text-decoration:none">
+				<span class="w3-large">Zend ACL</span><br>
+				<span class="w3-small w3-text-grey">2008-04-27T19:50:00Z</span>
+			</a></li><li><a href="/en/code/php/num_row-with-pdo.html" style="text-decoration:none">
+				<span class="w3-large">num_row with PDO</span><br>
+				<span class="w3-small w3-text-grey">2011-06-10T06:33:51Z</span>
+			</a></li><li><a href="/en/code/php/autoload.html" style="text-decoration:none">
+				<span class="w3-large">Autoload</span><br>
+				<span class="w3-small w3-text-grey">2012-07-01T07:37:41.00Z</span>
+			</a></li><li><a href="/en/code/php/multiple-php-installations.html" style="text-decoration:none">
+				<span class="w3-large">Multiple PHP installations</span><br>
+				<span class="w3-small w3-text-grey">2011-06-20T11:58:00.00Z</span>
+			</a></li><li><a href="/en/code/php/e-for-echo.html" style="text-decoration:none">
+				<span class="w3-large">e() for echo</span><br>
+				<span class="w3-small w3-text-grey">2011-06-01T02:01:27Z</span>
+			</a></li><li><a href="/en/code/php/fixing-phps-gettype-function.html" style="text-decoration:none">
+				<span class="w3-large">fixing php's gettype function</span><br>
+				<span class="w3-small w3-text-grey">2011-06-17T10:10:09Z</span>
+			</a></li><li><a href="/en/code/php/read-folder.html" style="text-decoration:none">
+				<span class="w3-large">Read Folder</span><br>
+				<span class="w3-small w3-text-grey">2012-07-13T20:45:12.00Z</span>
+			</a></li><li><a href="/en/code/php/php-goto-statement.html" style="text-decoration:none">
+				<span class="w3-large">PHP goto statement</span><br>
+				<span class="w3-small w3-text-grey">2010-03-13T16:15:00Z</span>
+			</a></li></ul>
+            
+        </div>
+    </div>
+    
+    <script>
+    let idx = [];
+    async function init() { 
+        try {
+            const r = await fetch("/en/search.json"); 
+            idx = await r.json(); 
+        } catch(e) { console.error("Search index failed", e); }
+    }
+    init();
+    function search() {
+        const q = document.getElementById("si").value.toLowerCase();
+        const r = document.getElementById("sr");
+        if (q.length < 2) { r.style.display="none"; return; }
+        const m = idx.filter(i => 
+            i.t.toLowerCase().includes(q) || 
+            (i.g && i.g.toLowerCase().includes(q))
+        ).slice(0, 5);
+        if (m.length > 0) {
+            r.innerHTML = m.map(i => `<a href="${i.u}" class="w3-bar-item w3-button w3-white">${i.t}</a>`).join("");
+            r.style.display="block";
+        } else { r.style.display="none"; }
+    }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

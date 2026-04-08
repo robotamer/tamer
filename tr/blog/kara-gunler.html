@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,6 +8,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/tr/rss.xml">
     <title>Kara Günler</title>
+    <meta name="author" content="TaMeR">
+    <meta name="description" content="Avrupadaki Müslüman savaşının geleceği">
+    <meta name="keywords" content="politik, özgürlük">
+    <style>
+        .tag-cloud { line-height: 2.5; padding: 40px; background: white; border-radius: 8px; text-align: center; }
+        .tag-item { transition: transform 0.2s; display: inline-block; text-decoration: none; margin: 0 10px; }
+        .tag-item:hover { transform: scale(1.1); color: #2196F3 !important; }
+        .tag-badge { 
+            font-size: 0.6rem; 
+            vertical-align: top; 
+            background: #e1e1e1; 
+            color: #555; 
+            padding: 2px 6px; 
+            border-radius: 10px; 
+            margin-left: 4px; 
+        }
+    </style>
 </head>
 <body class="w3-light-grey">
     <div class="w3-bar w3-black w3-card">
@@ -15,7 +33,9 @@
         <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
     </div>
     <div class="w3-content" style="max-width:1400px; margin:20px auto">
-        <div class="w3-container w3-white w3-card-4 w3-padding-32"><a href="/tr/index.html" class="w3-button w3-light-grey">&laquo; Back</a><h1>Kara Günler</h1><div class="w3-justify"><p>Paris'te İslamcılar tarafından, alaycı karikatüristlerin, ve Şabat yemeği sırasındaki Yahudilerin cinayetleri dünyayi, özelikle Fransa ve İsraili ayağa kaldırdı.</p>
+        <div class="w3-container w3-white w3-card-4 w3-padding-32">
+            <h1>Kara Günler</h1>
+            <p>Paris'te İslamcılar tarafından, alaycı karikatüristlerin, ve Şabat yemeği sırasındaki Yahudilerin cinayetleri dünyayi, özelikle Fransa ve İsraili ayağa kaldırdı.</p>
 <p>Bunu her gazetete, her haber ajansı konu yaptı. Olaylar nereden, nereye geldi, niçin geldi diye kendilerine göre yorumlar yaptı.</p>
 <p>Bu şekilde sarsılmış bir dünya bayağı tehlikeli olabilir. İçimden haykırmak gelse de zamanı değil. Özelikle böylesine duygu yüklü aşırı zamanlarda soğukkanlılık gerekiyor. Olaylar nereden nereye geldi, niçin geldi birde ben anlatayım sizlere; çünkü elimden geldiğince tarafsız bir açıklama yapma ihtiyacını duyuyorum.</p>
 <p>Olaya jeopolitik bakarsak, anlam veremesek dahi, belki bir açıklama buluruz.
@@ -65,27 +85,36 @@ Ne güzel söylüyor, ama kaç tane Paris cinayetlerine benzer olay 'radikal' ke
 <p>Şimdi gelelim kendilerini bizden saymayanlara, biz laikiz, biz aydınız diyenlere, veya dahası Avrupada yaşayan, ve biz dillerini öğrendik, burda doğduk, vatandaşlık aldık, adapte olduk diyenler. Asla onlardan olamayacağınızı sizde benim kadar iyi biliyorsunuz. Onların laiklik ahlâklarına sığınıyorsunuz, ama aralarındaki en laik olanları bile kız vermeye gelince içi kaynamaya basliyor.</p>
 <p>O laikliğin getirdiği ahlâki değerler şimdi zorlanıyor, nereye kadar dayanırlar bilmiyorum.</p>
 <p>Hepimiz bir oluruz, yani Yahudilerden bu konuda hayır beklemek olmaz ama biz Müslümanlar ve Hristiyanlar bu olayları beraber çözeriz, veya çok kara günlere doğru yola koyuluruz.</p>
-<p>Sadece Almanya ve Fransada toplam 10 milyon Müslüman yaşıyor. Ne olur, nasıl olur, ne biter, bu konuları da şimdilik sizin hayal gücünüze bırakıyorum.</p></div><hr><p class="w3-small w3-text-grey">Last Modified: 2015-01-19T13:49:22+02:00</p></div>
+<p>Sadece Almanya ve Fransada toplam 10 milyon Müslüman yaşıyor. Ne olur, nasıl olur, ne biter, bu konuları da şimdilik sizin hayal gücünüze bırakıyorum.</p>
+            <hr>
+        <p class="w3-small w3-text-grey">Last Modified: 2015-01-19T13:49:22+02:00</p>
+        </div>
     </div>
+    
     <script>
     let idx = [];
-    async function init() { const r = await fetch("/tr/search.json"); idx = await r.json(); }
+    async function init() { 
+        try {
+            const r = await fetch("/tr/search.json"); 
+            idx = await r.json(); 
+        } catch(e) { console.error("Search index failed", e); }
+    }
     init();
     function search() {
         const q = document.getElementById("si").value.toLowerCase();
         const r = document.getElementById("sr");
         if (q.length < 2) { r.style.display="none"; return; }
-        const m = idx.filter(i => i.t.toLowerCase().includes(q)).slice(0, 5);
+        const m = idx.filter(i => 
+            i.t.toLowerCase().includes(q) || 
+            (i.g && i.g.toLowerCase().includes(q))
+        ).slice(0, 5);
         if (m.length > 0) {
             r.innerHTML = m.map(i => `<a href="${i.u}" class="w3-bar-item w3-button w3-white">${i.t}</a>`).join("");
             r.style.display="block";
         } else { r.style.display="none"; }
     }
     </script>
-
-	<!-- Prism.js Core -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
-	<!-- Autoloader: Automatically loads languages  -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>

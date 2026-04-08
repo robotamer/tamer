@@ -5,6 +5,7 @@ title = "Go jkl"
 linktitle = ""
 description = "Go JKL a static website generator"
 keywords = ["code", "go", "website"]
+tags = ["code", "go", "website"]
 language = "en"
 author = ""
 groups = ["code", "go"]

@@ -6,6 +6,7 @@ linktitle = ""
 description = ""
 language = "en"
 author = ""
+tags = ["code", "go"]
 groups = ["code", "go"]
 categories = ["code", "go"]
 +++

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,6 +8,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/tr/rss.xml">
     <title>﻿Eş cinsel insanların evlenme haki</title>
+    <meta name="author" content="TaMeR">
+    <meta name="description" content="Dünyanın pek çok yerinde eş cinsel insanların evlenme konuşu uzun süredir gündeme girip çıkıyor.">
+    <meta name="keywords" content="politik, gündem">
+    <style>
+        .tag-cloud { line-height: 2.5; padding: 40px; background: white; border-radius: 8px; text-align: center; }
+        .tag-item { transition: transform 0.2s; display: inline-block; text-decoration: none; margin: 0 10px; }
+        .tag-item:hover { transform: scale(1.1); color: #2196F3 !important; }
+        .tag-badge { 
+            font-size: 0.6rem; 
+            vertical-align: top; 
+            background: #e1e1e1; 
+            color: #555; 
+            padding: 2px 6px; 
+            border-radius: 10px; 
+            margin-left: 4px; 
+        }
+    </style>
 </head>
 <body class="w3-light-grey">
     <div class="w3-bar w3-black w3-card">
@@ -15,7 +33,9 @@
         <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
     </div>
     <div class="w3-content" style="max-width:1400px; margin:20px auto">
-        <div class="w3-container w3-white w3-card-4 w3-padding-32"><a href="/tr/index.html" class="w3-button w3-light-grey">&laquo; Back</a><h1>﻿Eş cinsel insanların evlenme haki</h1><div class="w3-justify"><p>Dünyanın pek çok yerinde eş cinsel insanların evlenme konuşu uzun süredir gündeme girip çıkıyor.
+        <div class="w3-container w3-white w3-card-4 w3-padding-32">
+            <h1>﻿Eş cinsel insanların evlenme haki</h1>
+            <p>Dünyanın pek çok yerinde eş cinsel insanların evlenme konuşu uzun süredir gündeme girip çıkıyor.
 Bu Türkiye için henüz uzak bir konu olmasına rağmen, eh şu anda 20.08.2013 04:31 internetim yok, okumak için bir düzgün kitabim da olmadığı için ben yazmaya karar verdim ve ne yapayım akıla gelen konu da bu oldu.</p>
 <p>Bu konuya insanların çeşitly tepkileri oluyor, kimisi yüzünü ekşitiyor, başkası dini sebeplerden dolayı tepki gösteriyor.
 Fakat eş cinseller gayet mantıklı nedenler de ortaya sürüyor.
@@ -24,27 +44,36 @@ Bizde vergi ödeyenler olarak, vergi indirimlerden faydalanabilmeliyiz, hastalı
 Kim kimi sevmiş, yatak odalarında kim ne yapıyor gibi konular değil hukuk, dedi kodu konusu bile olmamalı bence. Fakat evlenme konusuna gelince, eş cinselleri desteklemiyorum, evet doğru duydunuz desteklemiyorum.<br>
 Çünkü eğer ki iki erkek veya iki kadın kanuni evli olarak kabul edilirse o zaman otomatikman çocuk evlat etme hakkına da kavuşmuş oluyorlar. Vergi indirimlerinden yararlansınlar tabiî ki ama bir daha eş cinsel olup olmadığı beli olmayan bir bebeğin hayatını bu kadar derin bir şekilde etkilemeye hakları olmamaları gerektiğini düşünüyorum. Özellikle ergenlik cağına gelen gençlerin hayatları zaten zor. Okulda ve arkadaş çevresine birde böyle bir etken eklememesi çocuğun zihni sağlına zararlı olacağını, veya en azından zararlı olma ihtimali yüksek olduğunu düşünüyorum.<br>
 Bugün dünyanın birçok yerinde, eş cinseller evlene biliyor. ABD kanunlar buna izin vermediği halde, San Francisco belediyesi izin veriyor. Yeni Zeylanda da, deniz ve uçak kaptanları evlendiriyor.<br>
-Bence bu konunun böyle aheste gelişmesine izin vermemek lazım. Basit bir şekilde onlara vergi indirim gibi hakları vermek lazım ki biran önce bu konu kapansın ve gündemden kalksın.</p></div><hr><p class="w3-small w3-text-grey">Last Modified: 2013-11-20T19:50:00Z</p></div>
+Bence bu konunun böyle aheste gelişmesine izin vermemek lazım. Basit bir şekilde onlara vergi indirim gibi hakları vermek lazım ki biran önce bu konu kapansın ve gündemden kalksın.</p>
+            <hr>
+        <p class="w3-small w3-text-grey">Last Modified: 2013-11-20T19:50:00Z</p>
+        </div>
     </div>
+    
     <script>
     let idx = [];
-    async function init() { const r = await fetch("/tr/search.json"); idx = await r.json(); }
+    async function init() { 
+        try {
+            const r = await fetch("/tr/search.json"); 
+            idx = await r.json(); 
+        } catch(e) { console.error("Search index failed", e); }
+    }
     init();
     function search() {
         const q = document.getElementById("si").value.toLowerCase();
         const r = document.getElementById("sr");
         if (q.length < 2) { r.style.display="none"; return; }
-        const m = idx.filter(i => i.t.toLowerCase().includes(q)).slice(0, 5);
+        const m = idx.filter(i => 
+            i.t.toLowerCase().includes(q) || 
+            (i.g && i.g.toLowerCase().includes(q))
+        ).slice(0, 5);
         if (m.length > 0) {
             r.innerHTML = m.map(i => `<a href="${i.u}" class="w3-bar-item w3-button w3-white">${i.t}</a>`).join("");
             r.style.display="block";
         } else { r.style.display="none"; }
     }
     </script>
-
-	<!-- Prism.js Core -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
-	<!-- Autoloader: Automatically loads languages  -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>

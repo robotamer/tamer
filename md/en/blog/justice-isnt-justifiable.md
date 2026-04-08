@@ -15,4 +15,4 @@ categories = ["blog"]
 _The time, effort and money it takes to get justice isn't justifiable!_
 
 
-> Dennis T Kaplan (June 2nd, 2010)
+> TaMeR (June 2nd, 2010)

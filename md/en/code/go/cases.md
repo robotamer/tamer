@@ -5,6 +5,7 @@ title = "Cases"
 linktitle = ""
 description = "Case Manipulation in Go"
 keywords = ["code", "go"]
+tags = ["code", "go"]
 language = "en"
 author = ""
 groups = ["code", "go"]

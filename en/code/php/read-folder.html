@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,15 +8,34 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/en/rss.xml">
     <title>Read Folder</title>
+    <meta name="author" content="TaMeR">
+    <meta name="description" content="Get php files in dir with recursive lambda callback function">
+    <meta name="keywords" content="php">
+    <style>
+        .tag-cloud { line-height: 2.5; padding: 40px; background: white; border-radius: 8px; text-align: center; }
+        .tag-item { transition: transform 0.2s; display: inline-block; text-decoration: none; margin: 0 10px; }
+        .tag-item:hover { transform: scale(1.1); color: #2196F3 !important; }
+        .tag-badge { 
+            font-size: 0.6rem; 
+            vertical-align: top; 
+            background: #e1e1e1; 
+            color: #555; 
+            padding: 2px 6px; 
+            border-radius: 10px; 
+            margin-left: 4px; 
+        }
+    </style>
 </head>
 <body class="w3-light-grey">
     <div class="w3-bar w3-black w3-card">
-        <a href="/en/index.html" class="w3-bar-item w3-button">Home</a><a href="/en/code/php/creating-models-for-the-zend-framework-from-command-line-via-phpcli.html" class="w3-bar-item w3-button">Creating models for the Zend Framework from command line via phpcli</a><a href="/en/code/php/load-functions-and-arrays.html" class="w3-bar-item w3-button">Load functions and array's</a><a href="/en/code/php/zend-acl.html" class="w3-bar-item w3-button">Zend ACL</a><a href="/en/code/php/num_row-with-pdo.html" class="w3-bar-item w3-button">num_row with PDO</a><a href="/en/code/php/autoload.html" class="w3-bar-item w3-button">Autoload</a><a href="/en/code/php/multiple-php-installations.html" class="w3-bar-item w3-button">Multiple PHP installations</a><a href="/en/code/php/e-for-echo.html" class="w3-bar-item w3-button">e() for echo</a><a href="/en/code/php/fixing-phps-gettype-function.html" class="w3-bar-item w3-button">fixing php's gettype function</a><a href="/en/code/php/index.html" class="w3-bar-item w3-button">PHP Documentation</a><a href="/en/code/php/php-goto-statement.html" class="w3-bar-item w3-button">PHP goto statement</a><a href="/en/code/php/PHPTamer/index.html" class="w3-bar-item w3-button w3-blue">📁 PHPTamer</a>
+        <a href="/en/index.html" class="w3-bar-item w3-button">Home</a><a href="/en/code/php/creating-models-for-the-zend-framework-from-command-line-via-phpcli.html" class="w3-bar-item w3-button">Creating models for the Zend Framework from command line via phpcli</a><a href="/en/code/php/load-functions-and-arrays.html" class="w3-bar-item w3-button">Load functions and array's</a><a href="/en/code/php/zend-acl.html" class="w3-bar-item w3-button">Zend ACL</a><a href="/en/code/php/num_row-with-pdo.html" class="w3-bar-item w3-button">num_row with PDO</a><a href="/en/code/php/autoload.html" class="w3-bar-item w3-button">Autoload</a><a href="/en/code/php/multiple-php-installations.html" class="w3-bar-item w3-button">Multiple PHP installations</a><a href="/en/code/php/e-for-echo.html" class="w3-bar-item w3-button">e() for echo</a><a href="/en/code/php/fixing-phps-gettype-function.html" class="w3-bar-item w3-button">fixing php's gettype function</a><a href="/en/code/php/index.html" class="w3-bar-item w3-button">PHP Documentation</a><a href="/en/code/php/php-goto-statement.html" class="w3-bar-item w3-button">PHP goto statement</a>
         <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
         <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
     </div>
     <div class="w3-content" style="max-width:1400px; margin:20px auto">
-        <div class="w3-container w3-white w3-card-4 w3-padding-32"><a href="/en/code/index.html" class="w3-button w3-light-grey">&laquo; Back</a><h1>Read Folder</h1><div class="w3-justify"><p>This is a <em>Lambda</em> function also called anonymous function within a regular function that scans a given directory and it's sub directories returning an array of all php files within.</p>
+        <div class="w3-container w3-white w3-card-4 w3-padding-32">
+            <h1>Read Folder</h1>
+            <p>This is a <em>Lambda</em> function also called anonymous function within a regular function that scans a given directory and it's sub directories returning an array of all php files within.</p>
 <p>Following is a snip output of the Zend files.</p>
 <pre><code>[6] =&gt; /usr/share/php/Zend/Captcha/ReCaptcha.php
 [7] =&gt; /usr/share/php/Zend/Captcha/Base.php
@@ -66,27 +86,36 @@ function get_php_files_in_dir($dir)
 }
 ?&gt;
 </code></pre>
-<p><a href="https://gist.github.com/robotamer/3107221#file-get_php_files_in_dir-php">gist id=3107221</a></p></div><hr><p class="w3-small w3-text-grey">Last Modified: 2012-07-13T20:45:12.00Z</p></div>
+<p><a href="https://gist.github.com/robotamer/3107221#file-get_php_files_in_dir-php">gist id=3107221</a></p>
+            <hr>
+        <p class="w3-small w3-text-grey">Last Modified: 2012-07-13T20:45:12.00Z</p>
+        </div>
     </div>
+    
     <script>
     let idx = [];
-    async function init() { const r = await fetch("/en/search.json"); idx = await r.json(); }
+    async function init() { 
+        try {
+            const r = await fetch("/en/search.json"); 
+            idx = await r.json(); 
+        } catch(e) { console.error("Search index failed", e); }
+    }
     init();
     function search() {
         const q = document.getElementById("si").value.toLowerCase();
         const r = document.getElementById("sr");
         if (q.length < 2) { r.style.display="none"; return; }
-        const m = idx.filter(i => i.t.toLowerCase().includes(q)).slice(0, 5);
+        const m = idx.filter(i => 
+            i.t.toLowerCase().includes(q) || 
+            (i.g && i.g.toLowerCase().includes(q))
+        ).slice(0, 5);
         if (m.length > 0) {
             r.innerHTML = m.map(i => `<a href="${i.u}" class="w3-bar-item w3-button w3-white">${i.t}</a>`).join("");
             r.style.display="block";
         } else { r.style.display="none"; }
     }
     </script>
-
-	<!-- Prism.js Core -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
-	<!-- Autoloader: Automatically loads languages  -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>
