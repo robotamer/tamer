@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
-    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/en/rss.xml">
+    <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     <title>msmtp install, config and test</title>
     <meta name="author" content="TaMeR">
     <meta name="description" content="">
@@ -28,7 +27,13 @@
 </head>
 <body class="w3-light-grey">
     <div class="w3-bar w3-black w3-card">
-        <a href="/en/index.html" class="w3-bar-item w3-button">Home</a><a href="/en/linux/mail/imap.html" class="w3-bar-item w3-button">IMAP mail server</a><a href="/en/linux/mail/msmtp.html" class="w3-bar-item w3-button">msmtp</a><a href="/en/linux/mail/index.html" class="w3-bar-item w3-button">email</a><a href="/en/linux/mail/telnet.html" class="w3-bar-item w3-button">Telnet to mail server</a><a href="/en/linux/mail/send-mail-with-sendmail.html" class="w3-bar-item w3-button">Send mail with sendmail</a>
+        <a href="/en/index.html" class="w3-bar-item w3-button">en Home</a>
+<a href="/en/linux/mail/imap.html" class="w3-bar-item w3-button">IMAP mail server</a>
+<a href="/en/linux/mail/msmtp.html" class="w3-bar-item w3-button">msmtp</a>
+<a href="/en/linux/mail/index.html" class="w3-bar-item w3-button">email</a>
+<a href="/en/linux/mail/telnet.html" class="w3-bar-item w3-button">Telnet to mail server</a>
+<a href="/en/linux/mail/send-mail-with-sendmail.html" class="w3-bar-item w3-button">Send mail with sendmail</a>
+
         <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
         <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
     </div>
@@ -103,8 +108,12 @@ logfile         /var/log/msmtp.log
 <pre><code>echo -e &quot;Subject: msmtp test mailnThis is a test mail from msmtp&quot; | msmtp --debug --from=default -t xxxxx@gmail.com
 </code></pre>
 <p><a href="http://msmtp.sourceforge.net/">Link to developer site</a></p>
+            <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/server.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">server</a> </p></div>
             <hr>
-        <p class="w3-small w3-text-grey">Last Modified: 2011-06-26T10:24:08Z</p>
+        <p class="w3-small w3-text-grey">
+			First Created: 2011-06-26T10:24:08Z<br>
+			Last Modified: 2026-04-05 19:35
+		</p>
         </div>
     </div>
     

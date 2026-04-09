@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
-    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/en/rss.xml">
+    <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     <title>﻿Sometimes I fall in love with code</title>
     <meta name="author" content="TaMeR">
     <meta name="description" content="The things you can do, in this case with the Go programing language">
@@ -28,7 +27,25 @@
 </head>
 <body class="w3-light-grey">
     <div class="w3-bar w3-black w3-card">
-        <a href="/en/index.html" class="w3-bar-item w3-button">Home</a><a href="/en/code/go/smtp.html" class="w3-bar-item w3-button">Smtp</a><a href="/en/code/go/jgdb.html" class="w3-bar-item w3-button">jgdb</a><a href="/en/code/go/a-gopher-named-gophy.html" class="w3-bar-item w3-button">A Gopher named Gophy</a><a href="/en/code/go/encode-decode-golang-data-to-gob-files.html" class="w3-bar-item w3-button">Encode/Decode Golang data to Gob files</a><a href="/en/code/go/gowatch.html" class="w3-bar-item w3-button">GoWatch</a><a href="/en/code/go/cfg.html" class="w3-bar-item w3-button">Cfg</a><a href="/en/code/go/file-access-and-create-time.html" class="w3-bar-item w3-button">File Access and Create Time</a><a href="/en/code/go/go-snippets.html" class="w3-bar-item w3-button">Go Snippets</a><a href="/en/code/go/ping.html" class="w3-bar-item w3-button">Ping</a><a href="/en/code/go/citadel-vcard-sync.html" class="w3-bar-item w3-button">Citadel vCard Sync</a><a href="/en/code/go/your-everyday-go-tools.html" class="w3-bar-item w3-button">Your Everyday Go Tools</a><a href="/en/code/go/cases.html" class="w3-bar-item w3-button">Cases</a><a href="/en/code/go/conv.html" class="w3-bar-item w3-button">Conv</a><a href="/en/code/go/go-jkl.html" class="w3-bar-item w3-button">Go jkl</a><a href="/en/code/go/encode-decode-between-struct-and-byte-slice.html" class="w3-bar-item w3-button">Encode/Decode between struct and byte slice</a><a href="/en/code/go/crypt.html" class="w3-bar-item w3-button">Crypt</a><a href="/en/code/go/index.html" class="w3-bar-item w3-button">Golang</a>
+        <a href="/en/index.html" class="w3-bar-item w3-button">en Home</a>
+<a href="/en/code/go/smtp.html" class="w3-bar-item w3-button">Smtp</a>
+<a href="/en/code/go/jgdb.html" class="w3-bar-item w3-button">jgdb</a>
+<a href="/en/code/go/a-gopher-named-gophy.html" class="w3-bar-item w3-button">A Gopher named Gophy</a>
+<a href="/en/code/go/encode-decode-golang-data-to-gob-files.html" class="w3-bar-item w3-button">Encode/Decode Golang data to Gob files</a>
+<a href="/en/code/go/gowatch.html" class="w3-bar-item w3-button">GoWatch</a>
+<a href="/en/code/go/cfg.html" class="w3-bar-item w3-button">Cfg</a>
+<a href="/en/code/go/file-access-and-create-time.html" class="w3-bar-item w3-button">File Access and Create Time</a>
+<a href="/en/code/go/go-snippets.html" class="w3-bar-item w3-button">Go Snippets</a>
+<a href="/en/code/go/ping.html" class="w3-bar-item w3-button">Ping</a>
+<a href="/en/code/go/citadel-vcard-sync.html" class="w3-bar-item w3-button">Citadel vCard Sync</a>
+<a href="/en/code/go/your-everyday-go-tools.html" class="w3-bar-item w3-button">Your Everyday Go Tools</a>
+<a href="/en/code/go/cases.html" class="w3-bar-item w3-button">Cases</a>
+<a href="/en/code/go/conv.html" class="w3-bar-item w3-button">Conv</a>
+<a href="/en/code/go/go-jkl.html" class="w3-bar-item w3-button">Go jkl</a>
+<a href="/en/code/go/encode-decode-between-struct-and-byte-slice.html" class="w3-bar-item w3-button">Encode/Decode between struct and byte slice</a>
+<a href="/en/code/go/crypt.html" class="w3-bar-item w3-button">Crypt</a>
+<a href="/en/code/go/index.html" class="w3-bar-item w3-button">Golang</a>
+
         <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
         <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
     </div>
@@ -55,8 +72,12 @@
         debug.Printf(&quot;foo %d %.2f&quot;, 42, 12.7)
     }
 </code></pre>
+            <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/code.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">code</a> <a href="/en/tags/go.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">go</a> <a href="/en/tags/log.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">log</a> </p></div>
             <hr>
-        <p class="w3-small w3-text-grey">Last Modified: 2013-12-27T20:40:00Z</p>
+        <p class="w3-small w3-text-grey">
+			First Created: 2013-12-27T20:40:00Z<br>
+			Last Modified: 2026-04-05 19:35
+		</p>
         </div>
     </div>
     

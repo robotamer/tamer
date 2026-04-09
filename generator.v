@@ -1,6 +1,9 @@
 module main
 
+// To regenerate all pages delete folder en and tr
+
 import os
+import time
 import toml
 import markdown
 import json
@@ -15,6 +18,8 @@ const supported_langs = ['en', 'tr']
 // --- MODELS ---
 
 struct Page {
+	path_md string
+	modified string
 mut:
 	url         string
 	content     string
@@ -118,9 +123,22 @@ fn (p Page) render(t Theme) string {
 	// Only create the date HTML if the date string isn't empty
 	date_html := if p.date != '' {
 		'<hr>
-        <p class="w3-small w3-text-grey">Last Modified: ${p.date}</p>'
+        <p class="w3-small w3-text-grey">
+			First Created: ${p.date}<br>
+			Last Modified: ${p.modified}
+		</p>'
 	} else {
-		''
+		'<hr><p class="w3-small w3-text-grey">Last Modified: ${p.modified}</p>'
+	}
+
+	// Create Tag Links for the bottom of the page
+	mut tags_html := ''
+	if p.tags.len > 0 && p.tags[0] != 'Uncategorized' {
+		tags_html = '<div class="w3-padding-16"><p><b>Tags:</b> '
+		for tag in p.tags {
+			tags_html += '<a href="/${p.lang}/tags/${tag}.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">${tag}</a> '
+		}
+		tags_html += '</p></div>'
 	}
 
 	return '<!DOCTYPE html>
@@ -136,6 +154,7 @@ ${t.header(p, keywords)}
         <div class="w3-container w3-white w3-card-4 w3-padding-32">
             <h1>${p.title}</h1>
             ${p.content}
+            ${tags_html}
             ${date_html}
         </div>
     </div>
@@ -148,16 +167,21 @@ ${t.header(p, keywords)}
 
 fn main() {
 	if os.args.len < 2 {
-		println('Usage: v run . [run|serve]')
+		println('Usage: v run . [run --force|dixdate|serve]')
 		return
 	}
+	force_rebuild := '--force' in os.args
+
 	match os.args[1] {
 		'serve' {
 			println('Serving at http://localhost:8080')
 			file.serve(folder: output_root, on: ':8080')
 		}
 		'run' {
-			generate_site()
+			generate_site(force_rebuild)
+		}
+		'fixdate' {
+			fix_dates()
 		}
 		else {
 			println('Unknown command')
@@ -165,7 +189,24 @@ fn main() {
 	}
 }
 
-fn generate_site() {
+fn fix_dates() {
+	println('Scanning content...')
+	mut pages := scan_content()
+	for p in pages {
+		path := os.join_path(os.home_dir(), 'Public', 'tamer.pw','md',p.path_md)
+		stat := os.stat(path) or {
+			println('Could not stat ${path}')
+			continue
+		}
+		println('${path}')
+		println('mtime: ${stat.mtime}')
+		if p.date.len > 1 {
+			println('Toml Date: ${p.date}')
+		}
+	}
+}
+
+fn generate_site(force bool) {
 	println('Scanning content...')
 	mut pages := scan_content()
 
@@ -189,7 +230,7 @@ fn generate_site() {
 
 		generate_rss_feed(lang, real_content)
 
-		total_sitemap += render_pages(mut lang_pages)
+		total_sitemap += render_pages(mut lang_pages, force)
 
 		// Create missing folder indices index.html
 		generate_auto_indices(lang, lang_pages)
@@ -220,6 +261,11 @@ fn scan_content() []Page {
 
 		toml_doc := toml.parse_text(parts[1].trim_space()) or { continue }
 
+		mut modified := get_field(toml_doc, 'modified')
+		if modified.len < 2 {
+			modified = time.unix(os.file_last_mod_unix(path)).format()
+		}
+
 		// Safely extract tags:
 		// 1. .array() converts the TOML value to []toml.Any
 		// 2. .as_strings() converts them to []string
@@ -232,6 +278,8 @@ fn scan_content() []Page {
 		}
 
 		pages << Page{
+			path_md:     path
+			modified:	modified
 			url:         rel.replace('.md', '.html')
 			lang:        lang
 			title:       get_field(toml_doc, 'title')
@@ -261,7 +309,7 @@ fn get_field(doc toml.Doc, key string) string {
 	return ''
 }
 
-fn render_pages(mut pages []Page) string {
+fn render_pages(mut pages []Page, force bool) string {
 	mut acc := ''
 	theme := Theme{}
 	for mut p in pages {
@@ -270,9 +318,12 @@ fn render_pages(mut pages []Page) string {
 		// Only render if source is newer than output
 		// We get source path by rebuilding from content_root
 		src_path := os.join_path(content_root, p.url.replace('.html', '.md'))
-		if os.exists(out_path) && os.file_last_mod_unix(src_path) <= os.file_last_mod_unix(out_path) {
-			acc += '<url><loc>${site_url}/${p.url}</loc><lastmod>${p.date}</lastmod></url>'
-			continue
+		// Logic: If not forced AND file exists AND source hasn't changed, skip.
+		if !force && os.exists(out_path) {
+			if os.file_last_mod_unix(src_path) <= os.file_last_mod_unix(out_path) {
+				acc += '<url><loc>${site_url}/${p.url}</loc><lastmod>${p.date}</lastmod></url>'
+				continue 
+			}
 		}
 
 		p.build_menu(pages)
