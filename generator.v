@@ -41,13 +41,12 @@ struct Theme {
 // --- THEME METHODS ---
 
 fn (t Theme) header(p Page, keywords string) string {
-	return '
-<head>
+	return '<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
-    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/${p.lang}/rss.xml">
+    <link rel="alternate" type="application/rss+xml" title="${p.lang} RSS Feed" href="/${p.lang}/rss.xml">
     <title>${p.title}</title>
     <meta name="author" content="${t.author}">
     <meta name="description" content="${p.description}">
@@ -102,10 +101,12 @@ fn (t Theme) scripts(lang string) string {
 
 fn (mut p Page) build_menu(all_pages []Page) {
 	current_dir := os.dir(p.url)
-	mut links := ['<a href="/${p.lang}/index.html" class="w3-bar-item w3-button">Home</a>']
+	mut links := [
+		'<a href="/${p.lang}/index.html" class="w3-bar-item w3-button">${p.lang} Home</a>\n',
+	]
 	for sib in all_pages {
 		if sib.lang == p.lang && os.dir(sib.url) == current_dir && sib.url != p.url {
-			links << '<a href="/${sib.url}" class="w3-bar-item w3-button">${sib.title}</a>'
+			links << '<a href="/${sib.url}" class="w3-bar-item w3-button">${sib.title}</a>\n'
 		}
 	}
 	p.menu_html = links.join('')
@@ -114,14 +115,13 @@ fn (mut p Page) build_menu(all_pages []Page) {
 fn (p Page) render(t Theme) string {
 	keywords := p.tags.join(', ')
 
-    // Only create the date HTML if the date string isn't empty
-    date_html := if p.date != '' { 
-        '<hr>
-        <p class="w3-small w3-text-grey">Last Modified: ${p.date}</p>' 
-    } else { 
-        '' 
-    }
-
+	// Only create the date HTML if the date string isn't empty
+	date_html := if p.date != '' {
+		'<hr>
+        <p class="w3-small w3-text-grey">Last Modified: ${p.date}</p>'
+	} else {
+		''
+	}
 
 	return '<!DOCTYPE html>
 <html lang="${p.lang}">
@@ -159,14 +159,16 @@ fn main() {
 		'run' {
 			generate_site()
 		}
-		else { println('Unknown command') }
+		else {
+			println('Unknown command')
+		}
 	}
 }
 
 fn generate_site() {
 	println('Scanning content...')
 	mut pages := scan_content()
-	
+
 	mut lang_map := map[string][]Page{}
 	for p in pages {
 		lang_map[p.lang] << p
@@ -176,20 +178,21 @@ fn generate_site() {
 	for lang, mut lang_pages in lang_map {
 		println('Processing ${lang}...')
 		os.mkdir_all('${output_root}/${lang}') or {}
-    os.mkdir_all('${output_root}/${lang}/tags') or {} // Ensure tags dir exists
+		os.mkdir_all('${output_root}/${lang}/tags') or {} // Ensure tags dir exists
 
 		real_content := lang_pages.filter(!it.url.ends_with('index.html'))
 
-    generate_search_index(lang, real_content)
+		generate_search_index(lang, real_content)
 
-    generate_tag_archive_pages(lang, real_content)
-    generate_tag_cloud(lang, real_content)
+		generate_tag_archive_pages(lang, real_content)
+		generate_tag_cloud(lang, real_content)
 
 		generate_rss_feed(lang, real_content)
-		
+
 		total_sitemap += render_pages(mut lang_pages)
-    // NEW: Create missing folder indices
-    generate_auto_indices(lang, lang_pages) 
+
+		// Create missing folder indices index.html
+		generate_auto_indices(lang, lang_pages)
 	}
 
 	generate_global_assets(total_sitemap)
@@ -202,41 +205,42 @@ fn scan_content() []Page {
 	for path in files {
 		rel := path.all_after(content_root).trim_left('/')
 		lang := rel.all_before('/')
-		if lang !in supported_langs { continue }
+		if lang !in supported_langs {
+			continue
+		}
 
 		raw := os.read_file(path) or { continue }
-		if !raw.starts_with('+++') { continue }
+		if !raw.starts_with('+++') {
+			continue
+		}
 		parts := raw.split('+++')
-		if parts.len < 3 { continue }
-
+		if parts.len < 3 {
+			continue
+		}
 
 		toml_doc := toml.parse_text(parts[1].trim_space()) or { continue }
 
-		// Safely extract tags: 
+		// Safely extract tags:
 		// 1. .array() converts the TOML value to []toml.Any
 		// 2. .as_strings() converts them to []string
 		// 3. .filter removes the Null artifact text and empty strings
-		mut raw_tags := toml_doc.value('tags').array().as_strings().filter(
-				it != '' && 
-				!it.contains('toml.Any') && 
-				!it.contains('toml.Null')
-		)
+		mut raw_tags := toml_doc.value('tags').array().as_strings().filter(it != ''
+			&& !it.contains('toml.Any') && !it.contains('toml.Null'))
 
 		if raw_tags.len == 0 {
-				raw_tags = ['Uncategorized']
+			raw_tags = ['Uncategorized']
 		}
 
 		pages << Page{
-				url:         rel.replace('.md', '.html')
-				lang:        lang
-				title:       get_field(toml_doc, 'title')
-				date:        get_field(toml_doc, 'date')
-				description: get_field(toml_doc, 'description')
-				tags:        raw_tags
-				content:     markdown.to_html(parts[2].trim_space())
-				is_blog:     rel.contains('/blog/')
+			url:         rel.replace('.md', '.html')
+			lang:        lang
+			title:       get_field(toml_doc, 'title')
+			date:        get_field(toml_doc, 'date')
+			description: get_field(toml_doc, 'description')
+			tags:        raw_tags
+			content:     markdown.to_html(parts[2].trim_space())
+			is_blog:     rel.contains('/blog/')
 		}
-
 	}
 	return pages
 }
@@ -262,13 +266,13 @@ fn render_pages(mut pages []Page) string {
 	theme := Theme{}
 	for mut p in pages {
 		out_path := os.join_path(output_root, p.url)
-		
+
 		// Only render if source is newer than output
 		// We get source path by rebuilding from content_root
 		src_path := os.join_path(content_root, p.url.replace('.html', '.md'))
 		if os.exists(out_path) && os.file_last_mod_unix(src_path) <= os.file_last_mod_unix(out_path) {
 			acc += '<url><loc>${site_url}/${p.url}</loc><lastmod>${p.date}</lastmod></url>'
-			continue 
+			continue
 		}
 
 		p.build_menu(pages)
@@ -278,7 +282,6 @@ fn render_pages(mut pages []Page) string {
 	}
 	return acc
 }
-
 
 fn generate_search_index(lang string, pages []Page) {
 	data := pages.map(SearchItem{
@@ -304,11 +307,17 @@ fn generate_rss_feed(lang string, pages []Page) {
 fn generate_tag_cloud(lang string, pages []Page) {
 	mut counts := map[string]int{}
 	for p in pages {
-		for tag in p.tags { counts[tag]++ }
+		for tag in p.tags {
+			counts[tag]++
+		}
 	}
 
 	mut max := 1
-	for _, count in counts { if count > max { max = count } }
+	for _, count in counts {
+		if count > max {
+			max = count
+		}
+	}
 
 	mut cloud_html := '<div class="tag-cloud">'
 	for tag, count in counts {
@@ -321,15 +330,14 @@ fn generate_tag_cloud(lang string, pages []Page) {
 	cloud_html += '</div>'
 
 	mut p := Page{
-		title: 'Tag Cloud'
+		title:   'Tag Cloud'
 		content: cloud_html
-		lang: lang
-		url: '${lang}/tags.html'
+		lang:    lang
+		url:     '${lang}/tags.html'
 	}
-	p.build_menu(pages) 
+	p.build_menu(pages)
 	os.write_file(os.join_path(output_root, p.url), p.render(Theme{})) or {}
 }
-
 
 fn generate_global_assets(sitemap_urls string) {
 	sitemap := '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://sitemaps.org">${sitemap_urls}</urlset>'
@@ -339,7 +347,7 @@ fn generate_global_assets(sitemap_urls string) {
 
 fn generate_tag_archive_pages(lang string, pages []Page) {
 	mut tag_map := map[string][]Page{}
-	
+
 	// Group pages by tag
 	for p in pages {
 		for tag in p.tags {
@@ -359,12 +367,12 @@ fn generate_tag_archive_pages(lang string, pages []Page) {
 		list_html += '</ul>'
 
 		mut p := Page{
-			title: 'Tag: ${tag}'
+			title:   'Tag: ${tag}'
 			content: list_html
-			lang: lang
-			url: '${lang}/tags/${tag}.html'
+			lang:    lang
+			url:     '${lang}/tags/${tag}.html'
 		}
-		
+
 		// Build menu and render
 		p.build_menu(pages)
 		out_path := os.join_path(output_root, p.url)
@@ -388,11 +396,11 @@ fn generate_auto_indices(lang string, all_pages []Page) {
 		}
 
 		index_path := os.join_path(output_root, dir_path, 'index.html')
-		
+
 		// Logic: Always recreate auto-indices to ensure lists are fresh,
 		// OR check if any file inside this dir is newer than the index.html
 		mut dir_items := all_pages.filter(os.dir(it.url) == dir_path)
-		
+
 		// Build the HTML list... (same as previous block)
 		mut list := '<ul>'
 		for itm in dir_items {
@@ -401,12 +409,12 @@ fn generate_auto_indices(lang string, all_pages []Page) {
 		list += '</ul>'
 
 		mut p := Page{
-			title: 'Index of ${dir_path}'
+			title:   'Index of ${dir_path}'
 			content: '${list}'
-			lang: lang
-			url: '${dir_path}/index.html'
+			lang:    lang
+			url:     '${dir_path}/index.html'
 		}
-		
+
 		p.build_menu(all_pages)
 		os.mkdir_all(os.dir(index_path)) or { continue }
 		os.write_file(index_path, p.render(theme)) or { continue }
