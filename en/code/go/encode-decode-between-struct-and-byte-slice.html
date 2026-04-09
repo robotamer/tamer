@@ -52,6 +52,7 @@
     <div class="w3-content" style="max-width:1400px; margin:20px auto">
         <div class="w3-container w3-white w3-card-4 w3-padding-32">
             <h1>Encode/Decode between struct and byte slice</h1>
+            <p class="w3-large w3-text-grey"><i>This is handy if you need to send a struct to a database or network</i></p>
             <p><em>sbs</em> stands for Struct to Byte Slice and back to Struct</p>
 <h2>Internals:</h2>
 <p><em>sbs</em> encodes your struct first to a Gob, then it convers it to a byte slice; it reverses the process for decoding.</p>

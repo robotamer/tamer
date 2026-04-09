@@ -1,7 +1,5 @@
 module main
 
-// To regenerate all pages delete folder en and tr
-
 import os
 import time
 import toml
@@ -131,6 +129,13 @@ fn (p Page) render(t Theme) string {
 		'<hr><p class="w3-small w3-text-grey">Last Modified: ${p.modified}</p>'
 	}
 
+	// 1. Description snippet (Added below title)
+	desc_html := if p.description.len > 0 {
+		'<p class="w3-large w3-text-grey"><i>${p.description}</i></p>'
+	} else {
+		''
+	}
+
 	// Create Tag Links for the bottom of the page
 	mut tags_html := ''
 	if p.tags.len > 0 && p.tags[0] != 'Uncategorized' {
@@ -153,6 +158,7 @@ ${t.header(p, keywords)}
     <div class="w3-content" style="max-width:1400px; margin:20px auto">
         <div class="w3-container w3-white w3-card-4 w3-padding-32">
             <h1>${p.title}</h1>
+            ${desc_html}
             ${p.content}
             ${tags_html}
             ${date_html}
