@@ -44,12 +44,15 @@ struct Theme {
 // --- THEME METHODS ---
 
 fn (t Theme) header(p Page, keywords string) string {
+	markdown_link := p.path_md.all_after('/tamer.pw')
 	return '<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="${p.lang} RSS Feed" href="/${p.lang}/rss.xml">
+    <link rel="alternate" type="text/markdown" href="${markdown_link}">
+
     <title>${p.title}</title>
     <meta name="author" content="${t.author}">
     <meta name="description" content="${p.description}">
@@ -250,6 +253,14 @@ fn scan_content() []Page {
 	mut pages := []Page{}
 	files := os.walk_ext(content_root, '.md')
 	for path in files {
+		// Identify the file name
+		file_name := os.file_name(path)
+
+		// SKIP _index.md files (these are handled by generate_auto_indices)
+		if file_name == '_index.md' {
+			continue
+		}
+
 		rel := path.all_after(content_root).trim_left('/')
 		lang := rel.all_before('/')
 		if lang !in supported_langs {
@@ -446,30 +457,63 @@ fn generate_auto_indices(lang string, all_pages []Page) {
 
 	theme := Theme{}
 	for dir_path, _ in all_dirs {
-		// Check for manual source file
-		manual_src := os.join_path(content_root, dir_path, 'index.md')
-		if os.exists(manual_src) {
-			continue // Handled by render_pages
+		// 1. Check for manual source file (now looking for _index.md)
+		// We skip regular index.md as it's handled by the main render_pages
+		if os.exists(os.join_path(content_root, dir_path, 'index.md')) {
+			continue 
 		}
 
+		_index_src := os.join_path(content_root, dir_path, '_index.md')
 		index_path := os.join_path(output_root, dir_path, 'index.html')
 
-		// Logic: Always recreate auto-indices to ensure lists are fresh,
-		// OR check if any file inside this dir is newer than the index.html
-		mut dir_items := all_pages.filter(os.dir(it.url) == dir_path)
+		mut title := 'Index of ${dir_path}'
+		mut content := ''
+		mut description := ''
 
-		// Build the HTML list... (same as previous block)
-		mut list := '<ul>'
-		for itm in dir_items {
-			list += '<li><a href="/${itm.url}">${itm.title}</a></li>'
+		// 2. If _index.md exists, parse it to get base content and frontmatter
+		if os.exists(_index_src) {
+			raw := os.read_file(_index_src) or { '' }
+			if raw.starts_with('+++') {
+				parts := raw.split('+++')
+				if parts.len >= 3 {
+					toml_doc := toml.parse_text(parts[1].trim_space()) or { toml.Doc{} }
+					
+					// Use our safe get_field helper (from previous steps)
+					t := get_field(toml_doc, 'title')
+					if t != '' { title = t }
+					
+					description = get_field(toml_doc, 'description')
+					content = markdown.to_html(parts[2].trim_space())
+				}
+			} else {
+				content = markdown.to_html(raw)
+			}
 		}
-		list += '</ul>'
 
+		// 3. Generate the directory list
+		mut dir_items := all_pages.filter(os.dir(it.url) == dir_path && !os.file_name(it.url).starts_with('index'))
+		
+		// Sort by date for blog, otherwise title
+		if dir_path.contains('/blog') {
+			dir_items.sort(a.date > b.date)
+		} else {
+			dir_items.sort(a.title < b.title)
+		}
+
+		mut list_html := '<ul class="w3-ul w3-hoverable w3-white w3-margin-top">'
+		for itm in dir_items {
+			date_label := if itm.date != '' { '<span class="w3-right w3-tiny w3-text-grey">${itm.date}</span>' } else { '' }
+			list_html += '<li>${date_label}<a href="/${itm.url}" style="text-decoration:none">${itm.title}</a></li>'
+		}
+		list_html += '</ul>'
+
+		// 4. Merge manual content with auto-list
 		mut p := Page{
-			title:   'Index of ${dir_path}'
-			content: '${list}'
-			lang:    lang
-			url:     '${dir_path}/index.html'
+			title:       title
+			description: description
+			content:     content + list_html // Markdown content first, then the list
+			lang:        lang
+			url:         '${dir_path}/index.html'
 		}
 
 		p.build_menu(all_pages)
