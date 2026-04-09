@@ -1,11 +1,6 @@
 +++
 title = "Code"
-description = "Codding"
+description = "Coding in Go, V, Javascript etc"
 +++
 
-
-* [Go](/en/code/go)
-* [Lua](/en/code/lua)
-* [PHP](/en/code/php)
-* [V Language](/en/code/v)
 

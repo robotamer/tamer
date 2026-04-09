@@ -128,8 +128,10 @@ fn (p Page) render(t Theme) string {
 			First Created: ${p.date}<br>
 			Last Modified: ${p.modified}
 		</p>'
-	} else {
+	} else if p.modified != '' {
 		'<hr><p class="w3-small w3-text-grey">Last Modified: ${p.modified}</p>'
+	}else{
+		''
 	}
 
 	// 1. Description snippet (Added below title)
@@ -236,7 +238,8 @@ fn generate_site(force bool) {
 
 		generate_tag_archive_pages(lang, real_content)
 		generate_tag_cloud(lang, real_content)
-
+		generate_tag_api(lang, real_content)
+		
 		generate_rss_feed(lang, real_content)
 
 		total_sitemap += render_pages(mut lang_pages, force)
@@ -352,6 +355,7 @@ fn render_pages(mut pages []Page, force bool) string {
 }
 
 fn generate_search_index(lang string, pages []Page) {
+	
 	data := pages.map(SearchItem{
 		t: it.title
 		u: '/${it.url}'
@@ -398,7 +402,7 @@ fn generate_tag_cloud(lang string, pages []Page) {
 	cloud_html += '</div>'
 
 	mut p := Page{
-		title:   'Tag Cloud'
+		title:   if lang == 'tr' { 'Etiket Bulutu'} else { 'Tag Cloud' }
 		content: cloud_html
 		lang:    lang
 		url:     '${lang}/tags.html'
@@ -450,39 +454,56 @@ fn generate_tag_archive_pages(lang string, pages []Page) {
 }
 
 fn generate_auto_indices(lang string, all_pages []Page) {
-	mut all_dirs := map[string]bool{}
+
+	tag_cloud := if lang == 'tr' { 'Etiket Bulutu'} else { 'Tag Cloud' }
+
+	// 1. Manually identify all directories by looking at the page URLs
+	// and adding their parent paths recursively.
+	mut unique_dirs := map[string]bool{}
 	for p in all_pages {
-		all_dirs[os.dir(p.url)] = true
+		if p.lang != lang { continue }
+		mut current := os.dir(p.url)
+		for current != '.' && current != '' {
+			unique_dirs[current] = true
+			current = os.dir(current)
+		}
+	}
+	
+	// 2. Also check for "empty" folders that might have an _index.md 
+	// but no other .md files inside them.
+	lang_root := os.join_path(content_root, lang)
+	if os.exists(lang_root) {
+		os.walk(lang_root, fn [mut unique_dirs] (path string) {
+			if os.is_dir(path) {
+				rel := path.all_after(content_root).trim_left(os.path_separator)
+				if rel != '' { unique_dirs[rel] = true }
+			}
+		})
 	}
 
 	theme := Theme{}
-	for dir_path, _ in all_dirs {
-		// 1. Check for manual source file (now looking for _index.md)
-		// We skip regular index.md as it's handled by the main render_pages
+	for dir_path, _ in unique_dirs {
+		// Skip if manual index.md exists (handled by render_pages)
 		if os.exists(os.join_path(content_root, dir_path, 'index.md')) {
-			continue 
+			continue
 		}
 
-		_index_src := os.join_path(content_root, dir_path, '_index.md')
+		index_src := os.join_path(content_root, dir_path, '_index.md')
 		index_path := os.join_path(output_root, dir_path, 'index.html')
 
-		mut title := 'Index of ${dir_path}'
+		mut title := 'Index of ${os.file_name(dir_path)}'
 		mut content := ''
 		mut description := ''
 
-		// 2. If _index.md exists, parse it to get base content and frontmatter
-		if os.exists(_index_src) {
-			raw := os.read_file(_index_src) or { '' }
+		if os.exists(index_src) {
+			raw := os.read_file(index_src) or { '' }
 			if raw.starts_with('+++') {
 				parts := raw.split('+++')
 				if parts.len >= 3 {
-					toml_doc := toml.parse_text(parts[1].trim_space()) or { toml.Doc{} }
-					
-					// Use our safe get_field helper (from previous steps)
-					t := get_field(toml_doc, 'title')
+					doc := toml.parse_text(parts[1].trim_space()) or { toml.Doc{} }
+					t := get_field(doc, 'title')
 					if t != '' { title = t }
-					
-					description = get_field(toml_doc, 'description')
+					description = get_field(doc, 'description')
 					content = markdown.to_html(parts[2].trim_space())
 				}
 			} else {
@@ -490,35 +511,63 @@ fn generate_auto_indices(lang string, all_pages []Page) {
 			}
 		}
 
-		// 3. Generate the directory list
-		mut dir_items := all_pages.filter(os.dir(it.url) == dir_path && !os.file_name(it.url).starts_with('index'))
+		// 3. Build List: Subfolders + Files
+		mut list_html := '<ul class="w3-ul w3-hoverable w3-white w3-card w3-margin-top">'
 		
-		// Sort by date for blog, otherwise title
-		if dir_path.contains('/blog') {
+		// Find child directories (subfolders)
+		mut sub_dirs := []string{}
+		for sd, _ in unique_dirs {
+			if os.dir(sd) == dir_path && sd != dir_path {
+				sub_dirs << sd
+			}
+		}
+		sub_dirs.sort()
+		for sd in sub_dirs {
+			list_html += '<li><a href="/${sd}/index.html" class="w3-text-blue"><b>&bull; ${os.file_name(sd)}</b></a></li>'
+		}
+
+		// Find child pages
+		mut dir_items := all_pages.filter(os.dir(it.url) == dir_path && !it.url.ends_with('index.html'))
+		if dir_path.contains('blog') {
 			dir_items.sort(a.date > b.date)
 		} else {
 			dir_items.sort(a.title < b.title)
 		}
 
-		mut list_html := '<ul class="w3-ul w3-hoverable w3-white w3-margin-top">'
 		for itm in dir_items {
-			date_label := if itm.date != '' { '<span class="w3-right w3-tiny w3-text-grey">${itm.date}</span>' } else { '' }
+			date_label := if itm.date != '' { '<span class="w3-right w3-tiny w3-text-grey">${itm.date}</span> ' } else { '' }
 			list_html += '<li>${date_label}<a href="/${itm.url}" style="text-decoration:none">${itm.title}</a></li>'
 		}
+		list_html += '<li><a href="/${lang}/tags.html" class="w3-text-blue"><b>&bull; ${tag_cloud}</b></a></li>'		
 		list_html += '</ul>'
 
-		// 4. Merge manual content with auto-list
 		mut p := Page{
-			title:       title
+			title: title
 			description: description
-			content:     content + list_html // Markdown content first, then the list
-			lang:        lang
-			url:         '${dir_path}/index.html'
+			content: content + list_html
+			lang: lang
+			url: '${dir_path}/index.html'
 		}
 
 		p.build_menu(all_pages)
 		os.mkdir_all(os.dir(index_path)) or { continue }
 		os.write_file(index_path, p.render(theme)) or { continue }
 	}
+}
+
+fn generate_tag_api(lang string, pages []Page) {
+	mut counts := map[string]int{}
+	for p in pages {
+		for tag in p.tags {
+			counts[tag]++
+		}
+	}
+	
+	// Create a simple map for the API
+	api_path := os.join_path(output_root, lang, 'tags.json')
+	os.write_file(api_path, json.encode(counts)) or {
+		eprintln('Failed to write Tag API for ${lang}')
+	}
+	println('API Generated: ${lang}/tags.json')
 }
 

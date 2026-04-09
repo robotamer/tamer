@@ -6,12 +6,12 @@
     <link rel="stylesheet" href="/css/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
-    <link rel="alternate" type="text/markdown" href="/md/en/linux/openssl/mail-server-fingerprint.md">
+    <link rel="alternate" type="text/markdown" href="">
 
-    <title>Mail Server Fingerprint</title>
+    <title>Index of code</title>
     <meta name="author" content="TaMeR">
-    <meta name="description" content="Fetching the SSL Cert from a remote mail server, and extracting the SHA1 Fingerprint.">
-    <meta name="keywords" content="howto, mail, smtp, linux, ssl">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
     <style>
         .tag-cloud { line-height: 2.5; padding: 40px; background: white; border-radius: 8px; text-align: center; }
         .tag-item { transition: transform 0.2s; display: inline-block; text-decoration: none; margin: 0 10px; }
@@ -30,30 +30,17 @@
 <body class="w3-light-grey">
     <div class="w3-bar w3-black w3-card">
         <a href="/en/index.html" class="w3-bar-item w3-button">en Home</a>
-<a href="/en/linux/openssl/ssh-authorization.html" class="w3-bar-item w3-button">ssh authorization</a>
-<a href="/en/linux/openssl/self-signed-ssl-certificate.html" class="w3-bar-item w3-button">Self-Signed SSL Certificate</a>
 
         <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
         <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
     </div>
     <div class="w3-content" style="max-width:1400px; margin:20px auto">
         <div class="w3-container w3-white w3-card-4 w3-padding-32">
-            <h1>Mail Server Fingerprint</h1>
-            <p class="w3-large w3-text-grey"><i>Fetching the SSL Cert from a remote mail server, and extracting the SHA1 Fingerprint.</i></p>
-            <p>This is useful when you need the fingerprint to identify via TLS</p>
-<p>Get the raw certificate:</p>
-<pre><code>echo Q | openssl s_client -connect mail.example.com:443
-</code></pre>
-<p>Copy and paste the scribble from -----BEGIN CERTIFICATE----- to -----END CERTIFICATE----- to a file called cert.pem. Including -----BEGIN CERTIFICATE----- as first and -----END CERTIFICATE----- as last line.</p>
-<p>Generate the SHA1 fingerprint by issuing following command:</p>
-<pre><code>openssl x509 -in cert.pem -sha1 -noout -fingerprint
-</code></pre>
-            <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/howto.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">howto</a> <a href="/en/tags/mail.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">mail</a> <a href="/en/tags/smtp.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">smtp</a> <a href="/en/tags/linux.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">linux</a> <a href="/en/tags/ssl.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">ssl</a> </p></div>
-            <hr>
-        <p class="w3-small w3-text-grey">
-			First Created: 2015-01-28T19:54:59Z<br>
-			Last Modified: 2026-04-05 19:35
-		</p>
+            <h1>Index of code</h1>
+            
+            <ul class="w3-ul w3-hoverable w3-white w3-card w3-margin-top"><li><a href="/en/blog/code/php/index.html" class="w3-text-blue"><b>&bull; php</b></a></li><li><a href="/en/tags.html" class="w3-text-blue"><b>&bull; Tag Cloud</b></a></li></ul>
+            
+            
         </div>
     </div>
     
