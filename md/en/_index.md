@@ -1,6 +1,5 @@
 +++
 title = "Random toughts"
-description = "Random toughts"
+description = "Random toughts, enjoy"
 +++
-Random toughts, enjoy.
 

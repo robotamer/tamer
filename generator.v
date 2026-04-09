@@ -16,7 +16,7 @@ const supported_langs = ['en', 'tr']
 // --- MODELS ---
 
 struct Page {
-	path_md string
+	path_md  string
 	modified string
 mut:
 	url         string
@@ -130,7 +130,7 @@ fn (p Page) render(t Theme) string {
 		</p>'
 	} else if p.modified != '' {
 		'<hr><p class="w3-small w3-text-grey">Last Modified: ${p.modified}</p>'
-	}else{
+	} else {
 		''
 	}
 
@@ -178,10 +178,15 @@ ${t.header(p, keywords)}
 
 fn main() {
 	if os.args.len < 2 {
-		println('Usage: v run . [run --force|dixdate|serve]')
+		println('Usage: v run generator.v [run|serve|path/to/new.md]')
 		return
 	}
-	force_rebuild := '--force' in os.args
+
+	// Detect if the user wants to create a new page directly
+	if os.args[1].ends_with('.md') {
+		create_new_page(os.args[1])
+		return
+	}
 
 	match os.args[1] {
 		'serve' {
@@ -189,7 +194,7 @@ fn main() {
 			file.serve(folder: output_root, on: ':8080')
 		}
 		'run' {
-			generate_site(force_rebuild)
+			generate_site('--force' in os.args)
 		}
 		'fixdate' {
 			fix_dates()
@@ -204,7 +209,7 @@ fn fix_dates() {
 	println('Scanning content...')
 	mut pages := scan_content()
 	for p in pages {
-		path := os.join_path(os.home_dir(), 'Public', 'tamer.pw','md',p.path_md)
+		path := os.join_path(os.home_dir(), 'Public', 'tamer.pw', 'md', p.path_md)
 		stat := os.stat(path) or {
 			println('Could not stat ${path}')
 			continue
@@ -215,6 +220,37 @@ fn fix_dates() {
 			println('Toml Date: ${p.date}')
 		}
 	}
+}
+
+fn create_new_page(rel_path string) {
+	full_path := os.join_path(content_root, rel_path)
+
+	if os.exists(full_path) {
+		println('Error: ${rel_path} already exists.')
+		return
+	}
+
+	// Get current timestamp
+	now := time.now()
+	date_str := now.format_ss() // Example: 2026-04-09 23:27:00
+
+	// Pre-format title from filename
+	title := os.file_name(rel_path).replace('.md', '').replace('_', ' ').replace('-',
+		' ').title()
+
+	template := '+++
+title = "${title}"
+date = "${date_str}"
+description = ""
+tags = []
++++
+
+# ${title}
+
+'
+	os.mkdir_all(os.dir(full_path)) or { panic(err) }
+	os.write_file(full_path, template) or { panic(err) }
+	println('Created: ${full_path}')
 }
 
 fn generate_site(force bool) {
@@ -239,7 +275,7 @@ fn generate_site(force bool) {
 		generate_tag_archive_pages(lang, real_content)
 		generate_tag_cloud(lang, real_content)
 		generate_tag_api(lang, real_content)
-		
+
 		generate_rss_feed(lang, real_content)
 
 		total_sitemap += render_pages(mut lang_pages, force)
@@ -299,7 +335,7 @@ fn scan_content() []Page {
 
 		pages << Page{
 			path_md:     path
-			modified:	modified
+			modified:    modified
 			url:         rel.replace('.md', '.html')
 			lang:        lang
 			title:       get_field(toml_doc, 'title')
@@ -342,7 +378,7 @@ fn render_pages(mut pages []Page, force bool) string {
 		if !force && os.exists(out_path) {
 			if os.file_last_mod_unix(src_path) <= os.file_last_mod_unix(out_path) {
 				acc += '<url><loc>${site_url}/${p.url}</loc><lastmod>${p.date}</lastmod></url>'
-				continue 
+				continue
 			}
 		}
 
@@ -355,7 +391,6 @@ fn render_pages(mut pages []Page, force bool) string {
 }
 
 fn generate_search_index(lang string, pages []Page) {
-	
 	data := pages.map(SearchItem{
 		t: it.title
 		u: '/${it.url}'
@@ -402,7 +437,7 @@ fn generate_tag_cloud(lang string, pages []Page) {
 	cloud_html += '</div>'
 
 	mut p := Page{
-		title:   if lang == 'tr' { 'Etiket Bulutu'} else { 'Tag Cloud' }
+		title:   if lang == 'tr' { 'Etiket Bulutu' } else { 'Tag Cloud' }
 		content: cloud_html
 		lang:    lang
 		url:     '${lang}/tags.html'
@@ -454,29 +489,32 @@ fn generate_tag_archive_pages(lang string, pages []Page) {
 }
 
 fn generate_auto_indices(lang string, all_pages []Page) {
-
-	tag_cloud := if lang == 'tr' { 'Etiket Bulutu'} else { 'Tag Cloud' }
+	tag_cloud := if lang == 'tr' { 'Etiket Bulutu' } else { 'Tag Cloud' }
 
 	// 1. Manually identify all directories by looking at the page URLs
 	// and adding their parent paths recursively.
 	mut unique_dirs := map[string]bool{}
 	for p in all_pages {
-		if p.lang != lang { continue }
+		if p.lang != lang {
+			continue
+		}
 		mut current := os.dir(p.url)
 		for current != '.' && current != '' {
 			unique_dirs[current] = true
 			current = os.dir(current)
 		}
 	}
-	
-	// 2. Also check for "empty" folders that might have an _index.md 
+
+	// 2. Also check for "empty" folders that might have an _index.md
 	// but no other .md files inside them.
 	lang_root := os.join_path(content_root, lang)
 	if os.exists(lang_root) {
 		os.walk(lang_root, fn [mut unique_dirs] (path string) {
 			if os.is_dir(path) {
 				rel := path.all_after(content_root).trim_left(os.path_separator)
-				if rel != '' { unique_dirs[rel] = true }
+				if rel != '' {
+					unique_dirs[rel] = true
+				}
 			}
 		})
 	}
@@ -502,7 +540,9 @@ fn generate_auto_indices(lang string, all_pages []Page) {
 				if parts.len >= 3 {
 					doc := toml.parse_text(parts[1].trim_space()) or { toml.Doc{} }
 					t := get_field(doc, 'title')
-					if t != '' { title = t }
+					if t != '' {
+						title = t
+					}
 					description = get_field(doc, 'description')
 					content = markdown.to_html(parts[2].trim_space())
 				}
@@ -513,7 +553,7 @@ fn generate_auto_indices(lang string, all_pages []Page) {
 
 		// 3. Build List: Subfolders + Files
 		mut list_html := '<ul class="w3-ul w3-hoverable w3-white w3-card w3-margin-top">'
-		
+
 		// Find child directories (subfolders)
 		mut sub_dirs := []string{}
 		for sd, _ in unique_dirs {
@@ -527,7 +567,8 @@ fn generate_auto_indices(lang string, all_pages []Page) {
 		}
 
 		// Find child pages
-		mut dir_items := all_pages.filter(os.dir(it.url) == dir_path && !it.url.ends_with('index.html'))
+		mut dir_items := all_pages.filter(os.dir(it.url) == dir_path
+			&& !it.url.ends_with('index.html'))
 		if dir_path.contains('blog') {
 			dir_items.sort(a.date > b.date)
 		} else {
@@ -535,18 +576,22 @@ fn generate_auto_indices(lang string, all_pages []Page) {
 		}
 
 		for itm in dir_items {
-			date_label := if itm.date != '' { '<span class="w3-right w3-tiny w3-text-grey">${itm.date}</span> ' } else { '' }
+			date_label := if itm.date != '' {
+				'<span class="w3-right w3-tiny w3-text-grey">${itm.date}</span> '
+			} else {
+				''
+			}
 			list_html += '<li>${date_label}<a href="/${itm.url}" style="text-decoration:none">${itm.title}</a></li>'
 		}
-		list_html += '<li><a href="/${lang}/tags.html" class="w3-text-blue"><b>&bull; ${tag_cloud}</b></a></li>'		
+		list_html += '<li><a href="/${lang}/tags.html" class="w3-text-blue"><b>&bull; ${tag_cloud}</b></a></li>'
 		list_html += '</ul>'
 
 		mut p := Page{
-			title: title
+			title:       title
 			description: description
-			content: content + list_html
-			lang: lang
-			url: '${dir_path}/index.html'
+			content:     content + list_html
+			lang:        lang
+			url:         '${dir_path}/index.html'
 		}
 
 		p.build_menu(all_pages)
@@ -562,7 +607,7 @@ fn generate_tag_api(lang string, pages []Page) {
 			counts[tag]++
 		}
 	}
-	
+
 	// Create a simple map for the API
 	api_path := os.join_path(output_root, lang, 'tags.json')
 	os.write_file(api_path, json.encode(counts)) or {
