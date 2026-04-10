@@ -8,10 +8,10 @@
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
-    <title>PHP goto statement</title>
+    <title>Messenger Laravel Framework</title>
     <meta name="author" content="TaMeR">
-    <meta name="description" content="">
-    <meta name="keywords" content="php, php5">
+    <meta name="description" content="A Messenger (error, info, ...) for the Laravel Framework">
+    <meta name="keywords" content="php, laravel, twitter">
     <style>
         .tag-cloud { line-height: 2.5; padding: 40px; background: white; border-radius: 8px; text-align: center; }
         .tag-item { transition: transform 0.2s; display: inline-block; text-decoration: none; margin: 0 10px; }
@@ -31,7 +31,6 @@
     <div class="w3-bar w3-black w3-card">
         <a href="/en/index.html" class="w3-bar-item w3-button">en Home</a>
 <a href="/en/code/php/creating-models-for-the-zend-framework-from-command-line-via-phpcli.html" class="w3-bar-item w3-button">Creating models for the Zend Framework from command line via phpcli</a>
-<a href="/en/code/php/messenger-laravel-framework.html" class="w3-bar-item w3-button">Messenger Laravel Framework</a>
 <a href="/en/code/php/load-functions-and-arrays.html" class="w3-bar-item w3-button">Load functions and array's</a>
 <a href="/en/code/php/zend-acl.html" class="w3-bar-item w3-button">Zend ACL</a>
 <a href="/en/code/php/num_row-with-pdo.html" class="w3-bar-item w3-button">num_row with PDO</a>
@@ -40,23 +39,78 @@
 <a href="/en/code/php/e-for-echo.html" class="w3-bar-item w3-button">e() for echo</a>
 <a href="/en/code/php/fixing-phps-gettype-function.html" class="w3-bar-item w3-button">fixing php's gettype function</a>
 <a href="/en/code/php/read-folder.html" class="w3-bar-item w3-button">Read Folder</a>
+<a href="/en/code/php/php-goto-statement.html" class="w3-bar-item w3-button">PHP goto statement</a>
 
         <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
         <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
     </div>
     <div class="w3-content" style="max-width:1400px; margin:20px auto">
         <div class="w3-container w3-white w3-card-4 w3-padding-32">
-            <h1>PHP goto statement</h1>
-            
-            <p>I just discovered that the
-<a href="http://www.php.net/manual/en/control-structures.goto.php">goto statement</a>
-is available since php 5.3</p>
-<p>I love the guys from php for that.<br>
-I am a hobby programmer and unlike the professionals, I learned OOP via php, which is great but having <a href="http://www.php.net/manual/en/control-structures.goto.php">goto</a> available like back in the Amiga days made my day.</p>
-            <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/php.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">php</a> <a href="/en/tags/php5.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">php5</a> </p></div>
+            <h1>Messenger Laravel Framework</h1>
+            <p class="w3-large w3-text-grey"><i>A Messenger (error, info, ...) for the Laravel Framework</i></p>
+            <p><img src="/img/laravel.png" alt="Laravel Framework"> This is a fork and upgrade of the <a href="http://forums.laravel.com/profile.php?id=583">davzie</a> message class.
+A info, error etc messenger class that allows you to add validation errors, statuses etc to flash data and then retrieve them in a nicely formatted way in your front-end. Automates the process a little when you're adding and retrieving messages, especially in a CRUD type environment. The formatting integrates well with Twitter's Bootstrap Alert formatting.</p>
+<p>This upgraded version works smoothly with the Laravel validation class</p>
+<p><a href="https://gist.github.com/robotamer/3007511#file-msg-php">gist id=3007511</a></p>
+<pre><code class="language-php">&lt;?php
+
+class Msg {
+
+     public static $msgss = array();
+
+     /**
+      * Add a message to the message array (adds to the user's session)
+      * @param string  $type    You can have several types of messages, these are class names for Bootstrap's messaging classes, usually, info, error, success, warning
+      * @param string $message  The message you want to add to the list
+      */
+     public static function add($type = 'info', $message = FALSE){
+         if(!$message) return FALSE;
+         if(is_array($message)){
+             foreach($message as $msg){
+                 static::$msgss[$type][] = $msg;
+             }
+         }else{
+             static::$msgss[$type][] = $message;
+         }
+         Session::flash('messages', static::$msgss);
+     }
+
+     /**
+      * Pull back those messages from the session
+      * @return array
+      */
+     public static function get(){
+         return (Session::has('messages')) ? Session::get('messages') : FALSE;
+     }
+    
+     /**
+      * Gets all the messages from the session and formats them accordingly for Twitter bootstrap.
+      * @return string
+      */
+     public static function getHtml(){
+         $output = FALSE;
+         if (Session::has('messages')){
+             $messages = Session::get('messages');
+             foreach($messages as $type =&gt; $msgs){
+                 if(is_integer($type)) $type = 'error';
+                 $output .= '&lt;div class=&quot;alert alert-'.$type.'&quot;&gt;&lt;a class=&quot;close&quot; data-dismiss=&quot;alert&quot;&gt;×&lt;/a&gt;';
+                 if(is_array($msgs)){
+                 foreach($msgs as $msg) $output .= '&lt;p&gt;'.$msg.'&lt;/p&gt;';
+                 }else{
+                      $output .= '&lt;p&gt;'.$msgs.'&lt;/p&gt;';
+                 }
+                 $output .= '&lt;/div&gt;';
+             }
+         }
+         return $output;
+     }
+}
+?&gt;
+</code></pre>
+            <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/php.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">php</a> <a href="/en/tags/laravel.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">laravel</a> <a href="/en/tags/twitter.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">twitter</a> </p></div>
             <hr>
         <p class="w3-small w3-text-grey">
-			First Created: 2010-03-13T16:15:00Z<br>
+			First Created: 2012-06-27T23:27:29Z<br>
 			Last Modified: 2026-04-05 19:35
 		</p>
         </div>

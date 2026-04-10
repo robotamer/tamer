@@ -44,13 +44,14 @@ struct Theme {
 // --- THEME METHODS ---
 
 fn (t Theme) header(p Page, keywords string) string {
-	println('/md/${p.url.replace('.html', '.md')}')
+
 	markdown_file := os.join_path_single('/md', p.url.replace('.html', '.md'))
 	markdown_link := if os.exists(markdown_file) {
 		'<link rel="alternate" type="text/markdown" href="${markdown_file}">'
 	} else {
 		''
 	}
+
 	return '<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -587,7 +588,12 @@ fn generate_auto_indices(lang string, all_pages []Page) {
 			} else {
 				''
 			}
-			list_html += '<li>${date_label}<a href="/${itm.url}" style="text-decoration:none">${itm.title}</a></li>'
+			desc := if itm.description != '' {
+				'<br>${itm.description}'
+			} else {
+				''
+			}
+			list_html += '<li>${date_label}<a href="/${itm.url}" style="text-decoration:none"><b>${itm.title}</b></a>${desc}</li>'
 		}
 		list_html += '<li><a href="/${lang}/tags.html" class="w3-text-blue"><b>&bull; ${tag_cloud}</b></a></li>'
 		list_html += '</ul>'

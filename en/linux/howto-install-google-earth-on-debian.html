@@ -8,10 +8,10 @@
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
-    <title>Linux find & replace HowTo</title>
+    <title>HowTo install Google Earth on Debian</title>
     <meta name="author" content="TaMeR">
-    <meta name="description" content="">
-    <meta name="keywords" content="server, bash, linux, perl, shell">
+    <meta name="description" content="The Google Earth .deb still depends on ia32-libs, but ia32-libs has been removed">
+    <meta name="keywords" content="howTo, debian">
     <style>
         .tag-cloud { line-height: 2.5; padding: 40px; background: white; border-radius: 8px; text-align: center; }
         .tag-item { transition: transform 0.2s; display: inline-block; text-decoration: none; margin: 0 10px; }
@@ -30,27 +30,47 @@
 <body class="w3-light-grey">
     <div class="w3-bar w3-black w3-card">
         <a href="/en/index.html" class="w3-bar-item w3-button">en Home</a>
-<a href="/en/linux/bash/linux-bash-history.html" class="w3-bar-item w3-button">Linux bash history</a>
-<a href="/en/linux/bash/git-branch-on-bash-line.html" class="w3-bar-item w3-button">git branch on bash line</a>
+<a href="/en/linux/containers.html" class="w3-bar-item w3-button">Linux Containers</a>
+<a href="/en/linux/log-rotate.html" class="w3-bar-item w3-button">Log Rotate</a>
+<a href="/en/linux/markdown.html" class="w3-bar-item w3-button">Markdown Syntax</a>
+<a href="/en/linux/snippets.html" class="w3-bar-item w3-button">Linux Snippets</a>
+<a href="/en/linux/backround-process.html" class="w3-bar-item w3-button">Linux backround process</a>
+<a href="/en/linux/network-safety-restart-bash-script.html" class="w3-bar-item w3-button">Network Safety Restart Bash Script</a>
+<a href="/en/linux/git-howto.html" class="w3-bar-item w3-button">Git Howto</a>
+<a href="/en/linux/utf-8-character-list.html" class="w3-bar-item w3-button">UTF-8 Character List</a>
+<a href="/en/linux/bridge-utils-for-lxc.html" class="w3-bar-item w3-button">Bridge-Utils for LXC</a>
+<a href="/en/linux/netbeans-error.html" class="w3-bar-item w3-button">Netbeans error</a>
+<a href="/en/linux/caldav-and-carddav-server.html" class="w3-bar-item w3-button">CalDAV and CardDAV Server</a>
+<a href="/en/linux/git-alias.html" class="w3-bar-item w3-button">Git Alias</a>
 
         <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
         <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
     </div>
     <div class="w3-content" style="max-width:1400px; margin:20px auto">
         <div class="w3-container w3-white w3-card-4 w3-padding-32">
-            <h1>Linux find & replace HowTo</h1>
-            
-            <p><strong>Find and chmod files or folders</strong></p>
-<p><code>find . -type d -exec chmod 755 {} ;</code></p>
-<p><code>find . -name &quot;*.php&quot; | xargs grep -niP 'thingy'</code></p>
-<p><strong>Find a directory and display on screen</strong></p>
-<p><code>find . -type d -name 'linux' 2&gt;/dev/null</code></p>
-<p><strong>Find/Grep for a string across multiple files with different extensions</strong></p>
-<p><code>find ( -name &quot;*js&quot; -o -name &quot;*jsp&quot; -o -name &quot;*jspf&quot; ) | xargs grep -niP 'thingy'</code></p>
-            <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/server.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">server</a> <a href="/en/tags/bash.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">bash</a> <a href="/en/tags/linux.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">linux</a> <a href="/en/tags/perl.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">perl</a> <a href="/en/tags/shell.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">shell</a> </p></div>
+            <h1>HowTo install Google Earth on Debian</h1>
+            <p class="w3-large w3-text-grey"><i>The Google Earth .deb still depends on ia32-libs, but ia32-libs has been removed</i></p>
+            <p>The Google Earth .DEB still depends on ia32-libs, but ia32-libs has been removed as part of the transition to multiarch, so it won't install.</p>
+<h3>Steps</h3>
+<ol>
+<li>Download the 64-bit google earth .deb file from <a href="http://www.google.com/earth">http://www.google.com/earth</a></li>
+<li>mkdir earth</li>
+<li>dpkg-deb -R google-earth*.deb earth</li>
+<li>edit the file earth/DEBIAN/control and replace the Depends line as shown below</li>
+<li>dpkg-deb -b earth earth.deb</li>
+<li>dpkg -i earth.deb</li>
+<li>apt-get install -f</li>
+</ol>
+<p>Replace</p>
+<pre><code>Depends: lsb-core (&gt;= 3.2), ia32-libs  
+</code></pre>
+<p>with</p>
+<pre><code>Depends: lsb-core (&gt;= 3.2),lib32z1, lib32ncurses5, lib32bz2-1.0
+</code></pre>
+            <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/howTo.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">howTo</a> <a href="/en/tags/debian.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">debian</a> </p></div>
             <hr>
         <p class="w3-small w3-text-grey">
-			First Created: 2011-06-01T09:20:26Z<br>
+			First Created: 2013-12-29T19:50:00Z<br>
 			Last Modified: 2026-04-05 19:35
 		</p>
         </div>
