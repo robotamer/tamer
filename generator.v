@@ -44,14 +44,20 @@ struct Theme {
 // --- THEME METHODS ---
 
 fn (t Theme) header(p Page, keywords string) string {
-	markdown_link := p.path_md.all_after('/tamer.pw')
+	println('/md/${p.url.replace('.html', '.md')}')
+	markdown_file := os.join_path_single('/md', p.url.replace('.html', '.md'))
+	markdown_link := if os.exists(markdown_file) {
+		'<link rel="alternate" type="text/markdown" href="${markdown_file}">'
+	} else {
+		''
+	}
 	return '<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="${p.lang} RSS Feed" href="/${p.lang}/rss.xml">
-    <link rel="alternate" type="text/markdown" href="${markdown_link}">
+    ${markdown_link}
 
     <title>${p.title}</title>
     <meta name="author" content="${t.author}">
@@ -594,7 +600,7 @@ fn generate_auto_indices(lang string, all_pages []Page) {
 			url:         '${dir_path}/index.html'
 		}
 
-		p.build_menu(all_pages)
+		// p.build_menu(all_pages) // No menu for indexes
 		os.mkdir_all(os.dir(index_path)) or { continue }
 		os.write_file(index_path, p.render(theme)) or { continue }
 	}
