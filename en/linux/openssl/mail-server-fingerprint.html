@@ -42,11 +42,11 @@
             <p class="w3-large w3-text-grey"><i>Fetching the SSL Cert from a remote mail server, and extracting the SHA1 Fingerprint.</i></p>
             <p>This is useful when you need the fingerprint to identify via TLS</p>
 <p>Get the raw certificate:</p>
-<pre><code>echo Q | openssl s_client -connect mail.example.com:443
+<pre class="language-bash"><code class="language-bash"><span class="token keyword">echo</span> Q <span class="token operator">|</span> openssl s_client <span class="token operator">-</span>connect mail<span class="token operator">.</span>example<span class="token operator">.</span>com<span class="token operator">:</span><span class="token number">443</span>
 </code></pre>
 <p>Copy and paste the scribble from -----BEGIN CERTIFICATE----- to -----END CERTIFICATE----- to a file called cert.pem. Including -----BEGIN CERTIFICATE----- as first and -----END CERTIFICATE----- as last line.</p>
 <p>Generate the SHA1 fingerprint by issuing following command:</p>
-<pre><code>openssl x509 -in cert.pem -sha1 -noout -fingerprint
+<pre class="language-bash"><code class="language-bash">openssl x509 <span class="token operator">-</span><span class="token keyword">in</span> cert<span class="token operator">.</span>pem <span class="token operator">-</span>sha1 <span class="token operator">-</span>noout <span class="token operator">-</span>fingerprint
 </code></pre>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/howto.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">howto</a> <a href="/en/tags/mail.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">mail</a> <a href="/en/tags/smtp.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">smtp</a> <a href="/en/tags/linux.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">linux</a> <a href="/en/tags/ssl.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">ssl</a> </p></div>
             <hr>
@@ -80,7 +80,5 @@
         } else { r.style.display="none"; }
     }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>

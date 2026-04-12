@@ -55,55 +55,55 @@
 <a href="https://git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server">4.4 Git on the Server - Setting Up the Server</a></p>
 <h4>Remote Server</h4>
 <p>Go to your web root directory</p>
-<pre><code class="language-bash">cd /var/www/
+<pre class="language-bash"><code class="language-bash"><span class="token keyword">cd</span> <span class="token operator">/</span>var<span class="token operator">/</span>www<span class="token operator">/</span>
 </code></pre>
 <p>identify your self to git</p>
-<pre><code class="language-bash">git config --global user.name &quot;Your Name&quot;
-git config --global user.email &quot;alias@example.com&quot;
+<pre class="language-bash"><code class="language-bash">git config <span class="token operator">-</span><span class="token operator">-</span>global user<span class="token operator">.</span>name <span class="token string">"Your Name"</span>
+git config <span class="token operator">-</span><span class="token operator">-</span>global user<span class="token operator">.</span>email <span class="token string">"alias@example.com"</span>
 </code></pre>
 <p>Create git</p>
-<pre><code class="language-bash">git init
+<pre class="language-bash"><code class="language-bash">git init
 </code></pre>
 <p>Create a live branch</p>
-<pre><code class="language-bash">git branch live
+<pre class="language-bash"><code class="language-bash">git branch live
 </code></pre>
 <p>Make the live branch active</p>
-<pre><code class="language-bash">git checkout live
+<pre class="language-bash"><code class="language-bash">git checkout live
 </code></pre>
 <h4>Local</h4>
 <p>Go to your working directory</p>
-<pre><code class="language-bash">cd /var/www/
+<pre class="language-bash"><code class="language-bash"><span class="token keyword">cd</span> <span class="token operator">/</span>var<span class="token operator">/</span>www<span class="token operator">/</span>
 </code></pre>
 <p>identify your self to git</p>
-<pre><code class="language-bash">git config --global user.name &quot;Dennis T Kaplan&quot;
-git config --global user.email &quot;alias@example.com&quot;
+<pre class="language-bash"><code class="language-bash">git config <span class="token operator">-</span><span class="token operator">-</span>global user<span class="token operator">.</span>name <span class="token string">"Dennis T Kaplan"</span>
+git config <span class="token operator">-</span><span class="token operator">-</span>global user<span class="token operator">.</span>email <span class="token string">"alias@example.com"</span>
 </code></pre>
 <p>Create git</p>
-<pre><code class="language-bash">git init
+<pre class="language-bash"><code class="language-bash">git init
 </code></pre>
 <p>create the ignore file</p>
-<pre><code class="language-bash">nano .gitignore
+<pre class="language-bash"><code class="language-bash">nano <span class="token operator">.</span>gitignore
 </code></pre>
 <p>Place this in to your .gitignore file:</p>
-<pre><code># Packages #
-############
-# it's better to unpack these files and commit the raw source
-# git has its own built in compression methods
-*.7z
-*.dmg
-*.gz
-*.iso
-*.jar
-*.rar
-*.tar
-*.zip
+<pre class="language-bash"><code class="language-bash"><span class="token comment"># Packages #</span>
+<span class="token comment">############</span>
+<span class="token comment"># it's better to unpack these files and commit the raw source</span>
+<span class="token comment"># git has its own built in compression methods</span>
+<span class="token operator">*</span><span class="token operator">.</span><span class="token number">7z</span>
+<span class="token operator">*</span><span class="token operator">.</span>dmg
+<span class="token operator">*</span><span class="token operator">.</span>gz
+<span class="token operator">*</span><span class="token operator">.</span>iso
+<span class="token operator">*</span><span class="token operator">.</span>jar
+<span class="token operator">*</span><span class="token operator">.</span>rar
+<span class="token operator">*</span><span class="token operator">.</span>tar
+<span class="token operator">*</span><span class="token operator">.</span>zip
 
-# Logs and databases #
-######################
-*.log
-*.sqlite
-*.db3
-*/temp/*
+<span class="token comment"># Logs and databases #</span>
+<span class="token comment">######################</span>
+<span class="token operator">*</span><span class="token operator">.</span>log
+<span class="token operator">*</span><span class="token operator">.</span>sqlite
+<span class="token operator">*</span><span class="token operator">.</span>db3
+<span class="token operator">*</span><span class="token operator">/</span>temp<span class="token comment">/*
 
 # OS generated files #
 ######################
@@ -118,38 +118,38 @@ Thumbs.db
 *.orig
 *.bak
 test*
-</code></pre>
+</span></code></pre>
 <p>Add your files to git</p>
-<pre><code class="language-bash">git add .
+<pre class="language-bash"><code class="language-bash">git add <span class="token operator">.</span>
 </code></pre>
 <p>Commit them</p>
-<pre><code class="language-bash">git commit -m 'init'
+<pre class="language-bash"><code class="language-bash">git commit <span class="token operator">-</span>m <span class="token string">'init'</span>
 </code></pre>
 <p>Add your remote git server</p>
-<pre><code class="language-bash">git remote add ssh://username@example.com/var/www/.git
+<pre class="language-bash"><code class="language-bash">git remote add ssh<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>username@example<span class="token operator">.</span>com<span class="token operator">/</span>var<span class="token operator">/</span>www<span class="token operator">/</span><span class="token operator">.</span>git
 </code></pre>
 <p>send your data to the remote server</p>
-<pre><code class="language-bash">git push
+<pre class="language-bash"><code class="language-bash">git push
 </code></pre>
 <h4>Remote Server</h4>
 <p>Checkout master branch so we can test the changes</p>
-<pre><code class="language-bash">git checkout master
+<pre class="language-bash"><code class="language-bash">git checkout master
 </code></pre>
 <p>see if it works and if it does go back to the live branch</p>
-<pre><code class="language-bash">git checkout live
+<pre class="language-bash"><code class="language-bash">git checkout live
 </code></pre>
 <p>pull in master to live</p>
-<pre><code class="language-bash">git merge master
+<pre class="language-bash"><code class="language-bash">git merge master
 </code></pre>
 <h4>Stop tracking a file but keep the file:</h4>
-<pre><code class="language-bash">git rm --cached filename
+<pre class="language-bash"><code class="language-bash">git rm <span class="token operator">-</span><span class="token operator">-</span>cached filename
 </code></pre>
 <h4>Alias:</h4>
 <p>Following will create an alias for git add, commit and push</p>
-<pre><code class="language-bash">git config alias.acp '! acp() { git add . &amp;&amp; git commit -m \&quot;$1\&quot; &amp;&amp; git push ; } ; acp'  
+<pre class="language-bash"><code class="language-bash">git config <span class="token keyword">alias</span><span class="token operator">.</span>acp <span class="token string">'! acp() { git add . && git commit -m \"$1\" && git push ; } ; acp'</span>  
 </code></pre>
 <p>Use it like this:</p>
-<pre><code class="language-bash">git acp &quot;your commit message&quot;
+<pre class="language-bash"><code class="language-bash">git acp <span class="token string">"your commit message"</span>
 </code></pre>
 <p>{{&lt; lastmod &gt;}}</p>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/howto.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">howto</a> <a href="/en/tags/git.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">git</a> </p></div>
@@ -184,7 +184,5 @@ test*
         } else { r.style.display="none"; }
     }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>

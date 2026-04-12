@@ -77,175 +77,175 @@
 <p><h2 id="block">Block Elements</h2></p>
 <p><h3 id="p">Paragraphs and Line Breaks</h3></p>
 <p>Two spaces on the end of a line<br>
-<code>&lt;br /&gt;</code></p>
+<code class="language-bash"><span class="token operator"><</span>br <span class="token operator">/</span><span class="token operator">></span></code></p>
 <p>Blank line<br>
-<code>&lt;p&gt;</code></p>
+<code class="language-bash"><span class="token operator"><</span>p<span class="token operator">></span></code></p>
 <p><h3 id="header">Headers</h3></p>
-<pre><code>This is an H1
-=============
+<pre class="language-bash"><code class="language-bash">This is an H1
+<span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span>
 
 This is an H2
--------------
+<span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span>
 
-# This is an H1
+<span class="token comment"># This is an H1</span>
 
-## This is an H2
+<span class="token comment">## This is an H2</span>
 
-###### This is an H6
+<span class="token comment">###### This is an H6</span>
 
-# This is an H1 #
+<span class="token comment"># This is an H1 #</span>
 
-## This is an H2 ##
+<span class="token comment">## This is an H2 ##</span>
 
-### This is an H3 ######
+<span class="token comment">### This is an H3 ######</span>
 </code></pre>
 <p><h3 id="blockquote">Blockquotes</h3></p>
-<pre><code>&gt; This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
-&gt; consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
-&gt; Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
-&gt; 
-&gt; Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
-&gt; id sem consectetuer libero luctus adipiscing.
+<pre class="language-bash"><code class="language-bash"><span class="token operator">></span> This is a blockquote with two paragraphs<span class="token operator">.</span> Lorem ipsum dolor sit amet<span class="token operator">,</span>
+<span class="token operator">></span> consectetuer adipiscing elit<span class="token operator">.</span> Aliquam hendrerit mi posuere lectus<span class="token operator">.</span>
+<span class="token operator">></span> Vestibulum enim wisi<span class="token operator">,</span> viverra nec<span class="token operator">,</span> fringilla <span class="token keyword">in</span><span class="token operator">,</span> laoreet vitae<span class="token operator">,</span> risus<span class="token operator">.</span>
+<span class="token operator">></span> 
+<span class="token operator">></span> Donec sit amet nisl<span class="token operator">.</span> Aliquam semper ipsum sit amet velit<span class="token operator">.</span> Suspendisse
+<span class="token operator">></span> id sem consectetuer libero luctus adipiscing<span class="token operator">.</span>
 
 
-&gt; This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
-consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
-Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
+<span class="token operator">></span> This is a blockquote with two paragraphs<span class="token operator">.</span> Lorem ipsum dolor sit amet<span class="token operator">,</span>
+consectetuer adipiscing elit<span class="token operator">.</span> Aliquam hendrerit mi posuere lectus<span class="token operator">.</span>
+Vestibulum enim wisi<span class="token operator">,</span> viverra nec<span class="token operator">,</span> fringilla <span class="token keyword">in</span><span class="token operator">,</span> laoreet vitae<span class="token operator">,</span> risus<span class="token operator">.</span>
 </code></pre>
 <p>Blockquotes can be nested (i.e. a blockquote-in-a-blockquote) by
-adding additional levels of <code>&gt;</code>:</p>
-<pre><code>&gt; This is the first level of quoting.
-&gt;
-&gt; &gt; This is nested blockquote.
-&gt;
-&gt; Back to the first level.
+adding additional levels of <code class="language-bash"><span class="token operator">></span></code>:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token operator">></span> This is the first level of quoting<span class="token operator">.</span>
+<span class="token operator">></span>
+<span class="token operator">></span> <span class="token operator">></span> This is nested blockquote<span class="token operator">.</span>
+<span class="token operator">></span>
+<span class="token operator">></span> Back to the first level<span class="token operator">.</span>
 </code></pre>
 <p>Blockquotes can contain other Markdown elements, including headers, lists,
 and code blocks:</p>
-<pre><code>&gt; ## This is a header.
-&gt; 
-&gt; 1.   This is the first list item.
-&gt; 2.   This is the second list item.
-&gt; 
-&gt; Here's some example code:
-&gt; 
-&gt;     return shell_exec(&quot;echo $input | $markdown_script&quot;);
-</code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="token operator">></span> <span class="token comment">## This is a header.</span>
+<span class="token operator">></span> 
+<span class="token operator">></span> <span class="token number">1.</span>   This is the first list item<span class="token operator">.</span>
+<span class="token operator">></span> <span class="token number">2.</span>   This is the second list item<span class="token operator">.</span>
+<span class="token operator">></span> 
+<span class="token operator">></span> Here<span class="token string">'s some example code:
+> 
+>     return shell_exec("echo $input | $markdown_script");
+</span></code></pre>
 <p><h3 id="list">Lists</h3></p>
 <p>-- as list markers:</p>
-<pre><code>*   Red
-*   Green
-*   Blue
+<pre class="language-bash"><code class="language-bash"><span class="token operator">*</span>   Red
+<span class="token operator">*</span>   Green
+<span class="token operator">*</span>   Blue
 </code></pre>
 <p>is equivalent to:</p>
-<pre><code>+   Red
-+   Green
-+   Blue
+<pre class="language-bash"><code class="language-bash"><span class="token operator">+</span>   Red
+<span class="token operator">+</span>   Green
+<span class="token operator">+</span>   Blue
 </code></pre>
 <p>and:</p>
-<pre><code>-   Red
--   Green
--   Blue
+<pre class="language-bash"><code class="language-bash"><span class="token operator">-</span>   Red
+<span class="token operator">-</span>   Green
+<span class="token operator">-</span>   Blue
 </code></pre>
 <p>Ordered lists use numbers followed by periods:</p>
-<pre><code>1.  Bird
-2.  McHale
-3.  Parish
+<pre class="language-bash"><code class="language-bash"><span class="token number">1.</span>  Bird
+<span class="token number">2.</span>  McHale
+<span class="token number">3.</span>  Parish
 </code></pre>
 <p>is okay:</p>
-<pre><code>1.  Bird
-1.  McHale
-1.  Parish
+<pre class="language-bash"><code class="language-bash"><span class="token number">1.</span>  Bird
+<span class="token number">1.</span>  McHale
+<span class="token number">1.</span>  Parish
 </code></pre>
 <p>or even:</p>
-<pre><code>3. Bird
-1. McHale
-8. Parish
+<pre class="language-bash"><code class="language-bash"><span class="token number">3.</span> Bird
+<span class="token number">1.</span> McHale
+<span class="token number">8.</span> Parish
 
-*   Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-    Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi,
-    viverra nec, fringilla in, laoreet vitae, risus.
-*   Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
-    Suspendisse id sem consectetuer libero luctus adipiscing.
+<span class="token operator">*</span>   Lorem ipsum dolor sit amet<span class="token operator">,</span> consectetuer adipiscing elit<span class="token operator">.</span>
+    Aliquam hendrerit mi posuere lectus<span class="token operator">.</span> Vestibulum enim wisi<span class="token operator">,</span>
+    viverra nec<span class="token operator">,</span> fringilla <span class="token keyword">in</span><span class="token operator">,</span> laoreet vitae<span class="token operator">,</span> risus<span class="token operator">.</span>
+<span class="token operator">*</span>   Donec sit amet nisl<span class="token operator">.</span> Aliquam semper ipsum sit amet velit<span class="token operator">.</span>
+    Suspendisse id sem consectetuer libero luctus adipiscing<span class="token operator">.</span>
 
-*   Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi,
-viverra nec, fringilla in, laoreet vitae, risus.
-*   Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
-Suspendisse id sem consectetuer libero luctus adipiscing.
+<span class="token operator">*</span>   Lorem ipsum dolor sit amet<span class="token operator">,</span> consectetuer adipiscing elit<span class="token operator">.</span>
+Aliquam hendrerit mi posuere lectus<span class="token operator">.</span> Vestibulum enim wisi<span class="token operator">,</span>
+viverra nec<span class="token operator">,</span> fringilla <span class="token keyword">in</span><span class="token operator">,</span> laoreet vitae<span class="token operator">,</span> risus<span class="token operator">.</span>
+<span class="token operator">*</span>   Donec sit amet nisl<span class="token operator">.</span> Aliquam semper ipsum sit amet velit<span class="token operator">.</span>
+Suspendisse id sem consectetuer libero luctus adipiscing<span class="token operator">.</span>
 </code></pre>
 <p><h3 id="precode">Code Blocks</h3></p>
-<pre><code>This is a normal paragraph:
+<pre class="language-bash"><code class="language-bash">This is a normal paragraph<span class="token operator">:</span>
 
-    This is a code block.
+    This is a code block<span class="token operator">.</span>
 </code></pre>
 <p>Markdown will generate:</p>
-<pre><code>&lt;p&gt;This is a normal paragraph:&lt;/p&gt;
+<pre class="language-bash"><code class="language-bash"><span class="token operator"><</span>p<span class="token operator">></span>This is a normal paragraph<span class="token operator">:</span><span class="token operator"><</span><span class="token operator">/</span>p<span class="token operator">></span>
 
-&lt;pre&gt;&lt;code&gt;This is a code block.
-&lt;/code&gt;&lt;/pre&gt;
+<span class="token operator"><</span>pre<span class="token operator">></span><span class="token operator"><</span>code<span class="token operator">></span>This is a code block<span class="token operator">.</span>
+<span class="token operator"><</span><span class="token operator">/</span>code<span class="token operator">></span><span class="token operator"><</span><span class="token operator">/</span>pre<span class="token operator">></span>
 </code></pre>
 <p><h3 id="hr">Horizontal Rules</h3></p>
-<pre><code>* * *
+<pre class="language-bash"><code class="language-bash"><span class="token operator">*</span> <span class="token operator">*</span> <span class="token operator">*</span>
 
-***
+<span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span>
 
-*****
+<span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span>
 
-- - -
+<span class="token operator">-</span> <span class="token operator">-</span> <span class="token operator">-</span>
 
----------------------------------------
+<span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span>
 </code></pre>
 <hr>
 <p><h2 id="span">Span Elements</h2></p>
 <p><h3 id="link">Links</h3></p>
-<pre><code>This is [an example](http://example.com/ &quot;Title&quot;) inline link.
+<pre class="language-bash"><code class="language-bash">This is <span class="token operator">[</span>an example<span class="token operator">]</span><span class="token operator">(</span>http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>example<span class="token operator">.</span>com<span class="token operator">/</span> <span class="token string">"Title"</span><span class="token operator">)</span> inline link<span class="token operator">.</span>
 
 
-This is [an example][id] reference-style link.
-[id]: http://example.com/  &quot;Optional Title Here&quot;
+This is <span class="token operator">[</span>an example<span class="token operator">]</span><span class="token operator">[</span>id<span class="token operator">]</span> reference<span class="token operator">-</span>style link<span class="token operator">.</span>
+<span class="token operator">[</span>id<span class="token operator">]</span><span class="token operator">:</span> http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>example<span class="token operator">.</span>com<span class="token operator">/</span>  <span class="token string">"Optional Title Here"</span>
 </code></pre>
 <p><h3 id="em">Emphasis</h3></p>
-<pre><code>*single asterisks*
+<pre class="language-bash"><code class="language-bash"><span class="token operator">*</span>single asterisks<span class="token operator">*</span>
 
 _single underscores_
 
-**double asterisks**
+<span class="token operator">*</span><span class="token operator">*</span>double asterisks<span class="token operator">*</span><span class="token operator">*</span>
 
 __double underscores__
 </code></pre>
 <p>will produce:</p>
-<pre><code>&lt;em&gt;single asterisks&lt;/em&gt;
+<pre class="language-bash"><code class="language-bash"><span class="token operator"><</span>em<span class="token operator">></span>single asterisks<span class="token operator"><</span><span class="token operator">/</span>em<span class="token operator">></span>
 
-&lt;em&gt;single underscores&lt;/em&gt;
+<span class="token operator"><</span>em<span class="token operator">></span>single underscores<span class="token operator"><</span><span class="token operator">/</span>em<span class="token operator">></span>
 
-&lt;strong&gt;double asterisks&lt;/strong&gt;
+<span class="token operator"><</span>strong<span class="token operator">></span>double asterisks<span class="token operator"><</span><span class="token operator">/</span>strong<span class="token operator">></span>
 
-&lt;strong&gt;double underscores&lt;/strong&gt;
+<span class="token operator"><</span>strong<span class="token operator">></span>double underscores<span class="token operator"><</span><span class="token operator">/</span>strong<span class="token operator">></span>
 </code></pre>
 <p><h3 id="code">Code</h3></p>
-<pre><code>Use the `printf()` function.
+<pre class="language-bash"><code class="language-bash">Use the <span class="token string">`printf()`</span> <span class="token keyword">function</span><span class="token operator">.</span>
 
-&lt;p&gt;Use the &lt;code&gt;printf()&lt;/code&gt; function.&lt;/p&gt;
+<span class="token operator"><</span>p<span class="token operator">></span>Use the <span class="token operator"><</span>code<span class="token operator">></span><span class="token keyword">printf</span><span class="token operator">(</span><span class="token operator">)</span><span class="token operator"><</span><span class="token operator">/</span>code<span class="token operator">></span> <span class="token keyword">function</span><span class="token operator">.</span><span class="token operator"><</span><span class="token operator">/</span>p<span class="token operator">></span>
 </code></pre>
 <p><h3 id="img">Images</h3></p>
 <p>Inline image syntax looks like this:</p>
-<pre><code>![Alt text](/path/to/img.jpg)
-![Alt text](/path/to/img.jpg &quot;Optional title&quot;)
+<pre class="language-bash"><code class="language-bash"><span class="token operator">!</span><span class="token operator">[</span>Alt text<span class="token operator">]</span><span class="token operator">(</span><span class="token operator">/</span>path<span class="token operator">/</span>to<span class="token operator">/</span>img<span class="token operator">.</span>jpg<span class="token operator">)</span>
+<span class="token operator">!</span><span class="token operator">[</span>Alt text<span class="token operator">]</span><span class="token operator">(</span><span class="token operator">/</span>path<span class="token operator">/</span>to<span class="token operator">/</span>img<span class="token operator">.</span>jpg <span class="token string">"Optional title"</span><span class="token operator">)</span>
 </code></pre>
 <p>Reference-style image syntax looks like this:</p>
-<pre><code>![Alt text][id]
+<pre class="language-bash"><code class="language-bash"><span class="token operator">!</span><span class="token operator">[</span>Alt text<span class="token operator">]</span><span class="token operator">[</span>id<span class="token operator">]</span>
 
-[id]: url/to/image  &quot;Optional title attribute&quot;
+<span class="token operator">[</span>id<span class="token operator">]</span><span class="token operator">:</span> url<span class="token operator">/</span>to<span class="token operator">/</span>image  <span class="token string">"Optional title attribute"</span>
 </code></pre>
 <p><h2 id="misc">Miscellaneous</h2></p>
-<pre><code>&lt;address@example.com&gt;
+<pre class="language-bash"><code class="language-bash"><span class="token operator"><</span>address@example<span class="token operator">.</span>com<span class="token operator">></span>
 </code></pre>
 <p>into something like this:</p>
-<pre><code>&lt;a href=&quot;&amp;#x6D;&amp;#x61;i&amp;#x6C;&amp;#x74;&amp;#x6F;:&amp;#x61;&amp;#x64;&amp;#x64;&amp;#x72;&amp;#x65;
-&amp;#115;&amp;#115;&amp;#64;&amp;#101;&amp;#120;&amp;#x61;&amp;#109;&amp;#x70;&amp;#x6C;e&amp;#x2E;&amp;#99;&amp;#111;
-&amp;#109;&quot;&gt;&amp;#x61;&amp;#x64;&amp;#x64;&amp;#x72;&amp;#x65;&amp;#115;&amp;#115;&amp;#64;&amp;#101;&amp;#120;&amp;#x61;
-&amp;#109;&amp;#x70;&amp;#x6C;e&amp;#x2E;&amp;#99;&amp;#111;&amp;#109;&lt;/a&gt;
+<pre class="language-bash"><code class="language-bash"><span class="token operator"><</span>a href<span class="token operator">=</span><span class="token string">"&#x6D;&#x61;i&#x6C;&#x74;&#x6F;:&#x61;&#x64;&#x64;&#x72;&#x65;
+&#115;&#115;&#64;&#101;&#120;&#x61;&#109;&#x70;&#x6C;e&#x2E;&#99;&#111;
+&#109;"</span><span class="token operator">></span><span class="token operator">&</span><span class="token comment">#x61;&#x64;&#x64;&#x72;&#x65;&#115;&#115;&#64;&#101;&#120;&#x61;</span>
+<span class="token operator">&</span><span class="token comment">#109;&#x70;&#x6C;e&#x2E;&#99;&#111;&#109;&lt;/a&gt;</span>
 </code></pre>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/howto.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">howto</a> <a href="/en/tags/markdown.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">markdown</a> </p></div>
             <hr>
@@ -279,7 +279,5 @@ __double underscores__
         } else { r.style.display="none"; }
     }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>

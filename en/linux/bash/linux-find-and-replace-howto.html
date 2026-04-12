@@ -41,12 +41,12 @@
             <h1>Linux find & replace HowTo</h1>
             
             <p><strong>Find and chmod files or folders</strong></p>
-<p><code>find . -type d -exec chmod 755 {} ;</code></p>
-<p><code>find . -name &quot;*.php&quot; | xargs grep -niP 'thingy'</code></p>
+<p><code class="language-bash">find <span class="token operator">.</span> <span class="token operator">-</span><span class="token keyword">type</span> d <span class="token operator">-</span><span class="token keyword">exec</span> chmod <span class="token number">755</span> <span class="token operator">{</span><span class="token operator">}</span> <span class="token operator">;</span></code></p>
+<p><code class="language-bash">find <span class="token operator">.</span> <span class="token operator">-</span>name <span class="token string">"*.php"</span> <span class="token operator">|</span> xargs grep <span class="token operator">-</span>niP <span class="token string">'thingy'</span></code></p>
 <p><strong>Find a directory and display on screen</strong></p>
-<p><code>find . -type d -name 'linux' 2&gt;/dev/null</code></p>
+<p><code class="language-bash">find <span class="token operator">.</span> <span class="token operator">-</span><span class="token keyword">type</span> d <span class="token operator">-</span>name <span class="token string">'linux'</span> <span class="token number">2</span><span class="token operator">></span><span class="token operator">/</span>dev<span class="token operator">/</span>null</code></p>
 <p><strong>Find/Grep for a string across multiple files with different extensions</strong></p>
-<p><code>find ( -name &quot;*js&quot; -o -name &quot;*jsp&quot; -o -name &quot;*jspf&quot; ) | xargs grep -niP 'thingy'</code></p>
+<p><code class="language-bash">find <span class="token operator">(</span> <span class="token operator">-</span>name <span class="token string">"*js"</span> <span class="token operator">-</span>o <span class="token operator">-</span>name <span class="token string">"*jsp"</span> <span class="token operator">-</span>o <span class="token operator">-</span>name <span class="token string">"*jspf"</span> <span class="token operator">)</span> <span class="token operator">|</span> xargs grep <span class="token operator">-</span>niP <span class="token string">'thingy'</span></code></p>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/server.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">server</a> <a href="/en/tags/bash.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">bash</a> <a href="/en/tags/linux.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">linux</a> <a href="/en/tags/perl.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">perl</a> <a href="/en/tags/shell.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">shell</a> </p></div>
             <hr>
         <p class="w3-small w3-text-grey">
@@ -79,7 +79,5 @@
         } else { r.style.display="none"; }
     }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>

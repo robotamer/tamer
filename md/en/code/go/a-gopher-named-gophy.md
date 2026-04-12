@@ -19,43 +19,43 @@ It's about a Gopher, named Gophy who joint the Gophers but lost his identity in 
 Once you get how he gets his identity back you'll be golden.
 
 Here is the code:
+```go
+package main
 
-	package main
+import "fmt"
 
-	import "fmt"
+type I interface{}
 
-	type I interface{}
+var gophers map[uint]I = make(map[uint]I)
 
-	var gophers map[uint]I = make(map[uint]I)
+type gopher struct {
+	Name string
+}
 
-	type gopher struct {
-		Name string
-	}
+func main() {
 
-	func main() {
+	g := AddToGophers("Goghy")
 
-		g := AddToGophers("Goghy")
+	fmt.Printf("Hello, %s\n", g.Name)
+	fmt.Printf("Now %s is a %T, %s\n", g.Name, gophers[1], gophers[1])
 
-		fmt.Printf("Hello, %s\n", g.Name)
-		fmt.Printf("Now %s is a %T, %s\n", g.Name, gophers[1], gophers[1])
+	gg := GetGopher(1)
+	fmt.Printf("Bye, %s\n", gg.Name)
+}
 
-		gg := GetGopher(1)
-		fmt.Printf("Bye, %s\n", gg.Name)
-	}
+func GetGopher(i uint) *gopher {
+	g := gophers[i]
+	// I wont my gopher identity back
+	return g.(*gopher)
+}
 
-	func GetGopher(i uint) *gopher {
-		g := gophers[i]
-		// I wont my gopher identity back
-		return g.(*gopher)
-	}
-
-	func AddToGophers(n string) gopher {
-		g := new(gopher)
-		g.Name = n
-		gophers[1] = g
-		return *g
-	}
-
+func AddToGophers(n string) gopher {
+	g := new(gopher)
+	g.Name = n
+	gophers[1] = g
+	return *g
+}
+```
 
 
 [play]: http://play.golang.org/p/fjK_EoQDtR "Go Playground"

@@ -56,62 +56,62 @@
             <p class="w3-large w3-text-grey"><i>Save() and Load() any Go values to/from files</i></p>
             <p>Golang has a package called Gob to encode and decode values in to go specific binary format for transmiting as streams or for saving to file.</p>
 <p>Below are two functions, Load and Save to encode/decode go values including struct's in to files.</p>
-<pre><code class="language-go">
-package main
+<pre class="language-go"><code class="language-go">
+<span class="token keyword">package</span> main
 
-import (
-    &quot;encoding/gob&quot;
-    &quot;fmt&quot;
-    &quot;os&quot;
-    &quot;runtime&quot;
-)
+<span class="token keyword">import</span> <span class="token operator">(</span>
+    <span class="token string">"encoding/gob"</span>
+    <span class="token string">"fmt"</span>
+    <span class="token string">"os"</span>
+    <span class="token string">"runtime"</span>
+<span class="token operator">)</span>
 
-const file = &quot;/tmp/test.gob&quot;
+<span class="token keyword">const</span> file <span class="token operator">=</span> <span class="token string">"/tmp/test.gob"</span>
 
-type User struct {
-    Name, Pass string
-}
+<span class="token keyword">type</span> User <span class="token keyword">struct</span> <span class="token operator">{</span>
+    Name<span class="token operator">,</span> Pass <span class="token keyword2">string</span>
+<span class="token operator">}</span>
 
-func main(){
-    var datato = &amp;User{&quot;Donald&quot;,&quot;DuckPass&quot;}
-    var datafrom = new(User)
+<span class="token keyword">func</span> main<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">{</span>
+    <span class="token keyword">var</span> datato <span class="token operator">=</span> <span class="token operator">&</span>User<span class="token operator">{</span><span class="token string">"Donald"</span><span class="token operator">,</span><span class="token string">"DuckPass"</span><span class="token operator">}</span>
+    <span class="token keyword">var</span> datafrom <span class="token operator">=</span> new<span class="token operator">(</span>User<span class="token operator">)</span>
 
-    err := Save(file, datato)
-    Check(err)
-    err = Load(file, datafrom)
-    Check(err)
-    fmt.Println(datafrom)
-}
+    err <span class="token operator">:</span><span class="token operator">=</span> Save<span class="token operator">(</span>file<span class="token operator">,</span> datato<span class="token operator">)</span>
+    Check<span class="token operator">(</span>err<span class="token operator">)</span>
+    err <span class="token operator">=</span> Load<span class="token operator">(</span>file<span class="token operator">,</span> datafrom<span class="token operator">)</span>
+    Check<span class="token operator">(</span>err<span class="token operator">)</span>
+    fmt<span class="token operator">.</span>Println<span class="token operator">(</span>datafrom<span class="token operator">)</span>
+<span class="token operator">}</span>
 
-// Encode via Gob to file
-func Save(path string, object interface{}) error {
-    file, err := os.Create(path)
-    if err == nil {
-        encoder := gob.NewEncoder(file)
-        encoder.Encode(object)
-    }
-    file.Close()
-    return err
- }
+<span class="token comment">// Encode via Gob to file</span>
+<span class="token keyword">func</span> Save<span class="token operator">(</span>path <span class="token keyword2">string</span><span class="token operator">,</span> object <span class="token keyword">interface</span><span class="token operator">{</span><span class="token operator">}</span><span class="token operator">)</span> <span class="token keyword2">error</span> <span class="token operator">{</span>
+    file<span class="token operator">,</span> err <span class="token operator">:</span><span class="token operator">=</span> os<span class="token operator">.</span>Create<span class="token operator">(</span>path<span class="token operator">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">=</span><span class="token operator">=</span> <span class="token literal">nil</span> <span class="token operator">{</span>
+        encoder <span class="token operator">:</span><span class="token operator">=</span> gob<span class="token operator">.</span>NewEncoder<span class="token operator">(</span>file<span class="token operator">)</span>
+        encoder<span class="token operator">.</span>Encode<span class="token operator">(</span>object<span class="token operator">)</span>
+    <span class="token operator">}</span>
+    file<span class="token operator">.</span>Close<span class="token operator">(</span><span class="token operator">)</span>
+    <span class="token keyword">return</span> err
+ <span class="token operator">}</span>
 
-// Decode Gob file
-func Load(path string, object interface{}) error {
-    file, err := os.Open(path)
-    if err == nil {
-        decoder := gob.NewDecoder(file)
-        err = decoder.Decode(object)
-    }
-    file.Close()
-    return err
-}
+<span class="token comment">// Decode Gob file</span>
+<span class="token keyword">func</span> Load<span class="token operator">(</span>path <span class="token keyword2">string</span><span class="token operator">,</span> object <span class="token keyword">interface</span><span class="token operator">{</span><span class="token operator">}</span><span class="token operator">)</span> <span class="token keyword2">error</span> <span class="token operator">{</span>
+    file<span class="token operator">,</span> err <span class="token operator">:</span><span class="token operator">=</span> os<span class="token operator">.</span>Open<span class="token operator">(</span>path<span class="token operator">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">=</span><span class="token operator">=</span> <span class="token literal">nil</span> <span class="token operator">{</span>
+        decoder <span class="token operator">:</span><span class="token operator">=</span> gob<span class="token operator">.</span>NewDecoder<span class="token operator">(</span>file<span class="token operator">)</span>
+        err <span class="token operator">=</span> decoder<span class="token operator">.</span>Decode<span class="token operator">(</span>object<span class="token operator">)</span>
+    <span class="token operator">}</span>
+    file<span class="token operator">.</span>Close<span class="token operator">(</span><span class="token operator">)</span>
+    <span class="token keyword">return</span> err
+<span class="token operator">}</span>
 
-func Check(e error) {
-    if e != nil {
-        _, file, line, _ := runtime.Caller(1)
-        fmt.Println(line, &quot;\t&quot;, file, &quot;\n&quot;, e)
-        os.Exit(1)
-    }
-}
+<span class="token keyword">func</span> Check<span class="token operator">(</span>e <span class="token keyword2">error</span><span class="token operator">)</span> <span class="token operator">{</span>
+    <span class="token keyword">if</span> e <span class="token operator">!</span><span class="token operator">=</span> <span class="token literal">nil</span> <span class="token operator">{</span>
+        _<span class="token operator">,</span> file<span class="token operator">,</span> line<span class="token operator">,</span> _ <span class="token operator">:</span><span class="token operator">=</span> runtime<span class="token operator">.</span>Caller<span class="token operator">(</span><span class="token number">1</span><span class="token operator">)</span>
+        fmt<span class="token operator">.</span>Println<span class="token operator">(</span>line<span class="token operator">,</span> <span class="token string">"\t"</span><span class="token operator">,</span> file<span class="token operator">,</span> <span class="token string">"\n"</span><span class="token operator">,</span> e<span class="token operator">)</span>
+        os<span class="token operator">.</span>Exit<span class="token operator">(</span><span class="token number">1</span><span class="token operator">)</span>
+    <span class="token operator">}</span>
+<span class="token operator">}</span>
 
 </code></pre>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/gotamer.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">gotamer</a> <a href="/en/tags/gob.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">gob</a> <a href="/en/tags/encode.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">encode</a> <a href="/en/tags/decode.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">decode</a> </p></div>
@@ -146,7 +146,5 @@ func Check(e error) {
         } else { r.style.display="none"; }
     }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>

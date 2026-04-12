@@ -42,18 +42,18 @@
         <div class="w3-container w3-white w3-card-4 w3-padding-32">
             <h1>Send mail with sendmail</h1>
             <p class="w3-large w3-text-grey"><i>A howto on sending email via the linux sendmail command</i></p>
-            <pre><code class="language-bash">    #!/bin/bash
+            <pre class="language-bash"><code class="language-bash">    <span class="token comment">#!/bin/bash</span>
 
-    SENDMAIL=/usr/sbin/sendmail
-    RECIPIENT=tosomeone@example.com
-    FROM=me@example.com
+    SENDMAIL<span class="token operator">=</span><span class="token operator">/</span>usr<span class="token operator">/</span>sbin<span class="token operator">/</span>sendmail
+    RECIPIENT<span class="token operator">=</span>tosomeone@example<span class="token operator">.</span>com
+    FROM<span class="token operator">=</span>me@example<span class="token operator">.</span>com
     
-    cat &lt;&lt;EOF | $SENDMAIL -t ${RECIPIENT}
-    From: ${FROM} 
-    To: ${RECIPIENT}
-    Subject: testmail
+    cat <span class="token operator"><</span><span class="token operator"><</span>EOF <span class="token operator">|</span> $SENDMAIL <span class="token operator">-</span>t $<span class="token operator">{</span>RECIPIENT<span class="token operator">}</span>
+    From<span class="token operator">:</span> $<span class="token operator">{</span>FROM<span class="token operator">}</span> 
+    To<span class="token operator">:</span> $<span class="token operator">{</span>RECIPIENT<span class="token operator">}</span>
+    Subject<span class="token operator">:</span> testmail
      
-    some test text as body of the email.
+    some <span class="token keyword">test</span> text as body of the email<span class="token operator">.</span>
     EOF
 </code></pre>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/howto.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">howto</a> <a href="/en/tags/linux.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">linux</a> <a href="/en/tags/debian.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">debian</a> <a href="/en/tags/desktop.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">desktop</a> <a href="/en/tags/server.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">server</a> <a href="/en/tags/mail.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">mail</a> <a href="/en/tags/smtp.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">smtp</a> <a href="/en/tags/bash.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">bash</a> </p></div>
@@ -88,7 +88,5 @@
         } else { r.style.display="none"; }
     }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>

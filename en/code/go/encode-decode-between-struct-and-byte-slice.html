@@ -58,20 +58,20 @@
 <h2>Internals:</h2>
 <p><em>sbs</em> encodes your struct first to a Gob, then it convers it to a byte slice; it reverses the process for decoding.</p>
 <h4>Example</h4>
-<pre><code class="language-go">
-    type Foo struct {
-        A int
-        B string
-    }
+<pre class="language-go"><code class="language-go">
+    <span class="token keyword">type</span> Foo <span class="token keyword">struct</span> <span class="token operator">{</span>
+        A <span class="token keyword2">int</span>
+        B <span class="token keyword2">string</span>
+    <span class="token operator">}</span>
 
-    p := &amp;Foo{111,&quot;A string&quot;}
+    p <span class="token operator">:</span><span class="token operator">=</span> <span class="token operator">&</span>Foo<span class="token operator">{</span><span class="token number">111</span><span class="token operator">,</span><span class="token string">"A string"</span><span class="token operator">}</span>
 
-    byteslice, err := sbs.Enc(p)
-    ...
+    byteslice<span class="token operator">,</span> err <span class="token operator">:</span><span class="token operator">=</span> sbs<span class="token operator">.</span>Enc<span class="token operator">(</span>p<span class="token operator">)</span>
+    <span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span>
 
-    foo := new(Foo)
-    structobject, err := sbs.Dec(foo, byteslice)
-    ...
+    foo <span class="token operator">:</span><span class="token operator">=</span> new<span class="token operator">(</span>Foo<span class="token operator">)</span>
+    structobject<span class="token operator">,</span> err <span class="token operator">:</span><span class="token operator">=</span> sbs<span class="token operator">.</span>Dec<span class="token operator">(</span>foo<span class="token operator">,</span> byteslice<span class="token operator">)</span>
+    <span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span>
 </code></pre>
 <p>Code is available at <a href="https://bitbucket.org/gotamer/sbs">https://bitbucket.org/gotamer/sbs</a></p>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/gotamer.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">gotamer</a> <a href="/en/tags/database.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">database</a> <a href="/en/tags/gob.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">gob</a> </p></div>
@@ -106,7 +106,5 @@
         } else { r.style.display="none"; }
     }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>

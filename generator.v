@@ -6,6 +6,7 @@ import toml
 import markdown
 import json
 import net.http.file
+import highlighter
 
 // --- CONFIGURATION ---
 const site_url = 'http://tamer.pw'
@@ -105,9 +106,9 @@ fn (t Theme) scripts(lang string) string {
             r.style.display="block";
         } else { r.style.display="none"; }
     }
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>'
+    </script>'
+//    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
+//    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
 }
 
 // --- PAGE METHODS ---
@@ -340,6 +341,8 @@ fn scan_content() []Page {
 			raw_tags = ['Uncategorized']
 		}
 
+		mut hl := highlighter.new_manager() 
+		
 		pages << Page{
 			path_md:     path
 			modified:    modified
@@ -349,7 +352,7 @@ fn scan_content() []Page {
 			date:        get_field(toml_doc, 'date')
 			description: get_field(toml_doc, 'description')
 			tags:        raw_tags
-			content:     markdown.to_html(parts[2].trim_space())
+			content:     hl.highlight_html( markdown.to_html(parts[2].trim_space()) )
 			is_blog:     rel.contains('/blog/')
 		}
 	}

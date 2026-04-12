@@ -49,9 +49,9 @@
             <h1>Load functions and array's</h1>
             
             <p>This class is used to load functions and array's. It also can copy functions and array's to the linux memory drive and load them from there to speed thinks up.</p>
-<pre><code class="language-php">    &lt;?php if(!defined('DROOT')) trigger_error(&quot;Please define data location (DROOT)&quot;);
+<pre class="language-php"><code class="language-php">    <span class="token operator"><</span><span class="token operator">?</span>php <span class="token keyword">if</span><span class="token operator">(</span><span class="token operator">!</span>defined<span class="token operator">(</span><span class="token string">'DROOT'</span><span class="token operator">)</span><span class="token operator">)</span> trigger_error<span class="token operator">(</span><span class="token string">"Please define data location (DROOT)"</span><span class="token operator">)</span><span class="token operator">;</span>
     
-    /**
+    <span class="token comment">/**
      *
      * This class loads stuff
      *
@@ -64,64 +64,64 @@
      * @copyright   Copyright (c) 2010 - 2011 Dennis T Kaplan
      * @license     http://www.gnu.org/licenses/gpl.txt
      * @author      Dennis T Kaplan
-     **/
+     **/</span>
     class Load
-    {
-        protected $type;
-        protected $path;
+    <span class="token operator">{</span>
+        protected $<span class="token keyword">type</span><span class="token operator">;</span>
+        protected $path<span class="token operator">;</span>
     
-        public function __construct(){}
-        public function __destruct(){}
+        public <span class="token keyword">function</span> __construct<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">{</span><span class="token operator">}</span>
+        public <span class="token keyword">function</span> __destruct<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">{</span><span class="token operator">}</span>
     
-        public static function a($array_name) {
-            if( ! is_string($array_name)){
-                trigger_error(&quot;Array name must be a string!&quot;.BR, E_USER_WARNING);
-                exit;
-            }
-            if(isset($$array_name) &amp;&amp; is_array($$array_name))
-                return $$array_name;
+        public static <span class="token keyword">function</span> a<span class="token operator">(</span>$array_name<span class="token operator">)</span> <span class="token operator">{</span>
+            <span class="token keyword">if</span><span class="token operator">(</span> <span class="token operator">!</span> is_string<span class="token operator">(</span>$array_name<span class="token operator">)</span><span class="token operator">)</span><span class="token operator">{</span>
+                trigger_error<span class="token operator">(</span><span class="token string">"Array name must be a string!"</span><span class="token operator">.</span>BR<span class="token operator">,</span> E_USER_WARNING<span class="token operator">)</span><span class="token operator">;</span>
+                <span class="token keyword">exit</span><span class="token operator">;</span>
+            <span class="token operator">}</span>
+            <span class="token keyword">if</span><span class="token operator">(</span>isset<span class="token operator">(</span>$$array_name<span class="token operator">)</span> <span class="token operator">&</span><span class="token operator">&</span> is_array<span class="token operator">(</span>$$array_name<span class="token operator">)</span><span class="token operator">)</span>
+                <span class="token keyword">return</span> $$array_name<span class="token operator">;</span>
     
-            $dfile = DROOT.'array/'.$array_name.'.php';
-            $mfile = FALSE;
-            if( defined('MROOT') &amp;&amp; MROOT != FALSE)
-                $mfile = MROOT.'array/'.$array_name.'.php';
-            return self::inc($dfile,$mfile,$array_name);
-        }
+            $dfile <span class="token operator">=</span> DROOT<span class="token operator">.</span><span class="token string">'array/'</span><span class="token operator">.</span>$array_name<span class="token operator">.</span><span class="token string">'.php'</span><span class="token operator">;</span>
+            $mfile <span class="token operator">=</span> FALSE<span class="token operator">;</span>
+            <span class="token keyword">if</span><span class="token operator">(</span> defined<span class="token operator">(</span><span class="token string">'MROOT'</span><span class="token operator">)</span> <span class="token operator">&</span><span class="token operator">&</span> MROOT <span class="token operator">!</span><span class="token operator">=</span> FALSE<span class="token operator">)</span>
+                $mfile <span class="token operator">=</span> MROOT<span class="token operator">.</span><span class="token string">'array/'</span><span class="token operator">.</span>$array_name<span class="token operator">.</span><span class="token string">'.php'</span><span class="token operator">;</span>
+            <span class="token keyword">return</span> self<span class="token operator">:</span><span class="token operator">:</span>inc<span class="token operator">(</span>$dfile<span class="token operator">,</span>$mfile<span class="token operator">,</span>$array_name<span class="token operator">)</span><span class="token operator">;</span>
+        <span class="token operator">}</span>
     
-        public function aSave($var)
-        {
-            $array_name = array_search($var, $GLOBALS);
+        public <span class="token keyword">function</span> aSave<span class="token operator">(</span>$var<span class="token operator">)</span>
+        <span class="token operator">{</span>
+            $array_name <span class="token operator">=</span> array_search<span class="token operator">(</span>$var<span class="token operator">,</span> $GLOBALS<span class="token operator">)</span><span class="token operator">;</span>
     
-            $dfile = DROOT.'array/'.$array_name.'.php';
+            $dfile <span class="token operator">=</span> DROOT<span class="token operator">.</span><span class="token string">'array/'</span><span class="token operator">.</span>$array_name<span class="token operator">.</span><span class="token string">'.php'</span><span class="token operator">;</span>
     
-            $string = var_export($var,true);
-            file_put_contents($dfile,
-                '');
+            $string <span class="token operator">=</span> var_export<span class="token operator">(</span>$var<span class="token operator">,</span><span class="token literal">true</span><span class="token operator">)</span><span class="token operator">;</span>
+            file_put_contents<span class="token operator">(</span>$dfile<span class="token operator">,</span>
+                <span class="token string">''</span><span class="token operator">)</span><span class="token operator">;</span>
     
-            $mfile = FALSE;
-            if( defined('MROOT') &amp;&amp; MROOT !== FALSE){
-                $mfile = MROOT.'array/'.$array_name.'.php';
-                file_put_contents($mfile, self::stripComments($dfile));
-            }
+            $mfile <span class="token operator">=</span> FALSE<span class="token operator">;</span>
+            <span class="token keyword">if</span><span class="token operator">(</span> defined<span class="token operator">(</span><span class="token string">'MROOT'</span><span class="token operator">)</span> <span class="token operator">&</span><span class="token operator">&</span> MROOT <span class="token operator">!</span><span class="token operator">=</span><span class="token operator">=</span> FALSE<span class="token operator">)</span><span class="token operator">{</span>
+                $mfile <span class="token operator">=</span> MROOT<span class="token operator">.</span><span class="token string">'array/'</span><span class="token operator">.</span>$array_name<span class="token operator">.</span><span class="token string">'.php'</span><span class="token operator">;</span>
+                file_put_contents<span class="token operator">(</span>$mfile<span class="token operator">,</span> self<span class="token operator">:</span><span class="token operator">:</span>stripComments<span class="token operator">(</span>$dfile<span class="token operator">)</span><span class="token operator">)</span><span class="token operator">;</span>
+            <span class="token operator">}</span>
     
-        }//end save()
+        <span class="token operator">}</span><span class="token operator">/</span><span class="token operator">/</span>end save<span class="token operator">(</span><span class="token operator">)</span>
     
-        public static function f($str) {
-            if( ! is_string($str))
-                trigger_error(&quot;Argument for load must be string!&quot;, E_USER_WARNING);
+        public static <span class="token keyword">function</span> f<span class="token operator">(</span>$str<span class="token operator">)</span> <span class="token operator">{</span>
+            <span class="token keyword">if</span><span class="token operator">(</span> <span class="token operator">!</span> is_string<span class="token operator">(</span>$str<span class="token operator">)</span><span class="token operator">)</span>
+                trigger_error<span class="token operator">(</span><span class="token string">"Argument for load must be string!"</span><span class="token operator">,</span> E_USER_WARNING<span class="token operator">)</span><span class="token operator">;</span>
     
-            $array = self::prepArgs($str);
-            $mfile = FALSE;
-            foreach($array as $func_name){
-                if ( function_exists($func_name)) continue;
-                $dfile = FROOT.$func_name.'.php';
-                if( defined('MROOT') &amp;&amp; MROOT != FALSE)
-                    $mfile = MROOT.'func/'.$func_name.'.php';
-                self::inc($dfile,$mfile);
-            }
-        }
+            $array <span class="token operator">=</span> self<span class="token operator">:</span><span class="token operator">:</span>prepArgs<span class="token operator">(</span>$str<span class="token operator">)</span><span class="token operator">;</span>
+            $mfile <span class="token operator">=</span> FALSE<span class="token operator">;</span>
+            foreach<span class="token operator">(</span>$array as $func_name<span class="token operator">)</span><span class="token operator">{</span>
+                <span class="token keyword">if</span> <span class="token operator">(</span> function_exists<span class="token operator">(</span>$func_name<span class="token operator">)</span><span class="token operator">)</span> <span class="token keyword">continue</span><span class="token operator">;</span>
+                $dfile <span class="token operator">=</span> FROOT<span class="token operator">.</span>$func_name<span class="token operator">.</span><span class="token string">'.php'</span><span class="token operator">;</span>
+                <span class="token keyword">if</span><span class="token operator">(</span> defined<span class="token operator">(</span><span class="token string">'MROOT'</span><span class="token operator">)</span> <span class="token operator">&</span><span class="token operator">&</span> MROOT <span class="token operator">!</span><span class="token operator">=</span> FALSE<span class="token operator">)</span>
+                    $mfile <span class="token operator">=</span> MROOT<span class="token operator">.</span><span class="token string">'func/'</span><span class="token operator">.</span>$func_name<span class="token operator">.</span><span class="token string">'.php'</span><span class="token operator">;</span>
+                self<span class="token operator">:</span><span class="token operator">:</span>inc<span class="token operator">(</span>$dfile<span class="token operator">,</span>$mfile<span class="token operator">)</span><span class="token operator">;</span>
+            <span class="token operator">}</span>
+        <span class="token operator">}</span>
     
-        /**
+        <span class="token comment">/**
          * Description load function
          * if availabe load from memory folder; else
          *  if a memory folder is availabe, copy to memory then load; else
@@ -136,27 +136,27 @@
          * @param  string $mfile Memory File
          * @param  string $array
          * @return mixed
-         */
-        protected static function inc($dfile,$mfile = FALSE,$array = FALSE)
-        {
-            if($mfile !== FALSE){
-                if(file_exists($mfile)){
-                     include $mfile;
-                }elseif(self::hasMRoot()){
-                    file_put_contents($mfile, self::stripComments($dfile));
-                    chmod($mfile, 00644);
-                    include $mfile;
-                }else{
-                    // Fail Safe
-                    include $dfile;
-                }
-            }else{
-                include $dfile;
-            }
-            if($array !== FALSE) return $$array;
-        }
+         */</span>
+        protected static <span class="token keyword">function</span> inc<span class="token operator">(</span>$dfile<span class="token operator">,</span>$mfile <span class="token operator">=</span> FALSE<span class="token operator">,</span>$array <span class="token operator">=</span> FALSE<span class="token operator">)</span>
+        <span class="token operator">{</span>
+            <span class="token keyword">if</span><span class="token operator">(</span>$mfile <span class="token operator">!</span><span class="token operator">=</span><span class="token operator">=</span> FALSE<span class="token operator">)</span><span class="token operator">{</span>
+                <span class="token keyword">if</span><span class="token operator">(</span>file_exists<span class="token operator">(</span>$mfile<span class="token operator">)</span><span class="token operator">)</span><span class="token operator">{</span>
+                     include $mfile<span class="token operator">;</span>
+                <span class="token operator">}</span>elseif<span class="token operator">(</span>self<span class="token operator">:</span><span class="token operator">:</span>hasMRoot<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">)</span><span class="token operator">{</span>
+                    file_put_contents<span class="token operator">(</span>$mfile<span class="token operator">,</span> self<span class="token operator">:</span><span class="token operator">:</span>stripComments<span class="token operator">(</span>$dfile<span class="token operator">)</span><span class="token operator">)</span><span class="token operator">;</span>
+                    chmod<span class="token operator">(</span>$mfile<span class="token operator">,</span> <span class="token number">00644</span><span class="token operator">)</span><span class="token operator">;</span>
+                    include $mfile<span class="token operator">;</span>
+                <span class="token operator">}</span><span class="token keyword">else</span><span class="token operator">{</span>
+                    <span class="token operator">/</span><span class="token operator">/</span> Fail Safe
+                    include $dfile<span class="token operator">;</span>
+                <span class="token operator">}</span>
+            <span class="token operator">}</span><span class="token keyword">else</span><span class="token operator">{</span>
+                include $dfile<span class="token operator">;</span>
+            <span class="token operator">}</span>
+            <span class="token keyword">if</span><span class="token operator">(</span>$array <span class="token operator">!</span><span class="token operator">=</span><span class="token operator">=</span> FALSE<span class="token operator">)</span> <span class="token keyword">return</span> $$array<span class="token operator">;</span>
+        <span class="token operator">}</span>
     
-        /**
+        <span class="token comment">/**
          * Name stripComments
          *
          * Description Strip php comments from php file
@@ -169,74 +169,74 @@
          * @param  string $file
          * @param  mixed  $file_desc '/var/www/somefile.php'
          * @return string
-         */
-        public static function stripComments($file) {
-            $fileStr = file_get_contents($file);
-            $newStr  = '';
+         */</span>
+        public static <span class="token keyword">function</span> stripComments<span class="token operator">(</span>$file<span class="token operator">)</span> <span class="token operator">{</span>
+            $fileStr <span class="token operator">=</span> file_get_contents<span class="token operator">(</span>$file<span class="token operator">)</span><span class="token operator">;</span>
+            $newStr  <span class="token operator">=</span> <span class="token string">''</span><span class="token operator">;</span>
     
-            $commentTokens = array(T_COMMENT);
+            $commentTokens <span class="token operator">=</span> array<span class="token operator">(</span>T_COMMENT<span class="token operator">)</span><span class="token operator">;</span>
     
-            if (defined('T_DOC_COMMENT'))
-                $commentTokens[] = T_DOC_COMMENT; // PHP 5
-            if (defined('T_ML_COMMENT'))
-                $commentTokens[] = T_ML_COMMENT;  // PHP 4
+            <span class="token keyword">if</span> <span class="token operator">(</span>defined<span class="token operator">(</span><span class="token string">'T_DOC_COMMENT'</span><span class="token operator">)</span><span class="token operator">)</span>
+                $commentTokens<span class="token operator">[</span><span class="token operator">]</span> <span class="token operator">=</span> T_DOC_COMMENT<span class="token operator">;</span> <span class="token operator">/</span><span class="token operator">/</span> PHP <span class="token number">5</span>
+            <span class="token keyword">if</span> <span class="token operator">(</span>defined<span class="token operator">(</span><span class="token string">'T_ML_COMMENT'</span><span class="token operator">)</span><span class="token operator">)</span>
+                $commentTokens<span class="token operator">[</span><span class="token operator">]</span> <span class="token operator">=</span> T_ML_COMMENT<span class="token operator">;</span>  <span class="token operator">/</span><span class="token operator">/</span> PHP <span class="token number">4</span>
     
-            $tokens = token_get_all($fileStr);
+            $tokens <span class="token operator">=</span> token_get_all<span class="token operator">(</span>$fileStr<span class="token operator">)</span><span class="token operator">;</span>
     
-            foreach ($tokens as $token) {
-                if (is_array($token)) {
-                    if (in_array($token[0], $commentTokens))
-                            continue;
+            foreach <span class="token operator">(</span>$tokens as $token<span class="token operator">)</span> <span class="token operator">{</span>
+                <span class="token keyword">if</span> <span class="token operator">(</span>is_array<span class="token operator">(</span>$token<span class="token operator">)</span><span class="token operator">)</span> <span class="token operator">{</span>
+                    <span class="token keyword">if</span> <span class="token operator">(</span>in_array<span class="token operator">(</span>$token<span class="token operator">[</span><span class="token number">0</span><span class="token operator">]</span><span class="token operator">,</span> $commentTokens<span class="token operator">)</span><span class="token operator">)</span>
+                            <span class="token keyword">continue</span><span class="token operator">;</span>
     
-                    $token = $token[1];
-                }
+                    $token <span class="token operator">=</span> $token<span class="token operator">[</span><span class="token number">1</span><span class="token operator">]</span><span class="token operator">;</span>
+                <span class="token operator">}</span>
     
-                $newStr .= $token;
-            }
-            /**
+                $newStr <span class="token operator">.</span><span class="token operator">=</span> $token<span class="token operator">;</span>
+            <span class="token operator">}</span>
+            <span class="token comment">/**
              * Replace all s t n with one space and trim
              * @todo replave with preg_replace()
-             */ 
-            $newStr = trim(preg_replace('/s+/', ' ', $newStr));
-            $newStr = str_replace(', ',',',$newStr);
-            $newStr = str_replace(' =&gt; ','=&gt;',$newStr);
-            $newStr = str_replace(' (','(',$newStr);
-            $newStr = str_replace('( ','(',$newStr);
-            $newStr = str_replace(') ',')',$newStr);
-            $newStr = str_replace(' )',')',$newStr);
-            $newStr = str_replace(' = ','=',$newStr);
-            $newStr = str_replace(' }','}',$newStr);
-            $newStr = str_replace('{ ','{',$newStr);
-            return $newStr;
-        }
+             */</span> 
+            $newStr <span class="token operator">=</span> trim<span class="token operator">(</span>preg_replace<span class="token operator">(</span><span class="token string">'/s+/'</span><span class="token operator">,</span> <span class="token string">' '</span><span class="token operator">,</span> $newStr<span class="token operator">)</span><span class="token operator">)</span><span class="token operator">;</span>
+            $newStr <span class="token operator">=</span> str_replace<span class="token operator">(</span><span class="token string">', '</span><span class="token operator">,</span><span class="token string">','</span><span class="token operator">,</span>$newStr<span class="token operator">)</span><span class="token operator">;</span>
+            $newStr <span class="token operator">=</span> str_replace<span class="token operator">(</span><span class="token string">' => '</span><span class="token operator">,</span><span class="token string">'=>'</span><span class="token operator">,</span>$newStr<span class="token operator">)</span><span class="token operator">;</span>
+            $newStr <span class="token operator">=</span> str_replace<span class="token operator">(</span><span class="token string">' ('</span><span class="token operator">,</span><span class="token string">'('</span><span class="token operator">,</span>$newStr<span class="token operator">)</span><span class="token operator">;</span>
+            $newStr <span class="token operator">=</span> str_replace<span class="token operator">(</span><span class="token string">'( '</span><span class="token operator">,</span><span class="token string">'('</span><span class="token operator">,</span>$newStr<span class="token operator">)</span><span class="token operator">;</span>
+            $newStr <span class="token operator">=</span> str_replace<span class="token operator">(</span><span class="token string">') '</span><span class="token operator">,</span><span class="token string">')'</span><span class="token operator">,</span>$newStr<span class="token operator">)</span><span class="token operator">;</span>
+            $newStr <span class="token operator">=</span> str_replace<span class="token operator">(</span><span class="token string">' )'</span><span class="token operator">,</span><span class="token string">')'</span><span class="token operator">,</span>$newStr<span class="token operator">)</span><span class="token operator">;</span>
+            $newStr <span class="token operator">=</span> str_replace<span class="token operator">(</span><span class="token string">' = '</span><span class="token operator">,</span><span class="token string">'='</span><span class="token operator">,</span>$newStr<span class="token operator">)</span><span class="token operator">;</span>
+            $newStr <span class="token operator">=</span> str_replace<span class="token operator">(</span><span class="token string">' }'</span><span class="token operator">,</span><span class="token string">'}'</span><span class="token operator">,</span>$newStr<span class="token operator">)</span><span class="token operator">;</span>
+            $newStr <span class="token operator">=</span> str_replace<span class="token operator">(</span><span class="token string">'{ '</span><span class="token operator">,</span><span class="token string">'{'</span><span class="token operator">,</span>$newStr<span class="token operator">)</span><span class="token operator">;</span>
+            <span class="token keyword">return</span> $newStr<span class="token operator">;</span>
+        <span class="token operator">}</span>
     
-        public static function prepArgs($args) {
-            $args = preg_replace('/ss+/', ' ', trim($args));
-            return explode(' ',$args);
-        }
+        public static <span class="token keyword">function</span> prepArgs<span class="token operator">(</span>$args<span class="token operator">)</span> <span class="token operator">{</span>
+            $args <span class="token operator">=</span> preg_replace<span class="token operator">(</span><span class="token string">'/ss+/'</span><span class="token operator">,</span> <span class="token string">' '</span><span class="token operator">,</span> trim<span class="token operator">(</span>$args<span class="token operator">)</span><span class="token operator">)</span><span class="token operator">;</span>
+            <span class="token keyword">return</span> explode<span class="token operator">(</span><span class="token string">' '</span><span class="token operator">,</span>$args<span class="token operator">)</span><span class="token operator">;</span>
+        <span class="token operator">}</span>
     
-        protected static function hasMRoot() {
-        /**
+        protected static <span class="token keyword">function</span> hasMRoot<span class="token operator">(</span><span class="token operator">)</span> <span class="token operator">{</span>
+        <span class="token comment">/**
          * Checks if the memory directory is available on the file system
          * and creates the directory structure if the memory folder is
          * available but the directory structure has not been created.
-         */
-            if( defined('MROOT') &amp;&amp; MROOT != FALSE){
-                if(file_exists(MROOT)){
-                    return TRUE;
-                }else{
-                    mkdir(MROOT, 0777);
-                    mkdir(MROOT.'class',  0777);
-                    mkdir(MROOT.'func' ,  0777);
-                    mkdir(MROOT.'array',  0777);
-                    return TRUE;
-                }
-            }else{
-                return FALSE;
-            }
-        }
-    }
-    ?&gt;
+         */</span>
+            <span class="token keyword">if</span><span class="token operator">(</span> defined<span class="token operator">(</span><span class="token string">'MROOT'</span><span class="token operator">)</span> <span class="token operator">&</span><span class="token operator">&</span> MROOT <span class="token operator">!</span><span class="token operator">=</span> FALSE<span class="token operator">)</span><span class="token operator">{</span>
+                <span class="token keyword">if</span><span class="token operator">(</span>file_exists<span class="token operator">(</span>MROOT<span class="token operator">)</span><span class="token operator">)</span><span class="token operator">{</span>
+                    <span class="token keyword">return</span> TRUE<span class="token operator">;</span>
+                <span class="token operator">}</span><span class="token keyword">else</span><span class="token operator">{</span>
+                    mkdir<span class="token operator">(</span>MROOT<span class="token operator">,</span> <span class="token number">0777</span><span class="token operator">)</span><span class="token operator">;</span>
+                    mkdir<span class="token operator">(</span>MROOT<span class="token operator">.</span><span class="token string">'class'</span><span class="token operator">,</span>  <span class="token number">0777</span><span class="token operator">)</span><span class="token operator">;</span>
+                    mkdir<span class="token operator">(</span>MROOT<span class="token operator">.</span><span class="token string">'func'</span> <span class="token operator">,</span>  <span class="token number">0777</span><span class="token operator">)</span><span class="token operator">;</span>
+                    mkdir<span class="token operator">(</span>MROOT<span class="token operator">.</span><span class="token string">'array'</span><span class="token operator">,</span>  <span class="token number">0777</span><span class="token operator">)</span><span class="token operator">;</span>
+                    <span class="token keyword">return</span> TRUE<span class="token operator">;</span>
+                <span class="token operator">}</span>
+            <span class="token operator">}</span><span class="token keyword">else</span><span class="token operator">{</span>
+                <span class="token keyword">return</span> FALSE<span class="token operator">;</span>
+            <span class="token operator">}</span>
+        <span class="token operator">}</span>
+    <span class="token operator">}</span>
+    <span class="token operator">?</span><span class="token operator">></span>
 </code></pre>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/code.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">code</a> </p></div>
             <hr>
@@ -270,7 +270,5 @@
         } else { r.style.display="none"; }
     }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>

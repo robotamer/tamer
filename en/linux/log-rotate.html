@@ -57,35 +57,35 @@
 <li>Add a cron job</li>
 </ul>
 <p>Create following file:</p>
-<pre><code class="language-bash">nano /var/www/log/logrotate.sh
+<pre class="language-bash"><code class="language-bash">nano <span class="token operator">/</span>var<span class="token operator">/</span>www<span class="token operator">/</span>log<span class="token operator">/</span>logrotate<span class="token operator">.</span>sh
 </code></pre>
-<pre><code class="language-bash">#!/bin/bash
+<pre class="language-bash"><code class="language-bash"><span class="token comment">#!/bin/bash</span>
 
-MAXSIZE=1024
-LOGDIR=/var/www/log/
+MAXSIZE<span class="token operator">=</span><span class="token number">1024</span>
+LOGDIR<span class="token operator">=</span><span class="token operator">/</span>var<span class="token operator">/</span>www<span class="token operator">/</span>log<span class="token operator">/</span>
 
-if [[ $EUID -ne 0 ]]; then
-   echo &quot;This script must be run as root&quot; 1&gt;&amp;2
-   exit 1
-fi
+<span class="token keyword">if</span> <span class="token operator">[</span><span class="token operator">[</span> $EUID <span class="token operator">-</span>ne <span class="token number">0</span> <span class="token operator">]</span><span class="token operator">]</span><span class="token operator">;</span> <span class="token keyword">then</span>
+   <span class="token keyword">echo</span> <span class="token string">"This script must be run as root"</span> <span class="token number">1</span><span class="token operator">></span><span class="token operator">&</span><span class="token number">2</span>
+   <span class="token keyword">exit</span> <span class="token number">1</span>
+<span class="token keyword">fi</span>
 
-cd $LOGDIR
+<span class="token keyword">cd</span> $LOGDIR
 
-for FILENAME in *.log; do
-        SIZE=$(du -b $FILENAME | cut -f 1)
-        if(($SIZE&gt;$MAXSIZE)); then
-                TIMESTAMP=`date +%Y%m%d`
-                NEWFILENAME=$FILENAME.$TIMESTAMP
+<span class="token keyword">for</span> FILENAME <span class="token keyword">in</span> <span class="token operator">*</span><span class="token operator">.</span>log<span class="token operator">;</span> <span class="token keyword">do</span>
+        SIZE<span class="token operator">=</span>$<span class="token operator">(</span>du <span class="token operator">-</span>b $FILENAME <span class="token operator">|</span> cut <span class="token operator">-</span>f <span class="token number">1</span><span class="token operator">)</span>
+        <span class="token keyword">if</span><span class="token operator">(</span><span class="token operator">(</span>$SIZE<span class="token operator">></span>$MAXSIZE<span class="token operator">)</span><span class="token operator">)</span><span class="token operator">;</span> <span class="token keyword">then</span>
+                TIMESTAMP<span class="token operator">=</span><span class="token string">`date +%Y%m%d`</span>
+                NEWFILENAME<span class="token operator">=</span>$FILENAME<span class="token operator">.</span>$TIMESTAMP
                 mv $FILENAME $NEWFILENAME
                 touch $FILENAME
-                chown www-data.tamer $FILENAME
-                gzip -f -9 $NEWFILENAME
-                chown tamer.www-data $NEWFILENAME.gz
-        fi
-done
+                chown www<span class="token operator">-</span>data<span class="token operator">.</span>tamer $FILENAME
+                gzip <span class="token operator">-</span>f <span class="token operator">-</span><span class="token number">9</span> $NEWFILENAME
+                chown tamer<span class="token operator">.</span>www<span class="token operator">-</span>data $NEWFILENAME<span class="token operator">.</span>gz
+        <span class="token keyword">fi</span>
+<span class="token keyword">done</span>
 </code></pre>
 <p>Now the Cron job; Here set to weekly at 5am</p>
-<pre><code class="language-bash">crontab: `0 5 * * 1 /var/www/log/logrotate.sh`
+<pre class="language-bash"><code class="language-bash">crontab<span class="token operator">:</span> <span class="token string">`0 5 * * 1 /var/www/log/logrotate.sh`</span>
 </code></pre>
 <p>{{&lt; lastmod &gt;}}</p>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/linux.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">linux</a> <a href="/en/tags/bash.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">bash</a> <a href="/en/tags/logrotate.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">logrotate</a> </p></div>
@@ -120,7 +120,5 @@ done
         } else { r.style.display="none"; }
     }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>

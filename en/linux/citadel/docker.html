@@ -42,8 +42,8 @@
         <div class="w3-container w3-white w3-card-4 w3-padding-32">
             <h1>Citadel Docker</h1>
             <p class="w3-large w3-text-grey"><i>Setting up Citadel with Docker</i></p>
-            <p>We will use <code>mail</code> as hostname, <code>mail.example.net</code> as our domain,
-and <code>203.0.113.1</code> as our public facing IP address on this page for the citadel server.
+            <p>We will use <code class="language-bash">mail</code> as hostname, <code class="language-bash">mail<span class="token operator">.</span>example<span class="token operator">.</span>net</code> as our domain,
+and <code class="language-bash"><span class="token number">203.0.113.1</span></code> as our public facing IP address on this page for the citadel server.
 Replace with your own.</p>
 <h2>Pre-Install</h2>
 <ul>
@@ -57,93 +57,93 @@ Installation of docker is a prerequisite that is out of scope of this documentat
 <hr>
 <h2>Installation</h2>
 <p>Next we will set some variables, <em>replace</em> with your domain and IP address then execute following in your servers shell.</p>
-<pre><code class="language-sh">export CIT_HOST_NAME=mail
-export CIT_DOMAIN_NAME=mail.example.net
-export CIT_IP_ADDRESS=203.0.113.1
+<pre class="language-sh"><code class="language-sh"><span class="token keyword">export</span> CIT_HOST_NAME<span class="token operator">=</span>mail
+<span class="token keyword">export</span> CIT_DOMAIN_NAME<span class="token operator">=</span>mail<span class="token operator">.</span>example<span class="token operator">.</span>net
+<span class="token keyword">export</span> CIT_IP_ADDRESS<span class="token operator">=</span><span class="token number">203.0.113.1</span>
 </code></pre>
-<pre><code class="language-sh">mkdir -p /usr/local/citadel
-mkdir -p /usr/local/webcit/.well-known
-mkdir -p /usr/local/webcit/static.local/t
-echo &quot;127.0.1.1   $CIT_DOMAIN_NAME   $CIT_HOST_NAME&quot;&gt;&gt;/etc/hosts
-echo &quot;$CIT_IP_ADDRESS   $CIT_DOMAIN_NAME   $CIT_HOST_NAME&quot;&gt;&gt;/etc/hosts
+<pre class="language-sh"><code class="language-sh">mkdir <span class="token operator">-</span>p <span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>citadel
+mkdir <span class="token operator">-</span>p <span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>webcit<span class="token operator">/</span><span class="token operator">.</span>well<span class="token operator">-</span>known
+mkdir <span class="token operator">-</span>p <span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>webcit<span class="token operator">/</span>static<span class="token operator">.</span><span class="token keyword">local</span><span class="token operator">/</span>t
+<span class="token keyword">echo</span> <span class="token string">"127.0.1.1   $CIT_DOMAIN_NAME   $CIT_HOST_NAME"</span><span class="token operator">></span><span class="token operator">></span><span class="token operator">/</span>etc<span class="token operator">/</span>hosts
+<span class="token keyword">echo</span> <span class="token string">"$CIT_IP_ADDRESS   $CIT_DOMAIN_NAME   $CIT_HOST_NAME"</span><span class="token operator">></span><span class="token operator">></span><span class="token operator">/</span>etc<span class="token operator">/</span>hosts
 </code></pre>
-<p>Now your <em>/etc/hosts</em> file should look something like following. We only added the last two lines. Make sure <code>127.0.1.1</code> is a unique IP address in the first column. If you have a IP6 address you may add it as well.</p>
-<pre><code class="language-sh">#
-# /etc/hosts: static lookup table for host names
-#
+<p>Now your <em>/etc/hosts</em> file should look something like following. We only added the last two lines. Make sure <code class="language-bash"><span class="token number">127.0.1.1</span></code> is a unique IP address in the first column. If you have a IP6 address you may add it as well.</p>
+<pre class="language-sh"><code class="language-sh"><span class="token comment">#</span>
+<span class="token comment"># /etc/hosts: static lookup table for host names</span>
+<span class="token comment">#</span>
 
-#&lt;ip-address&gt;		&lt;hostname.domain.tld&gt;	&lt;hostname&gt;
-127.0.0.1		localhost.local		localhost
-::1				localhost.local		localhost ip6-localhost
+<span class="token comment">#&lt;ip-address&gt;		&lt;hostname.domain.tld&gt;	&lt;hostname&gt;</span>
+<span class="token number">127.0.0.1</span>		localhost<span class="token operator">.</span><span class="token keyword">local</span>		localhost
+<span class="token operator">:</span><span class="token operator">:</span><span class="token number">1</span>				localhost<span class="token operator">.</span><span class="token keyword">local</span>		localhost ip6<span class="token operator">-</span>localhost
 
-127.0.1.1		mail.example.net		mail
-203.0.113.1		mail.example.net		mail
+<span class="token number">127.0.1.1</span>		mail<span class="token operator">.</span>example<span class="token operator">.</span>net		mail
+<span class="token number">203.0.113.1</span>		mail<span class="token operator">.</span>example<span class="token operator">.</span>net		mail
 </code></pre>
 <h2>Create Docker</h2>
 <ul>
 <li>Choice 1: Bind to IP 0.0.0.0</li>
 </ul>
-<pre><code class="language-sh">docker run -d --restart=unless-stopped --network host \
-    --volume=/usr/local/citadel:/citadel-data \
-    --volume=/usr/local/webcit/.well-known:/usr/local/webcit/.well-known \ 
-    --name=citadel citadeldotorg/citadel
+<pre class="language-sh"><code class="language-sh">docker run <span class="token operator">-</span>d <span class="token operator">-</span><span class="token operator">-</span>restart<span class="token operator">=</span>unless<span class="token operator">-</span>stopped <span class="token operator">-</span><span class="token operator">-</span>network host \
+    <span class="token operator">-</span><span class="token operator">-</span>volume<span class="token operator">=</span><span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>citadel<span class="token operator">:</span><span class="token operator">/</span>citadel<span class="token operator">-</span>data \
+    <span class="token operator">-</span><span class="token operator">-</span>volume<span class="token operator">=</span><span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>webcit<span class="token operator">/</span><span class="token operator">.</span>well<span class="token operator">-</span>known<span class="token operator">:</span><span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>webcit<span class="token operator">/</span><span class="token operator">.</span>well<span class="token operator">-</span>known \ 
+    <span class="token operator">-</span><span class="token operator">-</span>name<span class="token operator">=</span>citadel citadeldotorg<span class="token operator">/</span>citadel
 </code></pre>
 <ul>
-<li>Choice 2: Bind to <code>0.0.0.0</code> except change port 80 to 8080.</li>
+<li>Choice 2: Bind to <code class="language-bash"><span class="token number">0.0.0.0</span></code> except change port 80 to 8080.</li>
 </ul>
-<pre><code class="language-sh">docker run -d --restart=unless-stopped --network host \
-    --volume=/usr/local/citadel:/citadel-data \
-    --volume=/usr/local/webcit/.well-known:/usr/local/webcit/.well-known \
-    --volume=/usr/local/webcit/static.local:/usr/local/webcit/static.local \
-    --name=citadel citadeldotorg/citadel --http-port=8080 --https-port=8443
+<pre class="language-sh"><code class="language-sh">docker run <span class="token operator">-</span>d <span class="token operator">-</span><span class="token operator">-</span>restart<span class="token operator">=</span>unless<span class="token operator">-</span>stopped <span class="token operator">-</span><span class="token operator">-</span>network host \
+    <span class="token operator">-</span><span class="token operator">-</span>volume<span class="token operator">=</span><span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>citadel<span class="token operator">:</span><span class="token operator">/</span>citadel<span class="token operator">-</span>data \
+    <span class="token operator">-</span><span class="token operator">-</span>volume<span class="token operator">=</span><span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>webcit<span class="token operator">/</span><span class="token operator">.</span>well<span class="token operator">-</span>known<span class="token operator">:</span><span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>webcit<span class="token operator">/</span><span class="token operator">.</span>well<span class="token operator">-</span>known \
+    <span class="token operator">-</span><span class="token operator">-</span>volume<span class="token operator">=</span><span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>webcit<span class="token operator">/</span>static<span class="token operator">.</span><span class="token keyword">local</span><span class="token operator">:</span><span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>webcit<span class="token operator">/</span>static<span class="token operator">.</span><span class="token keyword">local</span> \
+    <span class="token operator">-</span><span class="token operator">-</span>name<span class="token operator">=</span>citadel citadeldotorg<span class="token operator">/</span>citadel <span class="token operator">-</span><span class="token operator">-</span>http<span class="token operator">-</span>port<span class="token operator">=</span><span class="token number">8080</span> <span class="token operator">-</span><span class="token operator">-</span>https<span class="token operator">-</span>port<span class="token operator">=</span><span class="token number">8443</span>
 </code></pre>
 <h2>Stop</h2>
-<pre><code class="language-sh">docker stop citadel
+<pre class="language-sh"><code class="language-sh">docker stop citadel
 </code></pre>
 <h2>Start</h2>
-<pre><code class="language-sh">docker start citadel
+<pre class="language-sh"><code class="language-sh">docker start citadel
 </code></pre>
 <h2>Restart</h2>
-<pre><code class="language-sh">docker restart citadel
+<pre class="language-sh"><code class="language-sh">docker restart citadel
 </code></pre>
 <h2>Upgrade</h2>
-<pre><code class="language-sh">docker stop citadel
+<pre class="language-sh"><code class="language-sh">docker stop citadel
 docker rm citadel
-docker pull citadeldotorg/citadel
--- Create (see above))
+docker pull citadeldotorg<span class="token operator">/</span>citadel
+<span class="token operator">-</span><span class="token operator">-</span> Create <span class="token operator">(</span>see above<span class="token operator">)</span><span class="token operator">)</span>
 </code></pre>
 <h2>Backup</h2>
-<pre><code class="language-sh">docker stop citadel
+<pre class="language-sh"><code class="language-sh">docker stop citadel
 docker rename citadel citadel_02
--- Create (see above))
+<span class="token operator">-</span><span class="token operator">-</span> Create <span class="token operator">(</span>see above<span class="token operator">)</span><span class="token operator">)</span>
 </code></pre>
 <h2>Attach will attach to ctdlvisor</h2>
-<pre><code class="language-sh"># /usr/local/bin/ctdlvisor
+<pre class="language-sh"><code class="language-sh"><span class="token comment"># /usr/local/bin/ctdlvisor</span>
 docker attach citadel
 </code></pre>
 <h2>Enter the container as root</h2>
-<pre><code class="language-sh">docker exec -it citadel sh
-ls -alh
-exit
+<pre class="language-sh"><code class="language-sh">docker <span class="token keyword">exec</span> <span class="token operator">-</span>it citadel sh
+ls <span class="token operator">-</span>alh
+<span class="token keyword">exit</span>
 </code></pre>
 <h2>List all running containers</h2>
-<pre><code class="language-sh">docker container ls
+<pre class="language-sh"><code class="language-sh">docker container ls
 OR
 docker ps
 </code></pre>
 <h2>List the content of a folder in the container</h2>
-<pre><code class="language-sh">docker exec -it citadel ls -al /usr/local/webcit/static
+<pre class="language-sh"><code class="language-sh">docker <span class="token keyword">exec</span> <span class="token operator">-</span>it citadel ls <span class="token operator">-</span>al <span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>webcit<span class="token operator">/</span>static
 </code></pre>
 <h2>Other helpful commands you can try to understand what goes on</h2>
-<pre><code class="language-sh">docker --help
-docker exec -it citadel  cat /etc/hosts
+<pre class="language-sh"><code class="language-sh">docker <span class="token operator">-</span><span class="token operator">-</span><span class="token keyword">help</span>
+docker <span class="token keyword">exec</span> <span class="token operator">-</span>it citadel  cat <span class="token operator">/</span>etc<span class="token operator">/</span>hosts
 docker container ls
 docker ps
-docker ps -a
+docker ps <span class="token operator">-</span>a
 docker ps citadel
-docker exec -it citadel cat /etc/hosts
-docker inspect --format '{{ .NetworkSettings.IPAddress }}' citadel
-docker inspect --format '{{ .Config.Hostname  }}' citadel
+docker <span class="token keyword">exec</span> <span class="token operator">-</span>it citadel cat <span class="token operator">/</span>etc<span class="token operator">/</span>hosts
+docker inspect <span class="token operator">-</span><span class="token operator">-</span>format <span class="token string">'{{ .NetworkSettings.IPAddress }}'</span> citadel
+docker inspect <span class="token operator">-</span><span class="token operator">-</span>format <span class="token string">'{{ .Config.Hostname  }}'</span> citadel
 </code></pre>
 <h2>Citadel Repo</h2>
 <p><a href="https://code.citadel.org">https://code.citadel.org</a></p>
@@ -179,7 +179,5 @@ docker inspect --format '{{ .Config.Hostname  }}' citadel
         } else { r.style.display="none"; }
     }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>

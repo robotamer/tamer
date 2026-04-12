@@ -59,47 +59,47 @@ figuring out how my little <a href="http://play.golang.org/p/fjK_EoQDtR" title="
 It's about a Gopher, named Gophy who joint the Gophers but lost his identity in the process.<br>
 Once you get how he gets his identity back you'll be golden.</p>
 <p>Here is the code:</p>
-<pre><code>package main
+<pre class="language-go"><code class="language-go"><span class="token keyword">package</span> main
 
-import &quot;fmt&quot;
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
 
-type I interface{}
+<span class="token keyword">type</span> I <span class="token keyword">interface</span><span class="token operator">{</span><span class="token operator">}</span>
 
-var gophers map[uint]I = make(map[uint]I)
+<span class="token keyword">var</span> gophers <span class="token keyword2">map</span><span class="token operator">[</span><span class="token keyword2">uint</span><span class="token operator">]</span>I <span class="token operator">=</span> make<span class="token operator">(</span><span class="token keyword2">map</span><span class="token operator">[</span><span class="token keyword2">uint</span><span class="token operator">]</span>I<span class="token operator">)</span>
 
-type gopher struct {
-    Name string
-}
+<span class="token keyword">type</span> gopher <span class="token keyword">struct</span> <span class="token operator">{</span>
+    Name <span class="token keyword2">string</span>
+<span class="token operator">}</span>
 
-func main() {
+<span class="token keyword">func</span> main<span class="token operator">(</span><span class="token operator">)</span> <span class="token operator">{</span>
 
-    g := AddToGophers(&quot;Goghy&quot;)
+    g <span class="token operator">:</span><span class="token operator">=</span> AddToGophers<span class="token operator">(</span><span class="token string">"Goghy"</span><span class="token operator">)</span>
 
-    fmt.Printf(&quot;Hello, %s\n&quot;, g.Name)
-    fmt.Printf(&quot;Now %s is a %T, %s\n&quot;, g.Name, gophers[1], gophers[1])
+    fmt<span class="token operator">.</span>Printf<span class="token operator">(</span><span class="token string">"Hello, %s\n"</span><span class="token operator">,</span> g<span class="token operator">.</span>Name<span class="token operator">)</span>
+    fmt<span class="token operator">.</span>Printf<span class="token operator">(</span><span class="token string">"Now %s is a %T, %s\n"</span><span class="token operator">,</span> g<span class="token operator">.</span>Name<span class="token operator">,</span> gophers<span class="token operator">[</span><span class="token number">1</span><span class="token operator">]</span><span class="token operator">,</span> gophers<span class="token operator">[</span><span class="token number">1</span><span class="token operator">]</span><span class="token operator">)</span>
 
-    gg := GetGopher(1)
-    fmt.Printf(&quot;Bye, %s\n&quot;, gg.Name)
-}
+    gg <span class="token operator">:</span><span class="token operator">=</span> GetGopher<span class="token operator">(</span><span class="token number">1</span><span class="token operator">)</span>
+    fmt<span class="token operator">.</span>Printf<span class="token operator">(</span><span class="token string">"Bye, %s\n"</span><span class="token operator">,</span> gg<span class="token operator">.</span>Name<span class="token operator">)</span>
+<span class="token operator">}</span>
 
-func GetGopher(i uint) *gopher {
-    g := gophers[i]
-    // I wont my gopher identity back
-    return g.(*gopher)
-}
+<span class="token keyword">func</span> GetGopher<span class="token operator">(</span>i <span class="token keyword2">uint</span><span class="token operator">)</span> <span class="token operator">*</span>gopher <span class="token operator">{</span>
+    g <span class="token operator">:</span><span class="token operator">=</span> gophers<span class="token operator">[</span>i<span class="token operator">]</span>
+    <span class="token comment">// I wont my gopher identity back</span>
+    <span class="token keyword">return</span> g<span class="token operator">.</span><span class="token operator">(</span><span class="token operator">*</span>gopher<span class="token operator">)</span>
+<span class="token operator">}</span>
 
-func AddToGophers(n string) gopher {
-    g := new(gopher)
-    g.Name = n
-    gophers[1] = g
-    return *g
-}
+<span class="token keyword">func</span> AddToGophers<span class="token operator">(</span>n <span class="token keyword2">string</span><span class="token operator">)</span> gopher <span class="token operator">{</span>
+    g <span class="token operator">:</span><span class="token operator">=</span> new<span class="token operator">(</span>gopher<span class="token operator">)</span>
+    g<span class="token operator">.</span>Name <span class="token operator">=</span> n
+    gophers<span class="token operator">[</span><span class="token number">1</span><span class="token operator">]</span> <span class="token operator">=</span> g
+    <span class="token keyword">return</span> <span class="token operator">*</span>g
+<span class="token operator">}</span>
 </code></pre>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/code.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">code</a> <a href="/en/tags/go.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">go</a> </p></div>
             <hr>
         <p class="w3-small w3-text-grey">
 			First Created: 2015-01-28T19:54:59Z<br>
-			Last Modified: 2026-04-05 19:35
+			Last Modified: 2026-04-12 14:52
 		</p>
         </div>
     </div>
@@ -127,7 +127,5 @@ func AddToGophers(n string) gopher {
         } else { r.style.display="none"; }
     }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>

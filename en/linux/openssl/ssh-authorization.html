@@ -41,21 +41,21 @@
             <h1>ssh authorization</h1>
             <p class="w3-large w3-text-grey"><i>key-based authorization with SSH</i></p>
             <p>Create a public ssh key, if you haven’t one already. Look at ~/.ssh. If you see a file named id_dsa.pub then you obviously already have a public key. If not, simply create one.</p>
-<pre><code>ssh-keygen -t dsa
+<pre class="language-bash"><code class="language-bash">ssh<span class="token operator">-</span>keygen <span class="token operator">-</span>t dsa
 </code></pre>
 <p>ItemMake sure your .ssh dir is 700:</p>
-<pre><code>chmod 700 ~/.ssh
+<pre class="language-bash"><code class="language-bash">chmod <span class="token number">700</span> <span class="token operator">~</span><span class="token operator">/</span><span class="token operator">.</span>ssh
 </code></pre>
 <p>Get your public ssh key on the server you want to login automatically.</p>
-<pre><code>scp ~/.ssh/id_dsa.pub remoteuser@remoteserver.com:
+<pre class="language-bash"><code class="language-bash">scp <span class="token operator">~</span><span class="token operator">/</span><span class="token operator">.</span>ssh<span class="token operator">/</span>id_dsa<span class="token operator">.</span>pub remoteuser@remoteserver<span class="token operator">.</span>com<span class="token operator">:</span>
 </code></pre>
 <p>Append the contents of your public key to the ~/.ssh/authorized_keys and remove it. Simply issue something like</p>
-<pre><code>cat id_dsa.pub &gt;&gt; .ssh/authorized_keys
+<pre class="language-bash"><code class="language-bash">cat id_dsa<span class="token operator">.</span>pub <span class="token operator">></span><span class="token operator">></span> <span class="token operator">.</span>ssh<span class="token operator">/</span>authorized_keys
 </code></pre>
 <p>Remove your public key from the home directory on the server.<br>
 Done!</p>
 <p>You can now login without getting asked for a password.</p>
-<pre><code>ssh -l remoteuser remoteserver.com or ssh remoteuser@remoteserver.com
+<pre class="language-bash"><code class="language-bash">ssh <span class="token operator">-</span>l remoteuser remoteserver<span class="token operator">.</span>com or ssh remoteuser@remoteserver<span class="token operator">.</span>com
 </code></pre>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/howto.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">howto</a> <a href="/en/tags/linux.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">linux</a> <a href="/en/tags/debian.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">debian</a> <a href="/en/tags/server.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">server</a> <a href="/en/tags/ssh.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">ssh</a> <a href="/en/tags/ssl.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">ssl</a> </p></div>
             <hr>
@@ -89,7 +89,5 @@ Done!</p>
         } else { r.style.display="none"; }
     }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>

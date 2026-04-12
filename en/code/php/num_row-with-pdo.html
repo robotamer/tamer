@@ -51,15 +51,15 @@
             <p>There is no num_row() function for PHP PDO</p>
 <p>Here are my two solutions:</p>
 <p><strong>One with prepare &amp; execute</strong>:</p>
-<pre><code class="language-php">    db-&gt;prepare($sql);
-    $sth-&gt;execute(array($key));
-    $rows = $sth-&gt;fetch(PDO::FETCH_NUM);
-    echo $rows[0];
+<pre class="language-php"><code class="language-php">    db<span class="token operator">-</span><span class="token operator">></span>prepare<span class="token operator">(</span>$sql<span class="token operator">)</span><span class="token operator">;</span>
+    $sth<span class="token operator">-</span><span class="token operator">></span>execute<span class="token operator">(</span>array<span class="token operator">(</span>$key<span class="token operator">)</span><span class="token operator">)</span><span class="token operator">;</span>
+    $rows <span class="token operator">=</span> $sth<span class="token operator">-</span><span class="token operator">></span>fetch<span class="token operator">(</span>PDO<span class="token operator">:</span><span class="token operator">:</span>FETCH_NUM<span class="token operator">)</span><span class="token operator">;</span>
+    <span class="token keyword">echo</span> $rows<span class="token operator">[</span><span class="token number">0</span><span class="token operator">]</span><span class="token operator">;</span>
 </code></pre>
 <p><strong>One with query:</strong></p>
-<pre><code class="language-php">    db-&gt;query($sql);
-    $row = $result-&gt;fetch(PDO::FETCH_NUM);
-    echo $row[0];
+<pre class="language-php"><code class="language-php">    db<span class="token operator">-</span><span class="token operator">></span>query<span class="token operator">(</span>$sql<span class="token operator">)</span><span class="token operator">;</span>
+    $row <span class="token operator">=</span> $result<span class="token operator">-</span><span class="token operator">></span>fetch<span class="token operator">(</span>PDO<span class="token operator">:</span><span class="token operator">:</span>FETCH_NUM<span class="token operator">)</span><span class="token operator">;</span>
+    <span class="token keyword">echo</span> $row<span class="token operator">[</span><span class="token number">0</span><span class="token operator">]</span><span class="token operator">;</span>
 </code></pre>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/code.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">code</a> <a href="/en/tags/pdo.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">pdo</a> <a href="/en/tags/php.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">php</a> <a href="/en/tags/sql.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">sql</a> </p></div>
             <hr>
@@ -93,7 +93,5 @@
         } else { r.style.display="none"; }
     }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>

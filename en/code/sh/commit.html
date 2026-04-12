@@ -40,36 +40,36 @@
             <p class="w3-large w3-text-grey"><i>A script to git add, git tag, git commit, and git push. Including auto incrementing tags with semantic versioning.</i></p>
             <p>Optionaly creates a meta data file.</p>
 <p><a href="https://gist.github.com/robotamer/35ef24fdd326626b7f5d8e9571e133c5">The script is in a Github Gist</a></p>
-<pre><code class="language-sh">NAME 
-    commit - git add, tag, commit &amp; push
+<pre class="language-sh"><code class="language-sh">NAME 
+    commit <span class="token operator">-</span> git add<span class="token operator">,</span> tag<span class="token operator">,</span> commit <span class="token operator">&</span> push
 SYNOPSIS
-    commit OPTION...
+    commit OPTION<span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span>
 DESCRIPTION
-    A script to git add, git tag, git commit, and git push. 
-    Including auto incrementing tags with semantic versioning.
+    A script to git add<span class="token operator">,</span> git tag<span class="token operator">,</span> git commit<span class="token operator">,</span> and git push<span class="token operator">.</span> 
+    Including auto incrementing tags with semantic versioning<span class="token operator">.</span>
     Optionaly creates a meta data file
 OPTIONS
-    -m, --message (optional only in dry run mode)
+    <span class="token operator">-</span>m<span class="token operator">,</span> <span class="token operator">-</span><span class="token operator">-</span>message <span class="token operator">(</span>optional only <span class="token keyword">in</span> dry run mode<span class="token operator">)</span>
         Specify a commit message
-    -i, --increment [major, minor, patch] (optional patch is the default)
-        Specify the type of version increment, alternatives: -v or -r 
-    -v, --version (optional) (default: -i patch)
-        Specify a version. Use semantic versioning (v0.2.3). 
-    -r, --recreate (optional)
-        Recreate the last tag, if it already exists, by deleting and retagging
-    -n, --nopush ( optional) (default for -i patch)
-        Do not push the tag to the remote even if it is created.
-    -d, --dryrun (optional)
-        Perform a dry run; no commit, tag, push ...
-    -t, --metadata (optional)
-        Create metadata.toml file
-    -p, --print (optional)
+    <span class="token operator">-</span>i<span class="token operator">,</span> <span class="token operator">-</span><span class="token operator">-</span>increment <span class="token operator">[</span>major<span class="token operator">,</span> minor<span class="token operator">,</span> patch<span class="token operator">]</span> <span class="token operator">(</span>optional patch is the default<span class="token operator">)</span>
+        Specify the <span class="token keyword">type</span> of version increment<span class="token operator">,</span> alternatives<span class="token operator">:</span> <span class="token operator">-</span>v or <span class="token operator">-</span>r 
+    <span class="token operator">-</span>v<span class="token operator">,</span> <span class="token operator">-</span><span class="token operator">-</span>version <span class="token operator">(</span>optional<span class="token operator">)</span> <span class="token operator">(</span>default<span class="token operator">:</span> <span class="token operator">-</span>i patch<span class="token operator">)</span>
+        Specify a version<span class="token operator">.</span> Use semantic versioning <span class="token operator">(</span>v0<span class="token operator">.</span><span class="token number">2.3</span><span class="token operator">)</span><span class="token operator">.</span> 
+    <span class="token operator">-</span>r<span class="token operator">,</span> <span class="token operator">-</span><span class="token operator">-</span>recreate <span class="token operator">(</span>optional<span class="token operator">)</span>
+        Recreate the last tag<span class="token operator">,</span> <span class="token keyword">if</span> it already exists<span class="token operator">,</span> by deleting and retagging
+    <span class="token operator">-</span>n<span class="token operator">,</span> <span class="token operator">-</span><span class="token operator">-</span>nopush <span class="token operator">(</span> optional<span class="token operator">)</span> <span class="token operator">(</span>default <span class="token keyword">for</span> <span class="token operator">-</span>i patch<span class="token operator">)</span>
+        Do not push the tag to the remote even <span class="token keyword">if</span> it is created<span class="token operator">.</span>
+    <span class="token operator">-</span>d<span class="token operator">,</span> <span class="token operator">-</span><span class="token operator">-</span>dryrun <span class="token operator">(</span>optional<span class="token operator">)</span>
+        Perform a dry run<span class="token operator">;</span> no commit<span class="token operator">,</span> tag<span class="token operator">,</span> push <span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span>
+    <span class="token operator">-</span>t<span class="token operator">,</span> <span class="token operator">-</span><span class="token operator">-</span>metadata <span class="token operator">(</span>optional<span class="token operator">)</span>
+        Create metadata<span class="token operator">.</span>toml file
+    <span class="token operator">-</span>p<span class="token operator">,</span> <span class="token operator">-</span><span class="token operator">-</span>print <span class="token operator">(</span>optional<span class="token operator">)</span>
         Print git info
 EXAMPLES
-    commit.sh -v v2.0.0 -m 'code for freedom'
-    commit.sh -i patch -n -m '-i patch is the default you don't need to provide it'
+    commit<span class="token operator">.</span>sh <span class="token operator">-</span>v v2<span class="token operator">.</span><span class="token number">0.0</span> <span class="token operator">-</span>m <span class="token string">'code for freedom'</span>
+    commit<span class="token operator">.</span>sh <span class="token operator">-</span>i patch <span class="token operator">-</span>n <span class="token operator">-</span>m <span class="token string">'-i patch is the default you don'</span>t need to provide it<span class="token string">'
     commit.sh -r -d 
-</code></pre>
+</span></code></pre>
 <h1>Embeded Gist:</h1>
 <script src="https://gist.github.com/robotamer/35ef24fdd326626b7f5d8e9571e133c5.js"></script>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/sh.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">sh</a> <a href="/en/tags/code.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">code</a> <a href="/en/tags/git.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">git</a> </p></div>
@@ -104,7 +104,5 @@ EXAMPLES
         } else { r.style.display="none"; }
     }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>

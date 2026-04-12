@@ -60,69 +60,69 @@
 </ul>
 <p>It also warns you a couple minutes before it does all that so you can terminate the program. Of course if you have been locked out you can't terminate it, and it will execute. <em>Giving you a fresh start!</em></p>
 <p>To start</p>
-<pre><code>network_Safety_Restart.sh start &amp;
+<pre class="language-bash"><code class="language-bash">network_Safety_Restart<span class="token operator">.</span>sh start <span class="token operator">&</span>
 </code></pre>
 <p>To Stop</p>
-<pre><code>network_Safety_Restart.sh stop
+<pre class="language-bash"><code class="language-bash">network_Safety_Restart<span class="token operator">.</span>sh stop
 </code></pre>
 <p>Here is the linkto the <a href="https://gist.github.com/robotamer/1479769">Gist</a> or you can just copy and paste from below.</p>
 <p>network_Safety_Restart.sh</p>
-<pre><code>#! /bin/sh
+<pre class="language-bash"><code class="language-bash"><span class="token comment">#! /bin/sh</span>
  
-PATH=/sbin:/usr/sbin:/bin:/usr/bin
+PATH<span class="token operator">=</span><span class="token operator">/</span>sbin<span class="token operator">:</span><span class="token operator">/</span>usr<span class="token operator">/</span>sbin<span class="token operator">:</span><span class="token operator">/</span>bin<span class="token operator">:</span><span class="token operator">/</span>usr<span class="token operator">/</span>bin
  
-. /lib/lsb/init-functions
+<span class="token operator">.</span> <span class="token operator">/</span>lib<span class="token operator">/</span>lsb<span class="token operator">/</span>init<span class="token operator">-</span>functions
  
-export PIDFILESTART=/tmp/network-safty-restart-start.pid
-export PIDFILESTOP=/tmp/network-safty-restart-stop.pid
-export FILE=/etc/network/interfaces
+<span class="token keyword">export</span> PIDFILESTART<span class="token operator">=</span><span class="token operator">/</span>tmp<span class="token operator">/</span>network<span class="token operator">-</span>safty<span class="token operator">-</span>restart<span class="token operator">-</span>start<span class="token operator">.</span>pid
+<span class="token keyword">export</span> PIDFILESTOP<span class="token operator">=</span><span class="token operator">/</span>tmp<span class="token operator">/</span>network<span class="token operator">-</span>safty<span class="token operator">-</span>restart<span class="token operator">-</span>stop<span class="token operator">.</span>pid
+<span class="token keyword">export</span> FILE<span class="token operator">=</span><span class="token operator">/</span>etc<span class="token operator">/</span>network<span class="token operator">/</span>interfaces
  
-case &quot;$1&quot; in
-  start)  
-    if [ -f ${PIDFILESTART} ]; then
-            rm ${PIDFILESTART}
-    fi
-    if [ -f ${PIDFILESTOP} ]; then
-            rm ${PIDFILESTOP}
-    fi	
-    ps -fe | grep ${1} | head -n1 | cut -d&quot; &quot; -f 6 &gt; ${PIDFILESTART}
+<span class="token keyword">case</span> <span class="token string">"$1"</span> <span class="token keyword">in</span>
+  start<span class="token operator">)</span>  
+    <span class="token keyword">if</span> <span class="token operator">[</span> <span class="token operator">-</span>f $<span class="token operator">{</span>PIDFILESTART<span class="token operator">}</span> <span class="token operator">]</span><span class="token operator">;</span> <span class="token keyword">then</span>
+            rm $<span class="token operator">{</span>PIDFILESTART<span class="token operator">}</span>
+    <span class="token keyword">fi</span>
+    <span class="token keyword">if</span> <span class="token operator">[</span> <span class="token operator">-</span>f $<span class="token operator">{</span>PIDFILESTOP<span class="token operator">}</span> <span class="token operator">]</span><span class="token operator">;</span> <span class="token keyword">then</span>
+            rm $<span class="token operator">{</span>PIDFILESTOP<span class="token operator">}</span>
+    <span class="token keyword">fi</span>	
+    ps <span class="token operator">-</span>fe <span class="token operator">|</span> grep $<span class="token operator">{</span><span class="token number">1</span><span class="token operator">}</span> <span class="token operator">|</span> head <span class="token operator">-</span>n1 <span class="token operator">|</span> cut <span class="token operator">-</span>d<span class="token string">" "</span> <span class="token operator">-</span>f <span class="token number">6</span> <span class="token operator">></span> $<span class="token operator">{</span>PIDFILESTART<span class="token operator">}</span>
  
-        sleep 3600 
+        sleep <span class="token number">3600</span> 
  
-        log_action_msg &quot;WARNING: Will in 120 sec rename ${FILE} and then restart&quot;
-        sleep 60
-        log_action_msg &quot;WARNING: Will in 60 sec rename ${FILE} and then restart&quot;
-        sleep 60
+        log_action_msg <span class="token string">"WARNING: Will in 120 sec rename ${FILE} and then restart"</span>
+        sleep <span class="token number">60</span>
+        log_action_msg <span class="token string">"WARNING: Will in 60 sec rename ${FILE} and then restart"</span>
+        sleep <span class="token number">60</span>
  
-    if ! [ -f ${PIDFILESTOP} ]; then
-        log_action_msg &quot;Restarting NOW&quot;
-            SUFFIX=$(date +%s)
-            cp ${FILE} ${FILE}.${SUFFIX}
-            sleep 1
-            cp ${FILE}.org ${FILE}
-            sleep 1
-            reboot -d -f -i
-    else
-        rm ${PIDFILESTOP}
-        log_action_msg &quot;NOT Restaring as you wish&quot;
-        fi
-        ;;
-  stop)
-    if [ -f ${PIDFILESTART} ]; then
-            rm ${PIDFILESTART}
-        touch ${PIDFILESTOP}
-        log_action_msg &quot;Terminating restart script&quot;
+    <span class="token keyword">if</span> <span class="token operator">!</span> <span class="token operator">[</span> <span class="token operator">-</span>f $<span class="token operator">{</span>PIDFILESTOP<span class="token operator">}</span> <span class="token operator">]</span><span class="token operator">;</span> <span class="token keyword">then</span>
+        log_action_msg <span class="token string">"Restarting NOW"</span>
+            SUFFIX<span class="token operator">=</span>$<span class="token operator">(</span>date <span class="token operator">+</span><span class="token operator">%</span>s<span class="token operator">)</span>
+            cp $<span class="token operator">{</span>FILE<span class="token operator">}</span> $<span class="token operator">{</span>FILE<span class="token operator">}</span><span class="token operator">.</span>$<span class="token operator">{</span>SUFFIX<span class="token operator">}</span>
+            sleep <span class="token number">1</span>
+            cp $<span class="token operator">{</span>FILE<span class="token operator">}</span><span class="token operator">.</span>org $<span class="token operator">{</span>FILE<span class="token operator">}</span>
+            sleep <span class="token number">1</span>
+            reboot <span class="token operator">-</span>d <span class="token operator">-</span>f <span class="token operator">-</span>i
+    <span class="token keyword">else</span>
+        rm $<span class="token operator">{</span>PIDFILESTOP<span class="token operator">}</span>
+        log_action_msg <span class="token string">"NOT Restaring as you wish"</span>
+        <span class="token keyword">fi</span>
+        <span class="token operator">;</span><span class="token operator">;</span>
+  stop<span class="token operator">)</span>
+    <span class="token keyword">if</span> <span class="token operator">[</span> <span class="token operator">-</span>f $<span class="token operator">{</span>PIDFILESTART<span class="token operator">}</span> <span class="token operator">]</span><span class="token operator">;</span> <span class="token keyword">then</span>
+            rm $<span class="token operator">{</span>PIDFILESTART<span class="token operator">}</span>
+        touch $<span class="token operator">{</span>PIDFILESTOP<span class="token operator">}</span>
+        log_action_msg <span class="token string">"Terminating restart script"</span>
  
-    fi
-    log_action_msg &quot;Terminated restart script&quot;
+    <span class="token keyword">fi</span>
+    log_action_msg <span class="token string">"Terminated restart script"</span>
  
-    exit 0
-        ;;
-  *)
-        echo &quot;Usage: $0 start|stop&quot; &gt;&amp;2
-        exit 3
-        ;;
-esac
+    <span class="token keyword">exit</span> <span class="token number">0</span>
+        <span class="token operator">;</span><span class="token operator">;</span>
+  <span class="token operator">*</span><span class="token operator">)</span>
+        <span class="token keyword">echo</span> <span class="token string">"Usage: $0 start|stop"</span> <span class="token operator">></span><span class="token operator">&</span><span class="token number">2</span>
+        <span class="token keyword">exit</span> <span class="token number">3</span>
+        <span class="token operator">;</span><span class="token operator">;</span>
+<span class="token keyword">esac</span>
 </code></pre>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/howto.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">howto</a> <a href="/en/tags/linux.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">linux</a> <a href="/en/tags/debian.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">debian</a> <a href="/en/tags/server.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">server</a> <a href="/en/tags/network.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">network</a> <a href="/en/tags/bash.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">bash</a> </p></div>
             <hr>
@@ -156,7 +156,5 @@ esac
         } else { r.style.display="none"; }
     }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>

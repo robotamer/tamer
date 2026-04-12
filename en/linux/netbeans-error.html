@@ -51,17 +51,17 @@
             <h1>Netbeans error</h1>
             <p class="w3-large w3-text-grey"><i>Solved: java-common: Package updates entail "Network is unreachable" in Java programs</i></p>
             <p>I been using Netbeans and following solved the problem:</p>
-<pre><code>    manticore:/etc/sysctl.d# telnet ::ffff:192.168.1.1
-    Trying ::ffff:192.168.1.1...
-    telnet: Unable to connect to remote host: Network is unreachable
-    manticore:/etc/sysctl.d# sysctl net.ipv6.bindv6only
-    net.ipv6.bindv6only = 1
-    manticore:/etc/sysctl.d# sysctl net.ipv6.bindv6only=0
-    net.ipv6.bindv6only = 0
-    manticore:/etc/sysctl.d# telnet ::ffff:192.168.1.1
-    Trying ::ffff:192.168.1.1...
-    Connected to ::ffff:192.168.1.1.
-    Escape character is '^]'.
+<pre class="language-bash"><code class="language-bash">    manticore<span class="token operator">:</span><span class="token operator">/</span>etc<span class="token operator">/</span>sysctl<span class="token operator">.</span>d<span class="token comment"># telnet ::ffff:192.168.1.1</span>
+    Trying <span class="token operator">:</span><span class="token operator">:</span>ffff<span class="token operator">:</span><span class="token number">192.168.1.1...</span>
+    telnet<span class="token operator">:</span> Unable to connect to remote host<span class="token operator">:</span> Network is unreachable
+    manticore<span class="token operator">:</span><span class="token operator">/</span>etc<span class="token operator">/</span>sysctl<span class="token operator">.</span>d<span class="token comment"># sysctl net.ipv6.bindv6only</span>
+    net<span class="token operator">.</span>ipv6<span class="token operator">.</span>bindv6only <span class="token operator">=</span> <span class="token number">1</span>
+    manticore<span class="token operator">:</span><span class="token operator">/</span>etc<span class="token operator">/</span>sysctl<span class="token operator">.</span>d<span class="token comment"># sysctl net.ipv6.bindv6only=0</span>
+    net<span class="token operator">.</span>ipv6<span class="token operator">.</span>bindv6only <span class="token operator">=</span> <span class="token number">0</span>
+    manticore<span class="token operator">:</span><span class="token operator">/</span>etc<span class="token operator">/</span>sysctl<span class="token operator">.</span>d<span class="token comment"># telnet ::ffff:192.168.1.1</span>
+    Trying <span class="token operator">:</span><span class="token operator">:</span>ffff<span class="token operator">:</span><span class="token number">192.168.1.1...</span>
+    Connected to <span class="token operator">:</span><span class="token operator">:</span>ffff<span class="token operator">:</span><span class="token number">192.168.1.1.</span>
+    Escape character is <span class="token string">'^]'</span><span class="token operator">.</span>
 </code></pre>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/linux.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">linux</a> <a href="/en/tags/java.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">java</a> </p></div>
             <hr>
@@ -95,7 +95,5 @@
         } else { r.style.display="none"; }
     }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>

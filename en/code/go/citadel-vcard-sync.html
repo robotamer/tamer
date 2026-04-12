@@ -94,19 +94,19 @@ is not supported in version 1, vCards on the server will be over written by the 
 defined in the config file, or optionally on the command line</p>
 <p>The -r Flag checks if the room exists on the mail server. You
 can use this to verify that you have spelled the room name correctly</p>
-<pre><code>-v=false: version
--h=false: Prints out this help text
--c=&quot;citadelVcard.json&quot;: Config file (*.json)
--u=&quot;&quot;: Username
--p=&quot;&quot;: Password
--r=false: Check if the citadel room even exists
--D=false: Delete all items in the room!
--i=&quot;&quot;: Import file (*.vcf)
+<pre class="language-bash"><code class="language-bash"><span class="token operator">-</span>v<span class="token operator">=</span><span class="token literal">false</span><span class="token operator">:</span> version
+<span class="token operator">-</span>h<span class="token operator">=</span><span class="token literal">false</span><span class="token operator">:</span> Prints out this <span class="token keyword">help</span> text
+<span class="token operator">-</span>c<span class="token operator">=</span><span class="token string">"citadelVcard.json"</span><span class="token operator">:</span> Config file <span class="token operator">(</span><span class="token operator">*</span><span class="token operator">.</span>json<span class="token operator">)</span>
+<span class="token operator">-</span>u<span class="token operator">=</span><span class="token string">""</span><span class="token operator">:</span> Username
+<span class="token operator">-</span>p<span class="token operator">=</span><span class="token string">""</span><span class="token operator">:</span> Password
+<span class="token operator">-</span>r<span class="token operator">=</span><span class="token literal">false</span><span class="token operator">:</span> Check <span class="token keyword">if</span> the citadel room even exists
+<span class="token operator">-</span>D<span class="token operator">=</span><span class="token literal">false</span><span class="token operator">:</span> Delete all items <span class="token keyword">in</span> the room<span class="token operator">!</span>
+<span class="token operator">-</span>i<span class="token operator">=</span><span class="token string">""</span><span class="token operator">:</span> Import file <span class="token operator">(</span><span class="token operator">*</span><span class="token operator">.</span>vcf<span class="token operator">)</span>
 </code></pre>
 <h4>The Environment flags in the config file are:</h4>
-<pre><code>0 = Production
-1 = Prints a lot of info
-2 = Debug mode, same as 1 but will exit on error
+<pre class="language-bash"><code class="language-bash"><span class="token number">0</span> <span class="token operator">=</span> Production
+<span class="token number">1</span> <span class="token operator">=</span> Prints a lot of info
+<span class="token number">2</span> <span class="token operator">=</span> Debug mode<span class="token operator">,</span> same as <span class="token number">1</span> but will <span class="token keyword">exit</span> on error
 </code></pre>
 <h2>Install</h2>
 <h3>Executable</h3>
@@ -118,7 +118,7 @@ can use this to verify that you have spelled the room name correctly</p>
 <blockquote>
 <p>Install go then run</p>
 </blockquote>
-<pre><code>go get bitbucket.org/gotamer/citadel
+<pre class="language-bash"><code class="language-bash">go get bitbucket<span class="token operator">.</span>org<span class="token operator">/</span>gotamer<span class="token operator">/</span>citadel
 </code></pre>
 <hr>
 <h1>The MIT License (MIT)</h1>
@@ -160,7 +160,5 @@ can use this to verify that you have spelled the room name correctly</p>
         } else { r.style.display="none"; }
     }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>

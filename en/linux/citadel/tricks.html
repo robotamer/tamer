@@ -50,7 +50,7 @@
 <blockquote>
 <p>webcit has a &quot;-g&quot; flag that will enter its value as the first command sent to it. (The container has a similar flag that will pass it along to webcit.)
 So you can do something like</p>
-<p><code>webcit [other commands] -g &quot;/dotgoto?room=Welcome&quot;</code></p>
+<p><code class="language-bash">webcit <span class="token operator">[</span>other commands<span class="token operator">]</span> <span class="token operator">-</span>g <span class="token string">"/dotgoto?room=Welcome"</span></code></p>
 <p>You can put anything in there you want. I chose to go with the welcome wiki because we can control exactly what it says on the front page.</p>
 </blockquote>
 <hr>
@@ -61,17 +61,17 @@ So you can do something like</p>
 <p><strong>-x9</strong> does the magic:</p>
 </blockquote>
 <blockquote>
-<pre><code class="language-sh"></code></pre>
+<pre class="language-sh"><code class="language-sh"></code></pre>
 </blockquote>
 <p>docker run -i --rm --network host <br>
 --volume=/usr/local/citadel:/citadel-data citadeldotorg/citadel <br>
 --http-port=8080 --https-port=8443 <br>
 -x9 &gt;&gt;citadel.out 2&gt;&gt;citadel.err</p>
-<pre><code>Do what you need to do, such as [telnet](/tags/telnet) to citadel then stop the running docker with **Ctrl-C** 
+<pre class="language-bash"><code class="language-bash">Do what you need to <span class="token keyword">do</span><span class="token operator">,</span> such as <span class="token operator">[</span>telnet<span class="token operator">]</span><span class="token operator">(</span><span class="token operator">/</span>tags<span class="token operator">/</span>telnet<span class="token operator">)</span> to citadel <span class="token keyword">then</span> stop the running docker with <span class="token operator">*</span><span class="token operator">*</span>Ctrl<span class="token operator">-</span>C<span class="token operator">*</span><span class="token operator">*</span> 
 
-&gt; ```sh
+<span class="token operator">></span> <span class="token string">``</span><span class="token string">`sh
 less citadel.err
-</code></pre>
+</span></code></pre>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/howto.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">howto</a> <a href="/en/tags/webcit.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">webcit</a> <a href="/en/tags/citadel.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">citadel</a> </p></div>
             <hr>
         <p class="w3-small w3-text-grey">
@@ -104,7 +104,5 @@ less citadel.err
         } else { r.style.display="none"; }
     }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>
