@@ -53,7 +53,7 @@
 <p>So I wrote this little method to take care of it all. It's nothing complicated but sure useful.</p>
 <p>It detects cgi and cli, and formats everything accordingly.</p>
 <pre class="language-php"><code class="language-php">    
-<span class="token operator"><</span><span class="token operator">?</span>php
+<span class="token operator">&lt;</span><span class="token operator">?</span>php
 
 <span class="token comment">/**
  * e() --- Prints human-readable information about a variable
@@ -78,34 +78,34 @@
  * @return      string
  **/</span>
 <span class="token keyword">function</span> e<span class="token operator">(</span>$var<span class="token operator">,</span> $name <span class="token operator">=</span> FALSE<span class="token operator">,</span> $<span class="token keyword">return</span> <span class="token operator">=</span> FALSE<span class="token operator">)</span> <span class="token operator">{</span>
-    $preO <span class="token operator">=</span> $preC <span class="token operator">=</span> <span class="token string">''</span><span class="token operator">;</span> $br <span class="token operator">=</span> PHP_EOL<span class="token operator">;</span>
-    <span class="token keyword">if</span><span class="token operator">(</span> <span class="token operator">!</span> isset<span class="token operator">(</span>$_SERVER<span class="token operator">[</span><span class="token string">'argv'</span><span class="token operator">]</span><span class="token operator">)</span><span class="token operator">)</span><span class="token operator">{</span>
-        $preO <span class="token operator">=</span> <span class="token string">'
+    $preO <span class="token operator">=</span> $preC <span class="token operator">=</span> <span class="token string">&apos;&apos;</span><span class="token operator">;</span> $br <span class="token operator">=</span> PHP_EOL<span class="token operator">;</span>
+    <span class="token keyword">if</span><span class="token operator">(</span> <span class="token operator">!</span> isset<span class="token operator">(</span>$_SERVER<span class="token operator">[</span><span class="token string">&apos;argv&apos;</span><span class="token operator">]</span><span class="token operator">)</span><span class="token operator">)</span><span class="token operator">{</span>
+        $preO <span class="token operator">=</span> <span class="token string">&apos;
 
-'</span><span class="token operator">;</span> $preC <span class="token operator">=</span> <span class="token string">''</span><span class="token operator">;</span>
-        $h1O <span class="token operator">=</span> <span class="token string">'<h1>'</span><span class="token operator">;</span>   $h1C <span class="token operator">=</span> <span class="token string">'</h1>'</span><span class="token operator">;</span>
-        $br <span class="token operator">=</span> <span class="token string">'<br></br>'</span><span class="token operator">.</span>PHP_EOL<span class="token operator">;</span>
+&apos;</span><span class="token operator">;</span> $preC <span class="token operator">=</span> <span class="token string">&apos;&apos;</span><span class="token operator">;</span>
+        $h1O <span class="token operator">=</span> <span class="token string">&apos;&lt;h1&gt;&apos;</span><span class="token operator">;</span>   $h1C <span class="token operator">=</span> <span class="token string">&apos;&lt;/h1&gt;&apos;</span><span class="token operator">;</span>
+        $br <span class="token operator">=</span> <span class="token string">&apos;&lt;br&gt;&lt;/br&gt;&apos;</span><span class="token operator">.</span>PHP_EOL<span class="token operator">;</span>
     <span class="token operator">}</span>
-    <span class="token keyword">if</span><span class="token operator">(</span><span class="token operator">!</span>is_array<span class="token operator">(</span>$var<span class="token operator">)</span> <span class="token operator">&</span><span class="token operator">&</span> <span class="token operator">!</span>is_object<span class="token operator">(</span>$var<span class="token operator">)</span><span class="token operator">)</span>
+    <span class="token keyword">if</span><span class="token operator">(</span><span class="token operator">!</span>is_array<span class="token operator">(</span>$var<span class="token operator">)</span> <span class="token operator">&amp;</span><span class="token operator">&amp;</span> <span class="token operator">!</span>is_object<span class="token operator">(</span>$var<span class="token operator">)</span><span class="token operator">)</span>
     <span class="token operator">{</span>
-        <span class="token keyword">if</span> <span class="token operator">(</span>$name <span class="token operator">!</span><span class="token operator">=</span><span class="token operator">=</span> FALSE<span class="token operator">)</span> <span class="token keyword">echo</span> $br<span class="token operator">.</span>$name<span class="token operator">.</span><span class="token string">': '</span><span class="token operator">;</span>
-        <span class="token keyword">echo</span> <span class="token operator">(</span>isset<span class="token operator">(</span>$_SERVER<span class="token operator">[</span><span class="token string">'argv'</span><span class="token operator">]</span><span class="token operator">)</span><span class="token operator">)</span>
+        <span class="token keyword">if</span> <span class="token operator">(</span>$name <span class="token operator">!</span><span class="token operator">=</span><span class="token operator">=</span> FALSE<span class="token operator">)</span> <span class="token keyword">echo</span> $br<span class="token operator">.</span>$name<span class="token operator">.</span><span class="token string">&apos;: &apos;</span><span class="token operator">;</span>
+        <span class="token keyword">echo</span> <span class="token operator">(</span>isset<span class="token operator">(</span>$_SERVER<span class="token operator">[</span><span class="token string">&apos;argv&apos;</span><span class="token operator">]</span><span class="token operator">)</span><span class="token operator">)</span>
                   <span class="token operator">?</span> $var<span class="token operator">.</span>$br
                   <span class="token operator">:</span> htmlspecialchars<span class="token operator">(</span>$var<span class="token operator">)</span><span class="token operator">.</span>$br<span class="token operator">;</span>
     <span class="token operator">}</span><span class="token keyword">else</span><span class="token operator">{</span>
         <span class="token keyword">if</span><span class="token operator">(</span>$<span class="token keyword">return</span> <span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span> FALSE<span class="token operator">)</span> <span class="token operator">{</span>
-            <span class="token keyword">if</span> <span class="token operator">(</span>$name <span class="token operator">!</span><span class="token operator">=</span><span class="token operator">=</span> FALSE<span class="token operator">)</span> <span class="token keyword">echo</span> $br<span class="token operator">.</span>$h1O<span class="token operator">.</span>$name<span class="token operator">.</span><span class="token string">': '</span><span class="token operator">.</span>$h1C<span class="token operator">;</span>
+            <span class="token keyword">if</span> <span class="token operator">(</span>$name <span class="token operator">!</span><span class="token operator">=</span><span class="token operator">=</span> FALSE<span class="token operator">)</span> <span class="token keyword">echo</span> $br<span class="token operator">.</span>$h1O<span class="token operator">.</span>$name<span class="token operator">.</span><span class="token string">&apos;: &apos;</span><span class="token operator">.</span>$h1C<span class="token operator">;</span>
             <span class="token keyword">echo</span> $preO<span class="token operator">.</span>print_r<span class="token operator">(</span>$var<span class="token operator">,</span> TRUE<span class="token operator">)</span><span class="token operator">.</span>$preC<span class="token operator">.</span>$br<span class="token operator">;</span>
         <span class="token operator">}</span><span class="token keyword">else</span><span class="token operator">{</span>
             <span class="token keyword">if</span> <span class="token operator">(</span>$name <span class="token operator">!</span><span class="token operator">=</span><span class="token operator">=</span> FALSE<span class="token operator">)</span><span class="token operator">{</span>
-                <span class="token keyword">return</span> <span class="token string">''</span><span class="token operator">;</span>
+                <span class="token keyword">return</span> <span class="token string">&apos;&apos;</span><span class="token operator">;</span>
             <span class="token operator">}</span><span class="token keyword">else</span><span class="token operator">{</span>
                 <span class="token keyword">return</span> $br<span class="token operator">.</span>$preO<span class="token operator">.</span>var_export<span class="token operator">(</span>$var<span class="token operator">,</span> TRUE<span class="token operator">)</span><span class="token operator">.</span>$preC<span class="token operator">.</span>$br<span class="token operator">;</span>
             <span class="token operator">}</span>
         <span class="token operator">}</span>
     <span class="token operator">}</span>
 <span class="token operator">}</span>
-<span class="token operator">?</span><span class="token operator">></span>
+<span class="token operator">?</span><span class="token operator">&gt;</span>
     
 </code></pre>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/code.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">code</a> <a href="/en/tags/php.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">php</a> </p></div>

@@ -61,12 +61,12 @@
 <p><a href="http://play.golang.org/p/ZNY_r72Mbj" title="GoPlay">GoPlay</a></p>
 <h2>unicode/utf8</h2>
 <h3>RuneCount</h3>
-<pre class="language-bash"><code class="language-bash">rc <span class="token operator">:</span><span class="token operator">=</span> utf8<span class="token operator">.</span>RuneCount<span class="token operator">(</span><span class="token operator">[</span><span class="token operator">]</span>byte<span class="token operator">(</span><span class="token string">"dsjkdshdjsdh..Ü..js"</span><span class="token operator">)</span><span class="token operator">)</span>
+<pre class="language-bash"><code class="language-bash">rc <span class="token operator">:</span><span class="token operator">=</span> utf8<span class="token operator">.</span>RuneCount<span class="token operator">(</span><span class="token operator">[</span><span class="token operator">]</span>byte<span class="token operator">(</span><span class="token string">&quot;dsjkdshdjsdh..Ü..js&quot;</span><span class="token operator">)</span><span class="token operator">)</span>
 </code></pre>
 <p><a href="http://play.golang.org/p/D428-5_J6V" title="GoPlay">GoPlay</a></p>
 <h2>encoding/base64</h2>
 <h3>Encode</h3>
-<pre class="language-bash"><code class="language-bash">value <span class="token operator">=</span> base64<span class="token operator">.</span>StdEncoding<span class="token operator">.</span>EncodeToString<span class="token operator">(</span><span class="token operator">[</span><span class="token operator">]</span>byte<span class="token operator">(</span><span class="token string">"Hello World"</span><span class="token operator">)</span><span class="token operator">)</span>
+<pre class="language-bash"><code class="language-bash">value <span class="token operator">=</span> base64<span class="token operator">.</span>StdEncoding<span class="token operator">.</span>EncodeToString<span class="token operator">(</span><span class="token operator">[</span><span class="token operator">]</span>byte<span class="token operator">(</span><span class="token string">&quot;Hello World&quot;</span><span class="token operator">)</span><span class="token operator">)</span>
 </code></pre>
 <h3>Decode</h3>
 <pre class="language-bash"><code class="language-bash">hw<span class="token operator">,</span> err <span class="token operator">:</span><span class="token operator">=</span> base64<span class="token operator">.</span>StdEncoding<span class="token operator">.</span>DecodeString<span class="token operator">(</span>value<span class="token operator">)</span>

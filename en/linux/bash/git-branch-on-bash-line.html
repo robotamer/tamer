@@ -42,10 +42,10 @@
             
             <p>This little code, if placed in to your ~/.bash_profile file will reveal what git branch you are working on.</p>
 <pre class="language-bash"><code class="language-bash">parse_git_branch<span class="token operator">(</span><span class="token operator">)</span> <span class="token operator">{</span>
-        git branch <span class="token number">2</span><span class="token operator">></span> <span class="token operator">/</span>dev<span class="token operator">/</span>null <span class="token operator">|</span> sed <span class="token operator">-</span>e <span class="token string">'/^[^*]/d'</span> <span class="token operator">-</span>e <span class="token string">'s/* (.*)/(1)/'</span>
+        git branch <span class="token number">2</span><span class="token operator">&gt;</span> <span class="token operator">/</span>dev<span class="token operator">/</span>null <span class="token operator">|</span> sed <span class="token operator">-</span>e <span class="token string">&apos;/^[^*]/d&apos;</span> <span class="token operator">-</span>e <span class="token string">&apos;s/* (.*)/(1)/&apos;</span>
 <span class="token operator">}</span>
 <span class="token keyword">if</span> <span class="token operator">[</span><span class="token operator">[</span> $EUID <span class="token operator">-</span>ne <span class="token number">0</span> <span class="token operator">]</span><span class="token operator">]</span><span class="token operator">;</span> <span class="token keyword">then</span>
-        PS1<span class="token operator">=</span><span class="token string">"w$(parse_git_branch) $ "</span>
+        PS1<span class="token operator">=</span><span class="token string">&quot;w$(parse_git_branch) $ &quot;</span>
 <span class="token keyword">fi</span>
 </code></pre>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/Server.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">Server</a> <a href="/en/tags/bash.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">bash</a> <a href="/en/tags/git.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">git</a> </p></div>

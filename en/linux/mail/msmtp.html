@@ -67,28 +67,28 @@ default<span class="token operator">:</span> me@example<span class="token operat
 </code></pre>
 <p>A php script to send mail</p>
 <pre class="language-bash"><code class="language-bash"><span class="token comment">#!/usr/bin/php</span>
-<span class="token operator"><</span><span class="token operator">?</span>php
+<span class="token operator">&lt;</span><span class="token operator">?</span>php
  
-define<span class="token operator">(</span><span class="token string">'TAB'</span><span class="token operator">,</span><span class="token string">"\t"</span><span class="token operator">)</span><span class="token operator">;</span>
+define<span class="token operator">(</span><span class="token string">&apos;TAB&apos;</span><span class="token operator">,</span><span class="token string">&quot;\t&quot;</span><span class="token operator">)</span><span class="token operator">;</span>
  
-$user <span class="token operator">=</span> $_SERVER<span class="token operator">[</span><span class="token string">'LOGNAME'</span><span class="token operator">]</span><span class="token operator">;</span>
-$host <span class="token operator">=</span> <span class="token keyword">exec</span><span class="token operator">(</span><span class="token string">"hostname -f"</span><span class="token operator">)</span><span class="token operator">;</span>
-$from <span class="token operator">=</span> $user<span class="token operator">.</span><span class="token string">'@'</span><span class="token operator">.</span>$host<span class="token operator">;</span>
+$user <span class="token operator">=</span> $_SERVER<span class="token operator">[</span><span class="token string">&apos;LOGNAME&apos;</span><span class="token operator">]</span><span class="token operator">;</span>
+$host <span class="token operator">=</span> <span class="token keyword">exec</span><span class="token operator">(</span><span class="token string">&quot;hostname -f&quot;</span><span class="token operator">)</span><span class="token operator">;</span>
+$from <span class="token operator">=</span> $user<span class="token operator">.</span><span class="token string">&apos;@&apos;</span><span class="token operator">.</span>$host<span class="token operator">;</span>
  
-$to      <span class="token operator">=</span> <span class="token string">'sweety@example.net'</span><span class="token operator">;</span>
-$subject <span class="token operator">=</span> <span class="token string">'Testing msmtp'</span><span class="token operator">;</span>
-$message <span class="token operator">=</span> <span class="token string">'hello from '</span><span class="token operator">.</span> $host<span class="token operator">;</span>
-$headers <span class="token operator">=</span> <span class="token string">'From: '</span><span class="token operator">.</span>$from<span class="token operator">.</span>PHP_EOL<span class="token operator">;</span>
-$headers <span class="token operator">.</span><span class="token operator">=</span> <span class="token string">'X-Mailer: msmtp + PHP '</span><span class="token operator">.</span>phpversion<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">;</span>
+$to      <span class="token operator">=</span> <span class="token string">&apos;sweety@example.net&apos;</span><span class="token operator">;</span>
+$subject <span class="token operator">=</span> <span class="token string">&apos;Testing msmtp&apos;</span><span class="token operator">;</span>
+$message <span class="token operator">=</span> <span class="token string">&apos;hello from &apos;</span><span class="token operator">.</span> $host<span class="token operator">;</span>
+$headers <span class="token operator">=</span> <span class="token string">&apos;From: &apos;</span><span class="token operator">.</span>$from<span class="token operator">.</span>PHP_EOL<span class="token operator">;</span>
+$headers <span class="token operator">.</span><span class="token operator">=</span> <span class="token string">&apos;X-Mailer: msmtp + PHP &apos;</span><span class="token operator">.</span>phpversion<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">;</span>
  
 <span class="token keyword">if</span><span class="token operator">(</span>mail<span class="token operator">(</span>$to<span class="token operator">,</span> $subject<span class="token operator">,</span> $message<span class="token operator">,</span> $headers<span class="token operator">)</span><span class="token operator">)</span>
 <span class="token operator">{</span>
-     <span class="token keyword">echo</span> PHP_EOL<span class="token operator">.</span>TAB<span class="token operator">.</span><span class="token string">'Your message was successfully accepted for delivery'</span><span class="token operator">.</span>PHP_EOL<span class="token operator">.</span>PHP_EOL<span class="token operator">;</span>
+     <span class="token keyword">echo</span> PHP_EOL<span class="token operator">.</span>TAB<span class="token operator">.</span><span class="token string">&apos;Your message was successfully accepted for delivery&apos;</span><span class="token operator">.</span>PHP_EOL<span class="token operator">.</span>PHP_EOL<span class="token operator">;</span>
 <span class="token operator">}</span><span class="token keyword">else</span><span class="token operator">{</span>
-     <span class="token keyword">echo</span> PHP_EOL<span class="token operator">.</span>TAB<span class="token operator">.</span><span class="token string">'Your message was not accepted for delivery!'</span><span class="token operator">.</span>PHP_EOL<span class="token operator">.</span>PHP_EOL<span class="token operator">;</span>
+     <span class="token keyword">echo</span> PHP_EOL<span class="token operator">.</span>TAB<span class="token operator">.</span><span class="token string">&apos;Your message was not accepted for delivery!&apos;</span><span class="token operator">.</span>PHP_EOL<span class="token operator">.</span>PHP_EOL<span class="token operator">;</span>
 <span class="token operator">}</span>
  
-<span class="token operator">?</span><span class="token operator">></span>
+<span class="token operator">?</span><span class="token operator">&gt;</span>
 </code></pre>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/howto.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">howto</a> <a href="/en/tags/linux.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">linux</a> <a href="/en/tags/debian.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">debian</a> <a href="/en/tags/server.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">server</a> <a href="/en/tags/mail.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">mail</a> <a href="/en/tags/smtp.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">smtp</a> </p></div>
             <hr>

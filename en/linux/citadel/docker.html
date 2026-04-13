@@ -64,8 +64,8 @@ Installation of docker is a prerequisite that is out of scope of this documentat
 <pre class="language-sh"><code class="language-sh">mkdir <span class="token operator">-</span>p <span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>citadel
 mkdir <span class="token operator">-</span>p <span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>webcit<span class="token operator">/</span><span class="token operator">.</span>well<span class="token operator">-</span>known
 mkdir <span class="token operator">-</span>p <span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>webcit<span class="token operator">/</span>static<span class="token operator">.</span><span class="token keyword">local</span><span class="token operator">/</span>t
-<span class="token keyword">echo</span> <span class="token string">"127.0.1.1   $CIT_DOMAIN_NAME   $CIT_HOST_NAME"</span><span class="token operator">></span><span class="token operator">></span><span class="token operator">/</span>etc<span class="token operator">/</span>hosts
-<span class="token keyword">echo</span> <span class="token string">"$CIT_IP_ADDRESS   $CIT_DOMAIN_NAME   $CIT_HOST_NAME"</span><span class="token operator">></span><span class="token operator">></span><span class="token operator">/</span>etc<span class="token operator">/</span>hosts
+<span class="token keyword">echo</span> <span class="token string">&quot;127.0.1.1   $CIT_DOMAIN_NAME   $CIT_HOST_NAME&quot;</span><span class="token operator">&gt;</span><span class="token operator">&gt;</span><span class="token operator">/</span>etc<span class="token operator">/</span>hosts
+<span class="token keyword">echo</span> <span class="token string">&quot;$CIT_IP_ADDRESS   $CIT_DOMAIN_NAME   $CIT_HOST_NAME&quot;</span><span class="token operator">&gt;</span><span class="token operator">&gt;</span><span class="token operator">/</span>etc<span class="token operator">/</span>hosts
 </code></pre>
 <p>Now your <em>/etc/hosts</em> file should look something like following. We only added the last two lines. Make sure <code class="language-bash"><span class="token number">127.0.1.1</span></code> is a unique IP address in the first column. If you have a IP6 address you may add it as well.</p>
 <pre class="language-sh"><code class="language-sh"><span class="token comment">#</span>
@@ -142,8 +142,8 @@ docker ps
 docker ps <span class="token operator">-</span>a
 docker ps citadel
 docker <span class="token keyword">exec</span> <span class="token operator">-</span>it citadel cat <span class="token operator">/</span>etc<span class="token operator">/</span>hosts
-docker inspect <span class="token operator">-</span><span class="token operator">-</span>format <span class="token string">'{{ .NetworkSettings.IPAddress }}'</span> citadel
-docker inspect <span class="token operator">-</span><span class="token operator">-</span>format <span class="token string">'{{ .Config.Hostname  }}'</span> citadel
+docker inspect <span class="token operator">-</span><span class="token operator">-</span>format <span class="token string">&apos;{{ .NetworkSettings.IPAddress }}&apos;</span> citadel
+docker inspect <span class="token operator">-</span><span class="token operator">-</span>format <span class="token string">&apos;{{ .Config.Hostname  }}&apos;</span> citadel
 </code></pre>
 <h2>Citadel Repo</h2>
 <p><a href="https://code.citadel.org">https://code.citadel.org</a></p>

@@ -64,7 +64,7 @@
         B <span class="token keyword2">string</span>
     <span class="token operator">}</span>
 
-    p <span class="token operator">:</span><span class="token operator">=</span> <span class="token operator">&</span>Foo<span class="token operator">{</span><span class="token number">111</span><span class="token operator">,</span><span class="token string">"A string"</span><span class="token operator">}</span>
+    p <span class="token operator">:</span><span class="token operator">=</span> <span class="token operator">&amp;</span>Foo<span class="token operator">{</span><span class="token number">111</span><span class="token operator">,</span><span class="token string">&quot;A string&quot;</span><span class="token operator">}</span>
 
     byteslice<span class="token operator">,</span> err <span class="token operator">:</span><span class="token operator">=</span> sbs<span class="token operator">.</span>Enc<span class="token operator">(</span>p<span class="token operator">)</span>
     <span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span>

@@ -61,7 +61,7 @@
 <li>You can save runtime modifications to the config</li>
 </ul>
 <h3>Docs:</h3>
-<pre class="language-bash"><code class="language-bash">import <span class="token string">"bitbucket.org/gotamer/cfg"</span>
+<pre class="language-bash"><code class="language-bash">import <span class="token string">&quot;bitbucket.org/gotamer/cfg&quot;</span>
 
 func Load<span class="token operator">(</span>filename string<span class="token operator">,</span> o interface<span class="token operator">{</span><span class="token operator">}</span><span class="token operator">)</span> <span class="token operator">(</span>err error<span class="token operator">)</span>
 </code></pre>
@@ -73,9 +73,9 @@ func Load<span class="token operator">(</span>filename string<span class="token 
 <pre class="language-go"><code class="language-go">    <span class="token keyword">package</span> main
 
     <span class="token keyword">import</span> <span class="token operator">(</span>
-        <span class="token string">"fmt"</span>
-        <span class="token string">"bitbucket.org/gotamer/cfg"</span>
-        <span class="token string">"os"</span>
+        <span class="token string">&quot;fmt&quot;</span>
+        <span class="token string">&quot;bitbucket.org/gotamer/cfg&quot;</span>
+        <span class="token string">&quot;os&quot;</span>
     <span class="token operator">)</span>
 
     <span class="token keyword">var</span> Cfg <span class="token operator">*</span>MainCfg
@@ -85,15 +85,15 @@ func Load<span class="token operator">(</span>filename string<span class="token 
     <span class="token operator">}</span>
 
     <span class="token keyword">func</span> main<span class="token operator">(</span><span class="token operator">)</span> <span class="token operator">{</span>
-        Cfg <span class="token operator">=</span> <span class="token operator">&</span>MainCfg<span class="token operator">{</span><span class="token string">"defaultAlias"</span><span class="token operator">}</span>
-        cfgpath <span class="token operator">:</span><span class="token operator">=</span> os<span class="token operator">.</span>Getenv<span class="token operator">(</span><span class="token string">"GOPATH"</span><span class="token operator">)</span> <span class="token operator">+</span> <span class="token string">"/etc/myappname.json"</span>
+        Cfg <span class="token operator">=</span> <span class="token operator">&amp;</span>MainCfg<span class="token operator">{</span><span class="token string">&quot;defaultAlias&quot;</span><span class="token operator">}</span>
+        cfgpath <span class="token operator">:</span><span class="token operator">=</span> os<span class="token operator">.</span>Getenv<span class="token operator">(</span><span class="token string">&quot;GOPATH&quot;</span><span class="token operator">)</span> <span class="token operator">+</span> <span class="token string">&quot;/etc/myappname.json&quot;</span>
         err <span class="token operator">:</span><span class="token operator">=</span> cfg<span class="token operator">.</span>Load<span class="token operator">(</span>cfgpath<span class="token operator">,</span> Cfg<span class="token operator">)</span>
         <span class="token keyword">if</span> err <span class="token operator">!</span><span class="token operator">=</span> <span class="token literal">nil</span> <span class="token operator">{</span>
             cfg<span class="token operator">.</span>Save<span class="token operator">(</span>cfgpath<span class="token operator">,</span> Cfg<span class="token operator">)</span>
-            fmt<span class="token operator">.</span>Println<span class="token operator">(</span><span class="token string">"\n\tPlease edit your configuration at: "</span><span class="token operator">,</span> cfgpath<span class="token operator">,</span> <span class="token string">"\n"</span><span class="token operator">)</span>
+            fmt<span class="token operator">.</span>Println<span class="token operator">(</span><span class="token string">&quot;\n\tPlease edit your configuration at: &quot;</span><span class="token operator">,</span> cfgpath<span class="token operator">,</span> <span class="token string">&quot;\n&quot;</span><span class="token operator">)</span>
             os<span class="token operator">.</span>Exit<span class="token operator">(</span><span class="token number">0</span><span class="token operator">)</span>
         <span class="token operator">}</span>
-        fmt<span class="token operator">.</span>Printf<span class="token operator">(</span><span class="token string">"%s"</span><span class="token operator">,</span> Cfg<span class="token operator">)</span>
+        fmt<span class="token operator">.</span>Printf<span class="token operator">(</span><span class="token string">&quot;%s&quot;</span><span class="token operator">,</span> Cfg<span class="token operator">)</span>
     <span class="token operator">}</span>
 </code></pre>
 <h3>Links</h3>

@@ -60,20 +60,20 @@
 <span class="token keyword">package</span> main
 
 <span class="token keyword">import</span> <span class="token operator">(</span>
-    <span class="token string">"encoding/gob"</span>
-    <span class="token string">"fmt"</span>
-    <span class="token string">"os"</span>
-    <span class="token string">"runtime"</span>
+    <span class="token string">&quot;encoding/gob&quot;</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+    <span class="token string">&quot;runtime&quot;</span>
 <span class="token operator">)</span>
 
-<span class="token keyword">const</span> file <span class="token operator">=</span> <span class="token string">"/tmp/test.gob"</span>
+<span class="token keyword">const</span> file <span class="token operator">=</span> <span class="token string">&quot;/tmp/test.gob&quot;</span>
 
 <span class="token keyword">type</span> User <span class="token keyword">struct</span> <span class="token operator">{</span>
     Name<span class="token operator">,</span> Pass <span class="token keyword2">string</span>
 <span class="token operator">}</span>
 
 <span class="token keyword">func</span> main<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">{</span>
-    <span class="token keyword">var</span> datato <span class="token operator">=</span> <span class="token operator">&</span>User<span class="token operator">{</span><span class="token string">"Donald"</span><span class="token operator">,</span><span class="token string">"DuckPass"</span><span class="token operator">}</span>
+    <span class="token keyword">var</span> datato <span class="token operator">=</span> <span class="token operator">&amp;</span>User<span class="token operator">{</span><span class="token string">&quot;Donald&quot;</span><span class="token operator">,</span><span class="token string">&quot;DuckPass&quot;</span><span class="token operator">}</span>
     <span class="token keyword">var</span> datafrom <span class="token operator">=</span> new<span class="token operator">(</span>User<span class="token operator">)</span>
 
     err <span class="token operator">:</span><span class="token operator">=</span> Save<span class="token operator">(</span>file<span class="token operator">,</span> datato<span class="token operator">)</span>
@@ -108,7 +108,7 @@
 <span class="token keyword">func</span> Check<span class="token operator">(</span>e <span class="token keyword2">error</span><span class="token operator">)</span> <span class="token operator">{</span>
     <span class="token keyword">if</span> e <span class="token operator">!</span><span class="token operator">=</span> <span class="token literal">nil</span> <span class="token operator">{</span>
         _<span class="token operator">,</span> file<span class="token operator">,</span> line<span class="token operator">,</span> _ <span class="token operator">:</span><span class="token operator">=</span> runtime<span class="token operator">.</span>Caller<span class="token operator">(</span><span class="token number">1</span><span class="token operator">)</span>
-        fmt<span class="token operator">.</span>Println<span class="token operator">(</span>line<span class="token operator">,</span> <span class="token string">"\t"</span><span class="token operator">,</span> file<span class="token operator">,</span> <span class="token string">"\n"</span><span class="token operator">,</span> e<span class="token operator">)</span>
+        fmt<span class="token operator">.</span>Println<span class="token operator">(</span>line<span class="token operator">,</span> <span class="token string">&quot;\t&quot;</span><span class="token operator">,</span> file<span class="token operator">,</span> <span class="token string">&quot;\n&quot;</span><span class="token operator">,</span> e<span class="token operator">)</span>
         os<span class="token operator">.</span>Exit<span class="token operator">(</span><span class="token number">1</span><span class="token operator">)</span>
     <span class="token operator">}</span>
 <span class="token operator">}</span>

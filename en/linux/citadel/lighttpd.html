@@ -80,36 +80,36 @@ xbps<span class="token operator">-</span>install <span class="token operator">-<
 <pre class="language-sh"><code class="language-sh"><span class="token comment"># See /usr/share/doc/lighttpd</span>
 <span class="token comment"># and http://redmine.lighttpd.net/projects/lighttpd/wiki/Docs:ConfigurationOptions</span>
 
-server<span class="token operator">.</span>username       <span class="token operator">=</span> <span class="token string">"_lighttpd"</span>
-server<span class="token operator">.</span>groupname      <span class="token operator">=</span> <span class="token string">"_lighttpd"</span>
-server<span class="token operator">.</span>document<span class="token operator">-</span>root  <span class="token operator">=</span> <span class="token string">"/srv/www/lighttpd"</span>
-server<span class="token operator">.</span>errorlog       <span class="token operator">=</span> <span class="token string">"/var/log/lighttpd/error.log"</span>
-dir<span class="token operator">-</span>listing<span class="token operator">.</span>activate  <span class="token operator">=</span> <span class="token string">"enable"</span>
-index<span class="token operator">-</span>file<span class="token operator">.</span>names      <span class="token operator">=</span> <span class="token operator">(</span> <span class="token string">"index.html"</span> <span class="token operator">)</span>
+server<span class="token operator">.</span>username       <span class="token operator">=</span> <span class="token string">&quot;_lighttpd&quot;</span>
+server<span class="token operator">.</span>groupname      <span class="token operator">=</span> <span class="token string">&quot;_lighttpd&quot;</span>
+server<span class="token operator">.</span>document<span class="token operator">-</span>root  <span class="token operator">=</span> <span class="token string">&quot;/srv/www/lighttpd&quot;</span>
+server<span class="token operator">.</span>errorlog       <span class="token operator">=</span> <span class="token string">&quot;/var/log/lighttpd/error.log&quot;</span>
+dir<span class="token operator">-</span>listing<span class="token operator">.</span>activate  <span class="token operator">=</span> <span class="token string">&quot;enable&quot;</span>
+index<span class="token operator">-</span>file<span class="token operator">.</span>names      <span class="token operator">=</span> <span class="token operator">(</span> <span class="token string">&quot;index.html&quot;</span> <span class="token operator">)</span>
 
-server<span class="token operator">.</span>modules <span class="token operator">+</span><span class="token operator">=</span> <span class="token operator">(</span> <span class="token string">"mod_proxy"</span><span class="token operator">,</span> <span class="token string">"mod_openssl"</span> <span class="token operator">)</span>
+server<span class="token operator">.</span>modules <span class="token operator">+</span><span class="token operator">=</span> <span class="token operator">(</span> <span class="token string">&quot;mod_proxy&quot;</span><span class="token operator">,</span> <span class="token string">&quot;mod_openssl&quot;</span> <span class="token operator">)</span>
 
-static<span class="token operator">-</span>file<span class="token operator">.</span>exclude<span class="token operator">-</span>extensions <span class="token operator">=</span> <span class="token operator">(</span> <span class="token string">".fcgi"</span><span class="token operator">,</span> <span class="token string">".php"</span><span class="token operator">,</span> <span class="token string">".rb"</span><span class="token operator">,</span> <span class="token string">"~"</span><span class="token operator">,</span> <span class="token string">".inc"</span> <span class="token operator">)</span>
+static<span class="token operator">-</span>file<span class="token operator">.</span>exclude<span class="token operator">-</span>extensions <span class="token operator">=</span> <span class="token operator">(</span> <span class="token string">&quot;.fcgi&quot;</span><span class="token operator">,</span> <span class="token string">&quot;.php&quot;</span><span class="token operator">,</span> <span class="token string">&quot;.rb&quot;</span><span class="token operator">,</span> <span class="token string">&quot;~&quot;</span><span class="token operator">,</span> <span class="token string">&quot;.inc&quot;</span> <span class="token operator">)</span>
 
-$SERVER<span class="token operator">[</span><span class="token string">"socket"</span><span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">=</span> <span class="token string">":443"</span> <span class="token operator">{</span>
-    ssl<span class="token operator">.</span>engine <span class="token operator">=</span> <span class="token string">"enable"</span>
-    ssl<span class="token operator">.</span>pemfile <span class="token operator">=</span> <span class="token string">"/etc/letsencrypt/live/srv.example.net/fullchain.pem"</span>
-    ssl<span class="token operator">.</span>privkey <span class="token operator">=</span> <span class="token string">"/etc/letsencrypt/live/srv.example.net/privkey.pem"</span>
+$SERVER<span class="token operator">[</span><span class="token string">&quot;socket&quot;</span><span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">=</span> <span class="token string">&quot;:443&quot;</span> <span class="token operator">{</span>
+    ssl<span class="token operator">.</span>engine <span class="token operator">=</span> <span class="token string">&quot;enable&quot;</span>
+    ssl<span class="token operator">.</span>pemfile <span class="token operator">=</span> <span class="token string">&quot;/etc/letsencrypt/live/srv.example.net/fullchain.pem&quot;</span>
+    ssl<span class="token operator">.</span>privkey <span class="token operator">=</span> <span class="token string">&quot;/etc/letsencrypt/live/srv.example.net/privkey.pem&quot;</span>
 <span class="token operator">}</span>
 
 
-$HTTP<span class="token operator">[</span><span class="token string">"host"</span><span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">=</span> <span class="token string">"mail.example.net"</span> <span class="token operator">{</span>
-    proxy<span class="token operator">.</span>balance <span class="token operator">=</span> <span class="token string">"hash"</span>
+$HTTP<span class="token operator">[</span><span class="token string">&quot;host&quot;</span><span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">=</span> <span class="token string">&quot;mail.example.net&quot;</span> <span class="token operator">{</span>
+    proxy<span class="token operator">.</span>balance <span class="token operator">=</span> <span class="token string">&quot;hash&quot;</span>
     proxy<span class="token operator">.</span>server <span class="token operator">=</span> <span class="token operator">(</span>
-        <span class="token string">""</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">(</span>
-            <span class="token string">"citadel"</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">(</span>
-                <span class="token string">"host"</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token string">"127.0.1.2"</span><span class="token operator">,</span>
-                <span class="token string">"port"</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token string">"8080"</span>
+        <span class="token string">&quot;&quot;</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token operator">(</span>
+            <span class="token string">&quot;citadel&quot;</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token operator">(</span>
+                <span class="token string">&quot;host&quot;</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">&quot;127.0.1.2&quot;</span><span class="token operator">,</span>
+                <span class="token string">&quot;port&quot;</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">&quot;8080&quot;</span>
             <span class="token operator">)</span>
         <span class="token operator">)</span>
     <span class="token operator">)</span>
-    ssl<span class="token operator">.</span>pemfile <span class="token operator">=</span> <span class="token string">"/etc/letsencrypt/live/mail.example.net/fullchain.pem"</span>
-    ssl<span class="token operator">.</span>privkey <span class="token operator">=</span> <span class="token string">"/etc/letsencrypt/live/mail.example.net/privkey.pem"</span>
+    ssl<span class="token operator">.</span>pemfile <span class="token operator">=</span> <span class="token string">&quot;/etc/letsencrypt/live/mail.example.net/fullchain.pem&quot;</span>
+    ssl<span class="token operator">.</span>privkey <span class="token operator">=</span> <span class="token string">&quot;/etc/letsencrypt/live/mail.example.net/privkey.pem&quot;</span>
 <span class="token operator">}</span>
 
 </code></pre>

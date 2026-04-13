@@ -59,22 +59,22 @@ Example:</p>
 <pre class="language-go"><code class="language-go">    <span class="token keyword">package</span> main
 
     <span class="token keyword">import</span> <span class="token operator">(</span>
-        <span class="token string">"fmt"</span>
+        <span class="token string">&quot;fmt&quot;</span>
         
-        <span class="token string">"bitbucket.org/gotamer/mail"</span>
+        <span class="token string">&quot;bitbucket.org/gotamer/mail&quot;</span>
     <span class="token operator">)</span>
 
     <span class="token keyword">func</span> main<span class="token operator">(</span><span class="token operator">)</span> <span class="token operator">{</span>
         s <span class="token operator">:</span><span class="token operator">=</span> new<span class="token operator">(</span>mail<span class="token operator">.</span>Smtp<span class="token operator">)</span>
-        s<span class="token operator">.</span>SetHostname<span class="token operator">(</span><span class="token string">"smtp.gmail.com"</span><span class="token operator">)</span>
+        s<span class="token operator">.</span>SetHostname<span class="token operator">(</span><span class="token string">&quot;smtp.gmail.com&quot;</span><span class="token operator">)</span>
         s<span class="token operator">.</span>SetHostport<span class="token operator">(</span><span class="token number">587</span><span class="token operator">)</span>
-        s<span class="token operator">.</span>SetFromName<span class="token operator">(</span><span class="token string">"GoTamer"</span><span class="token operator">)</span>
-        s<span class="token operator">.</span>SetFromAddr<span class="token operator">(</span><span class="token string">"xxxx@gmail.com"</span><span class="token operator">)</span>
-        s<span class="token operator">.</span>SetPassword<span class="token operator">(</span><span class="token string">"*********"</span><span class="token operator">)</span>
-        s<span class="token operator">.</span>AddToAddr<span class="token operator">(</span><span class="token string">"to@example.com"</span><span class="token operator">)</span>
-        s<span class="token operator">.</span>SetSubject<span class="token operator">(</span><span class="token string">"GoTamer test smtp mail"</span><span class="token operator">)</span>
-        s<span class="token operator">.</span>SetBody<span class="token operator">(</span><span class="token string">"The Writer below should replace this default line"</span><span class="token operator">)</span>
-        <span class="token keyword">if</span> _<span class="token operator">,</span> err <span class="token operator">:</span><span class="token operator">=</span> fmt<span class="token operator">.</span>Fprintf<span class="token operator">(</span>s<span class="token operator">,</span> <span class="token string">"Hello, smtp mail writer\n"</span><span class="token operator">)</span><span class="token operator">;</span> err <span class="token operator">!</span><span class="token operator">=</span> <span class="token literal">nil</span> <span class="token operator">{</span>
+        s<span class="token operator">.</span>SetFromName<span class="token operator">(</span><span class="token string">&quot;GoTamer&quot;</span><span class="token operator">)</span>
+        s<span class="token operator">.</span>SetFromAddr<span class="token operator">(</span><span class="token string">&quot;xxxx@gmail.com&quot;</span><span class="token operator">)</span>
+        s<span class="token operator">.</span>SetPassword<span class="token operator">(</span><span class="token string">&quot;*********&quot;</span><span class="token operator">)</span>
+        s<span class="token operator">.</span>AddToAddr<span class="token operator">(</span><span class="token string">&quot;to@example.com&quot;</span><span class="token operator">)</span>
+        s<span class="token operator">.</span>SetSubject<span class="token operator">(</span><span class="token string">&quot;GoTamer test smtp mail&quot;</span><span class="token operator">)</span>
+        s<span class="token operator">.</span>SetBody<span class="token operator">(</span><span class="token string">&quot;The Writer below should replace this default line&quot;</span><span class="token operator">)</span>
+        <span class="token keyword">if</span> _<span class="token operator">,</span> err <span class="token operator">:</span><span class="token operator">=</span> fmt<span class="token operator">.</span>Fprintf<span class="token operator">(</span>s<span class="token operator">,</span> <span class="token string">&quot;Hello, smtp mail writer\n&quot;</span><span class="token operator">)</span><span class="token operator">;</span> err <span class="token operator">!</span><span class="token operator">=</span> <span class="token literal">nil</span> <span class="token operator">{</span>
             fmt<span class="token operator">.</span>Println<span class="token operator">(</span>err<span class="token operator">)</span>
         <span class="token operator">}</span>
     <span class="token operator">}</span>

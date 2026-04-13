@@ -58,8 +58,8 @@
 <pre class="language-bash"><code class="language-bash"><span class="token keyword">cd</span> <span class="token operator">/</span>var<span class="token operator">/</span>www<span class="token operator">/</span>
 </code></pre>
 <p>identify your self to git</p>
-<pre class="language-bash"><code class="language-bash">git config <span class="token operator">-</span><span class="token operator">-</span>global user<span class="token operator">.</span>name <span class="token string">"Your Name"</span>
-git config <span class="token operator">-</span><span class="token operator">-</span>global user<span class="token operator">.</span>email <span class="token string">"alias@example.com"</span>
+<pre class="language-bash"><code class="language-bash">git config <span class="token operator">-</span><span class="token operator">-</span>global user<span class="token operator">.</span>name <span class="token string">&quot;Your Name&quot;</span>
+git config <span class="token operator">-</span><span class="token operator">-</span>global user<span class="token operator">.</span>email <span class="token string">&quot;alias@example.com&quot;</span>
 </code></pre>
 <p>Create git</p>
 <pre class="language-bash"><code class="language-bash">git init
@@ -75,8 +75,8 @@ git config <span class="token operator">-</span><span class="token operator">-</
 <pre class="language-bash"><code class="language-bash"><span class="token keyword">cd</span> <span class="token operator">/</span>var<span class="token operator">/</span>www<span class="token operator">/</span>
 </code></pre>
 <p>identify your self to git</p>
-<pre class="language-bash"><code class="language-bash">git config <span class="token operator">-</span><span class="token operator">-</span>global user<span class="token operator">.</span>name <span class="token string">"Dennis T Kaplan"</span>
-git config <span class="token operator">-</span><span class="token operator">-</span>global user<span class="token operator">.</span>email <span class="token string">"alias@example.com"</span>
+<pre class="language-bash"><code class="language-bash">git config <span class="token operator">-</span><span class="token operator">-</span>global user<span class="token operator">.</span>name <span class="token string">&quot;Dennis T Kaplan&quot;</span>
+git config <span class="token operator">-</span><span class="token operator">-</span>global user<span class="token operator">.</span>email <span class="token string">&quot;alias@example.com&quot;</span>
 </code></pre>
 <p>Create git</p>
 <pre class="language-bash"><code class="language-bash">git init
@@ -87,7 +87,7 @@ git config <span class="token operator">-</span><span class="token operator">-</
 <p>Place this in to your .gitignore file:</p>
 <pre class="language-bash"><code class="language-bash"><span class="token comment"># Packages #</span>
 <span class="token comment">############</span>
-<span class="token comment"># it's better to unpack these files and commit the raw source</span>
+<span class="token comment"># it&apos;s better to unpack these files and commit the raw source</span>
 <span class="token comment"># git has its own built in compression methods</span>
 <span class="token operator">*</span><span class="token operator">.</span><span class="token number">7z</span>
 <span class="token operator">*</span><span class="token operator">.</span>dmg
@@ -123,7 +123,7 @@ test*
 <pre class="language-bash"><code class="language-bash">git add <span class="token operator">.</span>
 </code></pre>
 <p>Commit them</p>
-<pre class="language-bash"><code class="language-bash">git commit <span class="token operator">-</span>m <span class="token string">'init'</span>
+<pre class="language-bash"><code class="language-bash">git commit <span class="token operator">-</span>m <span class="token string">&apos;init&apos;</span>
 </code></pre>
 <p>Add your remote git server</p>
 <pre class="language-bash"><code class="language-bash">git remote add ssh<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>username@example<span class="token operator">.</span>com<span class="token operator">/</span>var<span class="token operator">/</span>www<span class="token operator">/</span><span class="token operator">.</span>git
@@ -146,10 +146,10 @@ test*
 </code></pre>
 <h4>Alias:</h4>
 <p>Following will create an alias for git add, commit and push</p>
-<pre class="language-bash"><code class="language-bash">git config <span class="token keyword">alias</span><span class="token operator">.</span>acp <span class="token string">'! acp() { git add . && git commit -m \"$1\" && git push ; } ; acp'</span>  
+<pre class="language-bash"><code class="language-bash">git config <span class="token keyword">alias</span><span class="token operator">.</span>acp <span class="token string">&apos;! acp() { git add . &amp;&amp; git commit -m \&quot;$1\&quot; &amp;&amp; git push ; } ; acp&apos;</span>  
 </code></pre>
 <p>Use it like this:</p>
-<pre class="language-bash"><code class="language-bash">git acp <span class="token string">"your commit message"</span>
+<pre class="language-bash"><code class="language-bash">git acp <span class="token string">&quot;your commit message&quot;</span>
 </code></pre>
 <p>{{&lt; lastmod &gt;}}</p>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/howto.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">howto</a> <a href="/en/tags/git.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">git</a> </p></div>

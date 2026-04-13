@@ -101,7 +101,7 @@ formatter <span class="token operator">=</span> simple
 
 <span class="token operator">[</span>handler_file<span class="token operator">]</span>
 class <span class="token operator">=</span> FileHandler
-args <span class="token operator">=</span> <span class="token operator">(</span><span class="token string">'/home/username/radicale/radicale.log'</span><span class="token operator">,</span><span class="token operator">)</span>
+args <span class="token operator">=</span> <span class="token operator">(</span><span class="token string">&apos;/home/username/radicale/radicale.log&apos;</span><span class="token operator">,</span><span class="token operator">)</span>
 level <span class="token operator">=</span> INFO
 formatter <span class="token operator">=</span> full
 
@@ -135,7 +135,7 @@ server <span class="token operator">{</span>
     gzip_static            on<span class="token operator">;</span>
     gzip_http_version      <span class="token number">1.1</span><span class="token operator">;</span>
     gzip_proxied           expired no<span class="token operator">-</span>cache no<span class="token operator">-</span>store private auth<span class="token operator">;</span>
-    gzip_disable           <span class="token string">"MSIE [1-6]\."</span><span class="token operator">;</span>
+    gzip_disable           <span class="token string">&quot;MSIE [1-6]\.&quot;</span><span class="token operator">;</span>
     gzip_vary              on<span class="token operator">;</span>
 
     location <span class="token operator">/</span> <span class="token operator">{</span>

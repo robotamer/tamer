@@ -65,7 +65,7 @@ MAXSIZE<span class="token operator">=</span><span class="token number">1024</spa
 LOGDIR<span class="token operator">=</span><span class="token operator">/</span>var<span class="token operator">/</span>www<span class="token operator">/</span>log<span class="token operator">/</span>
 
 <span class="token keyword">if</span> <span class="token operator">[</span><span class="token operator">[</span> $EUID <span class="token operator">-</span>ne <span class="token number">0</span> <span class="token operator">]</span><span class="token operator">]</span><span class="token operator">;</span> <span class="token keyword">then</span>
-   <span class="token keyword">echo</span> <span class="token string">"This script must be run as root"</span> <span class="token number">1</span><span class="token operator">></span><span class="token operator">&</span><span class="token number">2</span>
+   <span class="token keyword">echo</span> <span class="token string">&quot;This script must be run as root&quot;</span> <span class="token number">1</span><span class="token operator">&gt;</span><span class="token operator">&amp;</span><span class="token number">2</span>
    <span class="token keyword">exit</span> <span class="token number">1</span>
 <span class="token keyword">fi</span>
 
@@ -73,7 +73,7 @@ LOGDIR<span class="token operator">=</span><span class="token operator">/</span>
 
 <span class="token keyword">for</span> FILENAME <span class="token keyword">in</span> <span class="token operator">*</span><span class="token operator">.</span>log<span class="token operator">;</span> <span class="token keyword">do</span>
         SIZE<span class="token operator">=</span>$<span class="token operator">(</span>du <span class="token operator">-</span>b $FILENAME <span class="token operator">|</span> cut <span class="token operator">-</span>f <span class="token number">1</span><span class="token operator">)</span>
-        <span class="token keyword">if</span><span class="token operator">(</span><span class="token operator">(</span>$SIZE<span class="token operator">></span>$MAXSIZE<span class="token operator">)</span><span class="token operator">)</span><span class="token operator">;</span> <span class="token keyword">then</span>
+        <span class="token keyword">if</span><span class="token operator">(</span><span class="token operator">(</span>$SIZE<span class="token operator">&gt;</span>$MAXSIZE<span class="token operator">)</span><span class="token operator">)</span><span class="token operator">;</span> <span class="token keyword">then</span>
                 TIMESTAMP<span class="token operator">=</span><span class="token string">`date +%Y%m%d`</span>
                 NEWFILENAME<span class="token operator">=</span>$FILENAME<span class="token operator">.</span>$TIMESTAMP
                 mv $FILENAME $NEWFILENAME

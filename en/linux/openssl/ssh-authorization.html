@@ -50,7 +50,7 @@
 <pre class="language-bash"><code class="language-bash">scp <span class="token operator">~</span><span class="token operator">/</span><span class="token operator">.</span>ssh<span class="token operator">/</span>id_dsa<span class="token operator">.</span>pub remoteuser@remoteserver<span class="token operator">.</span>com<span class="token operator">:</span>
 </code></pre>
 <p>Append the contents of your public key to the ~/.ssh/authorized_keys and remove it. Simply issue something like</p>
-<pre class="language-bash"><code class="language-bash">cat id_dsa<span class="token operator">.</span>pub <span class="token operator">></span><span class="token operator">></span> <span class="token operator">.</span>ssh<span class="token operator">/</span>authorized_keys
+<pre class="language-bash"><code class="language-bash">cat id_dsa<span class="token operator">.</span>pub <span class="token operator">&gt;</span><span class="token operator">&gt;</span> <span class="token operator">.</span>ssh<span class="token operator">/</span>authorized_keys
 </code></pre>
 <p>Remove your public key from the home directory on the server.<br>
 Done!</p>

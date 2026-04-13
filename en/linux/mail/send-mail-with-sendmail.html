@@ -48,7 +48,7 @@
     RECIPIENT<span class="token operator">=</span>tosomeone@example<span class="token operator">.</span>com
     FROM<span class="token operator">=</span>me@example<span class="token operator">.</span>com
     
-    cat <span class="token operator"><</span><span class="token operator"><</span>EOF <span class="token operator">|</span> $SENDMAIL <span class="token operator">-</span>t $<span class="token operator">{</span>RECIPIENT<span class="token operator">}</span>
+    cat <span class="token operator">&lt;</span><span class="token operator">&lt;</span>EOF <span class="token operator">|</span> $SENDMAIL <span class="token operator">-</span>t $<span class="token operator">{</span>RECIPIENT<span class="token operator">}</span>
     From<span class="token operator">:</span> $<span class="token operator">{</span>FROM<span class="token operator">}</span> 
     To<span class="token operator">:</span> $<span class="token operator">{</span>RECIPIENT<span class="token operator">}</span>
     Subject<span class="token operator">:</span> testmail

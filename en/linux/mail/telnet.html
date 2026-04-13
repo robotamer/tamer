@@ -57,10 +57,10 @@ $ telnet $REMOTE_SRV <span class="token number">143</span>
 <pre class="language-sh"><code class="language-sh">c<span class="token operator">:</span> telnet $REMOTE_SRV <span class="token number">587</span>
 s<span class="token operator">:</span> Trying <span class="token number">107.189.21.115...</span>
 s<span class="token operator">:</span> Connected to mail<span class="token operator">.</span>example<span class="token operator">.</span>net<span class="token operator">.</span>
-s<span class="token operator">:</span> Escape character is <span class="token string">'^]'</span><span class="token operator">.</span>
+s<span class="token operator">:</span> Escape character is <span class="token string">&apos;^]&apos;</span><span class="token operator">.</span>
 s<span class="token operator">:</span> <span class="token number">220</span> mail<span class="token operator">.</span>example<span class="token operator">.</span>net ESMTP Citadel server ready<span class="token operator">.</span>
 c<span class="token operator">:</span> EHLO $USER
-s<span class="token operator">:</span> <span class="token number">250</span><span class="token operator">-</span>Hello <span class="token string">"your user name"</span>
+s<span class="token operator">:</span> <span class="token number">250</span><span class="token operator">-</span>Hello <span class="token string">&quot;your user name&quot;</span>
 s<span class="token operator">:</span> <span class="token number">250</span><span class="token operator">-</span>HELP
 s<span class="token operator">:</span> <span class="token number">250</span><span class="token operator">-</span>SIZE <span class="token number">10485760</span>
 s<span class="token operator">:</span> <span class="token number">250</span><span class="token operator">-</span>STARTTLS
@@ -94,7 +94,7 @@ $ openssl s_client <span class="token operator">-</span>debug  <span class="toke
 </code></pre>
 <h2>Using PLAIN</h2>
 <p>The PLAIN mechanism expects a base64 encoded string containing both username and password, each prefixed with a NULL byte. To generate this string using the base64 binary, run this command:</p>
-<pre class="language-sh"><code class="language-sh">$ <span class="token keyword">echo</span> <span class="token operator">-</span>ne <span class="token string">"\0username\0password"</span> <span class="token operator">|</span> base64
+<pre class="language-sh"><code class="language-sh">$ <span class="token keyword">echo</span> <span class="token operator">-</span>ne <span class="token string">&quot;\0username\0password&quot;</span> <span class="token operator">|</span> base64
 AHVzZXJuYW1lAHBhc3N3b3Jk
 </code></pre>
 <pre class="language-sh"><code class="language-sh">AUTH PLAIN AHVzZXJuYW1lAHBhc3N3b3Jk
@@ -102,9 +102,9 @@ AHVzZXJuYW1lAHBhc3N3b3Jk
 </code></pre>
 <h2>Using LOGIN authentication</h2>
 <p>The LOGIN mechanism also expects base64 encoded username and password, but separately. First, generate the base64 encoded strings:</p>
-<pre class="language-sh"><code class="language-sh">$ <span class="token keyword">echo</span> <span class="token operator">-</span>ne <span class="token string">"username"</span> <span class="token operator">|</span> base64
+<pre class="language-sh"><code class="language-sh">$ <span class="token keyword">echo</span> <span class="token operator">-</span>ne <span class="token string">&quot;username&quot;</span> <span class="token operator">|</span> base64
 dXNlcm5hbWU<span class="token operator">=</span>
-$ <span class="token keyword">echo</span> <span class="token operator">-</span>ne <span class="token string">"password"</span> <span class="token operator">|</span> base64
+$ <span class="token keyword">echo</span> <span class="token operator">-</span>ne <span class="token string">&quot;password&quot;</span> <span class="token operator">|</span> base64
 cGFzc3dvcmQ<span class="token operator">=</span>
 </code></pre>
 <p>and authenticate with the SMTP server:</p>
@@ -117,7 +117,7 @@ S<span class="token operator">:</span> <span class="token operator">*</span> CAP
 S<span class="token operator">:</span> a001 OK CAPABILITY completed
 C<span class="token operator">:</span> a002 STARTTLS
 S<span class="token operator">:</span> a002 OK Begin TLS negotiation now
-<span class="token operator"><</span>TLS negotiation<span class="token operator">,</span> further commands are under <span class="token operator">[</span>TLS<span class="token operator">]</span> layer<span class="token operator">></span>
+<span class="token operator">&lt;</span>TLS negotiation<span class="token operator">,</span> further commands are under <span class="token operator">[</span>TLS<span class="token operator">]</span> layer<span class="token operator">&gt;</span>
 C<span class="token operator">:</span> a003 CAPABILITY
 S<span class="token operator">:</span> <span class="token operator">*</span> CAPABILITY IMAP4rev1 AUTH<span class="token operator">=</span>PLAIN
 S<span class="token operator">:</span> a003 OK CAPABILITY completed
@@ -129,14 +129,14 @@ C<span class="token operator">:</span> Logout
 <pre class="language-sh"><code class="language-sh">$ telnet <span class="token number">172.16.6.165</span> <span class="token number">25</span>
 Trying <span class="token number">172.16.6.165...</span>
 Connected to my_esa<span class="token operator">.</span>
-Escape character is <span class="token string">'^]'</span><span class="token operator">.</span>
+Escape character is <span class="token string">&apos;^]&apos;</span><span class="token operator">.</span>
 <span class="token number">220</span> my_esa<span class="token operator">.</span><span class="token keyword">local</span> ESMTP
 helo
 <span class="token number">250</span> my_esa<span class="token operator">.</span><span class="token keyword">local</span>
-mail from<span class="token operator">:</span> <span class="token operator"><</span><span class="token keyword">test</span>@<span class="token keyword">test</span><span class="token operator">.</span>com<span class="token operator">></span>
-<span class="token number">250</span> sender <span class="token operator"><</span><span class="token keyword">test</span>@<span class="token keyword">test</span><span class="token operator">.</span>com<span class="token operator">></span> ok
-rcpt to<span class="token operator">:</span> <span class="token operator"><</span>user@other<span class="token operator">.</span>com<span class="token operator">></span> 
-<span class="token number">250</span> recipient <span class="token operator"><</span>user@other<span class="token operator">.</span>com<span class="token operator">></span> ok
+mail from<span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token keyword">test</span>@<span class="token keyword">test</span><span class="token operator">.</span>com<span class="token operator">&gt;</span>
+<span class="token number">250</span> sender <span class="token operator">&lt;</span><span class="token keyword">test</span>@<span class="token keyword">test</span><span class="token operator">.</span>com<span class="token operator">&gt;</span> ok
+rcpt to<span class="token operator">:</span> <span class="token operator">&lt;</span>user@other<span class="token operator">.</span>com<span class="token operator">&gt;</span> 
+<span class="token number">250</span> recipient <span class="token operator">&lt;</span>user@other<span class="token operator">.</span>com<span class="token operator">&gt;</span> ok
 data
 <span class="token number">354</span> go ahead
 subject<span class="token operator">:</span> TESTING SMTP
@@ -155,7 +155,7 @@ Connection closed by foreign host<span class="token operator">.</span>
 <span class="token number">421</span> <span class="token comment">#4.4.5 Too many connections to this host</span>
 <span class="token number">421</span> <span class="token comment">#4.4.5 Too many connections to this listener</span>
 <span class="token number">421</span> <span class="token comment">#4.x.2 Too many messages for this session</span>
-<span class="token number">421</span> <span class="token operator"><</span>hostname<span class="token operator">></span> Service not available<span class="token operator">,</span> closing transaction channel
+<span class="token number">421</span> <span class="token operator">&lt;</span>hostname<span class="token operator">&gt;</span> Service not available<span class="token operator">,</span> closing transaction channel
 <span class="token number">421</span> Exceeded allowable connection <span class="token keyword">time</span>
 <span class="token number">421</span> Exceeded bad SMTP command limit<span class="token operator">,</span> disconnecting
 <span class="token number">421</span> The evaluation license has expired

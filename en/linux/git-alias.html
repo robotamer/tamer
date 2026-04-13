@@ -53,10 +53,10 @@
             <h4>Git Alias:</h4>
 <p>I thought this deserves it's own little page.</p>
 <p>Following will create an alias for git add, commit, and push</p>
-<pre class="language-bash"><code class="language-bash">git config <span class="token keyword">alias</span><span class="token operator">.</span>acp <span class="token string">'! acp() { git add . && git commit -m \"$1\" && git push ; } ; acp'</span>  
+<pre class="language-bash"><code class="language-bash">git config <span class="token keyword">alias</span><span class="token operator">.</span>acp <span class="token string">&apos;! acp() { git add . &amp;&amp; git commit -m \&quot;$1\&quot; &amp;&amp; git push ; } ; acp&apos;</span>  
 </code></pre>
 <p>Use it like this:</p>
-<pre class="language-bash"><code class="language-bash">git acp <span class="token string">"your commit message"</span>
+<pre class="language-bash"><code class="language-bash">git acp <span class="token string">&quot;your commit message&quot;</span>
 </code></pre>
 <p>Depending on your setup, you may also want to add <code class="language-bash">git pull</code> before you <code class="language-bash">git add</code>, but I am sure you can figure out how to do that. Isn't this something?</p>
 <p>{{&lt; lastmod &gt;}}</p>

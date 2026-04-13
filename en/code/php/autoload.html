@@ -52,25 +52,25 @@
 <p>And since I could find anything good, I had to figure it out by my self, here is the result.</p>
 <p><a href="https://gist.github.com/robotamer/3027247">gist id=3027247</a></p>
 <p>HowTo:</p>
-<pre class="language-php"><code class="language-php">    <span class="token operator"><</span><span class="token operator">?</span>php
+<pre class="language-php"><code class="language-php">    <span class="token operator">&lt;</span><span class="token operator">?</span>php
     <span class="token comment"># Adds your library to the beginning of the php include path</span>
-    addInclude<span class="token operator">(</span><span class="token string">'~/code/libs'</span><span class="token operator">,</span> FALSE<span class="token operator">)</span><span class="token operator">;</span>
+    addInclude<span class="token operator">(</span><span class="token string">&apos;~/code/libs&apos;</span><span class="token operator">,</span> FALSE<span class="token operator">)</span><span class="token operator">;</span>
 
     $loader <span class="token operator">=</span> new SplClassLoader<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">;</span>
 
     <span class="token comment"># adds the php include path to the class</span>
-    $loader<span class="token operator">-</span><span class="token operator">></span>setIncludePathLookup<span class="token operator">(</span><span class="token literal">true</span><span class="token operator">)</span><span class="token operator">;</span>
+    $loader<span class="token operator">-</span><span class="token operator">&gt;</span>setIncludePathLookup<span class="token operator">(</span><span class="token literal">true</span><span class="token operator">)</span><span class="token operator">;</span>
 
-    $loader<span class="token operator">-</span><span class="token operator">></span>add<span class="token operator">(</span><span class="token string">'Zend'</span><span class="token operator">)</span><span class="token operator">;</span>
-    $loader<span class="token operator">-</span><span class="token operator">></span>add<span class="token operator">(</span><span class="token string">'PEAR'</span><span class="token operator">)</span><span class="token operator">;</span>
+    $loader<span class="token operator">-</span><span class="token operator">&gt;</span>add<span class="token operator">(</span><span class="token string">&apos;Zend&apos;</span><span class="token operator">)</span><span class="token operator">;</span>
+    $loader<span class="token operator">-</span><span class="token operator">&gt;</span>add<span class="token operator">(</span><span class="token string">&apos;PEAR&apos;</span><span class="token operator">)</span><span class="token operator">;</span>
 
-    <span class="token comment"># Give the path if it isn't in the php include path like this</span>
-    $loader<span class="token operator">-</span><span class="token operator">></span>add<span class="token operator">(</span><span class="token string">'Symfony'</span><span class="token operator">,</span> <span class="token string">'/path/to/symfony'</span><span class="token operator">)</span><span class="token operator">;</span>
+    <span class="token comment"># Give the path if it isn&apos;t in the php include path like this</span>
+    $loader<span class="token operator">-</span><span class="token operator">&gt;</span>add<span class="token operator">(</span><span class="token string">&apos;Symfony&apos;</span><span class="token operator">,</span> <span class="token string">&apos;/path/to/symfony&apos;</span><span class="token operator">)</span><span class="token operator">;</span>
 
-    $loader <span class="token operator">-</span><span class="token operator">></span> register<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">;</span>
-    <span class="token operator">?</span><span class="token operator">></span>
+    $loader <span class="token operator">-</span><span class="token operator">&gt;</span> register<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">;</span>
+    <span class="token operator">?</span><span class="token operator">&gt;</span>
 </code></pre>
-<pre class="language-php"><code class="language-php"><span class="token operator"><</span><span class="token operator">?</span>php
+<pre class="language-php"><code class="language-php"><span class="token operator">&lt;</span><span class="token operator">?</span>php
 <span class="token comment">/**
  * SplClassLoader implementation that implements the technical interoperability
  * standards for PHP 5.3 namespaces and class names.
@@ -82,43 +82,43 @@
  *     $classLoader = new \SplClassLoader();
  *
  *     // Configure the SplClassLoader to act normally or silently
- *     $classLoader->setMode(\SplClassLoader::MODE_NORMAL);
+ *     $classLoader-&gt;setMode(\SplClassLoader::MODE_NORMAL);
  *
  *     // Add a namespace of classes
- *     $classLoader->add('Doctrine', array(
- *         '/path/to/doctrine-common', '/path/to/doctrine-dbal', '/path/to/doctrine-orm'
+ *     $classLoader-&gt;add(&apos;Doctrine&apos;, array(
+ *         &apos;/path/to/doctrine-common&apos;, &apos;/path/to/doctrine-dbal&apos;, &apos;/path/to/doctrine-orm&apos;
  *     ));
  *
  *     // Add a prefix
- *     $classLoader->add('Swift', '/path/to/swift');
+ *     $classLoader-&gt;add(&apos;Swift&apos;, &apos;/path/to/swift&apos;);
  *
  *     // Add a prefix through PEAR1 convention, requiring include_path lookup
- *     $classLoader->add('PEAR');
+ *     $classLoader-&gt;add(&apos;PEAR&apos;);
  *
  *     // Allow to PHP use the include_path for file path lookup
- *     $classLoader->setIncludePathLookup(true);
+ *     $classLoader-&gt;setIncludePathLookup(true);
  *
  *     // Possibility to change the default php file extension
- *     $classLoader->setFileExtension('.php');
+ *     $classLoader-&gt;setFileExtension(&apos;.php&apos;);
  *
  *     // Register the autoloader, prepending it in the stack
- *     $classLoader->register(true);
+ *     $classLoader-&gt;register(true);
  *
- * @author Guilherme Blanco <guilhermeblanco@php.net>
- * @author Jonathan H. Wage <jonwage@gmail.com>
- * @author Roman S. Borschel <roman@code-factory.org>
- * @author Matthew Weier O'Phinney <matthew@zend.com>
- * @author Kris Wallsmith <kris.wallsmith@gmail.com>
- * @author Fabien Potencier <fabien.potencier@symfony-project.org>
+ * @author Guilherme Blanco &lt;guilhermeblanco@php.net&gt;
+ * @author Jonathan H. Wage &lt;jonwage@gmail.com&gt;
+ * @author Roman S. Borschel &lt;roman@code-factory.org&gt;
+ * @author Matthew Weier O&apos;Phinney &lt;matthew@zend.com&gt;
+ * @author Kris Wallsmith &lt;kris.wallsmith@gmail.com&gt;
+ * @author Fabien Potencier &lt;fabien.potencier@symfony-project.org&gt;
  */</span>
  
-include <span class="token string">'SplAutoloader.php'</span><span class="token operator">;</span>
+include <span class="token string">&apos;SplAutoloader.php&apos;</span><span class="token operator">;</span>
 class SplClassLoader implements SplAutoloader
 <span class="token operator">{</span>
     <span class="token comment">/**
      * @var string
      */</span>
-    private $fileExtension <span class="token operator">=</span> <span class="token string">'.php'</span><span class="token operator">;</span>
+    private $fileExtension <span class="token operator">=</span> <span class="token string">&apos;.php&apos;</span><span class="token operator">;</span>
  
     <span class="token comment">/**
      * @var boolean
@@ -140,13 +140,13 @@ class SplClassLoader implements SplAutoloader
      */</span>
     public <span class="token keyword">function</span> setMode<span class="token operator">(</span>$mode<span class="token operator">)</span>
     <span class="token operator">{</span>
-        <span class="token keyword">if</span> <span class="token operator">(</span>$mode <span class="token operator">&</span> self<span class="token operator">:</span><span class="token operator">:</span>MODE_SILENT <span class="token operator">&</span><span class="token operator">&</span> $mode <span class="token operator">&</span> self<span class="token operator">:</span><span class="token operator">:</span>MODE_NORMAL<span class="token operator">)</span> <span class="token operator">{</span>
+        <span class="token keyword">if</span> <span class="token operator">(</span>$mode <span class="token operator">&amp;</span> self<span class="token operator">:</span><span class="token operator">:</span>MODE_SILENT <span class="token operator">&amp;</span><span class="token operator">&amp;</span> $mode <span class="token operator">&amp;</span> self<span class="token operator">:</span><span class="token operator">:</span>MODE_NORMAL<span class="token operator">)</span> <span class="token operator">{</span>
             throw new \InvalidArgumentException<span class="token operator">(</span>
-                sprintf<span class="token operator">(</span><span class="token string">'Cannot have %s working normally and silently at the same time!'</span><span class="token operator">,</span> __CLASS__<span class="token operator">)</span>
+                sprintf<span class="token operator">(</span><span class="token string">&apos;Cannot have %s working normally and silently at the same time!&apos;</span><span class="token operator">,</span> __CLASS__<span class="token operator">)</span>
             <span class="token operator">)</span><span class="token operator">;</span>
         <span class="token operator">}</span>
  
-        $this<span class="token operator">-</span><span class="token operator">></span>mode <span class="token operator">=</span> $mode<span class="token operator">;</span>
+        $this<span class="token operator">-</span><span class="token operator">&gt;</span>mode <span class="token operator">=</span> $mode<span class="token operator">;</span>
     <span class="token operator">}</span>
  
     <span class="token comment">/**
@@ -156,7 +156,7 @@ class SplClassLoader implements SplAutoloader
      */</span>
     public <span class="token keyword">function</span> setFileExtension<span class="token operator">(</span>$fileExtension<span class="token operator">)</span>
     <span class="token operator">{</span>
-        $this<span class="token operator">-</span><span class="token operator">></span>fileExtension <span class="token operator">=</span> $fileExtension<span class="token operator">;</span>
+        $this<span class="token operator">-</span><span class="token operator">&gt;</span>fileExtension <span class="token operator">=</span> $fileExtension<span class="token operator">;</span>
     <span class="token operator">}</span>
  
     <span class="token comment">/**
@@ -166,7 +166,7 @@ class SplClassLoader implements SplAutoloader
      */</span>
     public <span class="token keyword">function</span> getFileExtension<span class="token operator">(</span><span class="token operator">)</span>
     <span class="token operator">{</span>
-        <span class="token keyword">return</span> $this<span class="token operator">-</span><span class="token operator">></span>fileExtension<span class="token operator">;</span>
+        <span class="token keyword">return</span> $this<span class="token operator">-</span><span class="token operator">&gt;</span>fileExtension<span class="token operator">;</span>
     <span class="token operator">}</span>
  
     <span class="token comment">/**
@@ -176,7 +176,7 @@ class SplClassLoader implements SplAutoloader
      */</span>
     public <span class="token keyword">function</span> setIncludePathLookup<span class="token operator">(</span>$includePathLookup<span class="token operator">)</span>
     <span class="token operator">{</span>
-        $this<span class="token operator">-</span><span class="token operator">></span>includePathLookup <span class="token operator">=</span> $includePathLookup<span class="token operator">;</span>
+        $this<span class="token operator">-</span><span class="token operator">&gt;</span>includePathLookup <span class="token operator">=</span> $includePathLookup<span class="token operator">;</span>
     <span class="token operator">}</span>
  
     <span class="token comment">/**
@@ -186,7 +186,7 @@ class SplClassLoader implements SplAutoloader
      */</span>
     public <span class="token keyword">function</span> getIncludePathLookup<span class="token operator">(</span><span class="token operator">)</span>
     <span class="token operator">{</span>
-        <span class="token keyword">return</span> $this<span class="token operator">-</span><span class="token operator">></span>includePathLookup<span class="token operator">;</span>
+        <span class="token keyword">return</span> $this<span class="token operator">-</span><span class="token operator">&gt;</span>includePathLookup<span class="token operator">;</span>
     <span class="token operator">}</span>
  
     <span class="token comment">/**
@@ -194,7 +194,7 @@ class SplClassLoader implements SplAutoloader
      */</span>
     public <span class="token keyword">function</span> register<span class="token operator">(</span>$prepend <span class="token operator">=</span> <span class="token literal">false</span><span class="token operator">)</span>
     <span class="token operator">{</span>
-        spl_autoload_register<span class="token operator">(</span>array<span class="token operator">(</span>$this<span class="token operator">,</span> <span class="token string">'load'</span><span class="token operator">)</span><span class="token operator">,</span> <span class="token literal">true</span><span class="token operator">,</span> $prepend<span class="token operator">)</span><span class="token operator">;</span>
+        spl_autoload_register<span class="token operator">(</span>array<span class="token operator">(</span>$this<span class="token operator">,</span> <span class="token string">&apos;load&apos;</span><span class="token operator">)</span><span class="token operator">,</span> <span class="token literal">true</span><span class="token operator">,</span> $prepend<span class="token operator">)</span><span class="token operator">;</span>
     <span class="token operator">}</span>
  
     <span class="token comment">/**
@@ -202,7 +202,7 @@ class SplClassLoader implements SplAutoloader
      */</span>
     public <span class="token keyword">function</span> unregister<span class="token operator">(</span><span class="token operator">)</span>
     <span class="token operator">{</span>
-        spl_autoload_unregister<span class="token operator">(</span>array<span class="token operator">(</span>$this<span class="token operator">,</span> <span class="token string">'load'</span><span class="token operator">)</span><span class="token operator">)</span><span class="token operator">;</span>
+        spl_autoload_unregister<span class="token operator">(</span>array<span class="token operator">(</span>$this<span class="token operator">,</span> <span class="token string">&apos;load&apos;</span><span class="token operator">)</span><span class="token operator">)</span><span class="token operator">;</span>
     <span class="token operator">}</span>
  
     <span class="token comment">/**
@@ -210,7 +210,7 @@ class SplClassLoader implements SplAutoloader
      */</span>
     public <span class="token keyword">function</span> add<span class="token operator">(</span>$resource<span class="token operator">,</span> $resourcePath <span class="token operator">=</span> null<span class="token operator">)</span>
     <span class="token operator">{</span>
-        $this<span class="token operator">-</span><span class="token operator">></span>resources<span class="token operator">[</span>$resource<span class="token operator">]</span> <span class="token operator">=</span> <span class="token operator">(</span>array<span class="token operator">)</span> $resourcePath<span class="token operator">;</span>
+        $this<span class="token operator">-</span><span class="token operator">&gt;</span>resources<span class="token operator">[</span>$resource<span class="token operator">]</span> <span class="token operator">=</span> <span class="token operator">(</span>array<span class="token operator">)</span> $resourcePath<span class="token operator">;</span>
     <span class="token operator">}</span>
  
     <span class="token comment">/**
@@ -218,24 +218,24 @@ class SplClassLoader implements SplAutoloader
      */</span>
     public <span class="token keyword">function</span> load<span class="token operator">(</span>$resourceName<span class="token operator">)</span>
     <span class="token operator">{</span>
-        $resourceAbsolutePath <span class="token operator">=</span> $this<span class="token operator">-</span><span class="token operator">></span>getResourceAbsolutePath<span class="token operator">(</span>$resourceName<span class="token operator">)</span><span class="token operator">;</span>
+        $resourceAbsolutePath <span class="token operator">=</span> $this<span class="token operator">-</span><span class="token operator">&gt;</span>getResourceAbsolutePath<span class="token operator">(</span>$resourceName<span class="token operator">)</span><span class="token operator">;</span>
  
         switch <span class="token operator">(</span><span class="token literal">true</span><span class="token operator">)</span> <span class="token operator">{</span>
-            <span class="token keyword">case</span> <span class="token operator">(</span>$this<span class="token operator">-</span><span class="token operator">></span>mode <span class="token operator">&</span> self<span class="token operator">:</span><span class="token operator">:</span>MODE_SILENT<span class="token operator">)</span><span class="token operator">:</span>
+            <span class="token keyword">case</span> <span class="token operator">(</span>$this<span class="token operator">-</span><span class="token operator">&gt;</span>mode <span class="token operator">&amp;</span> self<span class="token operator">:</span><span class="token operator">:</span>MODE_SILENT<span class="token operator">)</span><span class="token operator">:</span>
                 <span class="token keyword">if</span> <span class="token operator">(</span>$resourceAbsolutePath <span class="token operator">!</span><span class="token operator">=</span><span class="token operator">=</span> <span class="token literal">false</span><span class="token operator">)</span> <span class="token operator">{</span>
                     require $resourceAbsolutePath<span class="token operator">;</span>
                 <span class="token operator">}</span>
                 <span class="token keyword">break</span><span class="token operator">;</span>
  
-            <span class="token keyword">case</span> <span class="token operator">(</span>$this<span class="token operator">-</span><span class="token operator">></span>mode <span class="token operator">&</span> self<span class="token operator">:</span><span class="token operator">:</span>MODE_NORMAL<span class="token operator">)</span><span class="token operator">:</span>
+            <span class="token keyword">case</span> <span class="token operator">(</span>$this<span class="token operator">-</span><span class="token operator">&gt;</span>mode <span class="token operator">&amp;</span> self<span class="token operator">:</span><span class="token operator">:</span>MODE_NORMAL<span class="token operator">)</span><span class="token operator">:</span>
             default<span class="token operator">:</span>
                 require $resourceAbsolutePath<span class="token operator">;</span>
                 <span class="token keyword">break</span><span class="token operator">;</span>
         <span class="token operator">}</span>
  
-        <span class="token keyword">if</span> <span class="token operator">(</span>$this<span class="token operator">-</span><span class="token operator">></span>mode <span class="token operator">&</span> self<span class="token operator">:</span><span class="token operator">:</span>MODE_DEBUG <span class="token operator">&</span><span class="token operator">&</span> <span class="token operator">!</span> $this<span class="token operator">-</span><span class="token operator">></span>isResourceDeclared<span class="token operator">(</span>$resourceName<span class="token operator">)</span><span class="token operator">)</span> <span class="token operator">{</span>
+        <span class="token keyword">if</span> <span class="token operator">(</span>$this<span class="token operator">-</span><span class="token operator">&gt;</span>mode <span class="token operator">&amp;</span> self<span class="token operator">:</span><span class="token operator">:</span>MODE_DEBUG <span class="token operator">&amp;</span><span class="token operator">&amp;</span> <span class="token operator">!</span> $this<span class="token operator">-</span><span class="token operator">&gt;</span>isResourceDeclared<span class="token operator">(</span>$resourceName<span class="token operator">)</span><span class="token operator">)</span> <span class="token operator">{</span>
             throw new \RuntimeException<span class="token operator">(</span>
-                sprintf<span class="token operator">(</span><span class="token string">'Autoloader expected resource "%s" to be declared in file "%s".'</span><span class="token operator">,</span> $resourceName<span class="token operator">,</span> $resourceAbsolutePath<span class="token operator">)</span>
+                sprintf<span class="token operator">(</span><span class="token string">&apos;Autoloader expected resource &quot;%s&quot; to be declared in file &quot;%s&quot;.&apos;</span><span class="token operator">,</span> $resourceName<span class="token operator">,</span> $resourceAbsolutePath<span class="token operator">)</span>
             <span class="token operator">)</span><span class="token operator">;</span>
         <span class="token operator">}</span>
     <span class="token operator">}</span>
@@ -249,9 +249,9 @@ class SplClassLoader implements SplAutoloader
      */</span>
     private <span class="token keyword">function</span> getResourceAbsolutePath<span class="token operator">(</span>$resourceName<span class="token operator">)</span>
     <span class="token operator">{</span>
-        $resourceRelativePath <span class="token operator">=</span> $this<span class="token operator">-</span><span class="token operator">></span>getResourceRelativePath<span class="token operator">(</span>$resourceName<span class="token operator">)</span><span class="token operator">;</span>
+        $resourceRelativePath <span class="token operator">=</span> $this<span class="token operator">-</span><span class="token operator">&gt;</span>getResourceRelativePath<span class="token operator">(</span>$resourceName<span class="token operator">)</span><span class="token operator">;</span>
  
-        foreach <span class="token operator">(</span>$this<span class="token operator">-</span><span class="token operator">></span>resources as $resource <span class="token operator">=</span><span class="token operator">></span> $resourcesPath<span class="token operator">)</span> <span class="token operator">{</span>
+        foreach <span class="token operator">(</span>$this<span class="token operator">-</span><span class="token operator">&gt;</span>resources as $resource <span class="token operator">=</span><span class="token operator">&gt;</span> $resourcesPath<span class="token operator">)</span> <span class="token operator">{</span>
             <span class="token keyword">if</span> <span class="token operator">(</span>strpos<span class="token operator">(</span>$resourceName<span class="token operator">,</span> $resource<span class="token operator">)</span> <span class="token operator">!</span><span class="token operator">=</span><span class="token operator">=</span> <span class="token number">0</span><span class="token operator">)</span> <span class="token operator">{</span>
                 <span class="token keyword">continue</span><span class="token operator">;</span>
             <span class="token operator">}</span>
@@ -265,7 +265,7 @@ class SplClassLoader implements SplAutoloader
             <span class="token operator">}</span>
         <span class="token operator">}</span>
  
-        <span class="token keyword">if</span> <span class="token operator">(</span>$this<span class="token operator">-</span><span class="token operator">></span>includePathLookup <span class="token operator">&</span><span class="token operator">&</span> <span class="token operator">(</span>$resourceAbsolutePath <span class="token operator">=</span> stream_resolve_include_path<span class="token operator">(</span>$resourceRelativePath<span class="token operator">)</span><span class="token operator">)</span> <span class="token operator">!</span><span class="token operator">=</span><span class="token operator">=</span> <span class="token literal">false</span><span class="token operator">)</span> <span class="token operator">{</span>
+        <span class="token keyword">if</span> <span class="token operator">(</span>$this<span class="token operator">-</span><span class="token operator">&gt;</span>includePathLookup <span class="token operator">&amp;</span><span class="token operator">&amp;</span> <span class="token operator">(</span>$resourceAbsolutePath <span class="token operator">=</span> stream_resolve_include_path<span class="token operator">(</span>$resourceRelativePath<span class="token operator">)</span><span class="token operator">)</span> <span class="token operator">!</span><span class="token operator">=</span><span class="token operator">=</span> <span class="token literal">false</span><span class="token operator">)</span> <span class="token operator">{</span>
             <span class="token keyword">return</span> $resourceAbsolutePath<span class="token operator">;</span>
         <span class="token operator">}</span>
  
@@ -282,17 +282,17 @@ class SplClassLoader implements SplAutoloader
     private <span class="token keyword">function</span> getResourceRelativePath<span class="token operator">(</span>$resourceName<span class="token operator">)</span>
     <span class="token operator">{</span>
         <span class="token operator">/</span><span class="token operator">/</span> We always work with FQCN <span class="token keyword">in</span> this context
-        $resourceName <span class="token operator">=</span> ltrim<span class="token operator">(</span>$resourceName<span class="token operator">,</span> <span class="token string">'\\'</span><span class="token operator">)</span><span class="token operator">;</span>
-        $resourcePath <span class="token operator">=</span> <span class="token string">''</span><span class="token operator">;</span>
+        $resourceName <span class="token operator">=</span> ltrim<span class="token operator">(</span>$resourceName<span class="token operator">,</span> <span class="token string">&apos;\\&apos;</span><span class="token operator">)</span><span class="token operator">;</span>
+        $resourcePath <span class="token operator">=</span> <span class="token string">&apos;&apos;</span><span class="token operator">;</span>
  
-        <span class="token keyword">if</span> <span class="token operator">(</span><span class="token operator">(</span>$lastNamespacePosition <span class="token operator">=</span> strrpos<span class="token operator">(</span>$resourceName<span class="token operator">,</span> <span class="token string">'\\'</span><span class="token operator">)</span><span class="token operator">)</span> <span class="token operator">!</span><span class="token operator">=</span><span class="token operator">=</span> <span class="token literal">false</span><span class="token operator">)</span> <span class="token operator">{</span>
+        <span class="token keyword">if</span> <span class="token operator">(</span><span class="token operator">(</span>$lastNamespacePosition <span class="token operator">=</span> strrpos<span class="token operator">(</span>$resourceName<span class="token operator">,</span> <span class="token string">&apos;\\&apos;</span><span class="token operator">)</span><span class="token operator">)</span> <span class="token operator">!</span><span class="token operator">=</span><span class="token operator">=</span> <span class="token literal">false</span><span class="token operator">)</span> <span class="token operator">{</span>
             <span class="token operator">/</span><span class="token operator">/</span> Namespaced resource name
             $resourceNamespace <span class="token operator">=</span> substr<span class="token operator">(</span>$resourceName<span class="token operator">,</span> <span class="token number">0</span><span class="token operator">,</span> $lastNamespacePosition<span class="token operator">)</span><span class="token operator">;</span>
             $resourceName      <span class="token operator">=</span> substr<span class="token operator">(</span>$resourceName<span class="token operator">,</span> $lastNamespacePosition <span class="token operator">+</span> <span class="token number">1</span><span class="token operator">)</span><span class="token operator">;</span>
-            $resourcePath      <span class="token operator">=</span>  str_replace<span class="token operator">(</span><span class="token string">'\\'</span><span class="token operator">,</span> DIRECTORY_SEPARATOR<span class="token operator">,</span> $resourceNamespace<span class="token operator">)</span> <span class="token operator">.</span> DIRECTORY_SEPARATOR<span class="token operator">;</span>
+            $resourcePath      <span class="token operator">=</span>  str_replace<span class="token operator">(</span><span class="token string">&apos;\\&apos;</span><span class="token operator">,</span> DIRECTORY_SEPARATOR<span class="token operator">,</span> $resourceNamespace<span class="token operator">)</span> <span class="token operator">.</span> DIRECTORY_SEPARATOR<span class="token operator">;</span>
         <span class="token operator">}</span>
  
-        <span class="token keyword">return</span> $resourcePath <span class="token operator">.</span> str_replace<span class="token operator">(</span><span class="token string">'_'</span><span class="token operator">,</span> DIRECTORY_SEPARATOR<span class="token operator">,</span> $resourceName<span class="token operator">)</span> <span class="token operator">.</span> $this<span class="token operator">-</span><span class="token operator">></span>fileExtension<span class="token operator">;</span>
+        <span class="token keyword">return</span> $resourcePath <span class="token operator">.</span> str_replace<span class="token operator">(</span><span class="token string">&apos;_&apos;</span><span class="token operator">,</span> DIRECTORY_SEPARATOR<span class="token operator">,</span> $resourceName<span class="token operator">)</span> <span class="token operator">.</span> $this<span class="token operator">-</span><span class="token operator">&gt;</span>fileExtension<span class="token operator">;</span>
     <span class="token operator">}</span>
  
     <span class="token comment">/**
@@ -306,14 +306,14 @@ class SplClassLoader implements SplAutoloader
     <span class="token operator">{</span>
         <span class="token keyword">return</span> class_exists<span class="token operator">(</span>$resourceName<span class="token operator">,</span> <span class="token literal">false</span><span class="token operator">)</span>
             <span class="token operator">|</span><span class="token operator">|</span> interface_exists<span class="token operator">(</span>$resourceName<span class="token operator">,</span> <span class="token literal">false</span><span class="token operator">)</span>
-            <span class="token operator">|</span><span class="token operator">|</span> <span class="token operator">(</span>function_exists<span class="token operator">(</span><span class="token string">'trait_exists'</span><span class="token operator">)</span> <span class="token operator">&</span><span class="token operator">&</span> trait_exists<span class="token operator">(</span>$resourceName<span class="token operator">,</span> <span class="token literal">false</span><span class="token operator">)</span><span class="token operator">)</span><span class="token operator">;</span>
+            <span class="token operator">|</span><span class="token operator">|</span> <span class="token operator">(</span>function_exists<span class="token operator">(</span><span class="token string">&apos;trait_exists&apos;</span><span class="token operator">)</span> <span class="token operator">&amp;</span><span class="token operator">&amp;</span> trait_exists<span class="token operator">(</span>$resourceName<span class="token operator">,</span> <span class="token literal">false</span><span class="token operator">)</span><span class="token operator">)</span><span class="token operator">;</span>
     <span class="token operator">}</span>
 <span class="token operator">}</span>
 
-<span class="token operator">?</span><span class="token operator">></span>
+<span class="token operator">?</span><span class="token operator">&gt;</span>
 </code></pre>
 <pre class="language-php"><code class="language-php">
-<span class="token operator"><</span><span class="token operator">?</span>php
+<span class="token operator">&lt;</span><span class="token operator">?</span>php
 <span class="token comment">/**
  * Adds a directory to the php include path
  */</span>
@@ -333,17 +333,17 @@ class SplClassLoader implements SplAutoloader
 <span class="token keyword">function</span> addInclude<span class="token operator">(</span>$dir<span class="token operator">,</span> $at_end <span class="token operator">=</span> TRUE<span class="token operator">)</span>
 <span class="token operator">{</span>
     $exist <span class="token operator">=</span> file_exists<span class="token operator">(</span>$dir<span class="token operator">)</span><span class="token operator">;</span>
-    <span class="token keyword">if</span> <span class="token operator">(</span> <span class="token operator">!</span> $exist <span class="token operator">|</span><span class="token operator">|</span> <span class="token operator">(</span>$exist <span class="token operator">&</span><span class="token operator">&</span> filetype<span class="token operator">(</span>$dir<span class="token operator">)</span> <span class="token operator">!</span><span class="token operator">=</span> <span class="token string">'dir'</span><span class="token operator">)</span><span class="token operator">)</span>
+    <span class="token keyword">if</span> <span class="token operator">(</span> <span class="token operator">!</span> $exist <span class="token operator">|</span><span class="token operator">|</span> <span class="token operator">(</span>$exist <span class="token operator">&amp;</span><span class="token operator">&amp;</span> filetype<span class="token operator">(</span>$dir<span class="token operator">)</span> <span class="token operator">!</span><span class="token operator">=</span> <span class="token string">&apos;dir&apos;</span><span class="token operator">)</span><span class="token operator">)</span>
     <span class="token operator">{</span>
-        trigger_error<span class="token operator">(</span><span class="token string">"Include path '{$dir}' does not exist"</span><span class="token operator">,</span> E_USER_WARNING<span class="token operator">)</span><span class="token operator">;</span>
-        <span class="token keyword">echo</span> <span class="token string">'<pre>'</span><span class="token operator">;</span> print_r<span class="token operator">(</span>debug_backtrace<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">)</span><span class="token operator">;</span> <span class="token keyword">echo</span> <span class="token string">'</pre>'</span><span class="token operator">;</span>
+        trigger_error<span class="token operator">(</span><span class="token string">&quot;Include path &apos;{$dir}&apos; does not exist&quot;</span><span class="token operator">,</span> E_USER_WARNING<span class="token operator">)</span><span class="token operator">;</span>
+        <span class="token keyword">echo</span> <span class="token string">&apos;&lt;pre&gt;&apos;</span><span class="token operator">;</span> print_r<span class="token operator">(</span>debug_backtrace<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">)</span><span class="token operator">;</span> <span class="token keyword">echo</span> <span class="token string">&apos;&lt;/pre&gt;&apos;</span><span class="token operator">;</span>
         <span class="token keyword">exit</span><span class="token operator">;</span>
     <span class="token operator">}</span>
-    $dir   <span class="token operator">=</span> rtrim<span class="token operator">(</span>$dir<span class="token operator">,</span> <span class="token string">"/"</span><span class="token operator">)</span><span class="token operator">;</span>
-    $paths <span class="token operator">=</span> ltrim<span class="token operator">(</span>get_include_path<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">,</span> <span class="token string">"."</span><span class="token operator">.</span>PATH_SEPARATOR<span class="token operator">)</span><span class="token operator">;</span>
+    $dir   <span class="token operator">=</span> rtrim<span class="token operator">(</span>$dir<span class="token operator">,</span> <span class="token string">&quot;/&quot;</span><span class="token operator">)</span><span class="token operator">;</span>
+    $paths <span class="token operator">=</span> ltrim<span class="token operator">(</span>get_include_path<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">,</span> <span class="token string">&quot;.&quot;</span><span class="token operator">.</span>PATH_SEPARATOR<span class="token operator">)</span><span class="token operator">;</span>
     $paths <span class="token operator">=</span> explode<span class="token operator">(</span>PATH_SEPARATOR<span class="token operator">,</span> $paths<span class="token operator">)</span><span class="token operator">;</span>
-    $ds    <span class="token operator">=</span> <span class="token string">'.'</span><span class="token operator">.</span>PATH_SEPARATOR<span class="token operator">;</span>
-    <span class="token keyword">if</span> <span class="token operator">(</span>strlen<span class="token operator">(</span>$paths<span class="token operator">[</span><span class="token number">0</span><span class="token operator">]</span><span class="token operator">)</span> <span class="token operator">&</span><span class="token operator">&</span> array_search<span class="token operator">(</span>$dir<span class="token operator">,</span> $paths<span class="token operator">)</span> <span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span> <span class="token literal">false</span><span class="token operator">)</span> <span class="token operator">{</span>
+    $ds    <span class="token operator">=</span> <span class="token string">&apos;.&apos;</span><span class="token operator">.</span>PATH_SEPARATOR<span class="token operator">;</span>
+    <span class="token keyword">if</span> <span class="token operator">(</span>strlen<span class="token operator">(</span>$paths<span class="token operator">[</span><span class="token number">0</span><span class="token operator">]</span><span class="token operator">)</span> <span class="token operator">&amp;</span><span class="token operator">&amp;</span> array_search<span class="token operator">(</span>$dir<span class="token operator">,</span> $paths<span class="token operator">)</span> <span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span> <span class="token literal">false</span><span class="token operator">)</span> <span class="token operator">{</span>
         $at_end <span class="token operator">?</span> array_push<span class="token operator">(</span>$paths<span class="token operator">,</span> $dir<span class="token operator">)</span> <span class="token operator">:</span> array_unshift<span class="token operator">(</span>$paths<span class="token operator">,</span> $dir<span class="token operator">)</span><span class="token operator">;</span>
         $paths <span class="token operator">=</span> implode<span class="token operator">(</span>PATH_SEPARATOR<span class="token operator">,</span> $paths<span class="token operator">)</span><span class="token operator">;</span>
         set_include_path<span class="token operator">(</span>$ds<span class="token operator">.</span>$paths<span class="token operator">)</span><span class="token operator">;</span>
@@ -353,33 +353,33 @@ class SplClassLoader implements SplAutoloader
 <span class="token operator">}</span>
 <span class="token comment">/* #Test it
 echo get_include_path();
-echo '<br />';
-addInclude('/var/www/library/');
+echo &apos;&lt;br /&gt;&apos;;
+addInclude(&apos;/var/www/library/&apos;);
 echo get_include_path();
-echo '<br />';
+echo &apos;&lt;br /&gt;&apos;;
 */</span>
-<span class="token operator">?</span><span class="token operator">></span>
+<span class="token operator">?</span><span class="token operator">&gt;</span>
 
 </code></pre>
-<pre class="language-php"><code class="language-php"><span class="token operator"><</span><span class="token operator">?</span>php
+<pre class="language-php"><code class="language-php"><span class="token operator">&lt;</span><span class="token operator">?</span>php
 
 <span class="token keyword">function</span> autoload<span class="token operator">(</span>$className<span class="token operator">)</span>
 <span class="token operator">{</span>
-    $className <span class="token operator">=</span> ltrim<span class="token operator">(</span>$className<span class="token operator">,</span> <span class="token string">'\\'</span><span class="token operator">)</span><span class="token operator">;</span>
-    $fileName  <span class="token operator">=</span> <span class="token string">''</span><span class="token operator">;</span>
-    $namespace <span class="token operator">=</span> <span class="token string">''</span><span class="token operator">;</span>
+    $className <span class="token operator">=</span> ltrim<span class="token operator">(</span>$className<span class="token operator">,</span> <span class="token string">&apos;\\&apos;</span><span class="token operator">)</span><span class="token operator">;</span>
+    $fileName  <span class="token operator">=</span> <span class="token string">&apos;&apos;</span><span class="token operator">;</span>
+    $namespace <span class="token operator">=</span> <span class="token string">&apos;&apos;</span><span class="token operator">;</span>
  
-    <span class="token keyword">if</span> <span class="token operator">(</span>$lastNsPos <span class="token operator">=</span> strripos<span class="token operator">(</span>$className<span class="token operator">,</span> <span class="token string">'\\'</span><span class="token operator">)</span><span class="token operator">)</span> <span class="token operator">{</span>
+    <span class="token keyword">if</span> <span class="token operator">(</span>$lastNsPos <span class="token operator">=</span> strripos<span class="token operator">(</span>$className<span class="token operator">,</span> <span class="token string">&apos;\\&apos;</span><span class="token operator">)</span><span class="token operator">)</span> <span class="token operator">{</span>
         $namespace <span class="token operator">=</span> substr<span class="token operator">(</span>$className<span class="token operator">,</span> <span class="token number">0</span><span class="token operator">,</span> $lastNsPos<span class="token operator">)</span><span class="token operator">;</span>
         $className <span class="token operator">=</span> substr<span class="token operator">(</span>$className<span class="token operator">,</span> $lastNsPos <span class="token operator">+</span> <span class="token number">1</span><span class="token operator">)</span><span class="token operator">;</span>
-        $fileName  <span class="token operator">=</span> str_replace<span class="token operator">(</span><span class="token string">'\\'</span><span class="token operator">,</span> DIRECTORY_SEPARATOR<span class="token operator">,</span> $namespace<span class="token operator">)</span> <span class="token operator">.</span> DIRECTORY_SEPARATOR<span class="token operator">;</span>
+        $fileName  <span class="token operator">=</span> str_replace<span class="token operator">(</span><span class="token string">&apos;\\&apos;</span><span class="token operator">,</span> DIRECTORY_SEPARATOR<span class="token operator">,</span> $namespace<span class="token operator">)</span> <span class="token operator">.</span> DIRECTORY_SEPARATOR<span class="token operator">;</span>
     <span class="token operator">}</span>
  
-    $fileName <span class="token operator">.</span><span class="token operator">=</span> str_replace<span class="token operator">(</span><span class="token string">'_'</span><span class="token operator">,</span> DIRECTORY_SEPARATOR<span class="token operator">,</span> $className<span class="token operator">)</span> <span class="token operator">.</span> <span class="token string">'.php'</span><span class="token operator">;</span>
+    $fileName <span class="token operator">.</span><span class="token operator">=</span> str_replace<span class="token operator">(</span><span class="token string">&apos;_&apos;</span><span class="token operator">,</span> DIRECTORY_SEPARATOR<span class="token operator">,</span> $className<span class="token operator">)</span> <span class="token operator">.</span> <span class="token string">&apos;.php&apos;</span><span class="token operator">;</span>
  
     require $fileName<span class="token operator">;</span>
 <span class="token operator">}</span>
-<span class="token operator">?</span><span class="token operator">></span>
+<span class="token operator">?</span><span class="token operator">&gt;</span>
 </code></pre>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/php.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">php</a> <a href="/en/tags/zend.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">zend</a> <a href="/en/tags/HowTo.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">HowTo</a> </p></div>
             <hr>

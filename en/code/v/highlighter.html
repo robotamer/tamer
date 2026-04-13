@@ -66,17 +66,17 @@ The command will walk all sub direcories looking for html files.</p>
 
 <span class="token keyword">pub</span> <span class="token keyword">fn</span> new_manager<span class="token operator">(</span><span class="token operator">)</span> Manager <span class="token operator">{</span>
     <span class="token keyword">return</span> Manager<span class="token operator">{</span>
-        json_dir<span class="token operator">:</span> os<span class="token operator">.</span>join_path<span class="token operator">(</span>os<span class="token operator">.</span>dir<span class="token operator">(</span>@FILE<span class="token operator">)</span><span class="token operator">,</span> <span class="token string">'lang_data'</span><span class="token operator">)</span>
+        json_dir<span class="token operator">:</span> os<span class="token operator">.</span>join_path<span class="token operator">(</span>os<span class="token operator">.</span>dir<span class="token operator">(</span>@FILE<span class="token operator">)</span><span class="token operator">,</span> <span class="token string">&apos;lang_data&apos;</span><span class="token operator">)</span>
     <span class="token operator">}</span>
 <span class="token operator">}</span>
 
 <span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token operator">(</span><span class="token keyword">mut</span> m Manager<span class="token operator">)</span> highlight_html<span class="token operator">(</span>html <span class="token keyword2">string</span><span class="token operator">)</span> <span class="token keyword2">string</span> <span class="token operator">{</span>
-    parts <span class="token operator">:</span><span class="token operator">=</span> html<span class="token operator">.</span>split<span class="token operator">(</span><span class="token string">'</code>'</span><span class="token operator">)</span>
-    <span class="token keyword">if</span> parts<span class="token operator">.</span>len <span class="token operator"><</span><span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">{</span>
+    parts <span class="token operator">:</span><span class="token operator">=</span> html<span class="token operator">.</span>split<span class="token operator">(</span><span class="token string">&apos;&lt;/code&gt;&apos;</span><span class="token operator">)</span>
+    <span class="token keyword">if</span> parts<span class="token operator">.</span>len <span class="token operator">&lt;</span><span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">{</span>
         <span class="token keyword">return</span> html
     <span class="token operator">}</span>
 
-    <span class="token keyword">mut</span> final_html <span class="token operator">:</span><span class="token operator">=</span> <span class="token string">''</span>
+    <span class="token keyword">mut</span> final_html <span class="token operator">:</span><span class="token operator">=</span> <span class="token string">&apos;&apos;</span>
 
     <span class="token keyword">for</span> i<span class="token operator">,</span> part <span class="token keyword">in</span> parts <span class="token operator">{</span>
         <span class="token keyword">if</span> i <span class="token operator">=</span><span class="token operator">=</span> parts<span class="token operator">.</span>len <span class="token operator">-</span> <span class="token number">1</span> <span class="token operator">{</span>
@@ -84,31 +84,31 @@ The command will walk all sub direcories looking for html files.</p>
             <span class="token keyword">break</span>
         <span class="token operator">}</span>
 
-        <span class="token keyword">if</span> part<span class="token operator">.</span>contains<span class="token operator">(</span><span class="token string">'<code class="language-'</span><span class="token operator">)</span> <span class="token operator">{</span>
-            sub_parts <span class="token operator">:</span><span class="token operator">=</span> part<span class="token operator">.</span>split<span class="token operator">(</span><span class="token string">'<code class="language-'</span><span class="token operator">)</span>
+        <span class="token keyword">if</span> part<span class="token operator">.</span>contains<span class="token operator">(</span><span class="token string">&apos;&lt;code class=&quot;language-&apos;</span><span class="token operator">)</span> <span class="token operator">{</span>
+            sub_parts <span class="token operator">:</span><span class="token operator">=</span> part<span class="token operator">.</span>split<span class="token operator">(</span><span class="token string">&apos;&lt;code class=&quot;language-&apos;</span><span class="token operator">)</span>
             <span class="token keyword">mut</span> before_code <span class="token operator">:</span><span class="token operator">=</span> sub_parts<span class="token operator">[</span><span class="token number">0</span><span class="token operator">]</span>
 
             lang_and_code <span class="token operator">:</span><span class="token operator">=</span> sub_parts<span class="token operator">[</span><span class="token number">1</span><span class="token operator">]</span>
-            lang <span class="token operator">:</span><span class="token operator">=</span> lang_and_code<span class="token operator">.</span>all_before<span class="token operator">(</span><span class="token string">'">'</span><span class="token operator">)</span>
-            code <span class="token operator">:</span><span class="token operator">=</span> lang_and_code<span class="token operator">.</span>all_after<span class="token operator">(</span><span class="token string">'">'</span><span class="token operator">)</span>
+            lang <span class="token operator">:</span><span class="token operator">=</span> lang_and_code<span class="token operator">.</span>all_before<span class="token operator">(</span><span class="token string">&apos;&quot;&gt;&apos;</span><span class="token operator">)</span>
+            code <span class="token operator">:</span><span class="token operator">=</span> lang_and_code<span class="token operator">.</span>all_after<span class="token operator">(</span><span class="token string">&apos;&quot;&gt;&apos;</span><span class="token operator">)</span>
 
             syntax <span class="token operator">:</span><span class="token operator">=</span> m<span class="token operator">.</span>get_syntax<span class="token operator">(</span>lang<span class="token operator">)</span> <span class="token keyword">or</span> <span class="token operator">{</span>
-                m<span class="token operator">.</span>get_syntax<span class="token operator">(</span><span class="token string">'bash'</span><span class="token operator">)</span> <span class="token keyword">or</span> <span class="token operator">{</span>
-                    final_html <span class="token operator">+</span><span class="token operator">=</span> part <span class="token operator">+</span> <span class="token string">'</code>'</span>
+                m<span class="token operator">.</span>get_syntax<span class="token operator">(</span><span class="token string">&apos;bash&apos;</span><span class="token operator">)</span> <span class="token keyword">or</span> <span class="token operator">{</span>
+                    final_html <span class="token operator">+</span><span class="token operator">=</span> part <span class="token operator">+</span> <span class="token string">&apos;&lt;/code&gt;&apos;</span>
                     <span class="token keyword">continue</span>
                 <span class="token operator">}</span>
             <span class="token operator">}</span>
 
             <span class="token comment">// Add the language class to the &lt;pre&gt; tag for the dark background</span>
-            <span class="token comment">// We look back at the 'before_code' and swap &lt;pre&gt; for &lt;pre class="language-xxx"&gt;</span>
-            <span class="token keyword">if</span> before_code<span class="token operator">.</span>ends_with<span class="token operator">(</span><span class="token string">'<pre>'</span><span class="token operator">)</span> <span class="token operator">{</span>
-                before_code <span class="token operator">=</span> before_code<span class="token operator">.</span>trim_string_right<span class="token operator">(</span><span class="token string">'<pre>'</span><span class="token operator">)</span> <span class="token operator">+</span> <span class="token string">'<pre class="language-${lang}">'</span>
+            <span class="token comment">// We look back at the &apos;before_code&apos; and swap &lt;pre&gt; for &lt;pre class=&quot;language-xxx&quot;&gt;</span>
+            <span class="token keyword">if</span> before_code<span class="token operator">.</span>ends_with<span class="token operator">(</span><span class="token string">&apos;&lt;pre&gt;&apos;</span><span class="token operator">)</span> <span class="token operator">{</span>
+                before_code <span class="token operator">=</span> before_code<span class="token operator">.</span>trim_string_right<span class="token operator">(</span><span class="token string">&apos;&lt;pre&gt;&apos;</span><span class="token operator">)</span> <span class="token operator">+</span> <span class="token string">&apos;&lt;pre class=&quot;language-${lang}&quot;&gt;&apos;</span>
             <span class="token operator">}</span>
 
             highlighted <span class="token operator">:</span><span class="token operator">=</span> m<span class="token operator">.</span>apply_highlight<span class="token operator">(</span>code<span class="token operator">,</span> syntax<span class="token operator">)</span>
-            final_html <span class="token operator">+</span><span class="token operator">=</span> <span class="token string">'${before_code}<code class="language-${lang}">${highlighted}</code>'</span>
+            final_html <span class="token operator">+</span><span class="token operator">=</span> <span class="token string">&apos;${before_code}&lt;code class=&quot;language-${lang}&quot;&gt;${highlighted}&lt;/code&gt;&apos;</span>
         <span class="token operator">}</span> <span class="token keyword">else</span> <span class="token operator">{</span>
-            final_html <span class="token operator">+</span><span class="token operator">=</span> part <span class="token operator">+</span> <span class="token string">'</code>'</span>
+            final_html <span class="token operator">+</span><span class="token operator">=</span> part <span class="token operator">+</span> <span class="token string">&apos;&lt;/code&gt;&apos;</span>
         <span class="token operator">}</span>
     <span class="token operator">}</span>
 
@@ -119,7 +119,7 @@ The command will walk all sub direcories looking for html files.</p>
     <span class="token keyword">if</span> lang <span class="token keyword">in</span> m<span class="token operator">.</span>cache <span class="token operator">{</span>
         <span class="token keyword">return</span> m<span class="token operator">.</span>cache<span class="token operator">[</span>lang<span class="token operator">]</span>
     <span class="token operator">}</span>
-    path <span class="token operator">:</span><span class="token operator">=</span> os<span class="token operator">.</span>join_path<span class="token operator">(</span>m<span class="token operator">.</span>json_dir<span class="token operator">,</span> <span class="token string">'${lang}.json'</span><span class="token operator">)</span>
+    path <span class="token operator">:</span><span class="token operator">=</span> os<span class="token operator">.</span>join_path<span class="token operator">(</span>m<span class="token operator">.</span>json_dir<span class="token operator">,</span> <span class="token string">&apos;${lang}.json&apos;</span><span class="token operator">)</span>
     <span class="token keyword">if</span> <span class="token operator">!</span>os<span class="token operator">.</span>exists<span class="token operator">(</span>path<span class="token operator">)</span> <span class="token operator">{</span>
         <span class="token keyword">return</span> <span class="token literal">none</span>
     <span class="token operator">}</span>
@@ -129,34 +129,34 @@ The command will walk all sub direcories looking for html files.</p>
 <span class="token operator">}</span>
 
 <span class="token keyword">fn</span> <span class="token operator">(</span>m Manager<span class="token operator">)</span> apply_highlight<span class="token operator">(</span>code <span class="token keyword2">string</span><span class="token operator">,</span> syntax SyntaxDef<span class="token operator">)</span> <span class="token keyword2">string</span> <span class="token operator">{</span>
-    <span class="token keyword">mut</span> input <span class="token operator">:</span><span class="token operator">=</span> code<span class="token operator">.</span>replace<span class="token operator">(</span><span class="token string">'&quot;'</span><span class="token operator">,</span> <span class="token string">'"'</span><span class="token operator">)</span><span class="token operator">.</span>replace<span class="token operator">(</span><span class="token string">'&lt;'</span><span class="token operator">,</span> <span class="token string">'<'</span><span class="token operator">)</span><span class="token operator">.</span>replace<span class="token operator">(</span><span class="token string">'&gt;'</span><span class="token operator">,</span> <span class="token string">'>'</span><span class="token operator">)</span><span class="token operator">.</span>replace<span class="token operator">(</span><span class="token string">'&amp;'</span><span class="token operator">,</span>
-        <span class="token string">'&'</span><span class="token operator">)</span>
-    <span class="token keyword">mut</span> out <span class="token operator">:</span><span class="token operator">=</span> <span class="token string">''</span>
+    <span class="token keyword">mut</span> input <span class="token operator">:</span><span class="token operator">=</span> code<span class="token operator">.</span>replace<span class="token operator">(</span><span class="token string">&apos;&amp;quot;&apos;</span><span class="token operator">,</span> <span class="token string">&apos;&quot;&apos;</span><span class="token operator">)</span><span class="token operator">.</span>replace<span class="token operator">(</span><span class="token string">&apos;&amp;lt;&apos;</span><span class="token operator">,</span> <span class="token string">&apos;&lt;&apos;</span><span class="token operator">)</span><span class="token operator">.</span>replace<span class="token operator">(</span><span class="token string">&apos;&amp;gt;&apos;</span><span class="token operator">,</span> <span class="token string">&apos;&gt;&apos;</span><span class="token operator">)</span><span class="token operator">.</span>replace<span class="token operator">(</span><span class="token string">&apos;&amp;amp;&apos;</span><span class="token operator">,</span>
+        <span class="token string">&apos;&amp;&apos;</span><span class="token operator">)</span>
+    <span class="token keyword">mut</span> out <span class="token operator">:</span><span class="token operator">=</span> <span class="token string">&apos;&apos;</span>
     <span class="token keyword">mut</span> i <span class="token operator">:</span><span class="token operator">=</span> <span class="token number">0</span>
 
-    <span class="token keyword">for</span> i <span class="token operator"><</span> input<span class="token operator">.</span>len <span class="token operator">{</span>
+    <span class="token keyword">for</span> i <span class="token operator">&lt;</span> input<span class="token operator">.</span>len <span class="token operator">{</span>
         <span class="token comment">// 1. Multiline Comments /* */</span>
-        <span class="token keyword">if</span> input<span class="token operator">.</span>substr<span class="token operator">(</span>i<span class="token operator">,</span> input<span class="token operator">.</span>len<span class="token operator">)</span><span class="token operator">.</span>starts_with<span class="token operator">(</span><span class="token string">'/*'</span><span class="token operator">)</span> <span class="token operator">{</span>
-            end_idx <span class="token operator">:</span><span class="token operator">=</span> input<span class="token operator">.</span>index_after<span class="token operator">(</span><span class="token string">'*/'</span><span class="token operator">,</span> i<span class="token operator">)</span> <span class="token keyword">or</span> <span class="token operator">{</span> input<span class="token operator">.</span>len <span class="token operator">}</span>
-            out <span class="token operator">+</span><span class="token operator">=</span> <span class="token string">'<span class="token comment">${input[i..end_idx]}</span>'</span>
+        <span class="token keyword">if</span> input<span class="token operator">.</span>substr<span class="token operator">(</span>i<span class="token operator">,</span> input<span class="token operator">.</span>len<span class="token operator">)</span><span class="token operator">.</span>starts_with<span class="token operator">(</span><span class="token string">&apos;/*&apos;</span><span class="token operator">)</span> <span class="token operator">{</span>
+            end_idx <span class="token operator">:</span><span class="token operator">=</span> input<span class="token operator">.</span>index_after<span class="token operator">(</span><span class="token string">&apos;*/&apos;</span><span class="token operator">,</span> i<span class="token operator">)</span> <span class="token keyword">or</span> <span class="token operator">{</span> input<span class="token operator">.</span>len <span class="token operator">}</span>
+            out <span class="token operator">+</span><span class="token operator">=</span> <span class="token string">&apos;&lt;span class=&quot;token comment&quot;&gt;&apos;</span><span class="token operator">+</span> esc<span class="token operator">(</span>input<span class="token operator">[</span>i<span class="token operator">.</span><span class="token operator">.</span>end_idx<span class="token operator">]</span> <span class="token operator">+</span><span class="token string">&apos;&lt;/span&gt;&apos;</span>
             i <span class="token operator">=</span> end_idx
             <span class="token keyword">continue</span>
         <span class="token operator">}</span>
 
         <span class="token comment">// 2. Single Line Comments //</span>
-        <span class="token keyword">if</span> input<span class="token operator">.</span>substr<span class="token operator">(</span>i<span class="token operator">,</span> input<span class="token operator">.</span>len<span class="token operator">)</span><span class="token operator">.</span>starts_with<span class="token operator">(</span><span class="token string">'//'</span><span class="token operator">)</span> <span class="token operator">{</span>
-            end_idx <span class="token operator">:</span><span class="token operator">=</span> input<span class="token operator">.</span>index_after<span class="token operator">(</span><span class="token string">'\n'</span><span class="token operator">,</span> i<span class="token operator">)</span> <span class="token keyword">or</span> <span class="token operator">{</span> input<span class="token operator">.</span>len <span class="token operator">}</span>
-            out <span class="token operator">+</span><span class="token operator">=</span> <span class="token string">'<span class="token comment">${input[i..end_idx]}</span>'</span>
+        <span class="token keyword">if</span> input<span class="token operator">.</span>substr<span class="token operator">(</span>i<span class="token operator">,</span> input<span class="token operator">.</span>len<span class="token operator">)</span><span class="token operator">.</span>starts_with<span class="token operator">(</span><span class="token string">&apos;//&apos;</span><span class="token operator">)</span> <span class="token operator">{</span>
+            end_idx <span class="token operator">:</span><span class="token operator">=</span> input<span class="token operator">.</span>index_after<span class="token operator">(</span><span class="token string">&apos;\n&apos;</span><span class="token operator">,</span> i<span class="token operator">)</span> <span class="token keyword">or</span> <span class="token operator">{</span> input<span class="token operator">.</span>len <span class="token operator">}</span>
+            out <span class="token operator">+</span><span class="token operator">=</span> <span class="token string">&apos;&lt;span class=&quot;token comment&quot;&gt;&apos;</span><span class="token operator">+</span> esc<span class="token operator">(</span>input<span class="token operator">[</span>i<span class="token operator">.</span><span class="token operator">.</span>end_idx<span class="token operator">]</span> <span class="token operator">+</span><span class="token string">&apos;&lt;/span&gt;&apos;</span>
             i <span class="token operator">=</span> end_idx
             <span class="token keyword">continue</span>
         <span class="token operator">}</span>
 
-        <span class="token comment">// 3. Strings "..." or '...'</span>
-        <span class="token keyword">if</span> input<span class="token operator">[</span>i<span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">=</span> <span class="token string">`"`</span> <span class="token operator">|</span><span class="token operator">|</span> input<span class="token operator">[</span>i<span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">=</span> <span class="token string">`'`</span> <span class="token operator">{</span>
+        <span class="token comment">// 3. Strings &quot;...&quot; or &apos;...&apos;</span>
+        <span class="token keyword">if</span> input<span class="token operator">[</span>i<span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">=</span> <span class="token string">`&quot;`</span> <span class="token operator">|</span><span class="token operator">|</span> input<span class="token operator">[</span>i<span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">=</span> <span class="token string">`&apos;`</span> <span class="token operator">{</span>
             quote <span class="token operator">:</span><span class="token operator">=</span> input<span class="token operator">[</span>i<span class="token operator">]</span>
             <span class="token keyword">mut</span> j <span class="token operator">:</span><span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">1</span>
-            <span class="token keyword">for</span> j <span class="token operator"><</span> input<span class="token operator">.</span>len <span class="token operator">{</span>
-                <span class="token keyword">if</span> input<span class="token operator">[</span>j<span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">=</span> <span class="token string">`\\`</span> <span class="token operator">&</span><span class="token operator">&</span> j <span class="token operator">+</span> <span class="token number">1</span> <span class="token operator"><</span> input<span class="token operator">.</span>len <span class="token operator">{</span>
+            <span class="token keyword">for</span> j <span class="token operator">&lt;</span> input<span class="token operator">.</span>len <span class="token operator">{</span>
+                <span class="token keyword">if</span> input<span class="token operator">[</span>j<span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">=</span> <span class="token string">`\\`</span> <span class="token operator">&amp;</span><span class="token operator">&amp;</span> j <span class="token operator">+</span> <span class="token number">1</span> <span class="token operator">&lt;</span> input<span class="token operator">.</span>len <span class="token operator">{</span>
                     j <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">2</span>
                     <span class="token keyword">continue</span>
                 <span class="token operator">}</span>
@@ -166,61 +166,69 @@ The command will walk all sub direcories looking for html files.</p>
                 <span class="token operator">}</span>
                 j<span class="token operator">+</span><span class="token operator">+</span>
             <span class="token operator">}</span>
-            out <span class="token operator">+</span><span class="token operator">=</span> <span class="token string">'<span class="token string">${input[i..j]}</span>'</span>
+            out <span class="token operator">+</span><span class="token operator">=</span> <span class="token string">&apos;&lt;span class=&quot;token string&quot;&gt;&apos;</span> <span class="token operator">+</span> esc<span class="token operator">(</span>input<span class="token operator">[</span>i<span class="token operator">.</span><span class="token operator">.</span>j<span class="token operator">]</span><span class="token operator">)</span> <span class="token operator">+</span> <span class="token string">&apos;&lt;/span&gt;&apos;</span>
             i <span class="token operator">=</span> j
             <span class="token keyword">continue</span>
         <span class="token operator">}</span>
 
-        <span class="token comment">// 4. Words (Keywords & Types)</span>
+        <span class="token comment">// 4. Words (Keywords &amp; Types)</span>
         <span class="token keyword">if</span> input<span class="token operator">[</span>i<span class="token operator">]</span><span class="token operator">.</span>is_letter<span class="token operator">(</span><span class="token operator">)</span> <span class="token operator">|</span><span class="token operator">|</span> input<span class="token operator">[</span>i<span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">=</span> <span class="token string">`_`</span> <span class="token operator">{</span>
-            <span class="token keyword">mut</span> j <span class="token operator">:</span><span class="token operator">=</span> i
-            <span class="token keyword">for</span> j <span class="token operator"><</span> input<span class="token operator">.</span>len <span class="token operator">&</span><span class="token operator">&</span> <span class="token operator">(</span>input<span class="token operator">[</span>j<span class="token operator">]</span><span class="token operator">.</span>is_alnum<span class="token operator">(</span><span class="token operator">)</span> <span class="token operator">|</span><span class="token operator">|</span> input<span class="token operator">[</span>j<span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">=</span> <span class="token string">`_`</span><span class="token operator">)</span> <span class="token operator">{</span>
-                j<span class="token operator">+</span><span class="token operator">+</span>
-            <span class="token operator">}</span>
-            word <span class="token operator">:</span><span class="token operator">=</span> input<span class="token operator">[</span>i<span class="token operator">.</span><span class="token operator">.</span>j<span class="token operator">]</span>
-            <span class="token keyword">if</span> word <span class="token keyword">in</span> syntax<span class="token operator">.</span>symbols <span class="token operator">{</span>
-                out <span class="token operator">+</span><span class="token operator">=</span> <span class="token string">'<span class="token ${syntax.symbols[word]}">${word}</span>'</span>
-            <span class="token operator">}</span> <span class="token keyword">else</span> <span class="token operator">{</span>
-                out <span class="token operator">+</span><span class="token operator">=</span> word
-            <span class="token operator">}</span>
-            i <span class="token operator">=</span> j
-            <span class="token keyword">continue</span>
+                <span class="token keyword">mut</span> j <span class="token operator">:</span><span class="token operator">=</span> i
+                <span class="token keyword">for</span> j <span class="token operator">&lt;</span> input<span class="token operator">.</span>len <span class="token operator">&amp;</span><span class="token operator">&amp;</span> <span class="token operator">(</span>input<span class="token operator">[</span>j<span class="token operator">]</span><span class="token operator">.</span>is_alnum<span class="token operator">(</span><span class="token operator">)</span> <span class="token operator">|</span><span class="token operator">|</span> input<span class="token operator">[</span>j<span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">=</span> <span class="token string">`_`</span><span class="token operator">)</span> <span class="token operator">{</span> j<span class="token operator">+</span><span class="token operator">+</span> <span class="token operator">}</span>
+                word <span class="token operator">:</span><span class="token operator">=</span> input<span class="token operator">[</span>i<span class="token operator">.</span><span class="token operator">.</span>j<span class="token operator">]</span>
+                <span class="token keyword">if</span> word <span class="token keyword">in</span> syntax<span class="token operator">.</span>symbols <span class="token operator">{</span>
+                        <span class="token comment">// Escape the word just in case it contains &lt; or &gt;</span>
+                        out <span class="token operator">+</span><span class="token operator">=</span> <span class="token string">&apos;&lt;span class=&quot;token &apos;</span> <span class="token operator">+</span> syntax<span class="token operator">.</span>symbols<span class="token operator">[</span>word<span class="token operator">]</span> <span class="token operator">+</span> <span class="token string">&apos;&quot;&gt;&apos;</span> <span class="token operator">+</span> esc<span class="token operator">(</span>word<span class="token operator">)</span> <span class="token operator">+</span> <span class="token string">&apos;&lt;/span&gt;&apos;</span>
+                <span class="token operator">}</span> <span class="token keyword">else</span> <span class="token operator">{</span>
+                        out <span class="token operator">+</span><span class="token operator">=</span> esc<span class="token operator">(</span>word<span class="token operator">)</span>
+                <span class="token operator">}</span>
+                i <span class="token operator">=</span> j
+                <span class="token keyword">continue</span>
         <span class="token operator">}</span>
-
         <span class="token comment">// 5. Numbers</span>
         <span class="token keyword">if</span> input<span class="token operator">[</span>i<span class="token operator">]</span><span class="token operator">.</span>is_digit<span class="token operator">(</span><span class="token operator">)</span> <span class="token operator">{</span>
             <span class="token keyword">mut</span> j <span class="token operator">:</span><span class="token operator">=</span> i
-            <span class="token keyword">for</span> j <span class="token operator"><</span> input<span class="token operator">.</span>len <span class="token operator">&</span><span class="token operator">&</span> <span class="token operator">(</span>input<span class="token operator">[</span>j<span class="token operator">]</span><span class="token operator">.</span>is_alnum<span class="token operator">(</span><span class="token operator">)</span> <span class="token operator">|</span><span class="token operator">|</span> input<span class="token operator">[</span>j<span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">=</span> <span class="token string">`.`</span><span class="token operator">)</span> <span class="token operator">{</span>
+            <span class="token keyword">for</span> j <span class="token operator">&lt;</span> input<span class="token operator">.</span>len <span class="token operator">&amp;</span><span class="token operator">&amp;</span> <span class="token operator">(</span>input<span class="token operator">[</span>j<span class="token operator">]</span><span class="token operator">.</span>is_alnum<span class="token operator">(</span><span class="token operator">)</span> <span class="token operator">|</span><span class="token operator">|</span> input<span class="token operator">[</span>j<span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">=</span> <span class="token string">`.`</span><span class="token operator">)</span> <span class="token operator">{</span>
                 j<span class="token operator">+</span><span class="token operator">+</span>
             <span class="token operator">}</span>
-            out <span class="token operator">+</span><span class="token operator">=</span> <span class="token string">'<span class="token number">${input[i..j]}</span>'</span>
+            out <span class="token operator">+</span><span class="token operator">=</span> <span class="token string">&apos;&lt;span class=&quot;token number&quot;&gt;${input[i..j]}&lt;/span&gt;&apos;</span>
             i <span class="token operator">=</span> j
             <span class="token keyword">continue</span>
         <span class="token operator">}</span>
 
         <span class="token comment">// 6. Punctuation and Operators</span>
-        <span class="token comment">// Add this before the "Everything else" step</span>
+        <span class="token comment">// Add this before the &quot;Everything else&quot; step</span>
         <span class="token keyword">if</span> input<span class="token operator">[</span>i<span class="token operator">]</span> <span class="token keyword">in</span> <span class="token operator">[</span><span class="token string">`(`</span><span class="token operator">,</span> <span class="token string">`)`</span><span class="token operator">,</span> <span class="token string">`{`</span><span class="token operator">,</span> <span class="token string">`}`</span><span class="token operator">,</span> <span class="token string">`[`</span><span class="token operator">,</span> <span class="token string">`]`</span><span class="token operator">,</span> <span class="token string">`,`</span><span class="token operator">,</span> <span class="token string">`;`</span><span class="token operator">,</span> <span class="token string">`.`</span><span class="token operator">,</span> <span class="token string">`:`</span><span class="token operator">,</span> <span class="token string">`+`</span><span class="token operator">,</span> <span class="token string">`-`</span><span class="token operator">,</span> <span class="token string">`*`</span><span class="token operator">,</span> <span class="token string">`/`</span><span class="token operator">,</span> <span class="token string">`=`</span><span class="token operator">,</span>
-            <span class="token string">`>`</span><span class="token operator">,</span> <span class="token string">`<`</span><span class="token operator">,</span> <span class="token string">`!`</span><span class="token operator">,</span> <span class="token string">`&`</span><span class="token operator">,</span> <span class="token string">`|`</span><span class="token operator">,</span> <span class="token string">`^`</span><span class="token operator">,</span> <span class="token string">`%`</span><span class="token operator">,</span> <span class="token string">`~`</span><span class="token operator">,</span> <span class="token string">`?`</span><span class="token operator">]</span> <span class="token operator">{</span>
-            out <span class="token operator">+</span><span class="token operator">=</span> <span class="token string">'<span class="token operator">${input[i].ascii_str()}</span>'</span>
+            <span class="token string">`&gt;`</span><span class="token operator">,</span> <span class="token string">`&lt;`</span><span class="token operator">,</span> <span class="token string">`!`</span><span class="token operator">,</span> <span class="token string">`&amp;`</span><span class="token operator">,</span> <span class="token string">`|`</span><span class="token operator">,</span> <span class="token string">`^`</span><span class="token operator">,</span> <span class="token string">`%`</span><span class="token operator">,</span> <span class="token string">`~`</span><span class="token operator">,</span> <span class="token string">`?`</span><span class="token operator">]</span> <span class="token operator">{</span>
+            out <span class="token operator">+</span><span class="token operator">=</span> <span class="token string">&apos;&lt;span class=&quot;token operator&quot;&gt;${input[i].ascii_str()}&lt;/span&gt;&apos;</span>
             i<span class="token operator">+</span><span class="token operator">+</span>
             <span class="token keyword">continue</span>
         <span class="token operator">}</span>
 
         <span class="token comment">// 7. Everything else (fallback)</span>
-        out <span class="token operator">+</span><span class="token operator">=</span> input<span class="token operator">[</span>i<span class="token operator">]</span><span class="token operator">.</span>ascii_str<span class="token operator">(</span><span class="token operator">)</span>
+        out <span class="token operator">+</span><span class="token operator">=</span> esc<span class="token operator">(</span>input<span class="token operator">[</span>i<span class="token operator">]</span><span class="token operator">.</span>ascii_str<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">)</span>
         i<span class="token operator">+</span><span class="token operator">+</span>
     <span class="token operator">}</span>
 
     <span class="token keyword">return</span> out
 <span class="token operator">}</span>
 
+<span class="token comment">// esc safely converts HTML characters back to entities</span>
+<span class="token keyword">fn</span> esc<span class="token operator">(</span>s <span class="token keyword2">string</span><span class="token operator">)</span> <span class="token keyword2">string</span> <span class="token operator">{</span>
+    <span class="token keyword">return</span> s<span class="token operator">.</span>replace_each<span class="token operator">(</span><span class="token operator">[</span>
+        <span class="token string">&apos;&lt;&apos;</span><span class="token operator">,</span> <span class="token string">&apos;&amp;lt;&apos;</span><span class="token operator">,</span>
+        <span class="token string">&apos;&gt;&apos;</span><span class="token operator">,</span> <span class="token string">&apos;&amp;gt;&apos;</span><span class="token operator">,</span>
+        <span class="token string">&apos;&amp;&apos;</span><span class="token operator">,</span> <span class="token string">&apos;&amp;amp;&apos;</span><span class="token operator">,</span>
+        <span class="token string">&apos;&quot;&apos;</span><span class="token operator">,</span> <span class="token string">&apos;&amp;quot;&apos;</span><span class="token operator">,</span>
+        <span class="token string">&quot;&apos;&quot;</span><span class="token operator">,</span> <span class="token string">&apos;&amp;apos;&apos;</span>
+    <span class="token operator">]</span><span class="token operator">)</span>
+<span class="token operator">}</span>
 </code></pre>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/code.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">code</a> <a href="/en/tags/v.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">v</a> </p></div>
             <hr>
         <p class="w3-small w3-text-grey">
 			First Created: 2026-04-12 22:24:06<br>
-			Last Modified: 2026-04-12 21:41
+			Last Modified: 2026-04-12 21:57
 		</p>
         </div>
     </div>

@@ -65,10 +65,10 @@ Haven't tried on any other platform, please report if you do.</p>
 <pre class="language-go"><code class="language-go"><span class="token keyword">package</span> main
 
 <span class="token keyword">import</span><span class="token operator">(</span>
-    <span class="token string">"fmt"</span>
-    <span class="token string">"os"</span>
-    <span class="token string">"time"</span>
-    <span class="token string">"syscall"</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+    <span class="token string">&quot;time&quot;</span>
+    <span class="token string">&quot;syscall&quot;</span>
 <span class="token operator">)</span>
 
 <span class="token keyword">type</span> FileTime <span class="token keyword">struct</span> <span class="token operator">{</span>
@@ -77,15 +77,15 @@ Haven't tried on any other platform, please report if you do.</p>
     ATime time<span class="token operator">.</span>Time
 <span class="token operator">}</span>
 
-<span class="token keyword">const</span> FILE <span class="token operator">=</span> <span class="token string">"/opt/go/LICENSE"</span>
+<span class="token keyword">const</span> FILE <span class="token operator">=</span> <span class="token string">&quot;/opt/go/LICENSE&quot;</span>
 
 <span class="token keyword">func</span> main<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">{</span>
 
     file<span class="token operator">,</span> err <span class="token operator">:</span><span class="token operator">=</span> FTime<span class="token operator">(</span>FILE<span class="token operator">)</span>
     <span class="token keyword">if</span> err <span class="token operator">=</span><span class="token operator">=</span> <span class="token literal">nil</span> <span class="token operator">{</span>
-        fmt<span class="token operator">.</span>Println<span class="token operator">(</span><span class="token string">"Mo Time"</span><span class="token operator">,</span> file<span class="token operator">.</span>MTime<span class="token operator">)</span>
-        fmt<span class="token operator">.</span>Println<span class="token operator">(</span><span class="token string">"Ac Time"</span><span class="token operator">,</span> file<span class="token operator">.</span>ATime<span class="token operator">)</span>
-        fmt<span class="token operator">.</span>Println<span class="token operator">(</span><span class="token string">"Cr Time"</span><span class="token operator">,</span> file<span class="token operator">.</span>CTime<span class="token operator">)</span>
+        fmt<span class="token operator">.</span>Println<span class="token operator">(</span><span class="token string">&quot;Mo Time&quot;</span><span class="token operator">,</span> file<span class="token operator">.</span>MTime<span class="token operator">)</span>
+        fmt<span class="token operator">.</span>Println<span class="token operator">(</span><span class="token string">&quot;Ac Time&quot;</span><span class="token operator">,</span> file<span class="token operator">.</span>ATime<span class="token operator">)</span>
+        fmt<span class="token operator">.</span>Println<span class="token operator">(</span><span class="token string">&quot;Cr Time&quot;</span><span class="token operator">,</span> file<span class="token operator">.</span>CTime<span class="token operator">)</span>
     <span class="token operator">}</span>
 <span class="token operator">}</span>
 

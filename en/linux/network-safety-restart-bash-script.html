@@ -60,7 +60,7 @@
 </ul>
 <p>It also warns you a couple minutes before it does all that so you can terminate the program. Of course if you have been locked out you can't terminate it, and it will execute. <em>Giving you a fresh start!</em></p>
 <p>To start</p>
-<pre class="language-bash"><code class="language-bash">network_Safety_Restart<span class="token operator">.</span>sh start <span class="token operator">&</span>
+<pre class="language-bash"><code class="language-bash">network_Safety_Restart<span class="token operator">.</span>sh start <span class="token operator">&amp;</span>
 </code></pre>
 <p>To Stop</p>
 <pre class="language-bash"><code class="language-bash">network_Safety_Restart<span class="token operator">.</span>sh stop
@@ -77,7 +77,7 @@ PATH<span class="token operator">=</span><span class="token operator">/</span>sb
 <span class="token keyword">export</span> PIDFILESTOP<span class="token operator">=</span><span class="token operator">/</span>tmp<span class="token operator">/</span>network<span class="token operator">-</span>safty<span class="token operator">-</span>restart<span class="token operator">-</span>stop<span class="token operator">.</span>pid
 <span class="token keyword">export</span> FILE<span class="token operator">=</span><span class="token operator">/</span>etc<span class="token operator">/</span>network<span class="token operator">/</span>interfaces
  
-<span class="token keyword">case</span> <span class="token string">"$1"</span> <span class="token keyword">in</span>
+<span class="token keyword">case</span> <span class="token string">&quot;$1&quot;</span> <span class="token keyword">in</span>
   start<span class="token operator">)</span>  
     <span class="token keyword">if</span> <span class="token operator">[</span> <span class="token operator">-</span>f $<span class="token operator">{</span>PIDFILESTART<span class="token operator">}</span> <span class="token operator">]</span><span class="token operator">;</span> <span class="token keyword">then</span>
             rm $<span class="token operator">{</span>PIDFILESTART<span class="token operator">}</span>
@@ -85,17 +85,17 @@ PATH<span class="token operator">=</span><span class="token operator">/</span>sb
     <span class="token keyword">if</span> <span class="token operator">[</span> <span class="token operator">-</span>f $<span class="token operator">{</span>PIDFILESTOP<span class="token operator">}</span> <span class="token operator">]</span><span class="token operator">;</span> <span class="token keyword">then</span>
             rm $<span class="token operator">{</span>PIDFILESTOP<span class="token operator">}</span>
     <span class="token keyword">fi</span>	
-    ps <span class="token operator">-</span>fe <span class="token operator">|</span> grep $<span class="token operator">{</span><span class="token number">1</span><span class="token operator">}</span> <span class="token operator">|</span> head <span class="token operator">-</span>n1 <span class="token operator">|</span> cut <span class="token operator">-</span>d<span class="token string">" "</span> <span class="token operator">-</span>f <span class="token number">6</span> <span class="token operator">></span> $<span class="token operator">{</span>PIDFILESTART<span class="token operator">}</span>
+    ps <span class="token operator">-</span>fe <span class="token operator">|</span> grep $<span class="token operator">{</span><span class="token number">1</span><span class="token operator">}</span> <span class="token operator">|</span> head <span class="token operator">-</span>n1 <span class="token operator">|</span> cut <span class="token operator">-</span>d<span class="token string">&quot; &quot;</span> <span class="token operator">-</span>f <span class="token number">6</span> <span class="token operator">&gt;</span> $<span class="token operator">{</span>PIDFILESTART<span class="token operator">}</span>
  
         sleep <span class="token number">3600</span> 
  
-        log_action_msg <span class="token string">"WARNING: Will in 120 sec rename ${FILE} and then restart"</span>
+        log_action_msg <span class="token string">&quot;WARNING: Will in 120 sec rename ${FILE} and then restart&quot;</span>
         sleep <span class="token number">60</span>
-        log_action_msg <span class="token string">"WARNING: Will in 60 sec rename ${FILE} and then restart"</span>
+        log_action_msg <span class="token string">&quot;WARNING: Will in 60 sec rename ${FILE} and then restart&quot;</span>
         sleep <span class="token number">60</span>
  
     <span class="token keyword">if</span> <span class="token operator">!</span> <span class="token operator">[</span> <span class="token operator">-</span>f $<span class="token operator">{</span>PIDFILESTOP<span class="token operator">}</span> <span class="token operator">]</span><span class="token operator">;</span> <span class="token keyword">then</span>
-        log_action_msg <span class="token string">"Restarting NOW"</span>
+        log_action_msg <span class="token string">&quot;Restarting NOW&quot;</span>
             SUFFIX<span class="token operator">=</span>$<span class="token operator">(</span>date <span class="token operator">+</span><span class="token operator">%</span>s<span class="token operator">)</span>
             cp $<span class="token operator">{</span>FILE<span class="token operator">}</span> $<span class="token operator">{</span>FILE<span class="token operator">}</span><span class="token operator">.</span>$<span class="token operator">{</span>SUFFIX<span class="token operator">}</span>
             sleep <span class="token number">1</span>
@@ -104,22 +104,22 @@ PATH<span class="token operator">=</span><span class="token operator">/</span>sb
             reboot <span class="token operator">-</span>d <span class="token operator">-</span>f <span class="token operator">-</span>i
     <span class="token keyword">else</span>
         rm $<span class="token operator">{</span>PIDFILESTOP<span class="token operator">}</span>
-        log_action_msg <span class="token string">"NOT Restaring as you wish"</span>
+        log_action_msg <span class="token string">&quot;NOT Restaring as you wish&quot;</span>
         <span class="token keyword">fi</span>
         <span class="token operator">;</span><span class="token operator">;</span>
   stop<span class="token operator">)</span>
     <span class="token keyword">if</span> <span class="token operator">[</span> <span class="token operator">-</span>f $<span class="token operator">{</span>PIDFILESTART<span class="token operator">}</span> <span class="token operator">]</span><span class="token operator">;</span> <span class="token keyword">then</span>
             rm $<span class="token operator">{</span>PIDFILESTART<span class="token operator">}</span>
         touch $<span class="token operator">{</span>PIDFILESTOP<span class="token operator">}</span>
-        log_action_msg <span class="token string">"Terminating restart script"</span>
+        log_action_msg <span class="token string">&quot;Terminating restart script&quot;</span>
  
     <span class="token keyword">fi</span>
-    log_action_msg <span class="token string">"Terminated restart script"</span>
+    log_action_msg <span class="token string">&quot;Terminated restart script&quot;</span>
  
     <span class="token keyword">exit</span> <span class="token number">0</span>
         <span class="token operator">;</span><span class="token operator">;</span>
   <span class="token operator">*</span><span class="token operator">)</span>
-        <span class="token keyword">echo</span> <span class="token string">"Usage: $0 start|stop"</span> <span class="token operator">></span><span class="token operator">&</span><span class="token number">2</span>
+        <span class="token keyword">echo</span> <span class="token string">&quot;Usage: $0 start|stop&quot;</span> <span class="token operator">&gt;</span><span class="token operator">&amp;</span><span class="token number">2</span>
         <span class="token keyword">exit</span> <span class="token number">3</span>
         <span class="token operator">;</span><span class="token operator">;</span>
 <span class="token keyword">esac</span>

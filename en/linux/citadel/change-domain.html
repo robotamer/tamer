@@ -57,8 +57,8 @@ How to do that is out of this manuals scope.</li>
 </code></pre>
 <p>Change your <em>/etc/hosts</em> &amp; <em>lighttpd.conf</em> file replace old with new domain</p>
 <pre class="language-sh"><code class="language-sh"><span class="token comment"># Replace text in files</span>
-sed <span class="token operator">-</span>i <span class="token string">"s|$CIT_DOMAIN_ORG|$CIT_DOMAIN_NEW|g"</span> <span class="token operator">/</span>etc<span class="token operator">/</span>hosts
-sed <span class="token operator">-</span>i <span class="token string">"s|$CIT_DOMAIN_ORG|$CIT_DOMAIN_NEW|g"</span> <span class="token operator">/</span>etc<span class="token operator">/</span>lighttpd<span class="token operator">/</span>lighttpd<span class="token operator">.</span>conf
+sed <span class="token operator">-</span>i <span class="token string">&quot;s|$CIT_DOMAIN_ORG|$CIT_DOMAIN_NEW|g&quot;</span> <span class="token operator">/</span>etc<span class="token operator">/</span>hosts
+sed <span class="token operator">-</span>i <span class="token string">&quot;s|$CIT_DOMAIN_ORG|$CIT_DOMAIN_NEW|g&quot;</span> <span class="token operator">/</span>etc<span class="token operator">/</span>lighttpd<span class="token operator">/</span>lighttpd<span class="token operator">.</span>conf
 
 <span class="token comment"># Check config file</span>
 lighttpd <span class="token operator">-</span>tt <span class="token operator">-</span>f <span class="token operator">/</span>etc<span class="token operator">/</span>lighttpd<span class="token operator">/</span>lighttpd<span class="token operator">.</span>conf
@@ -107,7 +107,7 @@ docker rename citadel citadel<span class="token operator">.</span>net
 <ul>
 <li>Last we change the certbot post renewal hook</li>
 </ul>
-<pre class="language-sh"><code class="language-sh">sed <span class="token operator">-</span>i <span class="token string">"s|$CIT_DOMAIN_ORG|$CIT_DOMAIN_NEW|g"</span> <span class="token operator">/</span>etc<span class="token operator">/</span>letsencrypt<span class="token operator">/</span>renewal<span class="token operator">-</span>hooks<span class="token operator">/</span>post<span class="token operator">/</span>citadel<span class="token operator">.</span>sh
+<pre class="language-sh"><code class="language-sh">sed <span class="token operator">-</span>i <span class="token string">&quot;s|$CIT_DOMAIN_ORG|$CIT_DOMAIN_NEW|g&quot;</span> <span class="token operator">/</span>etc<span class="token operator">/</span>letsencrypt<span class="token operator">/</span>renewal<span class="token operator">-</span>hooks<span class="token operator">/</span>post<span class="token operator">/</span>citadel<span class="token operator">.</span>sh
 </code></pre>
 <p>All done check your new setup.<br>
 If you have a problem ask questions at <a href="https://uncensored.citadel.org/readfwd?go=Citadel%20Support">Citadel Support</a></p>

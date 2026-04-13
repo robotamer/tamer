@@ -61,7 +61,7 @@ Once you get how he gets his identity back you'll be golden.</p>
 <p>Here is the code:</p>
 <pre class="language-go"><code class="language-go"><span class="token keyword">package</span> main
 
-<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+<span class="token keyword">import</span> <span class="token string">&quot;fmt&quot;</span>
 
 <span class="token keyword">type</span> I <span class="token keyword">interface</span><span class="token operator">{</span><span class="token operator">}</span>
 
@@ -73,13 +73,13 @@ Once you get how he gets his identity back you'll be golden.</p>
 
 <span class="token keyword">func</span> main<span class="token operator">(</span><span class="token operator">)</span> <span class="token operator">{</span>
 
-    g <span class="token operator">:</span><span class="token operator">=</span> AddToGophers<span class="token operator">(</span><span class="token string">"Goghy"</span><span class="token operator">)</span>
+    g <span class="token operator">:</span><span class="token operator">=</span> AddToGophers<span class="token operator">(</span><span class="token string">&quot;Goghy&quot;</span><span class="token operator">)</span>
 
-    fmt<span class="token operator">.</span>Printf<span class="token operator">(</span><span class="token string">"Hello, %s\n"</span><span class="token operator">,</span> g<span class="token operator">.</span>Name<span class="token operator">)</span>
-    fmt<span class="token operator">.</span>Printf<span class="token operator">(</span><span class="token string">"Now %s is a %T, %s\n"</span><span class="token operator">,</span> g<span class="token operator">.</span>Name<span class="token operator">,</span> gophers<span class="token operator">[</span><span class="token number">1</span><span class="token operator">]</span><span class="token operator">,</span> gophers<span class="token operator">[</span><span class="token number">1</span><span class="token operator">]</span><span class="token operator">)</span>
+    fmt<span class="token operator">.</span>Printf<span class="token operator">(</span><span class="token string">&quot;Hello, %s\n&quot;</span><span class="token operator">,</span> g<span class="token operator">.</span>Name<span class="token operator">)</span>
+    fmt<span class="token operator">.</span>Printf<span class="token operator">(</span><span class="token string">&quot;Now %s is a %T, %s\n&quot;</span><span class="token operator">,</span> g<span class="token operator">.</span>Name<span class="token operator">,</span> gophers<span class="token operator">[</span><span class="token number">1</span><span class="token operator">]</span><span class="token operator">,</span> gophers<span class="token operator">[</span><span class="token number">1</span><span class="token operator">]</span><span class="token operator">)</span>
 
     gg <span class="token operator">:</span><span class="token operator">=</span> GetGopher<span class="token operator">(</span><span class="token number">1</span><span class="token operator">)</span>
-    fmt<span class="token operator">.</span>Printf<span class="token operator">(</span><span class="token string">"Bye, %s\n"</span><span class="token operator">,</span> gg<span class="token operator">.</span>Name<span class="token operator">)</span>
+    fmt<span class="token operator">.</span>Printf<span class="token operator">(</span><span class="token string">&quot;Bye, %s\n&quot;</span><span class="token operator">,</span> gg<span class="token operator">.</span>Name<span class="token operator">)</span>
 <span class="token operator">}</span>
 
 <span class="token keyword">func</span> GetGopher<span class="token operator">(</span>i <span class="token keyword2">uint</span><span class="token operator">)</span> <span class="token operator">*</span>gopher <span class="token operator">{</span>
