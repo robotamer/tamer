@@ -1,10 +1,9 @@
 +++
 date = "2026-04-09T18:15:57+0300"
-modified = ""
+modified = "2026-04-15T23:32:44+0300"
 title = "Static site generator"
 description = "V-lang static site generator"
 tags = ["v", "website", "code"]
-language = "en"
 +++
 
 ### AI Comment
@@ -41,7 +40,6 @@ modified = ""
 title = "Markdown to html website generator"
 description = "Markdown website generator in V"
 tags = ["v", "website"]
-language = "en"
 ++
 Markdown goes here
 
