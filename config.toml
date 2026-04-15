@@ -1,0 +1,9 @@
+site_name = "TaMeR"
+site_url = "http://tamer.pw"
+author = "TaMeR"
+content_root = "/home/tamer/Public/tamer.pw/md"
+output_root = "/home/tamer/Public/tamer.pw"
+supported_langs = [
+  "en",
+  "tr"
+]
