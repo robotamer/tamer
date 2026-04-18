@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="x-ua-compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>gittool | vdoc</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+		<link rel="manifest" href="site.webmanifest" />
+		<link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5" />
+		<meta name="msapplication-TileColor" content="#da532c" />
+		<meta name="theme-color" content="#ffffff" />
+		<link rel="stylesheet" href="doc.css" />
+		<link rel="stylesheet" href="normalize.css" />
+		<script src="dark-mode.js"></script>
+	</head>
+
+	<body>
+		<div><a id="skip-to-content-link" href="#main-content">Skip to content</a></div>
+		<div id="page">
+			<header class="doc-nav hidden">
+				<div class="heading-container">
+					<div class="heading">
+						<div class="info">
+							<div class="module">vmodules</div>
+							<div class="toggle-version-container">
+								<span> 0c3183c</span>
+								<div
+									id="dark-mode-toggle"
+									role="switch"
+									aria-checked="false"
+									aria-label="Toggle dark mode"
+								>
+									<svg xmlns="http://www.w3.org/2000/svg" class="light-icon" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9.95h-2V3.5h2V.55zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.7l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zM20 10.5v2h3v-2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95h2V19.5h-2v2.95zm-7.45-3.91l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" class="dark-icon" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24"><g><rect fill="none" height="24" width="24"/></g><g><g><g><path d="M11.1,12.08C8.77,7.57,10.6,3.6,11.63,2.01C6.27,2.2,1.98,6.59,1.98,12c0,0.14,0.02,0.28,0.02,0.42 C2.62,12.15,3.29,12,4,12c1.66,0,3.18,0.83,4.1,2.15C9.77,14.63,11,16.17,11,18c0,1.52-0.87,2.83-2.12,3.51 c0.98,0.32,2.03,0.5,3.11,0.5c3.5,0,6.58-1.8,8.37-4.52C18,17.72,13.38,16.52,11.1,12.08z"/></g><path d="M7,16l-0.18,0C6.4,14.84,5.3,14,4,14c-1.66,0-3,1.34-3,3s1.34,3,3,3c0.62,0,2.49,0,3,0c1.1,0,2-0.9,2-2 C9,16.9,8.1,16,7,16z"/></g></g></svg>
+
+								</div>
+							</div>
+							<svg xmlns="http://www.w3.org/2000/svg" id="toggle-menu" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+
+						</div>
+						<div id="search">
+							<input type="text" placeholder="Search... (beta)" autocomplete="off" />
+						</div>
+					</div>
+				</div>
+				<nav class="search hidden"></nav>
+				<nav class="content hidden">
+					<ul>
+						<li class="open">
+<div class="menu-row"><a href="./index.html">README</a></div>
+</li>
+<li class="open active">
+<div class="menu-row"><a href="./gittool.html">gittool</a></div>
+</li>
+<li class="open">
+<div class="menu-row"><a href="./highlighter.html">highlighter</a></div>
+</li>
+<li class="open">
+<div class="menu-row"><a href="./markdown.html">markdown</a></div>
+</li>
+<li class="open">
+<div class="menu-row"><a href="./nix.html">nix</a></div>
+</li>
+<li class="open">
+<div class="menu-row"><a href="./upgrade.html">upgrade</a></div>
+</li>
+
+					</ul>
+				</nav>
+			</header>
+			<div class="doc-scrollview" tabindex="-1" id="main-content">
+				<div class="doc-container">
+					<div class="doc-content">
+								<section id="readme_gittool" class="doc-node">
+			<div class="title"><h1> gittool <a href="#readme_gittool">#</a></h1></div>
+<p>A module (gittool) and a command line tool (commit); to git add, git tag, git commit, and git push. Including auto incrementing tags with semantic versioning.</p>
+<h2 id="installation">Installation</h2>
+<pre><code class="language-sh">v install https<span class="token punctuation">:</span><span class="token comment">//codeberg.org/tamer/gittool.git</span>
+<span class="token punctuation">.</span><span class="token operator">/</span>make<span class="token punctuation">.</span>vsh install</code></pre>
+<h2 id="usage-as-command">Usage as command</h2>
+<pre><code class="language-sh">$ commit help
+Usage<span class="token punctuation">:</span> commit <span class="token punctuation">[</span>flags<span class="token punctuation">]</span> <span class="token punctuation">[</span>commands<span class="token punctuation">]</span>
+
+Git add<span class="token punctuation">,</span> tag<span class="token punctuation">,</span> commit <span class="token operator">&</span> push
+
+Flags<span class="token punctuation">:</span>
+  <span class="token operator">-</span>m  <span class="token operator">-</span>message        
+  <span class="token operator">-</span>i  <span class="token operator">-</span>increment      major<span class="token punctuation">,</span> minor<span class="token punctuation">,</span> patch
+  <span class="token operator">-</span>d  <span class="token operator">-</span>dryrun         
+  <span class="token operator">-</span>n  <span class="token operator">-</span>nopush         
+      <span class="token operator">-</span>help           Prints help information<span class="token punctuation">.</span>
+      <span class="token operator">-</span>man            Prints the auto<span class="token operator">-</span>generated manpage<span class="token punctuation">.</span>
+
+Commands<span class="token punctuation">:</span>
+  info                Print information
+  help                Prints help information<span class="token punctuation">.</span>
+  man                 Prints the auto<span class="token operator">-</span>generated manpage<span class="token punctuation">.</span></code></pre>
+<h2 id="usage-as-module">Usage as module</h2>
+<ul>
+<li>See doc folder for module documentation</li>
+<li>See make.vsh as example.</li></ul>
+<pre><code class="language-v"><span class="token keyword">import</span> build
+<span class="token keyword">import</span> v<span class="token punctuation">.</span>vmod
+<span class="token keyword">import</span> gittool
+
+<span class="token keyword">const</span> manifest <span class="token operator">=</span> vmod<span class="token punctuation">.</span><span class="token function">from_file</span><span class="token punctuation">(</span><span class="token string">'v.mod'</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span> <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">'Failed to decode embedded v.mod: </span><span class="token string_interp">$</span>{err}<span class="token string">'</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+
+<span class="token comment">// Make the build context</span>
+<span class="token keyword">mut</span> context <span class="token operator">:=</span> build<span class="token punctuation">.</span><span class="token function">context</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+gittool<span class="token punctuation">.</span><span class="token function">context_help</span><span class="token punctuation">(</span><span class="token keyword">mut</span> context<span class="token punctuation">)</span>
+gittool<span class="token punctuation">.</span><span class="token function">context_git</span><span class="token punctuation">(</span><span class="token keyword">mut</span> context<span class="token punctuation">,</span> manifest<span class="token punctuation">)</span>
+gittool<span class="token punctuation">.</span><span class="token function">context_v</span><span class="token punctuation">(</span><span class="token keyword">mut</span> context<span class="token punctuation">)</span> <span class="token comment">// context V is seperated so the build system can be used with other codding languages</span></code></pre>
+<h2 id="license">License</h2>
+<p>Distributed under the MIT License. See LICENSE for more information.</p>
+
+</section>
+
+		<section id="bump_version" class="doc-node">
+			<div class="title"><h2>fn bump_version <a href="#bump_version">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">bump_version</span><span class="token punctuation">(</span>current <span class="token builtin">string</span><span class="token punctuation">,</span> mode <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
+
+
+</section>
+
+		<section id="check_state" class="doc-node">
+			<div class="title"><h2>fn check_state <a href="#check_state">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">check_state</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+		<section id="context_git" class="doc-node">
+			<div class="title"><h2>fn context_git <a href="#context_git">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">context_git</span><span class="token punctuation">(</span><span class="token keyword">mut</span> context build<span class="token punctuation">.</span>BuildContext<span class="token punctuation">,</span> manifest vmod<span class="token punctuation">.</span>Manifest<span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+		<section id="context_help" class="doc-node">
+			<div class="title"><h2>fn context_help <a href="#context_help">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">context_help</span><span class="token punctuation">(</span><span class="token keyword">mut</span> context build<span class="token punctuation">.</span>BuildContext<span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+		<section id="context_v" class="doc-node">
+			<div class="title"><h2>fn context_v <a href="#context_v">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">context_v</span><span class="token punctuation">(</span><span class="token keyword">mut</span> context build<span class="token punctuation">.</span>BuildContext<span class="token punctuation">)</span></code></pre>
+
+
+</section>
+
+		<section id="get_info" class="doc-node">
+			<div class="title"><h2>fn get_info <a href="#get_info">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">get_info</span><span class="token punctuation">(</span><span class="token punctuation">)</span> GitInfo</code></pre>
+
+
+</section>
+
+		<section id="git_version" class="doc-node">
+			<div class="title"><h2>fn git_version <a href="#git_version">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">git_version</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
+
+
+</section>
+
+		<section id="Config" class="doc-node">
+			<div class="title"><h2>struct Config <a href="#Config">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">struct</span> <span class="token symbol">Config</span> <span class="token punctuation">{</span>
+<span class="token keyword">pub</span> <span class="token keyword">mut</span><span class="token punctuation">:</span>
+	message  <span class="token builtin">string</span>
+	inc_type <span class="token builtin">string</span>
+	is_dry   <span class="token builtin">bool</span>
+	no_push  <span class="token builtin">bool</span>
+<span class="token punctuation">}</span></code></pre>
+
+
+</section>
+
+		<section id="GitInfo" class="doc-node">
+			<div class="title"><h2>struct GitInfo <a href="#GitInfo">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">struct</span> <span class="token symbol">GitInfo</span> <span class="token punctuation">{</span>
+<span class="token keyword">pub</span><span class="token punctuation">:</span>
+	branch     <span class="token builtin">string</span>
+	hash       <span class="token builtin">string</span>
+	has_remote <span class="token builtin">bool</span>
+	origin     <span class="token builtin">string</span>
+	remote     <span class="token builtin">string</span>
+	version    <span class="token builtin">string</span>
+<span class="token keyword">pub</span> <span class="token keyword">mut</span><span class="token punctuation">:</span>
+	new_version <span class="token builtin">string</span>
+<span class="token punctuation">}</span></code></pre>
+<p>GitInfo git information</p>
+
+</section>
+
+		<section id="GitInfo.fields" class="doc-node">
+			<div class="title"><h2>fn (GitInfo) fields <a href="#GitInfo.fields">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span>g GitInfo<span class="token punctuation">)</span> <span class="token function">fields</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">string</span></code></pre>
+
+
+</section>
+
+		<section id="GitInfo.commit" class="doc-node">
+			<div class="title"><h2>fn (GitInfo) commit <a href="#GitInfo.commit">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> g GitInfo<span class="token punctuation">)</span> <span class="token function">commit</span><span class="token punctuation">(</span>cfg Config<span class="token punctuation">)</span> <span class="token operator">!</span></code></pre>
+<p>Attach the logic directly to GitInfo</p>
+
+</section>
+
+
+						<div class="footer">Powered by vdoc. Generated on: 18 Apr 2026 17:55:57</div>
+					</div>
+					<div class="doc-toc"><ul><li class="open"><a href="#readme_gittool">README</a></li>
+<li class="open"><a href="#bump_version">fn bump_version</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#check_state">fn check_state</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#context_git">fn context_git</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#context_help">fn context_help</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#context_v">fn context_v</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#get_info">fn get_info</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#git_version">fn git_version</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#Config">struct Config</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#GitInfo">struct GitInfo</a>        <ul>
+<li><a href="#GitInfo.fields">fn fields</a></li>
+<li><a href="#GitInfo.commit">fn commit</a></li>
+</ul>
+</li>
+</ul></div>
+				</div>
+			</div>
+		</div>
+		<script src="doc.js"></script>
+		<script async src="search_index.js"></script>
+	</body>
+</html>

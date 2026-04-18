@@ -2,7 +2,7 @@
 title = "commit.sh"
 date = "2026-04-09 23:37:27"
 description = "A script to git add, git tag, git commit, and git push. Including auto incrementing tags with semantic versioning."
-tags = ["sh", "code", "git"]
+tags = ["sh", "bash", "code", "git"]
 +++
 
 Optionaly creates a meta data file.
@@ -36,8 +36,9 @@ OPTIONS
     -p, --print (optional)
         Print git info
 EXAMPLES
+	commit.sh -i minor -m 'updated something'
     commit.sh -v v2.0.0 -m 'code for freedom'
-    commit.sh -i patch -n -m '-i patch is the default you don't need to provide it'
+    commit.sh -i patch -n -m "-i patch is the default!"
     commit.sh -r -d 
 ```
 

@@ -34,9 +34,9 @@
 				<div class="heading-container">
 					<div class="heading">
 						<div class="info">
-							<div class="module">nix</div>
+							<div class="module">vmodules</div>
 							<div class="toggle-version-container">
-								<span>v0.3.1 4ac610c</span>
+								<span> 0c3183c</span>
 								<div
 									id="dark-mode-toggle"
 									role="switch"
@@ -62,8 +62,20 @@
 						<li class="open">
 <div class="menu-row"><a href="./index.html">README</a></div>
 </li>
+<li class="open">
+<div class="menu-row"><a href="./gittool.html">gittool</a></div>
+</li>
+<li class="open">
+<div class="menu-row"><a href="./highlighter.html">highlighter</a></div>
+</li>
+<li class="open">
+<div class="menu-row"><a href="./markdown.html">markdown</a></div>
+</li>
 <li class="open active">
 <div class="menu-row"><a href="./nix.html">nix</a></div>
+</li>
+<li class="open">
+<div class="menu-row"><a href="./upgrade.html">upgrade</a></div>
 </li>
 
 					</ul>
@@ -108,7 +120,7 @@
 </section>
 
 		<section id="dir_cfg" class="doc-node">
-			<div class="title"><h2>fn dir_cfg <a href="#dir_cfg">#</a></h2><a class="link" rel="noreferrer" target="_blank" href="https://codeberg.org/tamer/nix.git#L11"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></div>
+			<div class="title"><h2>fn dir_cfg <a href="#dir_cfg">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">fn</span> <span class="token function">dir_cfg</span><span class="token punctuation">(</span>application <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
 <p>dir_cfg returns the path to the applications configuration folder</p>
@@ -116,15 +128,23 @@
 </section>
 
 		<section id="dir_db" class="doc-node">
-			<div class="title"><h2>fn dir_db <a href="#dir_db">#</a></h2><a class="link" rel="noreferrer" target="_blank" href="https://codeberg.org/tamer/nix.git#L6"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></div>
+			<div class="title"><h2>fn dir_db <a href="#dir_db">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">fn</span> <span class="token function">dir_db</span><span class="token punctuation">(</span>application <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
 <p>dir_db returns the path to the applications database folder</p>
 
 </section>
 
+		<section id="distribution" class="doc-node">
+			<div class="title"><h2>fn distribution <a href="#distribution">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">distribution</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!</span><span class="token builtin">string</span></code></pre>
+
+
+</section>
+
 		<section id="get_linux_listening_tcp" class="doc-node">
-			<div class="title"><h2>fn get_linux_listening_tcp <a href="#get_linux_listening_tcp">#</a></h2><a class="link" rel="noreferrer" target="_blank" href="https://codeberg.org/tamer/nix.git#L31"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></div>
+			<div class="title"><h2>fn get_linux_listening_tcp <a href="#get_linux_listening_tcp">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">fn</span> <span class="token function">get_linux_listening_tcp</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span></code></pre>
 <p>get_linux_listening_tcp() Parsing of /proc/net/tcp. Skips header, filters by state (0A for TCP LISTEN</p>
@@ -132,7 +152,7 @@
 </section>
 
 		<section id="get_linux_listening_udp" class="doc-node">
-			<div class="title"><h2>fn get_linux_listening_udp <a href="#get_linux_listening_udp">#</a></h2><a class="link" rel="noreferrer" target="_blank" href="https://codeberg.org/tamer/nix.git#L67"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></div>
+			<div class="title"><h2>fn get_linux_listening_udp <a href="#get_linux_listening_udp">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">fn</span> <span class="token function">get_linux_listening_udp</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span></code></pre>
 <p>get_linux_listening_udp(): Parsing of /proc/net/udp. Skips header, filters by state bound check for UDP via remote addr).</p>
@@ -140,7 +160,7 @@
 </section>
 
 		<section id="hostname" class="doc-node">
-			<div class="title"><h2>fn hostname <a href="#hostname">#</a></h2><a class="link" rel="noreferrer" target="_blank" href="https://codeberg.org/tamer/nix.git#L5"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></div>
+			<div class="title"><h2>fn hostname <a href="#hostname">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">fn</span> <span class="token function">hostname</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
 
@@ -148,7 +168,7 @@
 </section>
 
 		<section id="is_email_address" class="doc-node">
-			<div class="title"><h2>fn is_email_address <a href="#is_email_address">#</a></h2><a class="link" rel="noreferrer" target="_blank" href="https://codeberg.org/tamer/nix.git#L227"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></div>
+			<div class="title"><h2>fn is_email_address <a href="#is_email_address">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">fn</span> <span class="token function">is_email_address</span><span class="token punctuation">(</span>email <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">!</span><span class="token builtin">bool</span></code></pre>
 
@@ -156,7 +176,7 @@
 </section>
 
 		<section id="is_root" class="doc-node">
-			<div class="title"><h2>fn is_root <a href="#is_root">#</a></h2><a class="link" rel="noreferrer" target="_blank" href="https://codeberg.org/tamer/nix.git#L65"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></div>
+			<div class="title"><h2>fn is_root <a href="#is_root">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">fn</span> <span class="token function">is_root</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">bool</span></code></pre>
 <p>is_root return true if current user is efectively root</p>
@@ -164,7 +184,7 @@
 </section>
 
 		<section id="is_user" class="doc-node">
-			<div class="title"><h2>fn is_user <a href="#is_user">#</a></h2><a class="link" rel="noreferrer" target="_blank" href="https://codeberg.org/tamer/nix.git#L69"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></div>
+			<div class="title"><h2>fn is_user <a href="#is_user">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">fn</span> <span class="token function">is_user</span><span class="token punctuation">(</span>username <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">bool</span></code></pre>
 
@@ -172,7 +192,7 @@
 </section>
 
 		<section id="new_aliases" class="doc-node">
-			<div class="title"><h2>fn new_aliases <a href="#new_aliases">#</a></h2><a class="link" rel="noreferrer" target="_blank" href="https://codeberg.org/tamer/nix.git#L28"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></div>
+			<div class="title"><h2>fn new_aliases <a href="#new_aliases">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">fn</span> <span class="token function">new_aliases</span><span class="token punctuation">(</span>path <span class="token builtin">string</span><span class="token punctuation">)</span> Aliases</code></pre>
 <p>new_aliases returns the aliases struct populated with users and the provided path</p>
@@ -180,7 +200,7 @@
 </section>
 
 		<section id="processes" class="doc-node">
-			<div class="title"><h2>fn processes <a href="#processes">#</a></h2><a class="link" rel="noreferrer" target="_blank" href="https://codeberg.org/tamer/nix.git#L17"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></div>
+			<div class="title"><h2>fn processes <a href="#processes">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">fn</span> <span class="token function">processes</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">?</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span></code></pre>
 <p>processes(): Aggregates TCP and UDP listeners, then iterates to replace "inode=XXXX" with the process name if found. Returns an array of strings like "tcp 0.0.0.0:22 sshd" (or leaves inode if not found).</p>
@@ -188,15 +208,23 @@
 </section>
 
 		<section id="uid_by_username" class="doc-node">
-			<div class="title"><h2>fn uid_by_username <a href="#uid_by_username">#</a></h2><a class="link" rel="noreferrer" target="_blank" href="https://codeberg.org/tamer/nix.git#L36"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></div>
+			<div class="title"><h2>fn uid_by_username <a href="#uid_by_username">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">fn</span> <span class="token function">uid_by_username</span><span class="token punctuation">(</span>username <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">int</span></code></pre>
 <p>uid_by_username gets the username from uid</p>
 
 </section>
 
+		<section id="uptime" class="doc-node">
+			<div class="title"><h2>fn uptime <a href="#uptime">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">uptime</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int</span></code></pre>
+
+
+</section>
+
 		<section id="user_by_name" class="doc-node">
-			<div class="title"><h2>fn user_by_name <a href="#user_by_name">#</a></h2><a class="link" rel="noreferrer" target="_blank" href="https://codeberg.org/tamer/nix.git#L46"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></div>
+			<div class="title"><h2>fn user_by_name <a href="#user_by_name">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">fn</span> <span class="token function">user_by_name</span><span class="token punctuation">(</span>username <span class="token builtin">string</span><span class="token punctuation">)</span> User</code></pre>
 <p>by_name gets the users /etc/passwd data by username</p>
@@ -204,7 +232,7 @@
 </section>
 
 		<section id="user_by_uid" class="doc-node">
-			<div class="title"><h2>fn user_by_uid <a href="#user_by_uid">#</a></h2><a class="link" rel="noreferrer" target="_blank" href="https://codeberg.org/tamer/nix.git#L56"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></div>
+			<div class="title"><h2>fn user_by_uid <a href="#user_by_uid">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">fn</span> <span class="token function">user_by_uid</span><span class="token punctuation">(</span>uid <span class="token builtin">int</span><span class="token punctuation">)</span> User</code></pre>
 <p>by_uid gets the users /etc/passwd data by user id</p>
@@ -212,7 +240,7 @@
 </section>
 
 		<section id="user_dir_bin" class="doc-node">
-			<div class="title"><h2>fn user_dir_bin <a href="#user_dir_bin">#</a></h2><a class="link" rel="noreferrer" target="_blank" href="https://codeberg.org/tamer/nix.git#L143"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></div>
+			<div class="title"><h2>fn user_dir_bin <a href="#user_dir_bin">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">fn</span> <span class="token function">user_dir_bin</span><span class="token punctuation">(</span>username <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">?</span><span class="token builtin">string</span></code></pre>
 
@@ -220,7 +248,7 @@
 </section>
 
 		<section id="user_dir_config" class="doc-node">
-			<div class="title"><h2>fn user_dir_config <a href="#user_dir_config">#</a></h2><a class="link" rel="noreferrer" target="_blank" href="https://codeberg.org/tamer/nix.git#L125"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></div>
+			<div class="title"><h2>fn user_dir_config <a href="#user_dir_config">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">fn</span> <span class="token function">user_dir_config</span><span class="token punctuation">(</span>username <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">?</span><span class="token builtin">string</span></code></pre>
 
@@ -228,7 +256,7 @@
 </section>
 
 		<section id="user_has_home" class="doc-node">
-			<div class="title"><h2>fn user_has_home <a href="#user_has_home">#</a></h2><a class="link" rel="noreferrer" target="_blank" href="https://codeberg.org/tamer/nix.git#L81"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></div>
+			<div class="title"><h2>fn user_has_home <a href="#user_has_home">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">fn</span> <span class="token function">user_has_home</span><span class="token punctuation">(</span>username <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">bool</span></code></pre>
 <p>user_has_home checks if the username has a home directory according to /etc/passwd</p>
@@ -236,7 +264,7 @@
 </section>
 
 		<section id="user_in_group" class="doc-node">
-			<div class="title"><h2>fn user_in_group <a href="#user_in_group">#</a></h2><a class="link" rel="noreferrer" target="_blank" href="https://codeberg.org/tamer/nix.git#L109"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></div>
+			<div class="title"><h2>fn user_in_group <a href="#user_in_group">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">fn</span> <span class="token function">user_in_group</span><span class="token punctuation">(</span>username <span class="token builtin">string</span><span class="token punctuation">,</span> group_name <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">bool</span></code></pre>
 <p>user_in_group checks if the user has given group privliages</p>
@@ -244,7 +272,7 @@
 </section>
 
 		<section id="username_by_uid" class="doc-node">
-			<div class="title"><h2>fn username_by_uid <a href="#username_by_uid">#</a></h2><a class="link" rel="noreferrer" target="_blank" href="https://codeberg.org/tamer/nix.git#L27"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></div>
+			<div class="title"><h2>fn username_by_uid <a href="#username_by_uid">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">fn</span> <span class="token function">username_by_uid</span><span class="token punctuation">(</span>uid <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
 <p>username_by_uid gets the users username from uid</p>
@@ -252,7 +280,7 @@
 </section>
 
 		<section id="username_current" class="doc-node">
-			<div class="title"><h2>fn username_current <a href="#username_current">#</a></h2><a class="link" rel="noreferrer" target="_blank" href="https://codeberg.org/tamer/nix.git#L21"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></div>
+			<div class="title"><h2>fn username_current <a href="#username_current">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">fn</span> <span class="token function">username_current</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
 
@@ -260,7 +288,7 @@
 </section>
 
 		<section id="users" class="doc-node">
-			<div class="title"><h2>fn users <a href="#users">#</a></h2><a class="link" rel="noreferrer" target="_blank" href="https://codeberg.org/tamer/nix.git#L180"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></div>
+			<div class="title"><h2>fn users <a href="#users">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">fn</span> <span class="token function">users</span><span class="token punctuation">(</span><span class="token punctuation">)</span> Users</code></pre>
 <p>users returns users. all data passwd and group</p>
@@ -268,7 +296,7 @@
 </section>
 
 		<section id="Aliases.add" class="doc-node">
-			<div class="title"><h2>fn (Aliases) add <a href="#Aliases.add">#</a></h2><a class="link" rel="noreferrer" target="_blank" href="https://codeberg.org/tamer/nix.git#L39"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></div>
+			<div class="title"><h2>fn (Aliases) add <a href="#Aliases.add">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> o Aliases<span class="token punctuation">)</span> <span class="token function">add</span><span class="token punctuation">(</span>from <span class="token builtin">string</span><span class="token punctuation">,</span> to <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">!</span><span class="token builtin">bool</span></code></pre>
 <p>add adds an alias <from> to be forwarded to <to></p>
@@ -276,7 +304,7 @@
 </section>
 
 		<section id="Aliases.has" class="doc-node">
-			<div class="title"><h2>fn (Aliases) has <a href="#Aliases.has">#</a></h2><a class="link" rel="noreferrer" target="_blank" href="https://codeberg.org/tamer/nix.git#L78"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></div>
+			<div class="title"><h2>fn (Aliases) has <a href="#Aliases.has">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> o Aliases<span class="token punctuation">)</span> <span class="token function">has</span><span class="token punctuation">(</span>from <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">bool</span></code></pre>
 <p>has returns true/false after checking the databsae for the alias</p>
@@ -284,7 +312,7 @@
 </section>
 
 		<section id="Aliases.get" class="doc-node">
-			<div class="title"><h2>fn (Aliases) get <a href="#Aliases.get">#</a></h2><a class="link" rel="noreferrer" target="_blank" href="https://codeberg.org/tamer/nix.git#L93"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></div>
+			<div class="title"><h2>fn (Aliases) get <a href="#Aliases.get">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> o Aliases<span class="token punctuation">)</span> <span class="token function">get</span><span class="token punctuation">(</span>from <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">?</span><span class="token builtin">string</span></code></pre>
 <p>get returns the receipient for alias</p>
@@ -292,7 +320,7 @@
 </section>
 
 		<section id="Aliases.del" class="doc-node">
-			<div class="title"><h2>fn (Aliases) del <a href="#Aliases.del">#</a></h2><a class="link" rel="noreferrer" target="_blank" href="https://codeberg.org/tamer/nix.git#L109"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></div>
+			<div class="title"><h2>fn (Aliases) del <a href="#Aliases.del">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> o Aliases<span class="token punctuation">)</span> <span class="token function">del</span><span class="token punctuation">(</span>from <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">bool</span></code></pre>
 <p>del with remove the alias from the database</p>
@@ -300,7 +328,7 @@
 </section>
 
 		<section id="Aliases.read" class="doc-node">
-			<div class="title"><h2>fn (Aliases) read <a href="#Aliases.read">#</a></h2><a class="link" rel="noreferrer" target="_blank" href="https://codeberg.org/tamer/nix.git#L119"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></div>
+			<div class="title"><h2>fn (Aliases) read <a href="#Aliases.read">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> o Aliases<span class="token punctuation">)</span> <span class="token function">read</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">bool</span></code></pre>
 <p>read reads the aliases file into memory</p>
@@ -308,7 +336,7 @@
 </section>
 
 		<section id="Aliases.write" class="doc-node">
-			<div class="title"><h2>fn (Aliases) write <a href="#Aliases.write">#</a></h2><a class="link" rel="noreferrer" target="_blank" href="https://codeberg.org/tamer/nix.git#L159"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></div>
+			<div class="title"><h2>fn (Aliases) write <a href="#Aliases.write">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">fn</span> <span class="token punctuation">(</span>o Aliases<span class="token punctuation">)</span> <span class="token function">write</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!</span><span class="token builtin">bool</span></code></pre>
 <p>write writes the aliases from memory to file</p>
@@ -316,7 +344,7 @@
 </section>
 
 		<section id="User" class="doc-node">
-			<div class="title"><h2>struct User <a href="#User">#</a></h2><a class="link" rel="noreferrer" target="_blank" href="https://codeberg.org/tamer/nix.git#L8"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></div>
+			<div class="title"><h2>struct User <a href="#User">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">struct</span> <span class="token symbol">User</span> <span class="token punctuation">{</span>
 <span class="token keyword">pub</span><span class="token punctuation">:</span>
@@ -335,7 +363,7 @@
 </section>
 
 
-						<div class="footer">Powered by vdoc. Generated on: 5 Apr 2026 17:59:04</div>
+						<div class="footer">Powered by vdoc. Generated on: 18 Apr 2026 17:55:57</div>
 					</div>
 					<div class="doc-toc"><ul><li class="open"><a href="#readme_nix">README</a></li>
 <li class="open"><a href="#Constants">Constants</a></li>
@@ -343,6 +371,9 @@
 </ul>
 </li>
 <li class="open"><a href="#dir_db">fn dir_db</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#distribution">fn distribution</a>        <ul>
 </ul>
 </li>
 <li class="open"><a href="#get_linux_listening_tcp">fn get_linux_listening_tcp</a>        <ul>
@@ -370,6 +401,9 @@
 </ul>
 </li>
 <li class="open"><a href="#uid_by_username">fn uid_by_username</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#uptime">fn uptime</a>        <ul>
 </ul>
 </li>
 <li class="open"><a href="#user_by_name">fn user_by_name</a>        <ul>
