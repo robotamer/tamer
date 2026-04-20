@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
+    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -56,20 +56,20 @@
             
             <h2>time</h2>
 <h3>Unix time to Date</h3>
-<pre class="language-bash"><code class="language-bash">d <span class="token operator">:</span><span class="token operator">=</span> <span class="token keyword">time</span><span class="token operator">.</span>Unix<span class="token operator">(</span><span class="token number">1348102780</span><span class="token operator">,</span> <span class="token number">0</span><span class="token operator">)</span><span class="token operator">.</span>Format<span class="token operator">(</span><span class="token keyword">time</span><span class="token operator">.</span>UnixDate<span class="token operator">)</span>
+<pre><code>d := time.Unix(1348102780, 0).Format(time.UnixDate)
 </code></pre>
 <p><a href="http://play.golang.org/p/ZNY_r72Mbj" title="GoPlay">GoPlay</a></p>
 <h2>unicode/utf8</h2>
 <h3>RuneCount</h3>
-<pre class="language-bash"><code class="language-bash">rc <span class="token operator">:</span><span class="token operator">=</span> utf8<span class="token operator">.</span>RuneCount<span class="token operator">(</span><span class="token operator">[</span><span class="token operator">]</span>byte<span class="token operator">(</span><span class="token string">&quot;dsjkdshdjsdh..Ü..js&quot;</span><span class="token operator">)</span><span class="token operator">)</span>
+<pre><code>rc := utf8.RuneCount([]byte(&quot;dsjkdshdjsdh..Ü..js&quot;))
 </code></pre>
 <p><a href="http://play.golang.org/p/D428-5_J6V" title="GoPlay">GoPlay</a></p>
 <h2>encoding/base64</h2>
 <h3>Encode</h3>
-<pre class="language-bash"><code class="language-bash">value <span class="token operator">=</span> base64<span class="token operator">.</span>StdEncoding<span class="token operator">.</span>EncodeToString<span class="token operator">(</span><span class="token operator">[</span><span class="token operator">]</span>byte<span class="token operator">(</span><span class="token string">&quot;Hello World&quot;</span><span class="token operator">)</span><span class="token operator">)</span>
+<pre><code>value = base64.StdEncoding.EncodeToString([]byte(&quot;Hello World&quot;))
 </code></pre>
 <h3>Decode</h3>
-<pre class="language-bash"><code class="language-bash">hw<span class="token operator">,</span> err <span class="token operator">:</span><span class="token operator">=</span> base64<span class="token operator">.</span>StdEncoding<span class="token operator">.</span>DecodeString<span class="token operator">(</span>value<span class="token operator">)</span>
+<pre><code>hw, err := base64.StdEncoding.DecodeString(value)
 </code></pre>
 <p><a href="http://play.golang.org/p/JrdcvJ_G5F" title="GoPlay">GoPlay</a></p>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/code.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">code</a> <a href="/en/tags/go.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">go</a> </p></div>

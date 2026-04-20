@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
+    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -51,62 +51,62 @@
             <h1>Linux Snippets</h1>
             <p class="w3-large w3-text-grey"><i>snippets for linux commands like find and replace, nohup, scp</i></p>
             <h4>Find and chmod files or folders</h4>
-<pre class="language-bash"><code class="language-bash">find <span class="token operator">.</span> <span class="token operator">-</span><span class="token keyword">type</span> d <span class="token operator">-</span><span class="token keyword">exec</span> chmod <span class="token number">755</span> <span class="token operator">{</span><span class="token operator">}</span> \<span class="token operator">;</span>
-find <span class="token operator">.</span> <span class="token operator">-</span><span class="token keyword">type</span> f <span class="token operator">-</span><span class="token keyword">exec</span> chmod <span class="token number">644</span> <span class="token operator">{</span><span class="token operator">}</span> \<span class="token operator">;</span>
+<pre><code>find . -type d -exec chmod 755 {} \;
+find . -type f -exec chmod 644 {} \;
 </code></pre>
 <h4>Find a directory and display on screen</h4>
-<pre class="language-bash"><code class="language-bash">find <span class="token operator">.</span> <span class="token operator">-</span><span class="token keyword">type</span> d <span class="token operator">-</span>name <span class="token string">&apos;linux&apos;</span> <span class="token number">2</span><span class="token operator">&gt;</span><span class="token operator">/</span>dev<span class="token operator">/</span>null
+<pre><code>find . -type d -name 'linux' 2&gt;/dev/null
 </code></pre>
 <h4>Find/Grep for a string across multiple files with different extensions</h4>
-<pre class="language-bash"><code class="language-bash">find <span class="token operator">.</span> <span class="token operator">-</span>name <span class="token string">&quot;*.php&quot;</span> <span class="token operator">|</span> xargs grep <span class="token operator">-</span>niP <span class="token string">&apos;thingy&apos;</span>
-find \<span class="token operator">(</span> <span class="token operator">-</span>name <span class="token string">&quot;*js&quot;</span> <span class="token operator">-</span>o <span class="token operator">-</span>name <span class="token string">&quot;*jsp&quot;</span> <span class="token operator">-</span>o <span class="token operator">-</span>name <span class="token string">&quot;*jspf&quot;</span> \<span class="token operator">)</span> <span class="token operator">|</span> xargs grep <span class="token operator">-</span>niP <span class="token string">&apos;thingy&apos;</span>
+<pre><code>find . -name &quot;*.php&quot; | xargs grep -niP 'thingy'
+find \( -name &quot;*js&quot; -o -name &quot;*jsp&quot; -o -name &quot;*jspf&quot; \) | xargs grep -niP 'thingy'
 </code></pre>
 <h4>Find and replace</h4>
-<pre class="language-bash"><code class="language-bash">find <span class="token operator">.</span> <span class="token operator">-</span><span class="token keyword">type</span> f <span class="token operator">-</span>name <span class="token string">&quot;*.php&quot;</span> <span class="token operator">-</span><span class="token keyword">exec</span> sed <span class="token operator">-</span>i <span class="token string">&apos;s/numRows/rowCount/g&apos;</span> <span class="token operator">{</span><span class="token operator">}</span> \<span class="token operator">;</span>
+<pre><code>find . -type f -name &quot;*.php&quot; -exec sed -i 's/numRows/rowCount/g' {} \;
 </code></pre>
 <h4>How much space is used by folder</h4>
-<pre class="language-bash"><code class="language-bash">$ du <span class="token operator">-</span>hs <span class="token operator">~</span><span class="token operator">/</span><span class="token operator">.</span><span class="token keyword">local</span><span class="token operator">/</span>share<span class="token operator">/</span>Trash
-<span class="token number">96M</span>	<span class="token operator">/</span>home<span class="token operator">/</span>tamer<span class="token operator">/</span><span class="token operator">.</span><span class="token keyword">local</span><span class="token operator">/</span>share<span class="token operator">/</span>Trash
+<pre><code>$ du -hs ~/.local/share/Trash
+96M	/home/tamer/.local/share/Trash
 </code></pre>
 <h4>running as background process</h4>
-<pre class="language-bash"><code class="language-bash">nohup scp <span class="token operator">&lt;</span>params<span class="token operator">&gt;</span> <span class="token operator">&amp;</span> <span class="token operator">&gt;</span> nohup<span class="token operator">.</span>out <span class="token number">2</span> <span class="token operator">&gt;</span> <span class="token operator">&amp;</span><span class="token number">1</span>
-nohup scp <span class="token operator">-</span>r <span class="token operator">-</span>p root@www<span class="token operator">.</span>example<span class="token operator">.</span>com<span class="token operator">:</span><span class="token operator">/</span>var<span class="token operator">/</span>www<span class="token operator">/</span> <span class="token operator">/</span>var<span class="token operator">/</span>www<span class="token operator">/</span> <span class="token operator">&amp;</span> <span class="token operator">&gt;</span>nohup<span class="token operator">.</span>out <span class="token number">2</span><span class="token operator">&gt;</span><span class="token operator">&amp;</span><span class="token number">1</span>
-nohup scp <span class="token operator">-</span>r <span class="token operator">-</span>p root@www<span class="token operator">.</span>example<span class="token operator">.</span>com<span class="token operator">:</span><span class="token operator">/</span>var<span class="token operator">/</span>www<span class="token operator">/</span>logs <span class="token operator">/</span>var<span class="token operator">/</span>www<span class="token operator">/</span> <span class="token operator">&amp;</span> <span class="token operator">&gt;</span>nohup<span class="token operator">.</span>out <span class="token number">2</span><span class="token operator">&gt;</span><span class="token operator">&amp;</span><span class="token number">1</span>
+<pre><code>nohup scp &lt;params&gt; &amp; &gt; nohup.out 2 &gt; &amp;1
+nohup scp -r -p root@www.example.com:/var/www/ /var/www/ &amp; &gt;nohup.out 2&gt;&amp;1
+nohup scp -r -p root@www.example.com:/var/www/logs /var/www/ &amp; &gt;nohup.out 2&gt;&amp;1
 </code></pre>
 <h4>Copying an image file to USB</h4>
-<pre class="language-bash"><code class="language-bash">cat file<span class="token operator">.</span>iso <span class="token operator">&gt;</span> <span class="token operator">/</span>dev<span class="token operator">/</span>sdb
+<pre><code>cat file.iso &gt; /dev/sdb
 sync
 </code></pre>
 <h4>Killing</h4>
-<pre class="language-bash"><code class="language-bash">killall <span class="token operator">-</span><span class="token number">9</span> nginx
+<pre><code>killall -9 nginx
 </code></pre>
 <h4>Mounting an imge file</h4>
-<pre class="language-bash"><code class="language-bash">mount <span class="token operator">-</span>o loop file<span class="token operator">.</span>img <span class="token operator">/</span>mnt<span class="token operator">/</span>image
+<pre><code>mount -o loop file.img /mnt/image
 </code></pre>
 <h4>Creating a file stsyem</h4>
-<pre class="language-bash"><code class="language-bash">mkfs<span class="token operator">.</span>ext2 <span class="token operator">/</span>dev<span class="token operator">/</span>sdb2
+<pre><code>mkfs.ext2 /dev/sdb2
 </code></pre>
 <h4>Labeling a file system</h4>
-<pre class="language-bash"><code class="language-bash">e2label <span class="token operator">/</span>dev<span class="token operator">/</span>sdb2 RoboTamer
+<pre><code>e2label /dev/sdb2 RoboTamer
 </code></pre>
 <h4>Searing bash history</h4>
-<pre class="language-bash"><code class="language-bash"><span class="token keyword">history</span> <span class="token operator">|</span> grep <span class="token operator">-</span>i <span class="token string">&quot;search term&quot;</span>
+<pre><code>history | grep -i &quot;search term&quot;
 </code></pre>
 <h2>Debian Specific</h2>
 <h4>See what is installed</h4>
-<pre class="language-bash"><code class="language-bash">dpkg <span class="token operator">-</span>l <span class="token operator">|</span> grep php5
+<pre><code>dpkg -l | grep php5
 </code></pre>
 <h4>Start a program</h4>
-<pre class="language-bash"><code class="language-bash">service program_name start
+<pre><code>service program_name start
 </code></pre>
 <h4>Stop a program</h4>
-<pre class="language-bash"><code class="language-bash">service program_name stop
+<pre><code>service program_name stop
 </code></pre>
 <h4>Start a programs at boot time</h4>
-<pre class="language-bash"><code class="language-bash">insserv <span class="token operator">-</span>d program_name
+<pre><code>insserv -d program_name
 </code></pre>
 <h4>Remove program from boot time</h4>
-<pre class="language-bash"><code class="language-bash">insserv <span class="token operator">-</span>r program_name
+<pre><code>insserv -r program_name
 </code></pre>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/howto.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">howto</a> <a href="/en/tags/linux.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">linux</a> <a href="/en/tags/debian.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">debian</a> <a href="/en/tags/desktop.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">desktop</a> <a href="/en/tags/server.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">server</a> <a href="/en/tags/bash.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">bash</a> </p></div>
             <hr>

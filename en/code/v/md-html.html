@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
+    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -31,6 +31,7 @@
     <div class="w3-bar w3-black w3-card">
         <a href="/en/index.html" class="w3-bar-item w3-button">en Home</a>
 <a href="/en/code/v/highlighter.html" class="w3-bar-item w3-button">Highlighter</a>
+<a href="/en/code/v/setup.html" class="w3-bar-item w3-button">Setup</a>
 
         <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
         <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
@@ -41,31 +42,31 @@
             <p class="w3-large w3-text-grey"><i>V-lang static site generator</i></p>
             <h3>AI Comment</h3>
 <p>The updated generator.v script provides a fully integrated V-lang static site generator featuring modular methods, /_index.md template support, an optional --force build flag, and enhanced tag management. The script ensures robust TOML parsing, includes automatic search index generation, and generates tag cloud/archive pages. For instructions and the latest code, the user can review the provided generator.v file.</p>
-<pre class="language-sh"><code class="language-sh">Usage<span class="token operator">:</span> v run generator<span class="token operator">.</span>v <span class="token operator">[</span>run<span class="token operator">|</span>serve<span class="token operator">|</span>path<span class="token operator">/</span>to<span class="token operator">/</span>new<span class="token operator">.</span>md<span class="token operator">]</span>
+<pre><code>Usage: v run generator.v [run|serve|path/to/new.md]
 
-Example<span class="token operator">:</span>
-$ v run generator<span class="token operator">.</span>v en<span class="token operator">/</span>code<span class="token operator">/</span>sh<span class="token operator">/</span>commit<span class="token operator">.</span>md
+Example:
+$ v run generator.v en/code/sh/commit.md
 </code></pre>
 <h3>Folder structure:</h3>
-<pre class="language-bash"><code class="language-bash">lang<span class="token operator">/</span>blog
-lang<span class="token operator">/</span>categorie1
-lang<span class="token operator">/</span>categorie2
+<pre><code>lang/blog
+lang/categorie1
+lang/categorie2
 </code></pre>
 <h3>Example:</h3>
-<pre class="language-bash"><code class="language-bash">en<span class="token operator">/</span>blog
-en<span class="token operator">/</span>code<span class="token operator">/</span>go
-en<span class="token operator">/</span>code<span class="token operator">/</span>lua
-en<span class="token operator">/</span>code<span class="token operator">/</span>js
-en<span class="token operator">/</span>linux<span class="token operator">/</span>alpine
+<pre><code>en/blog
+en/code/go
+en/code/lua
+en/code/js
+en/linux/alpine
 </code></pre>
 <h3>File format</h3>
-<pre class="language-Markdown"><code class="language-Markdown"><span class="token operator">+</span><span class="token operator">+</span>
-date <span class="token operator">=</span> <span class="token string">&quot;2026-04-09T18:15:57+0300&quot;</span>
-modified <span class="token operator">=</span> <span class="token string">&quot;&quot;</span>
-title <span class="token operator">=</span> <span class="token string">&quot;Markdown to html website generator&quot;</span>
-description <span class="token operator">=</span> <span class="token string">&quot;Markdown website generator in V&quot;</span>
-tags <span class="token operator">=</span> <span class="token operator">[</span><span class="token string">&quot;v&quot;</span><span class="token operator">,</span> <span class="token string">&quot;website&quot;</span><span class="token operator">]</span>
-<span class="token operator">+</span><span class="token operator">+</span>
+<pre><code>++
+date = &quot;2026-04-09T18:15:57+0300&quot;
+modified = &quot;&quot;
+title = &quot;Markdown to html website generator&quot;
+description = &quot;Markdown website generator in V&quot;
+tags = [&quot;v&quot;, &quot;website&quot;]
+++
 Markdown goes here
 
 </code></pre>

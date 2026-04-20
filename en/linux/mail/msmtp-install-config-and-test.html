@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
+    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -83,31 +83,31 @@ Support for Internationalized Domain Names (IDN) is available if you have GNU  L
 </li>
 </ul>
 <h3>install</h3>
-<pre class="language-bash"><code class="language-bash">apt<span class="token operator">-</span>get install msmtp
+<pre><code>apt-get install msmtp
 </code></pre>
 <h3>configure</h3>
 <p>Below you will see that I commented out tls_trust_file and went with tls_fingerprint.
 You can not use both at the same time, and I figure that tls_fingerprint is faster, however the gmail finger print may change over the years so going with tls_trust_file is probably safer.</p>
-<pre class="language-bash"><code class="language-bash"><span class="token comment"># /etc/msmtprc</span>
+<pre><code># /etc/msmtprc
 defaults
-logfile         <span class="token operator">~</span><span class="token operator">/</span><span class="token operator">.</span>msmtp<span class="token operator">.</span>log
-<span class="token comment">#tls_trust_file /etc/ssl/certs/ca-certificates.crt</span>
+logfile         ~/.msmtp.log
+#tls_trust_file /etc/ssl/certs/ca-certificates.crt
 
 account         default
-host            smtp<span class="token operator">.</span>gmail<span class="token operator">.</span>com
-port            <span class="token number">587</span>
-from            xxxxx@gmail<span class="token operator">.</span>com
+host            smtp.gmail.com
+port            587
+from            xxxxx@gmail.com
 auth            on
-user            xxxxx@gmail<span class="token operator">.</span>com
-password        <span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span>
+user            xxxxx@gmail.com
+password        *******
 tls             on
 tls_starttls    on
-tls_fingerprint DB<span class="token operator">:</span>A0<span class="token operator">:</span><span class="token number">2A</span><span class="token operator">:</span><span class="token number">07</span><span class="token operator">:</span><span class="token number">00</span><span class="token operator">:</span>F9<span class="token operator">:</span>E3<span class="token operator">:</span><span class="token number">23</span><span class="token operator">:</span><span class="token number">7D</span><span class="token operator">:</span><span class="token number">07</span><span class="token operator">:</span>E7<span class="token operator">:</span><span class="token number">52</span><span class="token operator">:</span><span class="token number">3C</span><span class="token operator">:</span><span class="token number">95</span><span class="token operator">:</span><span class="token number">9D</span><span class="token operator">:</span>E6<span class="token operator">:</span><span class="token number">7E</span><span class="token operator">:</span><span class="token number">12</span><span class="token operator">:</span><span class="token number">54</span><span class="token operator">:</span><span class="token number">3F</span>
-logfile         <span class="token operator">/</span>var<span class="token operator">/</span>log<span class="token operator">/</span>msmtp<span class="token operator">.</span>log
+tls_fingerprint DB:A0:2A:07:00:F9:E3:23:7D:07:E7:52:3C:95:9D:E6:7E:12:54:3F
+logfile         /var/log/msmtp.log
 </code></pre>
 <h3>Test</h3>
 <p>Send out a test mail:</p>
-<pre class="language-bash"><code class="language-bash"><span class="token keyword">echo</span> <span class="token operator">-</span>e <span class="token string">&quot;Subject: msmtp test mailnThis is a test mail from msmtp&quot;</span> <span class="token operator">|</span> msmtp <span class="token operator">-</span><span class="token operator">-</span>debug <span class="token operator">-</span><span class="token operator">-</span>from<span class="token operator">=</span>default <span class="token operator">-</span>t xxxxx@gmail<span class="token operator">.</span>com
+<pre><code>echo -e &quot;Subject: msmtp test mailnThis is a test mail from msmtp&quot; | msmtp --debug --from=default -t xxxxx@gmail.com
 </code></pre>
 <p><a href="http://msmtp.sourceforge.net/">Link to developer site</a></p>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/server.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">server</a> </p></div>

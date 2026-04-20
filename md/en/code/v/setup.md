@@ -8,7 +8,6 @@ tags = ["v", "code", "howto"]
 # V Language Setup
 
 ## Installing V
-
 ```sh
 mkdir -p /opt/nix
 chgrp users /opt/nix

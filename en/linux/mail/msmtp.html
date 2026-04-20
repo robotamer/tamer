@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
+    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -43,52 +43,52 @@
             <h1>msmtp</h1>
             <p class="w3-large w3-text-grey"><i>Setting up msmtp as sendmail on debian linux (to send email)</i></p>
             <h1>/etc/msmtprc</h1>
-<pre class="language-sh"><code class="language-sh">defaults
-maildomain      example<span class="token operator">.</span>net
+<pre><code>defaults
+maildomain      example.net
 syslog          LOG_MAIL
-aliases         <span class="token operator">/</span>etc<span class="token operator">/</span>aliases
+aliases         /etc/aliases
 
 account         default
-host            mail<span class="token operator">.</span>example<span class="token operator">.</span>net
-port            <span class="token number">587</span>
-from            srv7@example<span class="token operator">.</span>net
+host            mail.example.net
+port            587
+from            srv7@example.net
 auth            on
-user            user@example<span class="token operator">.</span>net
-password        <span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span>
+user            user@example.net
+password        ********
 tls             on
 tls_starttls    on
-<span class="token comment">#tls_certcheck   off</span>
-tls_fingerprint DB<span class="token operator">:</span>A0<span class="token operator">:</span><span class="token number">2A</span><span class="token operator">:</span><span class="token number">07</span><span class="token operator">:</span><span class="token number">00</span><span class="token operator">:</span>F9<span class="token operator">:</span>E3<span class="token operator">:</span><span class="token number">23</span><span class="token operator">:</span><span class="token number">7D</span><span class="token operator">:</span><span class="token number">07</span><span class="token operator">:</span>E7<span class="token operator">:</span><span class="token number">52</span><span class="token operator">:</span><span class="token number">3C</span><span class="token operator">:</span><span class="token number">95</span><span class="token operator">:</span><span class="token number">9D</span><span class="token operator">:</span>E6<span class="token operator">:</span><span class="token number">7E</span><span class="token operator">:</span><span class="token number">12</span><span class="token operator">:</span><span class="token number">54</span><span class="token operator">:</span><span class="token number">3F</span>
+#tls_certcheck   off
+tls_fingerprint DB:A0:2A:07:00:F9:E3:23:7D:07:E7:52:3C:95:9D:E6:7E:12:54:3F
 </code></pre>
 <p>You may need a manual for a <a href="/linux/openssl/mail-server-fingerprint">tls fingerprint</a></p>
 <p>Your alias file</p>
-<pre class="language-bash"><code class="language-bash"><span class="token comment"># /etc/aliases </span>
-default<span class="token operator">:</span> me@example<span class="token operator">.</span>net
+<pre><code># /etc/aliases 
+default: me@example.net
 </code></pre>
 <p>A php script to send mail</p>
-<pre class="language-bash"><code class="language-bash"><span class="token comment">#!/usr/bin/php</span>
-<span class="token operator">&lt;</span><span class="token operator">?</span>php
+<pre><code>#!/usr/bin/php
+&lt;?php
  
-define<span class="token operator">(</span><span class="token string">&apos;TAB&apos;</span><span class="token operator">,</span><span class="token string">&quot;\t&quot;</span><span class="token operator">)</span><span class="token operator">;</span>
+define('TAB',&quot;\t&quot;);
  
-$user <span class="token operator">=</span> $_SERVER<span class="token operator">[</span><span class="token string">&apos;LOGNAME&apos;</span><span class="token operator">]</span><span class="token operator">;</span>
-$host <span class="token operator">=</span> <span class="token keyword">exec</span><span class="token operator">(</span><span class="token string">&quot;hostname -f&quot;</span><span class="token operator">)</span><span class="token operator">;</span>
-$from <span class="token operator">=</span> $user<span class="token operator">.</span><span class="token string">&apos;@&apos;</span><span class="token operator">.</span>$host<span class="token operator">;</span>
+$user = $_SERVER['LOGNAME'];
+$host = exec(&quot;hostname -f&quot;);
+$from = $user.'@'.$host;
  
-$to      <span class="token operator">=</span> <span class="token string">&apos;sweety@example.net&apos;</span><span class="token operator">;</span>
-$subject <span class="token operator">=</span> <span class="token string">&apos;Testing msmtp&apos;</span><span class="token operator">;</span>
-$message <span class="token operator">=</span> <span class="token string">&apos;hello from &apos;</span><span class="token operator">.</span> $host<span class="token operator">;</span>
-$headers <span class="token operator">=</span> <span class="token string">&apos;From: &apos;</span><span class="token operator">.</span>$from<span class="token operator">.</span>PHP_EOL<span class="token operator">;</span>
-$headers <span class="token operator">.</span><span class="token operator">=</span> <span class="token string">&apos;X-Mailer: msmtp + PHP &apos;</span><span class="token operator">.</span>phpversion<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">;</span>
+$to      = 'sweety@example.net';
+$subject = 'Testing msmtp';
+$message = 'hello from '. $host;
+$headers = 'From: '.$from.PHP_EOL;
+$headers .= 'X-Mailer: msmtp + PHP '.phpversion();
  
-<span class="token keyword">if</span><span class="token operator">(</span>mail<span class="token operator">(</span>$to<span class="token operator">,</span> $subject<span class="token operator">,</span> $message<span class="token operator">,</span> $headers<span class="token operator">)</span><span class="token operator">)</span>
-<span class="token operator">{</span>
-     <span class="token keyword">echo</span> PHP_EOL<span class="token operator">.</span>TAB<span class="token operator">.</span><span class="token string">&apos;Your message was successfully accepted for delivery&apos;</span><span class="token operator">.</span>PHP_EOL<span class="token operator">.</span>PHP_EOL<span class="token operator">;</span>
-<span class="token operator">}</span><span class="token keyword">else</span><span class="token operator">{</span>
-     <span class="token keyword">echo</span> PHP_EOL<span class="token operator">.</span>TAB<span class="token operator">.</span><span class="token string">&apos;Your message was not accepted for delivery!&apos;</span><span class="token operator">.</span>PHP_EOL<span class="token operator">.</span>PHP_EOL<span class="token operator">;</span>
-<span class="token operator">}</span>
+if(mail($to, $subject, $message, $headers))
+{
+     echo PHP_EOL.TAB.'Your message was successfully accepted for delivery'.PHP_EOL.PHP_EOL;
+}else{
+     echo PHP_EOL.TAB.'Your message was not accepted for delivery!'.PHP_EOL.PHP_EOL;
+}
  
-<span class="token operator">?</span><span class="token operator">&gt;</span>
+?&gt;
 </code></pre>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/howto.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">howto</a> <a href="/en/tags/linux.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">linux</a> <a href="/en/tags/debian.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">debian</a> <a href="/en/tags/server.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">server</a> <a href="/en/tags/mail.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">mail</a> <a href="/en/tags/smtp.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">smtp</a> </p></div>
             <hr>

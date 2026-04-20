@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
+    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -31,6 +31,7 @@
     <div class="w3-bar w3-black w3-card">
         <a href="/en/index.html" class="w3-bar-item w3-button">en Home</a>
 <a href="/en/code/v/md-html.html" class="w3-bar-item w3-button">Static site generator</a>
+<a href="/en/code/v/setup.html" class="w3-bar-item w3-button">Setup</a>
 
         <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
         <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
@@ -46,20 +47,20 @@ static HTML files at build time. No client-side JavaScript required.</p>
 <ul>
 <li><strong>Native V</strong>: No external regex engine dependencies.</li>
 <li><strong>Fast</strong>: High-speed scanner (FSM)</li>
-<li><strong>Prism Compatible</strong>: Outputs standard <code class="language-bash">token</code> classes.</li>
-<li><strong>Auto-detection</strong>: Automatically highlights blocks with <code class="language-bash">class<span class="token operator">=</span><span class="token string">&quot;language-xxx&quot;</span></code> or defaults to Bash.</li>
+<li><strong>Prism Compatible</strong>: Outputs standard <code>token</code> classes.</li>
+<li><strong>Auto-detection</strong>: Automatically highlights blocks with <code>class=&quot;language-xxx&quot;</code> or defaults to Bash.</li>
 </ul>
 <h2>Installation</h2>
 <h3>For V Users</h3>
-<pre class="language-sh"><code class="language-sh">v install https<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>codeberg<span class="token operator">.</span>org<span class="token operator">/</span>tamer<span class="token operator">/</span>highlighter<span class="token operator">.</span>git
+<pre><code>v install https://codeberg.org/tamer/highlighter.git
 </code></pre>
 <h3>For C Users</h3>
-<pre class="language-sh"><code class="language-sh">make compile_c_linux   <span class="token operator">-</span> Build using GCC from the C file
-make compile_c_windows <span class="token operator">-</span> Build <span class="token keyword">for</span> Win using MinGW from the C file
+<pre><code>make compile_c_linux   - Build using GCC from the C file
+make compile_c_windows - Build for Win using MinGW from the C file
 </code></pre>
 <h2>Usage</h2>
 <h3>As a CLI tool</h3>
-<pre class="language-sh"><code class="language-sh">highlight <span class="token operator">-</span><span class="token operator">-</span>verbose <span class="token operator">-</span><span class="token operator">-</span>force <span class="token operator">/</span>var<span class="token operator">/</span>www
+<pre><code>highlight --verbose --force /var/www
 </code></pre>
 <h3>As a Module</h3>
 <pre class="language-v"><code class="language-v"><span class="token keyword">import</span> highlighter
@@ -68,15 +69,15 @@ make compile_c_windows <span class="token operator">-</span> Build <span class="
 html_output <span class="token operator">:</span><span class="token operator">=</span> hl<span class="token operator">.</span>highlight_html<span class="token operator">(</span>markdown_generated_html<span class="token operator">)</span>
 </code></pre>
 <h2>Structure</h2>
-<pre class="language-bash"><code class="language-bash"><span class="token operator">.</span>
-├── highlighter<span class="token operator">.</span>v           <span class="token comment"># Logic moved to root</span>
-├── v<span class="token operator">.</span>mod                   <span class="token comment"># Module info</span>
-├── highlight_standalone<span class="token operator">.</span>c  <span class="token comment"># Standalone C</span>
+<pre><code>.
+├── highlighter.v           # Logic moved to root
+├── v.mod                   # Module info
+├── highlight_standalone.c  # Standalone C
 ├── Makefile
-├── lang_data<span class="token operator">/</span>              <span class="token comment"># JSON files</span>
-├── cmd<span class="token operator">/</span>
-│   └── main<span class="token operator">.</span>v              <span class="token comment"># CLI entry point</span>
-└── convert<span class="token operator">.</span>lua             <span class="token comment"># Bootstrap script</span>
+├── lang_data/              # JSON files
+├── cmd/
+│   └── main.v              # CLI entry point
+└── convert.lua             # Bootstrap script
 </code></pre>
 <h2>License</h2>
 <p>Distributed under the MIT License. See LICENSE for more information.</p>

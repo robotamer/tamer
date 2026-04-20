@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
+    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -42,8 +42,8 @@
         <div class="w3-container w3-white w3-card-4 w3-padding-32">
             <h1>Change Citadel Domain</h1>
             <p class="w3-large w3-text-grey"><i>Change the Citadel domain address in docker installation</i></p>
-            <p>We will use <code class="language-bash">mail</code> as hostname, <code class="language-bash">mail<span class="token operator">.</span>example<span class="token operator">.</span>net</code> as our original domain, and <code class="language-bash">mail<span class="token operator">.</span>example<span class="token operator">.</span>com</code> as our new domain;
-and <code class="language-bash"><span class="token number">203.0.113.1</span></code> as our public facing IP address on this page for the citadel server.
+            <p>We will use <code>mail</code> as hostname, <code>mail.example.net</code> as our original domain, and <code>mail.example.com</code> as our new domain;
+and <code>203.0.113.1</code> as our public facing IP address on this page for the citadel server.
 Replace with your own.</p>
 <h2>Pre-Install</h2>
 <ul>
@@ -52,62 +52,62 @@ How to do that is out of this manuals scope.</li>
 </ul>
 <hr>
 <p>Next we will set some variables, <em>replace</em> with your domain and IP address then execute following in your servers shell.</p>
-<pre class="language-sh"><code class="language-sh"><span class="token keyword">export</span> CIT_DOMAIN_ORG<span class="token operator">=</span>mail<span class="token operator">.</span>example<span class="token operator">.</span>net
-<span class="token keyword">export</span> CIT_DOMAIN_NEW<span class="token operator">=</span>mail<span class="token operator">.</span>example<span class="token operator">.</span>com
+<pre><code>export CIT_DOMAIN_ORG=mail.example.net
+export CIT_DOMAIN_NEW=mail.example.com
 </code></pre>
 <p>Change your <em>/etc/hosts</em> &amp; <em>lighttpd.conf</em> file replace old with new domain</p>
-<pre class="language-sh"><code class="language-sh"><span class="token comment"># Replace text in files</span>
-sed <span class="token operator">-</span>i <span class="token string">&quot;s|$CIT_DOMAIN_ORG|$CIT_DOMAIN_NEW|g&quot;</span> <span class="token operator">/</span>etc<span class="token operator">/</span>hosts
-sed <span class="token operator">-</span>i <span class="token string">&quot;s|$CIT_DOMAIN_ORG|$CIT_DOMAIN_NEW|g&quot;</span> <span class="token operator">/</span>etc<span class="token operator">/</span>lighttpd<span class="token operator">/</span>lighttpd<span class="token operator">.</span>conf
+<pre><code># Replace text in files
+sed -i &quot;s|$CIT_DOMAIN_ORG|$CIT_DOMAIN_NEW|g&quot; /etc/hosts
+sed -i &quot;s|$CIT_DOMAIN_ORG|$CIT_DOMAIN_NEW|g&quot; /etc/lighttpd/lighttpd.conf
 
-<span class="token comment"># Check config file</span>
-lighttpd <span class="token operator">-</span>tt <span class="token operator">-</span>f <span class="token operator">/</span>etc<span class="token operator">/</span>lighttpd<span class="token operator">/</span>lighttpd<span class="token operator">.</span>conf
+# Check config file
+lighttpd -tt -f /etc/lighttpd/lighttpd.conf
 </code></pre>
 <p>If there is an error at this point check your <em>/etc/lighttpd/lighttpd.conf</em> file. Fix the problem and run last command again.</p>
 <ul>
 <li>No error continue</li>
 </ul>
-<pre class="language-sh"><code class="language-sh">certbot certonly <span class="token operator">-</span><span class="token operator">-</span>agree<span class="token operator">-</span>tos <span class="token operator">-</span><span class="token operator">-</span>non<span class="token operator">-</span>interactive <span class="token operator">-</span><span class="token operator">-</span>text <span class="token operator">-</span><span class="token operator">-</span>rsa<span class="token operator">-</span>key<span class="token operator">-</span>size <span class="token number">4096</span> \
-    <span class="token operator">-</span><span class="token operator">-</span>email webmaster@$<span class="token operator">{</span>CIT_DOMAIN_NEW<span class="token operator">}</span> \
-    <span class="token operator">-</span><span class="token operator">-</span>webroot <span class="token operator">-</span><span class="token operator">-</span>webroot<span class="token operator">-</span>path <span class="token operator">/</span>srv<span class="token operator">/</span>www<span class="token operator">/</span>lighttpd \
-    <span class="token operator">-</span><span class="token operator">-</span>domains $<span class="token operator">{</span>CIT_DOMAIN_NEW<span class="token operator">}</span>
+<pre><code>certbot certonly --agree-tos --non-interactive --text --rsa-key-size 4096 \
+    --email webmaster@${CIT_DOMAIN_NEW} \
+    --webroot --webroot-path /srv/www/lighttpd \
+    --domains ${CIT_DOMAIN_NEW}
 </code></pre>
 <ul>
 <li>No error continue</li>
 </ul>
-<pre class="language-bash"><code class="language-bash">sv stop lighttpd
+<pre><code>sv stop lighttpd
 </code></pre>
 <ul>
 <li>No error continue</li>
 </ul>
-<pre class="language-bash"><code class="language-bash">cp <span class="token operator">/</span>etc<span class="token operator">/</span>letsencrypt<span class="token operator">/</span>live<span class="token operator">/</span>$<span class="token operator">{</span>CIT_DOMAIN_NEW<span class="token operator">}</span><span class="token operator">/</span>privkey<span class="token operator">.</span>pem <span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>citadel<span class="token operator">/</span>keys<span class="token operator">/</span>citadel<span class="token operator">.</span>key 
-cp <span class="token operator">/</span>etc<span class="token operator">/</span>letsencrypt<span class="token operator">/</span>live<span class="token operator">/</span>$<span class="token operator">{</span>CIT_DOMAIN_NEW<span class="token operator">}</span><span class="token operator">/</span>fullchain<span class="token operator">.</span>pem <span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>citadel<span class="token operator">/</span>keys<span class="token operator">/</span>citadel<span class="token operator">.</span>cer
+<pre><code>cp /etc/letsencrypt/live/${CIT_DOMAIN_NEW}/privkey.pem /usr/local/citadel/keys/citadel.key 
+cp /etc/letsencrypt/live/${CIT_DOMAIN_NEW}/fullchain.pem /usr/local/citadel/keys/citadel.cer
 </code></pre>
 <ul>
 <li>No error continue</li>
 </ul>
-<pre class="language-sh"><code class="language-sh">docker stop citadel
+<pre><code>docker stop citadel
 wait
-docker rename citadel citadel<span class="token operator">.</span>net
+docker rename citadel citadel.net
 </code></pre>
 <ul>
 <li>No error continue</li>
 </ul>
-<pre class="language-sh"><code class="language-sh">docker run <span class="token operator">-</span>d <span class="token operator">-</span><span class="token operator">-</span>restart<span class="token operator">=</span>unless<span class="token operator">-</span>stopped <span class="token operator">-</span><span class="token operator">-</span>network host \
-    <span class="token operator">-</span><span class="token operator">-</span>volume<span class="token operator">=</span><span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>citadel<span class="token operator">:</span><span class="token operator">/</span>citadel<span class="token operator">-</span>data \
-    <span class="token operator">-</span><span class="token operator">-</span>volume<span class="token operator">=</span><span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>webcit<span class="token operator">/</span><span class="token operator">.</span>well<span class="token operator">-</span>known<span class="token operator">:</span><span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>webcit<span class="token operator">/</span><span class="token operator">.</span>well<span class="token operator">-</span>known \
-    <span class="token operator">-</span><span class="token operator">-</span>volume<span class="token operator">=</span><span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>webcit<span class="token operator">/</span>static<span class="token operator">.</span><span class="token keyword">local</span><span class="token operator">:</span><span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>webcit<span class="token operator">/</span>static<span class="token operator">.</span><span class="token keyword">local</span> \
-    <span class="token operator">-</span><span class="token operator">-</span>name<span class="token operator">=</span>citadel citadeldotorg<span class="token operator">/</span>citadel <span class="token operator">-</span><span class="token operator">-</span>http<span class="token operator">-</span>port<span class="token operator">=</span><span class="token number">8080</span> <span class="token operator">-</span><span class="token operator">-</span>https<span class="token operator">-</span>port<span class="token operator">=</span><span class="token number">8443</span>
+<pre><code>docker run -d --restart=unless-stopped --network host \
+    --volume=/usr/local/citadel:/citadel-data \
+    --volume=/usr/local/webcit/.well-known:/usr/local/webcit/.well-known \
+    --volume=/usr/local/webcit/static.local:/usr/local/webcit/static.local \
+    --name=citadel citadeldotorg/citadel --http-port=8080 --https-port=8443
 </code></pre>
 <ul>
 <li>No error continue</li>
 </ul>
-<pre class="language-sh"><code class="language-sh">sv start lighttpd
+<pre><code>sv start lighttpd
 </code></pre>
 <ul>
 <li>Last we change the certbot post renewal hook</li>
 </ul>
-<pre class="language-sh"><code class="language-sh">sed <span class="token operator">-</span>i <span class="token string">&quot;s|$CIT_DOMAIN_ORG|$CIT_DOMAIN_NEW|g&quot;</span> <span class="token operator">/</span>etc<span class="token operator">/</span>letsencrypt<span class="token operator">/</span>renewal<span class="token operator">-</span>hooks<span class="token operator">/</span>post<span class="token operator">/</span>citadel<span class="token operator">.</span>sh
+<pre><code>sed -i &quot;s|$CIT_DOMAIN_ORG|$CIT_DOMAIN_NEW|g&quot; /etc/letsencrypt/renewal-hooks/post/citadel.sh
 </code></pre>
 <p>All done check your new setup.<br>
 If you have a problem ask questions at <a href="https://uncensored.citadel.org/readfwd?go=Citadel%20Support">Citadel Support</a></p>

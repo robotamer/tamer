@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
+    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -42,36 +42,36 @@
             <h1>Master Singleton Class</h1>
             
             <h4>Via the factory</h4>
-<pre class="language-bash"><code class="language-bash">$l <span class="token operator">=</span> RTSingleton<span class="token operator">:</span><span class="token operator">:</span>factory<span class="token operator">(</span><span class="token string">&apos;Translate&apos;</span><span class="token operator">)</span><span class="token operator">;</span>
+<pre><code>$l = RTSingleton::factory('Translate');
 </code></pre>
 <h4>Directs call</h4>
-<pre class="language-bash"><code class="language-bash">$view <span class="token operator">=</span> RTSingleton<span class="token operator">:</span><span class="token operator">:</span>Template<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">;</span>
+<pre><code>$view = RTSingleton::Template();
 </code></pre>
 <h4>Class Alias</h4>
-<pre class="language-bash"><code class="language-bash">RTSingleton<span class="token operator">:</span><span class="token operator">:</span><span class="token keyword">alias</span><span class="token operator">(</span>string $className<span class="token operator">,</span> string $<span class="token keyword">alias</span><span class="token operator">)</span><span class="token operator">;</span>
+<pre><code>RTSingleton::alias(string $className, string $alias);
 
-RTSingleton<span class="token operator">:</span><span class="token operator">:</span><span class="token keyword">alias</span><span class="token operator">(</span><span class="token string">&apos;Template&apos;</span><span class="token operator">,</span> <span class="token string">&apos;V&apos;</span><span class="token operator">)</span><span class="token operator">;</span>
+RTSingleton::alias('Template', 'V');
 </code></pre>
 <h4>Aliased call <em>RTSingleton has an S alias by default</em></h4>
-<pre class="language-bash"><code class="language-bash">$view <span class="token operator">=</span> S<span class="token operator">:</span><span class="token operator">:</span>V<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">;</span>
+<pre><code>$view = S::V();
 </code></pre>
 <h4>Set Object  <em>Not available in version 0.0.1</em></h4>
-<pre class="language-bash"><code class="language-bash">RTSingleton<span class="token operator">:</span><span class="token operator">:</span><span class="token keyword">set</span><span class="token operator">(</span>object $class <span class="token operator">[</span><span class="token operator">,</span> string $<span class="token keyword">alias</span> <span class="token operator">=</span> NULL <span class="token operator">]</span> <span class="token operator">)</span><span class="token operator">;</span>
+<pre><code>RTSingleton::set(object $class [, string $alias = NULL ] );
 
-RTSingleton<span class="token operator">:</span><span class="token operator">:</span><span class="token keyword">set</span><span class="token operator">(</span>new Aura\View\Template<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">,</span> <span class="token string">&apos;View&apos;</span><span class="token operator">)</span><span class="token operator">;</span>
+RTSingleton::set(new Aura\View\Template(), 'View');
 </code></pre>
 <h4>Actually:</h4>
-<pre class="language-bash"><code class="language-bash"> RTSingleton<span class="token operator">:</span><span class="token operator">:</span><span class="token keyword">set</span><span class="token operator">(</span>require __dir__ <span class="token operator">.</span> <span class="token string">&apos;/../libs/composer/vendor/Aura/View/scripts/instance.php&apos;</span><span class="token operator">,</span><span class="token string">&apos;V&apos;</span><span class="token operator">)</span><span class="token operator">;</span>
+<pre><code> RTSingleton::set(require __dir__ . '/../libs/composer/vendor/Aura/View/scripts/instance.php','V');
 </code></pre>
 <h4>No need for global variables</h4>
-<pre class="language-bash"><code class="language-bash">S<span class="token operator">:</span><span class="token operator">:</span>V<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">-</span><span class="token operator">&gt;</span>var <span class="token operator">=</span> <span class="token string">&apos;Master RTSingleton Class&apos;</span><span class="token operator">;</span>
+<pre><code>S::V()-&gt;var = 'Master RTSingleton Class';
 </code></pre>
 <h4>Use original class or alias or switch back and forth</h4>
-<pre class="language-bash"><code class="language-bash"><span class="token keyword">echo</span> RTSingleton<span class="token operator">:</span><span class="token operator">:</span>Template<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">-</span><span class="token operator">&gt;</span>fetch<span class="token operator">(</span>__dir__ <span class="token operator">.</span><span class="token string">&apos;/gui/layout.php&apos;</span><span class="token operator">)</span><span class="token operator">;</span>
-<span class="token keyword">echo</span> S<span class="token operator">:</span><span class="token operator">:</span>V<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">-</span><span class="token operator">&gt;</span>fetch<span class="token operator">(</span>__dir__ <span class="token operator">.</span><span class="token string">&apos;/gui/otherlayout.php&apos;</span><span class="token operator">)</span><span class="token operator">;</span>
+<pre><code>echo RTSingleton::Template()-&gt;fetch(__dir__ .'/gui/layout.php');
+echo S::V()-&gt;fetch(__dir__ .'/gui/otherlayout.php');
 </code></pre>
 <h4>See all the registered classes</h4>
-<pre class="language-bash"><code class="language-bash">print_r<span class="token operator">(</span>S<span class="token operator">:</span><span class="token operator">:</span>getClasses<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">)</span><span class="token operator">;</span>
+<pre><code>print_r(S::getClasses());
 </code></pre>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/phptamer.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">phptamer</a> </p></div>
             <hr>

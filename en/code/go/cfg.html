@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
+    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -61,40 +61,40 @@
 <li>You can save runtime modifications to the config</li>
 </ul>
 <h3>Docs:</h3>
-<pre class="language-bash"><code class="language-bash">import <span class="token string">&quot;bitbucket.org/gotamer/cfg&quot;</span>
+<pre><code>import &quot;bitbucket.org/gotamer/cfg&quot;
 
-func Load<span class="token operator">(</span>filename string<span class="token operator">,</span> o interface<span class="token operator">{</span><span class="token operator">}</span><span class="token operator">)</span> <span class="token operator">(</span>err error<span class="token operator">)</span>
+func Load(filename string, o interface{}) (err error)
 </code></pre>
 <p>Load gets your config from the json file, and fills your struct with the option</p>
-<pre class="language-bash"><code class="language-bash">func Save<span class="token operator">(</span>filename string<span class="token operator">,</span> o interface<span class="token operator">{</span><span class="token operator">}</span><span class="token operator">)</span> <span class="token operator">(</span>err error<span class="token operator">)</span>	
+<pre><code>func Save(filename string, o interface{}) (err error)	
 </code></pre>
 <p>Save will save your struct to the given filename, this is a good way to create a json template</p>
 <h3>Example:</h3>
-<pre class="language-go"><code class="language-go">    <span class="token keyword">package</span> main
+<pre><code>    package main
 
-    <span class="token keyword">import</span> <span class="token operator">(</span>
-        <span class="token string">&quot;fmt&quot;</span>
-        <span class="token string">&quot;bitbucket.org/gotamer/cfg&quot;</span>
-        <span class="token string">&quot;os&quot;</span>
-    <span class="token operator">)</span>
+    import (
+        &quot;fmt&quot;
+        &quot;bitbucket.org/gotamer/cfg&quot;
+        &quot;os&quot;
+    )
 
-    <span class="token keyword">var</span> Cfg <span class="token operator">*</span>MainCfg
+    var Cfg *MainCfg
 
-    <span class="token keyword">type</span> MainCfg <span class="token keyword">struct</span> <span class="token operator">{</span>
-        Name  <span class="token keyword2">string</span>
-    <span class="token operator">}</span>
+    type MainCfg struct {
+        Name  string
+    }
 
-    <span class="token keyword">func</span> main<span class="token operator">(</span><span class="token operator">)</span> <span class="token operator">{</span>
-        Cfg <span class="token operator">=</span> <span class="token operator">&amp;</span>MainCfg<span class="token operator">{</span><span class="token string">&quot;defaultAlias&quot;</span><span class="token operator">}</span>
-        cfgpath <span class="token operator">:</span><span class="token operator">=</span> os<span class="token operator">.</span>Getenv<span class="token operator">(</span><span class="token string">&quot;GOPATH&quot;</span><span class="token operator">)</span> <span class="token operator">+</span> <span class="token string">&quot;/etc/myappname.json&quot;</span>
-        err <span class="token operator">:</span><span class="token operator">=</span> cfg<span class="token operator">.</span>Load<span class="token operator">(</span>cfgpath<span class="token operator">,</span> Cfg<span class="token operator">)</span>
-        <span class="token keyword">if</span> err <span class="token operator">!</span><span class="token operator">=</span> <span class="token literal">nil</span> <span class="token operator">{</span>
-            cfg<span class="token operator">.</span>Save<span class="token operator">(</span>cfgpath<span class="token operator">,</span> Cfg<span class="token operator">)</span>
-            fmt<span class="token operator">.</span>Println<span class="token operator">(</span><span class="token string">&quot;\n\tPlease edit your configuration at: &quot;</span><span class="token operator">,</span> cfgpath<span class="token operator">,</span> <span class="token string">&quot;\n&quot;</span><span class="token operator">)</span>
-            os<span class="token operator">.</span>Exit<span class="token operator">(</span><span class="token number">0</span><span class="token operator">)</span>
-        <span class="token operator">}</span>
-        fmt<span class="token operator">.</span>Printf<span class="token operator">(</span><span class="token string">&quot;%s&quot;</span><span class="token operator">,</span> Cfg<span class="token operator">)</span>
-    <span class="token operator">}</span>
+    func main() {
+        Cfg = &amp;MainCfg{&quot;defaultAlias&quot;}
+        cfgpath := os.Getenv(&quot;GOPATH&quot;) + &quot;/etc/myappname.json&quot;
+        err := cfg.Load(cfgpath, Cfg)
+        if err != nil {
+            cfg.Save(cfgpath, Cfg)
+            fmt.Println(&quot;\n\tPlease edit your configuration at: &quot;, cfgpath, &quot;\n&quot;)
+            os.Exit(0)
+        }
+        fmt.Printf(&quot;%s&quot;, Cfg)
+    }
 </code></pre>
 <h3>Links</h3>
 <ul>

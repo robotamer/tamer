@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
+    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -49,42 +49,42 @@
             <h1>Multiple PHP installations</h1>
             <p class="w3-large w3-text-grey"><i>Multiple PHP installations so you can run 5.3.x on one box</i></p>
             <p>How to install <strong>PHP 5.3.X</strong> as secondary php version from source</p>
-<pre class="language-bash"><code class="language-bash">PHPV<span class="token operator">=</span><span class="token number">5.3.6</span>
-<span class="token keyword">cd</span> <span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>src
-wget http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>us<span class="token operator">.</span>php<span class="token operator">.</span>net<span class="token operator">/</span>get<span class="token operator">/</span>php<span class="token operator">-</span>$PHPV<span class="token operator">.</span>tar<span class="token operator">.</span>gz<span class="token operator">/</span>from<span class="token operator">/</span>this<span class="token operator">/</span>mirror
-mv mirror php<span class="token operator">-</span>$PHPV<span class="token operator">.</span>tar<span class="token operator">.</span>gz
-tar xzvf php<span class="token operator">-</span>$PHPV<span class="token operator">.</span>tar<span class="token operator">.</span>gz
-chown <span class="token operator">-</span>R $USER<span class="token operator">:</span>$USER php<span class="token operator">-</span>$PHPV<span class="token operator">/</span>
-<span class="token keyword">cd</span> php<span class="token operator">-</span>$PHPV<span class="token operator">/</span>
+<pre><code>PHPV=5.3.6
+cd /usr/local/src
+wget http://us.php.net/get/php-$PHPV.tar.gz/from/this/mirror
+mv mirror php-$PHPV.tar.gz
+tar xzvf php-$PHPV.tar.gz
+chown -R $USER:$USER php-$PHPV/
+cd php-$PHPV/
 
-apt<span class="token operator">-</span>get install libxml2<span class="token operator">-</span>dev libssl<span class="token operator">-</span>dev libcurl4<span class="token operator">-</span>gnutls<span class="token operator">-</span>dev libjpeg62<span class="token operator">-</span>dev libpng12<span class="token operator">-</span>dev libfreetype6<span class="token operator">-</span>dev unixodbc<span class="token operator">-</span>dev
+apt-get install libxml2-dev libssl-dev libcurl4-gnutls-dev libjpeg62-dev libpng12-dev libfreetype6-dev unixodbc-dev
 
-<span class="token operator">.</span><span class="token operator">/</span>configure 
-  <span class="token operator">-</span><span class="token operator">-</span>prefix<span class="token operator">=</span><span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>php5<span class="token operator">.</span><span class="token number">3</span> 
-  <span class="token operator">-</span><span class="token operator">-</span>with<span class="token operator">-</span>config<span class="token operator">-</span>file<span class="token operator">-</span>path<span class="token operator">=</span><span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>etc<span class="token operator">/</span>php5<span class="token operator">.</span><span class="token number">3</span> 
-  <span class="token operator">-</span><span class="token operator">-</span>with<span class="token operator">-</span>config<span class="token operator">-</span>file<span class="token operator">-</span>scan<span class="token operator">-</span>dir<span class="token operator">=</span><span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>etc<span class="token operator">/</span>php5<span class="token operator">.</span><span class="token number">3</span><span class="token operator">/</span>$SAPIconf<span class="token operator">.</span>d 
-  <span class="token operator">-</span><span class="token operator">-</span>with<span class="token operator">-</span>libdir<span class="token operator">=</span><span class="token operator">/</span>lib 
-  <span class="token operator">-</span><span class="token operator">-</span>disable<span class="token operator">-</span>cgi 
-  <span class="token operator">-</span><span class="token operator">-</span>with<span class="token operator">-</span>libxml<span class="token operator">-</span>dir<span class="token operator">=</span><span class="token operator">/</span>usr<span class="token operator">/</span> 
-  <span class="token operator">-</span><span class="token operator">-</span>with<span class="token operator">-</span>mysql<span class="token operator">=</span><span class="token operator">/</span>usr<span class="token operator">/</span> 
-  <span class="token operator">-</span><span class="token operator">-</span><span class="token keyword">enable</span><span class="token operator">-</span>pdo 
-  <span class="token operator">-</span><span class="token operator">-</span>with<span class="token operator">-</span>pdo<span class="token operator">-</span>mysql 
-  <span class="token operator">-</span><span class="token operator">-</span>with<span class="token operator">-</span>mysqli 
-  <span class="token operator">-</span><span class="token operator">-</span>with<span class="token operator">-</span>zlib<span class="token operator">-</span>dir<span class="token operator">=</span><span class="token operator">/</span>usr 
-  <span class="token operator">-</span><span class="token operator">-</span>with<span class="token operator">-</span>curl 
-  <span class="token operator">-</span><span class="token operator">-</span>with<span class="token operator">-</span>gd 
-  <span class="token operator">-</span><span class="token operator">-</span>with<span class="token operator">-</span>jpeg<span class="token operator">-</span>dir<span class="token operator">=</span><span class="token operator">/</span>usr<span class="token operator">/</span>lib 
-  <span class="token operator">-</span><span class="token operator">-</span>with<span class="token operator">-</span>png<span class="token operator">-</span>dir<span class="token operator">=</span><span class="token operator">/</span>usr<span class="token operator">/</span>lib 
-  <span class="token operator">-</span><span class="token operator">-</span>with<span class="token operator">-</span>freetype<span class="token operator">-</span>dir<span class="token operator">=</span><span class="token operator">/</span>usr<span class="token operator">/</span>lib 
-  <span class="token operator">-</span><span class="token operator">-</span>with<span class="token operator">-</span>gettext 
-  <span class="token operator">-</span><span class="token operator">-</span><span class="token keyword">enable</span><span class="token operator">-</span>mbstring 
-  <span class="token operator">-</span><span class="token operator">-</span><span class="token keyword">enable</span><span class="token operator">-</span>soap 
-  <span class="token operator">-</span><span class="token operator">-</span><span class="token keyword">enable</span><span class="token operator">-</span>ftp 
-  <span class="token operator">-</span><span class="token operator">-</span><span class="token keyword">enable</span><span class="token operator">-</span>fpm 
-  <span class="token operator">-</span><span class="token operator">-</span>with<span class="token operator">-</span>openssl
+./configure 
+  --prefix=/usr/local/php5.3 
+  --with-config-file-path=/usr/local/etc/php5.3 
+  --with-config-file-scan-dir=/usr/local/etc/php5.3/$SAPIconf.d 
+  --with-libdir=/lib 
+  --disable-cgi 
+  --with-libxml-dir=/usr/ 
+  --with-mysql=/usr/ 
+  --enable-pdo 
+  --with-pdo-mysql 
+  --with-mysqli 
+  --with-zlib-dir=/usr 
+  --with-curl 
+  --with-gd 
+  --with-jpeg-dir=/usr/lib 
+  --with-png-dir=/usr/lib 
+  --with-freetype-dir=/usr/lib 
+  --with-gettext 
+  --enable-mbstring 
+  --enable-soap 
+  --enable-ftp 
+  --enable-fpm 
+  --with-openssl
 
 make
-make <span class="token keyword">test</span>
+make test
 make install
 </code></pre>
 <p>More help in case you have errors:

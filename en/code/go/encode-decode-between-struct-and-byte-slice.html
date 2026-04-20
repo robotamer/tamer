@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
+    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -58,20 +58,20 @@
 <h2>Internals:</h2>
 <p><em>sbs</em> encodes your struct first to a Gob, then it convers it to a byte slice; it reverses the process for decoding.</p>
 <h4>Example</h4>
-<pre class="language-go"><code class="language-go">
-    <span class="token keyword">type</span> Foo <span class="token keyword">struct</span> <span class="token operator">{</span>
-        A <span class="token keyword2">int</span>
-        B <span class="token keyword2">string</span>
-    <span class="token operator">}</span>
+<pre><code>
+    type Foo struct {
+        A int
+        B string
+    }
 
-    p <span class="token operator">:</span><span class="token operator">=</span> <span class="token operator">&amp;</span>Foo<span class="token operator">{</span><span class="token number">111</span><span class="token operator">,</span><span class="token string">&quot;A string&quot;</span><span class="token operator">}</span>
+    p := &amp;Foo{111,&quot;A string&quot;}
 
-    byteslice<span class="token operator">,</span> err <span class="token operator">:</span><span class="token operator">=</span> sbs<span class="token operator">.</span>Enc<span class="token operator">(</span>p<span class="token operator">)</span>
-    <span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span>
+    byteslice, err := sbs.Enc(p)
+    ...
 
-    foo <span class="token operator">:</span><span class="token operator">=</span> new<span class="token operator">(</span>Foo<span class="token operator">)</span>
-    structobject<span class="token operator">,</span> err <span class="token operator">:</span><span class="token operator">=</span> sbs<span class="token operator">.</span>Dec<span class="token operator">(</span>foo<span class="token operator">,</span> byteslice<span class="token operator">)</span>
-    <span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span>
+    foo := new(Foo)
+    structobject, err := sbs.Dec(foo, byteslice)
+    ...
 </code></pre>
 <p>Code is available at <a href="https://bitbucket.org/gotamer/sbs">https://bitbucket.org/gotamer/sbs</a></p>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/gotamer.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">gotamer</a> <a href="/en/tags/database.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">database</a> <a href="/en/tags/gob.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">gob</a> </p></div>

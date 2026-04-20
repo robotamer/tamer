@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
+    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -56,23 +56,23 @@
             <p class="w3-large w3-text-grey"><i>The things you can do, in this case with the Go programing language</i></p>
             <p>I don't use this, since I need often more but isn't this just need?</p>
 <p><a href="http://play.golang.org/p/QFheQeChIn">http://play.golang.org/p/QFheQeChIn</a></p>
-<pre class="language-go"><code class="language-go">    <span class="token keyword">package</span> main
+<pre><code>    package main
 
-    <span class="token keyword">import</span> <span class="token string">&quot;log&quot;</span>
+    import &quot;log&quot;
 
-    <span class="token keyword">const</span> debug debugging <span class="token operator">=</span> <span class="token literal">true</span> <span class="token comment">// or flip to false</span>
+    const debug debugging = true // or flip to false
 
-    <span class="token keyword">type</span> debugging <span class="token keyword2">bool</span>
+    type debugging bool
 
-    <span class="token keyword">func</span> <span class="token operator">(</span>d debugging<span class="token operator">)</span> Printf<span class="token operator">(</span>format <span class="token keyword2">string</span><span class="token operator">,</span> args <span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token keyword">interface</span><span class="token operator">{</span><span class="token operator">}</span><span class="token operator">)</span> <span class="token operator">{</span>
-        d <span class="token operator">{</span>
-            log<span class="token operator">.</span>Printf<span class="token operator">(</span>format<span class="token operator">,</span> args<span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">)</span>
-        <span class="token operator">}</span>
-    <span class="token operator">}</span>
+    func (d debugging) Printf(format string, args ...interface{}) {
+        d {
+            log.Printf(format, args...)
+        }
+    }
 
-    <span class="token keyword">func</span> main<span class="token operator">(</span><span class="token operator">)</span> <span class="token operator">{</span>
-        debug<span class="token operator">.</span>Printf<span class="token operator">(</span><span class="token string">&quot;foo %d %.2f&quot;</span><span class="token operator">,</span> <span class="token number">42</span><span class="token operator">,</span> <span class="token number">12.7</span><span class="token operator">)</span>
-    <span class="token operator">}</span>
+    func main() {
+        debug.Printf(&quot;foo %d %.2f&quot;, 42, 12.7)
+    }
 </code></pre>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/code.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">code</a> <a href="/en/tags/go.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">go</a> <a href="/en/tags/log.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">log</a> </p></div>
             <hr>

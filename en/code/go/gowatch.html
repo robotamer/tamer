@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
+    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -56,12 +56,12 @@
             <p class="w3-large w3-text-grey"><i>It watches your dev folder for modified files, and if a file changes it restarts the process</i></p>
             <h1>GoTamer gowatch is a fork of bitbucket.org/jzs/buildwatch with some enhancements.</h1>
 <ul>
-<li><code class="language-bash">gowatch <span class="token operator">-</span><span class="token keyword">test</span></code> will run <code class="language-bash">go <span class="token keyword">test</span></code> on the folder</li>
-<li><code class="language-bash">gowatch <span class="token operator">-</span>build</code> will run <code class="language-bash">go build</code> on the folder</li>
-<li><code class="language-bash">gowatch <span class="token operator">-</span>run <span class="token operator">[</span>program_name<span class="token operator">]</span></code> will run <code class="language-bash">go build</code> and then it will execute <code class="language-bash"><span class="token operator">[</span>program_name<span class="token operator">]</span></code></li>
+<li><code>gowatch -test</code> will run <code>go test</code> on the folder</li>
+<li><code>gowatch -build</code> will run <code>go build</code> on the folder</li>
+<li><code>gowatch -run [program_name]</code> will run <code>go build</code> and then it will execute <code>[program_name]</code></li>
 </ul>
-<p>If a file changes while running lets say <code class="language-bash">gowatch <span class="token operator">-</span>run <span class="token operator">[</span>program_name<span class="token operator">]</span></code> it will
-kill <code class="language-bash"><span class="token operator">[</span>program_name<span class="token operator">]</span></code>, run <code class="language-bash">gowatch <span class="token operator">-</span>build</code> on the folder, and then restart <code class="language-bash"><span class="token operator">[</span>program_name<span class="token operator">]</span></code></p>
+<p>If a file changes while running lets say <code>gowatch -run [program_name]</code> it will
+kill <code>[program_name]</code>, run <code>gowatch -build</code> on the folder, and then restart <code>[program_name]</code></p>
 <h3>Links</h3>
 <ul>
 <li><a href="http://www.robotamer.com/code/go/gotamer" title="GoTamer Website">Website</a></li>

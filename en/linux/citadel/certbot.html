@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
+    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -44,28 +44,28 @@
             <p class="w3-large w3-text-grey"><i>Configuring Citadel to use the Let's Encrypt Certificate Authority</i></p>
             <p>Signed TLS certificates are now available at no cost from the nonprofit <a href="https://letsencrypt.org/">Let's Encrypt Certificate Authority</a>.
 To use these on a Citadel system, you will need the <a href="https://certbot.eff.org">Certbot</a> utility installed.</p>
-<pre class="language-sh"><code class="language-sh"><span class="token keyword">export</span> CIT_DOMAIN_NAME<span class="token operator">=</span>mail<span class="token operator">.</span>example<span class="token operator">.</span>net
+<pre><code>export CIT_DOMAIN_NAME=mail.example.net
 
-certbot certonly <span class="token operator">-</span><span class="token operator">-</span>agree<span class="token operator">-</span>tos <span class="token operator">-</span><span class="token operator">-</span>non<span class="token operator">-</span>interactive <span class="token operator">-</span><span class="token operator">-</span>text <span class="token operator">-</span><span class="token operator">-</span>rsa<span class="token operator">-</span>key<span class="token operator">-</span>size <span class="token number">4096</span> \
-    <span class="token operator">-</span><span class="token operator">-</span>email admin@$<span class="token operator">{</span>CIT_DOMAIN_NAME<span class="token operator">}</span> \
-    <span class="token operator">-</span><span class="token operator">-</span>webroot <span class="token operator">-</span><span class="token operator">-</span>webroot<span class="token operator">-</span>path <span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>webcit \
-    <span class="token operator">-</span><span class="token operator">-</span>domains $<span class="token operator">{</span>CIT_DOMAIN_NAME<span class="token operator">}</span>
-cp <span class="token operator">/</span>etc<span class="token operator">/</span>letsencrypt<span class="token operator">/</span>live<span class="token operator">/</span>$<span class="token operator">{</span>CIT_DOMAIN_NAME<span class="token operator">}</span><span class="token operator">/</span>privkey<span class="token operator">.</span>pem <span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>citadel<span class="token operator">/</span>keys<span class="token operator">/</span>citadel<span class="token operator">.</span>key 
-cp <span class="token operator">/</span>etc<span class="token operator">/</span>letsencrypt<span class="token operator">/</span>live<span class="token operator">/</span>$<span class="token operator">{</span>CIT_DOMAIN_NAME<span class="token operator">}</span><span class="token operator">/</span>fullchain<span class="token operator">.</span>pem <span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>citadel<span class="token operator">/</span>keys<span class="token operator">/</span>citadel<span class="token operator">.</span>cer
+certbot certonly --agree-tos --non-interactive --text --rsa-key-size 4096 \
+    --email admin@${CIT_DOMAIN_NAME} \
+    --webroot --webroot-path /usr/local/webcit \
+    --domains ${CIT_DOMAIN_NAME}
+cp /etc/letsencrypt/live/${CIT_DOMAIN_NAME}/privkey.pem /usr/local/citadel/keys/citadel.key 
+cp /etc/letsencrypt/live/${CIT_DOMAIN_NAME}/fullchain.pem /usr/local/citadel/keys/citadel.cer
 </code></pre>
 <h2>Now create these two files.</h2>
-<pre class="language-bash"><code class="language-bash">cat <span class="token operator">/</span>etc<span class="token operator">/</span>letsencrypt<span class="token operator">/</span>renewal<span class="token operator">-</span>hooks<span class="token operator">/</span>pre<span class="token operator">/</span>citadel<span class="token operator">.</span>sh
+<pre><code>cat /etc/letsencrypt/renewal-hooks/pre/citadel.sh
 </code></pre>
 <hr>
-<pre class="language-sh"><code class="language-sh"><span class="token comment">#!/bin/sh</span>
+<pre><code>#!/bin/sh
 docker stop citadel
 </code></pre>
-<pre class="language-bash"><code class="language-bash"><span class="token comment"># cat /etc/letsencrypt/renewal-hooks/post/citadel.sh</span>
+<pre><code># cat /etc/letsencrypt/renewal-hooks/post/citadel.sh
 </code></pre>
 <hr>
-<pre class="language-sh"><code class="language-sh"><span class="token comment">#!/bin/sh</span>
-cp <span class="token operator">/</span>etc<span class="token operator">/</span>letsencrypt<span class="token operator">/</span>live<span class="token operator">/</span>$<span class="token operator">{</span>CIT_DOMAIN_NAME<span class="token operator">}</span><span class="token operator">/</span>fullchain<span class="token operator">.</span>pem <span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>citadel<span class="token operator">/</span>keys<span class="token operator">/</span>citadel<span class="token operator">.</span>cer
-cp <span class="token operator">/</span>etc<span class="token operator">/</span>letsencrypt<span class="token operator">/</span>live<span class="token operator">/</span>$<span class="token operator">{</span>CIT_DOMAIN_NAME<span class="token operator">}</span><span class="token operator">/</span>privkey<span class="token operator">.</span>pem <span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>citadel<span class="token operator">/</span>keys<span class="token operator">/</span>citadel<span class="token operator">.</span>key
+<pre><code>#!/bin/sh
+cp /etc/letsencrypt/live/${CIT_DOMAIN_NAME}/fullchain.pem /usr/local/citadel/keys/citadel.cer
+cp /etc/letsencrypt/live/${CIT_DOMAIN_NAME}/privkey.pem /usr/local/citadel/keys/citadel.key
 wait
 docker start citadel
 </code></pre>

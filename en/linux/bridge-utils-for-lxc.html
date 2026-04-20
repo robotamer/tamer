@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
+    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -52,85 +52,85 @@
             <p class="w3-large w3-text-grey"><i>Bridging Network Connections for LXC</i></p>
             <h2>Bridging Network Connections</h2>
 <p>Install</p>
-<pre class="language-bash"><code class="language-bash">apt<span class="token operator">-</span>get install bridge<span class="token operator">-</span>utils
+<pre><code>apt-get install bridge-utils
 </code></pre>
 <p>Start the bridge:</p>
-<pre class="language-bash"><code class="language-bash">brctl addbr br0
+<pre><code>brctl addbr br0
 </code></pre>
 <p>Edit: /etc/network/interfaces</p>
-<pre class="language-bash"><code class="language-bash"><span class="token comment"># The loopback network interface</span>
+<pre><code># The loopback network interface
 auto lo
 iface lo inet loopback
 
-<span class="token comment"># Bridge between eth0 and eth1</span>
+# Bridge between eth0 and eth1
 auto br0
 
-<span class="token comment"># DHCP would look like this but we will use static</span>
-<span class="token comment"># iface br0 inet dhcp</span>
+# DHCP would look like this but we will use static
+# iface br0 inet dhcp
 
 iface br0 inet static
-address <span class="token number">192.168.1.100</span>
-network <span class="token number">192.168.1.0</span>
-gateway <span class="token number">192.168.1.1</span>
-broadcast <span class="token number">192.168.1.255</span>
-netmask <span class="token number">255.255.255.0</span>
-dns<span class="token operator">-</span>nameservers <span class="token number">192.168.1.1</span>
-<span class="token comment">#dns-search example.com </span>
+address 192.168.1.100
+network 192.168.1.0
+gateway 192.168.1.1
+broadcast 192.168.1.255
+netmask 255.255.255.0
+dns-nameservers 192.168.1.1
+#dns-search example.com 
 
-  pre<span class="token operator">-</span>up ip link <span class="token keyword">set</span> eth0 down
-  pre<span class="token operator">-</span>up ip link <span class="token keyword">set</span> eth1 down
-  pre<span class="token operator">-</span>up brctl addbr br0
-  pre<span class="token operator">-</span>up brctl addif br0 eth0 eth1
-  pre<span class="token operator">-</span>up ip addr flush dev eth0
-  pre<span class="token operator">-</span>up ip addr flush dev eth1
-  post<span class="token operator">-</span>down ip link <span class="token keyword">set</span> eth0 down
-  post<span class="token operator">-</span>down ip link <span class="token keyword">set</span> eth1 down
-  post<span class="token operator">-</span>down ip link <span class="token keyword">set</span> br0 down
-  post<span class="token operator">-</span>down brctl delif br0 eth0 eth1
-  post<span class="token operator">-</span>down brctl delbr br0
+  pre-up ip link set eth0 down
+  pre-up ip link set eth1 down
+  pre-up brctl addbr br0
+  pre-up brctl addif br0 eth0 eth1
+  pre-up ip addr flush dev eth0
+  pre-up ip addr flush dev eth1
+  post-down ip link set eth0 down
+  post-down ip link set eth1 down
+  post-down ip link set br0 down
+  post-down brctl delif br0 eth0 eth1
+  post-down brctl delbr br0
 </code></pre>
 <p>Restart network:</p>
-<pre class="language-bash"><code class="language-bash"><span class="token operator">/</span>etc<span class="token operator">/</span>init<span class="token operator">.</span>d<span class="token operator">/</span>networking stop
-<span class="token operator">/</span>etc<span class="token operator">/</span>init<span class="token operator">.</span>d<span class="token operator">/</span>networking start
+<pre><code>/etc/init.d/networking stop
+/etc/init.d/networking start
 </code></pre>
 <p>Turn on the bridge:</p>
-<pre class="language-bash"><code class="language-bash">ip link <span class="token keyword">set</span> br0 up
+<pre><code>ip link set br0 up
 </code></pre>
 <p>Let's check:</p>
-<pre class="language-bash"><code class="language-bash">ifconfig
+<pre><code>ifconfig
 brctl show
 ip addr show
 </code></pre>
 <p>Bridge Notes:
 How to remove a bridge {bring down first then delete}</p>
-<pre class="language-bash"><code class="language-bash">ip link <span class="token keyword">set</span> br0 down
+<pre><code>ip link set br0 down
 brctl delbr br0
 </code></pre>
 <h1>LXC Setup</h1>
-<pre class="language-bash"><code class="language-bash"><span class="token comment">#cat /etc/network/interfaces</span>
+<pre><code>#cat /etc/network/interfaces
 auto lo
 iface lo inet loopback
-up route add <span class="token operator">-</span>net <span class="token number">127.0.0.0</span> netmask <span class="token number">255.0.0.0</span> dev lo
-down route add <span class="token operator">-</span>net <span class="token number">127.0.0.0</span> netmask <span class="token number">255.0.0.0</span> dev lo
+up route add -net 127.0.0.0 netmask 255.0.0.0 dev lo
+down route add -net 127.0.0.0 netmask 255.0.0.0 dev lo
 
-<span class="token comment"># device: eth0</span>
+# device: eth0
 auto eth0
 iface eth0 inet manual
 
 auto br0
 iface br0 inet static
-       address <span class="token number">70.22.189.58</span>
-       netmask <span class="token number">255.255.255.248</span>
-       gateway <span class="token number">70.22.189.57</span>
-       broadcast <span class="token number">70.22.189.63</span>
+       address 70.22.189.58
+       netmask 255.255.255.248
+       gateway 70.22.189.57
+       broadcast 70.22.189.63
        bridge_ports eth0
-       bridge_fd <span class="token number">0</span>
-       bridge_maxwait <span class="token number">0</span>
+       bridge_fd 0
+       bridge_maxwait 0
        bridge_stp off
-        post<span class="token operator">-</span>up ip route add <span class="token number">70.22.189.59</span> dev br0
-        post<span class="token operator">-</span>up ip route add <span class="token number">70.22.189.60</span> dev br0
-        post<span class="token operator">-</span>up ip route add <span class="token number">70.22.189.61</span> dev br0
-        post<span class="token operator">-</span>up ip route add <span class="token number">70.22.189.62</span> dev br0
+        post-up ip route add 70.22.189.59 dev br0
+        post-up ip route add 70.22.189.60 dev br0
+        post-up ip route add 70.22.189.61 dev br0
+        post-up ip route add 70.22.189.62 dev br0
 </code></pre>
 <p>More info at:
 <a href="http://www.shorewall.net/LXC.html">shorewall.net</a></p>

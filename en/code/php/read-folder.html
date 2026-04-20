@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
+    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -50,54 +50,54 @@
             <p class="w3-large w3-text-grey"><i>Get php files in dir with recursive lambda callback function</i></p>
             <p>This is a <em>Lambda</em> function also called anonymous function within a regular function that scans a given directory and it's sub directories returning an array of all php files within.</p>
 <p>Following is a snip output of the Zend files.</p>
-<pre class="language-bash"><code class="language-bash"><span class="token operator">[</span><span class="token number">6</span><span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token operator">/</span>usr<span class="token operator">/</span>share<span class="token operator">/</span>php<span class="token operator">/</span>Zend<span class="token operator">/</span>Captcha<span class="token operator">/</span>ReCaptcha<span class="token operator">.</span>php
-<span class="token operator">[</span><span class="token number">7</span><span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token operator">/</span>usr<span class="token operator">/</span>share<span class="token operator">/</span>php<span class="token operator">/</span>Zend<span class="token operator">/</span>Captcha<span class="token operator">/</span>Base<span class="token operator">.</span>php
-<span class="token operator">[</span><span class="token number">8</span><span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token operator">/</span>usr<span class="token operator">/</span>share<span class="token operator">/</span>php<span class="token operator">/</span>Zend<span class="token operator">/</span>Feed<span class="token operator">/</span>Rss<span class="token operator">.</span>php
-<span class="token operator">[</span><span class="token number">9</span><span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token operator">/</span>usr<span class="token operator">/</span>share<span class="token operator">/</span>php<span class="token operator">/</span>Zend<span class="token operator">/</span>Feed<span class="token operator">/</span>Atom<span class="token operator">.</span>php
-<span class="token operator">[</span><span class="token number">52</span><span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token operator">/</span>usr<span class="token operator">/</span>share<span class="token operator">/</span>php<span class="token operator">/</span>Zend<span class="token operator">/</span>Feed<span class="token operator">/</span>Writer<span class="token operator">/</span>Source<span class="token operator">.</span>php
-<span class="token operator">[</span><span class="token number">53</span><span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token operator">/</span>usr<span class="token operator">/</span>share<span class="token operator">/</span>php<span class="token operator">/</span>Zend<span class="token operator">/</span>Feed<span class="token operator">/</span>Pubsubhubbub<span class="token operator">.</span>php
-<span class="token operator">[</span><span class="token number">54</span><span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token operator">/</span>usr<span class="token operator">/</span>share<span class="token operator">/</span>php<span class="token operator">/</span>Zend<span class="token operator">/</span>Feed<span class="token operator">/</span>Element<span class="token operator">.</span>php
-<span class="token operator">[</span><span class="token number">55</span><span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token operator">/</span>usr<span class="token operator">/</span>share<span class="token operator">/</span>php<span class="token operator">/</span>Zend<span class="token operator">/</span>Feed<span class="token operator">/</span>Reader<span class="token operator">/</span>Feed<span class="token operator">/</span>Rss<span class="token operator">.</span>php
-<span class="token operator">[</span><span class="token number">90</span><span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token operator">/</span>usr<span class="token operator">/</span>share<span class="token operator">/</span>php<span class="token operator">/</span>Zend<span class="token operator">/</span>Feed<span class="token operator">/</span>Builder<span class="token operator">.</span>php
-<span class="token operator">[</span><span class="token number">91</span><span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token operator">/</span>usr<span class="token operator">/</span>share<span class="token operator">/</span>php<span class="token operator">/</span>Zend<span class="token operator">/</span>Feed<span class="token operator">/</span>Writer<span class="token operator">.</span>php
-<span class="token operator">[</span><span class="token number">92</span><span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token operator">/</span>usr<span class="token operator">/</span>share<span class="token operator">/</span>php<span class="token operator">/</span>Zend<span class="token operator">/</span>Config<span class="token operator">.</span>php
-<span class="token operator">[</span><span class="token number">93</span><span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token operator">/</span>usr<span class="token operator">/</span>share<span class="token operator">/</span>php<span class="token operator">/</span>Zend<span class="token operator">/</span>Json<span class="token operator">/</span>Server<span class="token operator">.</span>php
-<span class="token operator">[</span><span class="token number">94</span><span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token operator">/</span>usr<span class="token operator">/</span>share<span class="token operator">/</span>php<span class="token operator">/</span>Zend<span class="token operator">/</span>Json<span class="token operator">/</span>Exception<span class="token operator">.</span>php
-<span class="token operator">[</span><span class="token number">95</span><span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token operator">/</span>usr<span class="token operator">/</span>share<span class="token operator">/</span>php<span class="token operator">/</span>Zend<span class="token operator">/</span>Json<span class="token operator">/</span>Encoder<span class="token operator">.</span>php
-<span class="token operator">[</span><span class="token number">865</span><span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token operator">/</span>usr<span class="token operator">/</span>share<span class="token operator">/</span>php<span class="token operator">/</span>Zend<span class="token operator">/</span>View<span class="token operator">/</span>Stream<span class="token operator">.</span>php
-<span class="token operator">[</span><span class="token number">866</span><span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token operator">/</span>usr<span class="token operator">/</span>share<span class="token operator">/</span>php<span class="token operator">/</span>Zend<span class="token operator">/</span>View<span class="token operator">/</span>Interface<span class="token operator">.</span>php
-<span class="token operator">[</span><span class="token number">867</span><span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token operator">/</span>usr<span class="token operator">/</span>share<span class="token operator">/</span>php<span class="token operator">/</span>Zend<span class="token operator">/</span>View<span class="token operator">/</span>Abstract<span class="token operator">.</span>php
-<span class="token operator">[</span><span class="token number">868</span><span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token operator">/</span>usr<span class="token operator">/</span>share<span class="token operator">/</span>php<span class="token operator">/</span>Zend<span class="token operator">/</span>Search<span class="token operator">/</span>Exception<span class="token operator">.</span>php
-<span class="token operator">[</span><span class="token number">869</span><span class="token operator">]</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token operator">/</span>usr<span class="token operator">/</span>share<span class="token operator">/</span>php<span class="token operator">/</span>Zend<span class="token operator">/</span>Search<span class="token operator">/</span>Lucene<span class="token operator">.</span>php
+<pre><code>[6] =&gt; /usr/share/php/Zend/Captcha/ReCaptcha.php
+[7] =&gt; /usr/share/php/Zend/Captcha/Base.php
+[8] =&gt; /usr/share/php/Zend/Feed/Rss.php
+[9] =&gt; /usr/share/php/Zend/Feed/Atom.php
+[52] =&gt; /usr/share/php/Zend/Feed/Writer/Source.php
+[53] =&gt; /usr/share/php/Zend/Feed/Pubsubhubbub.php
+[54] =&gt; /usr/share/php/Zend/Feed/Element.php
+[55] =&gt; /usr/share/php/Zend/Feed/Reader/Feed/Rss.php
+[90] =&gt; /usr/share/php/Zend/Feed/Builder.php
+[91] =&gt; /usr/share/php/Zend/Feed/Writer.php
+[92] =&gt; /usr/share/php/Zend/Config.php
+[93] =&gt; /usr/share/php/Zend/Json/Server.php
+[94] =&gt; /usr/share/php/Zend/Json/Exception.php
+[95] =&gt; /usr/share/php/Zend/Json/Encoder.php
+[865] =&gt; /usr/share/php/Zend/View/Stream.php
+[866] =&gt; /usr/share/php/Zend/View/Interface.php
+[867] =&gt; /usr/share/php/Zend/View/Abstract.php
+[868] =&gt; /usr/share/php/Zend/Search/Exception.php
+[869] =&gt; /usr/share/php/Zend/Search/Lucene.php
 </code></pre>
-<pre class="language-php"><code class="language-php"><span class="token operator">&lt;</span><span class="token operator">?</span>php
+<pre><code>&lt;?php
 
-<span class="token comment">/**
+/**
  *
  * @param string $dir
  * @return array 
- */</span>
-<span class="token keyword">function</span> get_php_files_in_dir<span class="token operator">(</span>$dir<span class="token operator">)</span>
-<span class="token operator">{</span>
-    $bin <span class="token operator">=</span> array <span class="token operator">(</span><span class="token operator">)</span><span class="token operator">;</span>
-    $run <span class="token operator">=</span> <span class="token keyword">function</span><span class="token operator">(</span><span class="token operator">&amp;</span>$run<span class="token operator">,</span> $dir<span class="token operator">,</span> <span class="token operator">&amp;</span>$bin<span class="token operator">)</span> <span class="token operator">{</span>
-        <span class="token keyword">if</span> <span class="token operator">(</span>$handle <span class="token operator">=</span> opendir<span class="token operator">(</span>$dir<span class="token operator">)</span><span class="token operator">)</span> <span class="token operator">{</span>
-            <span class="token keyword">while</span> <span class="token operator">(</span><span class="token literal">false</span> <span class="token operator">!</span><span class="token operator">=</span><span class="token operator">=</span> <span class="token operator">(</span>$file <span class="token operator">=</span> readdir<span class="token operator">(</span>$handle<span class="token operator">)</span><span class="token operator">)</span><span class="token operator">)</span> <span class="token operator">{</span>
-                <span class="token keyword">if</span> <span class="token operator">(</span>$file <span class="token operator">!</span><span class="token operator">=</span> <span class="token string">&quot;.&quot;</span> <span class="token operator">&amp;</span><span class="token operator">&amp;</span> $file <span class="token operator">!</span><span class="token operator">=</span> <span class="token string">&quot;..&quot;</span><span class="token operator">)</span> <span class="token operator">{</span>
-                    <span class="token keyword">if</span> <span class="token operator">(</span>strpos<span class="token operator">(</span>$file<span class="token operator">,</span> <span class="token string">&apos;.php&apos;</span><span class="token operator">)</span> <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token operator">)</span> <span class="token operator">{</span>
-                        $bin<span class="token operator">[</span><span class="token operator">]</span> <span class="token operator">=</span> $dir <span class="token operator">.</span> <span class="token string">&apos;/&apos;</span> <span class="token operator">.</span> $file<span class="token operator">;</span>
-                    <span class="token operator">}</span> elseif <span class="token operator">(</span>is_dir<span class="token operator">(</span>$dir <span class="token operator">.</span> <span class="token string">&apos;/&apos;</span> <span class="token operator">.</span> $file<span class="token operator">)</span><span class="token operator">)</span> <span class="token operator">{</span>
-                        $run<span class="token operator">(</span>$run<span class="token operator">,</span> $dir <span class="token operator">.</span> <span class="token string">&apos;/&apos;</span> <span class="token operator">.</span> $file<span class="token operator">,</span> $bin<span class="token operator">)</span><span class="token operator">;</span>
-                    <span class="token operator">}</span>
-                <span class="token operator">}</span>
-            <span class="token operator">}</span>
-        <span class="token operator">}</span>
-        closedir<span class="token operator">(</span>$handle<span class="token operator">)</span><span class="token operator">;</span>
-    <span class="token operator">}</span><span class="token operator">;</span>
-    $run<span class="token operator">(</span>$run<span class="token operator">,</span> $dir<span class="token operator">,</span> $bin<span class="token operator">)</span><span class="token operator">;</span>
-    <span class="token keyword">return</span> $bin<span class="token operator">;</span>
-<span class="token operator">}</span>
-<span class="token operator">?</span><span class="token operator">&gt;</span>
+ */
+function get_php_files_in_dir($dir)
+{
+    $bin = array ();
+    $run = function(&amp;$run, $dir, &amp;$bin) {
+        if ($handle = opendir($dir)) {
+            while (false !== ($file = readdir($handle))) {
+                if ($file != &quot;.&quot; &amp;&amp; $file != &quot;..&quot;) {
+                    if (strpos($file, '.php') &gt; 0) {
+                        $bin[] = $dir . '/' . $file;
+                    } elseif (is_dir($dir . '/' . $file)) {
+                        $run($run, $dir . '/' . $file, $bin);
+                    }
+                }
+            }
+        }
+        closedir($handle);
+    };
+    $run($run, $dir, $bin);
+    return $bin;
+}
+?&gt;
 </code></pre>
 <p><a href="https://gist.github.com/robotamer/3107221#file-get_php_files_in_dir-php">gist id=3107221</a></p>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/php.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">php</a> </p></div>

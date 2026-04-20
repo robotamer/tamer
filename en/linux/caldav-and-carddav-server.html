@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
+    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -54,111 +54,111 @@
 <p>This is my working setup on <em>Linux Debian</em> with the python <em>uwsgi</em> server and <em>Nginx</em>.<br>
 I could not get the database to work, so the backend is file based!</p>
 <h3>Install</h3>
-<pre class="language-bash"><code class="language-bash">apt<span class="token operator">-</span>get install radicale uwsgi uwsgi<span class="token operator">-</span>plugin<span class="token operator">-</span>http uwsgi<span class="token operator">-</span>plugin<span class="token operator">-</span>python
+<pre><code>apt-get install radicale uwsgi uwsgi-plugin-http uwsgi-plugin-python
 </code></pre>
 <h3>/etc/radicale/config</h3>
-<pre class="language-bash"><code class="language-bash"><span class="token operator">[</span>encoding<span class="token operator">]</span>
-request <span class="token operator">=</span> utf<span class="token operator">-</span><span class="token number">8</span>
-stock <span class="token operator">=</span> utf<span class="token operator">-</span><span class="token number">8</span>
+<pre><code>[encoding]
+request = utf-8
+stock = utf-8
 
 
-<span class="token operator">[</span>auth<span class="token operator">]</span>
-<span class="token keyword">type</span> <span class="token operator">=</span> IMAP
-imap_hostname <span class="token operator">=</span> localhost
-imap_port <span class="token operator">=</span> <span class="token number">143</span>
-imap_ssl <span class="token operator">=</span> False
+[auth]
+type = IMAP
+imap_hostname = localhost
+imap_port = 143
+imap_ssl = False
 
-<span class="token operator">[</span>rights<span class="token operator">]</span>
-<span class="token keyword">type</span> <span class="token operator">=</span> from_file
-file <span class="token operator">=</span> <span class="token operator">/</span>home<span class="token operator">/</span>username<span class="token operator">/</span>radicale<span class="token operator">/</span>etc<span class="token operator">/</span>rights
+[rights]
+type = from_file
+file = /home/username/radicale/etc/rights
 
-<span class="token operator">[</span>storage<span class="token operator">]</span>
-filesystem_folder <span class="token operator">=</span> <span class="token operator">/</span>home<span class="token operator">/</span>username<span class="token operator">/</span>radicale<span class="token operator">/</span>collections
+[storage]
+filesystem_folder = /home/username/radicale/collections
 
-<span class="token operator">[</span>logging<span class="token operator">]</span>
-config <span class="token operator">=</span> <span class="token operator">/</span>home<span class="token operator">/</span>username<span class="token operator">/</span>radicale<span class="token operator">/</span>etc<span class="token operator">/</span>logging
-<span class="token comment">#debug = True</span>
+[logging]
+config = /home/username/radicale/etc/logging
+#debug = True
 </code></pre>
 <h3>/home/username/radicale/etc/logging</h3>
-<pre class="language-bash"><code class="language-bash"><span class="token operator">[</span>loggers<span class="token operator">]</span>
-keys <span class="token operator">=</span> root
+<pre><code>[loggers]
+keys = root
 
-<span class="token operator">[</span>handlers<span class="token operator">]</span>
-keys <span class="token operator">=</span> console<span class="token operator">,</span>file
+[handlers]
+keys = console,file
 
-<span class="token operator">[</span>formatters<span class="token operator">]</span>
-keys <span class="token operator">=</span> simple<span class="token operator">,</span>full
+[formatters]
+keys = simple,full
 
-<span class="token operator">[</span>logger_root<span class="token operator">]</span>
-level <span class="token operator">=</span> DEBUG
-handlers <span class="token operator">=</span> file
+[logger_root]
+level = DEBUG
+handlers = file
 
-<span class="token operator">[</span>handler_console<span class="token operator">]</span>
-class <span class="token operator">=</span> StreamHandler
-level <span class="token operator">=</span> DEBUG
-args <span class="token operator">=</span> <span class="token operator">(</span>sys<span class="token operator">.</span>stdout<span class="token operator">,</span><span class="token operator">)</span>
-formatter <span class="token operator">=</span> simple
+[handler_console]
+class = StreamHandler
+level = DEBUG
+args = (sys.stdout,)
+formatter = simple
 
-<span class="token operator">[</span>handler_file<span class="token operator">]</span>
-class <span class="token operator">=</span> FileHandler
-args <span class="token operator">=</span> <span class="token operator">(</span><span class="token string">&apos;/home/username/radicale/radicale.log&apos;</span><span class="token operator">,</span><span class="token operator">)</span>
-level <span class="token operator">=</span> INFO
-formatter <span class="token operator">=</span> full
+[handler_file]
+class = FileHandler
+args = ('/home/username/radicale/radicale.log',)
+level = INFO
+formatter = full
 
-<span class="token operator">[</span>formatter_simple<span class="token operator">]</span>
-format <span class="token operator">=</span> <span class="token operator">%</span><span class="token operator">(</span>message<span class="token operator">)</span>s
+[formatter_simple]
+format = %(message)s
 
-<span class="token operator">[</span>formatter_full<span class="token operator">]</span>
-format <span class="token operator">=</span> <span class="token operator">%</span><span class="token operator">(</span>asctime<span class="token operator">)</span>s <span class="token operator">-</span> <span class="token operator">%</span><span class="token operator">(</span>levelname<span class="token operator">)</span>s<span class="token operator">:</span> <span class="token operator">%</span><span class="token operator">(</span>message<span class="token operator">)</span>s
+[formatter_full]
+format = %(asctime)s - %(levelname)s: %(message)s
 </code></pre>
 <h3>nginx</h3>
-<pre class="language-bash"><code class="language-bash">server <span class="token operator">{</span>
-    listen         <span class="token number">80</span><span class="token operator">;</span>
-    server_name    dav<span class="token operator">.</span>example<span class="token operator">.</span>com<span class="token operator">;</span>
-    rewrite        <span class="token operator">^</span> https<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>$server_name$request_uri<span class="token operator">?</span> permanent<span class="token operator">;</span>
-<span class="token operator">}</span>
+<pre><code>server {
+    listen         80;
+    server_name    dav.example.com;
+    rewrite        ^ https://$server_name$request_uri? permanent;
+}
 
-server <span class="token operator">{</span>
-    listen <span class="token number">443</span><span class="token operator">;</span>
-    server_name     dav<span class="token operator">.</span>example<span class="token operator">.</span>com<span class="token operator">;</span>
-    root            <span class="token operator">/</span>home<span class="token operator">/</span>username<span class="token operator">/</span>radicale<span class="token operator">/</span><span class="token operator">;</span>
-    index           index<span class="token operator">.</span>html index<span class="token operator">.</span>htm<span class="token operator">;</span>
-    access_log      <span class="token operator">/</span>home<span class="token operator">/</span>username<span class="token operator">/</span>www<span class="token operator">/</span>log<span class="token operator">/</span>radicale<span class="token operator">-</span>access<span class="token operator">.</span>log<span class="token operator">;</span>
-    error_log       <span class="token operator">/</span>home<span class="token operator">/</span>username<span class="token operator">/</span>www<span class="token operator">/</span>log<span class="token operator">/</span>radicale<span class="token operator">-</span>error<span class="token operator">.</span>log<span class="token operator">;</span>
+server {
+    listen 443;
+    server_name     dav.example.com;
+    root            /home/username/radicale/;
+    index           index.html index.htm;
+    access_log      /home/username/www/log/radicale-access.log;
+    error_log       /home/username/www/log/radicale-error.log;
 
-    ssl on<span class="token operator">;</span>
-    ssl_certificate      <span class="token operator">/</span>home<span class="token operator">/</span>username<span class="token operator">/</span>etc<span class="token operator">/</span>ssl<span class="token operator">/</span>dav<span class="token operator">.</span>example<span class="token operator">.</span>com<span class="token operator">.</span>unified<span class="token operator">.</span>crt<span class="token operator">;</span>
-    ssl_certificate_key  <span class="token operator">/</span>home<span class="token operator">/</span>username<span class="token operator">/</span>etc<span class="token operator">/</span>ssl<span class="token operator">/</span>dav<span class="token operator">.</span>example<span class="token operator">.</span>com<span class="token operator">.</span>key<span class="token operator">;</span>
+    ssl on;
+    ssl_certificate      /home/username/etc/ssl/dav.example.com.unified.crt;
+    ssl_certificate_key  /home/username/etc/ssl/dav.example.com.key;
 
-    add_header      X<span class="token operator">-</span>Frame<span class="token operator">-</span>Options deny<span class="token operator">;</span>
+    add_header      X-Frame-Options deny;
 
-    gzip_static            on<span class="token operator">;</span>
-    gzip_http_version      <span class="token number">1.1</span><span class="token operator">;</span>
-    gzip_proxied           expired no<span class="token operator">-</span>cache no<span class="token operator">-</span>store private auth<span class="token operator">;</span>
-    gzip_disable           <span class="token string">&quot;MSIE [1-6]\.&quot;</span><span class="token operator">;</span>
-    gzip_vary              on<span class="token operator">;</span>
+    gzip_static            on;
+    gzip_http_version      1.1;
+    gzip_proxied           expired no-cache no-store private auth;
+    gzip_disable           &quot;MSIE [1-6]\.&quot;;
+    gzip_vary              on;
 
-    location <span class="token operator">/</span> <span class="token operator">{</span>
-        include uwsgi_params<span class="token operator">;</span>
-        uwsgi_pass unix<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span><span class="token operator">/</span>tmp<span class="token operator">/</span>radicale<span class="token operator">.</span>sock<span class="token operator">;</span>
-    <span class="token operator">}</span>
-<span class="token operator">}</span>
+    location / {
+        include uwsgi_params;
+        uwsgi_pass unix:///tmp/radicale.sock;
+    }
+}
 </code></pre>
 <h3>/home/username/radicale/radicale.wsgi</h3>
-<pre class="language-bash"><code class="language-bash"><span class="token comment">#!/usr/bin/env python</span>
+<pre><code>#!/usr/bin/env python
 
 import radicale
 
-radicale<span class="token operator">.</span>log<span class="token operator">.</span>start<span class="token operator">(</span><span class="token operator">)</span>
-application <span class="token operator">=</span> radicale<span class="token operator">.</span>Application<span class="token operator">(</span><span class="token operator">)</span>
+radicale.log.start()
+application = radicale.Application()
 </code></pre>
 <h3>/etc/uwsgi/apps-available/radicale.ini</h3>
-<pre class="language-bash"><code class="language-bash"><span class="token operator">[</span>uwsgi<span class="token operator">]</span>
-uid <span class="token operator">=</span> www<span class="token operator">-</span>data
-gid <span class="token operator">=</span> www<span class="token operator">-</span>data
-socket <span class="token operator">=</span> <span class="token operator">/</span>tmp<span class="token operator">/</span>radicale<span class="token operator">.</span>sock
-plugins <span class="token operator">=</span> http<span class="token operator">,</span> python
-wsgi<span class="token operator">-</span>file <span class="token operator">=</span> <span class="token operator">/</span>home<span class="token operator">/</span>username<span class="token operator">/</span>radicale<span class="token operator">/</span>radicale<span class="token operator">.</span>wsgi
+<pre><code>[uwsgi]
+uid = www-data
+gid = www-data
+socket = /tmp/radicale.sock
+plugins = http, python
+wsgi-file = /home/username/radicale/radicale.wsgi
 </code></pre>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/linux.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">linux</a> <a href="/en/tags/howto.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">howto</a> <a href="/en/tags/radicale.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">radicale</a> </p></div>
             <hr>

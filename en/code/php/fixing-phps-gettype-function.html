@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
+    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -48,51 +48,51 @@
         <div class="w3-container w3-white w3-card-4 w3-padding-32">
             <h1>fixing php's gettype function</h1>
             
-            <pre class="language-php"><code class="language-php"><span class="token operator">&lt;</span><span class="token operator">?</span>php    
+            <pre><code>&lt;?php    
 
-public static <span class="token keyword">function</span> getType<span class="token operator">(</span>$value<span class="token operator">,</span> $max_length <span class="token operator">=</span> <span class="token number">50</span><span class="token operator">)</span><span class="token operator">{</span>
+public static function getType($value, $max_length = 50){
 
-    $<span class="token keyword">type</span> <span class="token operator">=</span> gettype<span class="token operator">(</span>$value<span class="token operator">)</span><span class="token operator">;</span>
+    $type = gettype($value);
 
-    <span class="token keyword">if</span><span class="token operator">(</span>$<span class="token keyword">type</span> <span class="token operator">=</span><span class="token operator">=</span> <span class="token string">&apos;NULL&apos;</span>
-            <span class="token operator">|</span><span class="token operator">|</span> $<span class="token keyword">type</span> <span class="token operator">=</span><span class="token operator">=</span> <span class="token string">&apos;boolean&apos;</span>
-            <span class="token operator">|</span><span class="token operator">|</span> $<span class="token keyword">type</span> <span class="token operator">=</span><span class="token operator">=</span> <span class="token string">&apos;integer&apos;</span>
-            <span class="token operator">|</span><span class="token operator">|</span> $<span class="token keyword">type</span> <span class="token operator">=</span><span class="token operator">=</span> <span class="token string">&apos;double&apos;</span>
-            <span class="token operator">|</span><span class="token operator">|</span> $<span class="token keyword">type</span> <span class="token operator">=</span><span class="token operator">=</span> <span class="token string">&apos;object&apos;</span>
-            <span class="token operator">|</span><span class="token operator">|</span> $<span class="token keyword">type</span> <span class="token operator">=</span><span class="token operator">=</span> <span class="token string">&apos;resource&apos;</span>
-            <span class="token operator">|</span><span class="token operator">|</span> $<span class="token keyword">type</span> <span class="token operator">=</span><span class="token operator">=</span> <span class="token string">&apos;array&apos;</span>
-        <span class="token operator">)</span>
-        <span class="token keyword">return</span> array<span class="token operator">(</span><span class="token string">&apos;type&apos;</span><span class="token operator">=</span><span class="token operator">&gt;</span>$<span class="token keyword">type</span><span class="token operator">,</span><span class="token string">&apos;value&apos;</span><span class="token operator">=</span><span class="token operator">&gt;</span>$value<span class="token operator">)</span><span class="token operator">;</span>
+    if($type == 'NULL'
+            || $type == 'boolean'
+            || $type == 'integer'
+            || $type == 'double'
+            || $type == 'object'
+            || $type == 'resource'
+            || $type == 'array'
+        )
+        return array('type'=&gt;$type,'value'=&gt;$value);
 
-    <span class="token keyword">if</span><span class="token operator">(</span>$<span class="token keyword">type</span> <span class="token operator">=</span><span class="token operator">=</span> <span class="token string">&apos;string&apos;</span> <span class="token operator">&amp;</span><span class="token operator">&amp;</span> empty<span class="token operator">(</span>$value<span class="token operator">)</span><span class="token operator">)</span>
-        <span class="token keyword">return</span> array<span class="token operator">(</span><span class="token string">&apos;type&apos;</span><span class="token operator">=</span><span class="token operator">&gt;</span><span class="token string">&apos;NULL&apos;</span><span class="token operator">,</span><span class="token string">&apos;value&apos;</span><span class="token operator">=</span><span class="token operator">&gt;</span>$value<span class="token operator">)</span><span class="token operator">;</span>
+    if($type == 'string' &amp;&amp; empty($value))
+        return array('type'=&gt;'NULL','value'=&gt;$value);
 
-    <span class="token keyword">if</span><span class="token operator">(</span>$<span class="token keyword">type</span> <span class="token operator">=</span><span class="token operator">=</span> <span class="token string">&apos;string&apos;</span> <span class="token operator">&amp;</span><span class="token operator">&amp;</span> strlen<span class="token operator">(</span>$value<span class="token operator">)</span> <span class="token operator">&gt;</span> $max_length<span class="token operator">)</span>
-        <span class="token keyword">return</span> array<span class="token operator">(</span><span class="token string">&apos;type&apos;</span><span class="token operator">=</span><span class="token operator">&gt;</span><span class="token string">&apos;blob&apos;</span><span class="token operator">,</span><span class="token string">&apos;value&apos;</span><span class="token operator">=</span><span class="token operator">&gt;</span>$value<span class="token operator">)</span><span class="token operator">;</span>
+    if($type == 'string' &amp;&amp; strlen($value) &gt; $max_length)
+        return array('type'=&gt;'blob','value'=&gt;$value);
 
-    <span class="token keyword">if</span><span class="token operator">(</span>$<span class="token keyword">type</span> <span class="token operator">=</span><span class="token operator">=</span> <span class="token string">&apos;string&apos;</span> <span class="token operator">&amp;</span><span class="token operator">&amp;</span> substr<span class="token operator">(</span>$value<span class="token operator">,</span> <span class="token number">0</span><span class="token operator">,</span><span class="token number">1</span><span class="token operator">)</span> <span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span> <span class="token string">&apos;0&apos;</span><span class="token operator">)</span>
-        <span class="token keyword">return</span> array<span class="token operator">(</span><span class="token string">&apos;type&apos;</span><span class="token operator">=</span><span class="token operator">&gt;</span><span class="token string">&apos;string&apos;</span><span class="token operator">,</span><span class="token string">&apos;value&apos;</span><span class="token operator">=</span><span class="token operator">&gt;</span>$value<span class="token operator">)</span><span class="token operator">;</span>
+    if($type == 'string' &amp;&amp; substr($value, 0,1) === '0')
+        return array('type'=&gt;'string','value'=&gt;$value);
 
-    <span class="token keyword">if</span><span class="token operator">(</span>$<span class="token keyword">type</span> <span class="token operator">=</span><span class="token operator">=</span> <span class="token string">&apos;string&apos;</span> <span class="token operator">&amp;</span><span class="token operator">&amp;</span> is_numeric<span class="token operator">(</span>$value<span class="token operator">)</span><span class="token operator">)</span><span class="token operator">{</span>
-        $int   <span class="token operator">=</span> <span class="token operator">(</span>int<span class="token operator">)</span> $value<span class="token operator">;</span>
-        $float <span class="token operator">=</span> <span class="token operator">(</span>float<span class="token operator">)</span> $value<span class="token operator">;</span>
+    if($type == 'string' &amp;&amp; is_numeric($value)){
+        $int   = (int) $value;
+        $float = (float) $value;
 
-        <span class="token keyword">if</span><span class="token operator">(</span>$int <span class="token operator">=</span><span class="token operator">=</span> $value<span class="token operator">)</span><span class="token operator">{</span>
-            $value <span class="token operator">=</span> $int<span class="token operator">;</span>
-            $<span class="token keyword">type</span> <span class="token operator">=</span> <span class="token string">&apos;integer&apos;</span><span class="token operator">;</span>
-        <span class="token operator">}</span>elseif<span class="token operator">(</span>$float <span class="token operator">=</span><span class="token operator">=</span> $value<span class="token operator">)</span><span class="token operator">{</span>
-            $value <span class="token operator">=</span> $float<span class="token operator">;</span>
-            $<span class="token keyword">type</span> <span class="token operator">=</span> <span class="token string">&apos;double&apos;</span><span class="token operator">;</span>
-        <span class="token operator">}</span>
-    <span class="token operator">}</span>elseif<span class="token operator">(</span>$<span class="token keyword">type</span> <span class="token operator">=</span><span class="token operator">=</span> <span class="token string">&apos;string&apos;</span><span class="token operator">)</span><span class="token operator">{</span>
-        $<span class="token keyword">type</span> <span class="token operator">=</span> <span class="token string">&apos;string&apos;</span><span class="token operator">;</span>
-    <span class="token operator">}</span><span class="token keyword">else</span><span class="token operator">{</span>
-        $<span class="token keyword">type</span> <span class="token operator">=</span> <span class="token string">&apos;blob&apos;</span><span class="token operator">;</span>
-    <span class="token operator">}</span>
-    <span class="token keyword">return</span> array<span class="token operator">(</span><span class="token string">&apos;type&apos;</span><span class="token operator">=</span><span class="token operator">&gt;</span>$<span class="token keyword">type</span><span class="token operator">,</span><span class="token string">&apos;value&apos;</span><span class="token operator">=</span><span class="token operator">&gt;</span>$value<span class="token operator">)</span><span class="token operator">;</span>
-<span class="token operator">}</span>
+        if($int == $value){
+            $value = $int;
+            $type = 'integer';
+        }elseif($float == $value){
+            $value = $float;
+            $type = 'double';
+        }
+    }elseif($type == 'string'){
+        $type = 'string';
+    }else{
+        $type = 'blob';
+    }
+    return array('type'=&gt;$type,'value'=&gt;$value);
+}
     
-<span class="token operator">?</span><span class="token operator">&gt;</span>
+?&gt;
 </code></pre>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/code.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">code</a> <a href="/en/tags/php.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">php</a> </p></div>
             <hr>

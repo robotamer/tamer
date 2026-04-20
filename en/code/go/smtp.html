@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
+    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -56,34 +56,34 @@
             <p class="w3-large w3-text-grey"><i>Simplifies the interface to the go smtp package, and creates a pipe for mail queuing</i></p>
             <p>Now gotamer/mail also implements the io.Writer interface.
 Example:</p>
-<pre class="language-go"><code class="language-go">    <span class="token keyword">package</span> main
+<pre><code>    package main
 
-    <span class="token keyword">import</span> <span class="token operator">(</span>
-        <span class="token string">&quot;fmt&quot;</span>
+    import (
+        &quot;fmt&quot;
         
-        <span class="token string">&quot;bitbucket.org/gotamer/mail&quot;</span>
-    <span class="token operator">)</span>
+        &quot;bitbucket.org/gotamer/mail&quot;
+    )
 
-    <span class="token keyword">func</span> main<span class="token operator">(</span><span class="token operator">)</span> <span class="token operator">{</span>
-        s <span class="token operator">:</span><span class="token operator">=</span> new<span class="token operator">(</span>mail<span class="token operator">.</span>Smtp<span class="token operator">)</span>
-        s<span class="token operator">.</span>SetHostname<span class="token operator">(</span><span class="token string">&quot;smtp.gmail.com&quot;</span><span class="token operator">)</span>
-        s<span class="token operator">.</span>SetHostport<span class="token operator">(</span><span class="token number">587</span><span class="token operator">)</span>
-        s<span class="token operator">.</span>SetFromName<span class="token operator">(</span><span class="token string">&quot;GoTamer&quot;</span><span class="token operator">)</span>
-        s<span class="token operator">.</span>SetFromAddr<span class="token operator">(</span><span class="token string">&quot;xxxx@gmail.com&quot;</span><span class="token operator">)</span>
-        s<span class="token operator">.</span>SetPassword<span class="token operator">(</span><span class="token string">&quot;*********&quot;</span><span class="token operator">)</span>
-        s<span class="token operator">.</span>AddToAddr<span class="token operator">(</span><span class="token string">&quot;to@example.com&quot;</span><span class="token operator">)</span>
-        s<span class="token operator">.</span>SetSubject<span class="token operator">(</span><span class="token string">&quot;GoTamer test smtp mail&quot;</span><span class="token operator">)</span>
-        s<span class="token operator">.</span>SetBody<span class="token operator">(</span><span class="token string">&quot;The Writer below should replace this default line&quot;</span><span class="token operator">)</span>
-        <span class="token keyword">if</span> _<span class="token operator">,</span> err <span class="token operator">:</span><span class="token operator">=</span> fmt<span class="token operator">.</span>Fprintf<span class="token operator">(</span>s<span class="token operator">,</span> <span class="token string">&quot;Hello, smtp mail writer\n&quot;</span><span class="token operator">)</span><span class="token operator">;</span> err <span class="token operator">!</span><span class="token operator">=</span> <span class="token literal">nil</span> <span class="token operator">{</span>
-            fmt<span class="token operator">.</span>Println<span class="token operator">(</span>err<span class="token operator">)</span>
-        <span class="token operator">}</span>
-    <span class="token operator">}</span>
+    func main() {
+        s := new(mail.Smtp)
+        s.SetHostname(&quot;smtp.gmail.com&quot;)
+        s.SetHostport(587)
+        s.SetFromName(&quot;GoTamer&quot;)
+        s.SetFromAddr(&quot;xxxx@gmail.com&quot;)
+        s.SetPassword(&quot;*********&quot;)
+        s.AddToAddr(&quot;to@example.com&quot;)
+        s.SetSubject(&quot;GoTamer test smtp mail&quot;)
+        s.SetBody(&quot;The Writer below should replace this default line&quot;)
+        if _, err := fmt.Fprintf(s, &quot;Hello, smtp mail writer\n&quot;); err != nil {
+            fmt.Println(err)
+        }
+    }
 </code></pre>
-<p>As an alternative to <code class="language-bash">AddToAddr<span class="token operator">(</span><span class="token operator">)</span></code> there is <code class="language-bash">SetToAddrs<span class="token operator">(</span><span class="token operator">)</span></code>. With <code class="language-bash">SetToAddrs<span class="token operator">(</span><span class="token operator">)</span></code> you can set one or more recipients as a comma separated list.</p>
+<p>As an alternative to <code>AddToAddr()</code> there is <code>SetToAddrs()</code>. With <code>SetToAddrs()</code> you can set one or more recipients as a comma separated list.</p>
 <h4>A note on the host.</h4>
 <p>Go SMTP does not allow to connect to SMPT servers with a self signed certs.</p>
 <p>You will get an error like following:</p>
-<pre class="language-bash"><code class="language-bash">x509<span class="token operator">:</span> certificate signed by unknown authority
+<pre><code>x509: certificate signed by unknown authority
 </code></pre>
 <p>The way I got around that is by using <a href="http://www.cacert.org" title="CA Cert">CAcert</a>. <a href="http://www.cacert.org" title="CA Cert">CAcert</a> provides FREE digital certificates.</p>
 <h3>Links</h3>

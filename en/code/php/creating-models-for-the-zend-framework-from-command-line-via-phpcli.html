@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
+    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -50,39 +50,39 @@
             
             <p>This is a php cli script that will create a database model from the database provided</p>
 <p>Download via git from <a href="http://github.com/pzzazz/phpcli">github -&gt; phpcli</a></p>
-<pre class="language-php"><code class="language-php">    php zend<span class="token operator">/</span>model<span class="token operator">.</span>php <span class="token operator">-</span>h
+<pre><code>    php zend/model.php -h
     
-    This is a command line PHP script<span class="token operator">.</span>
+    This is a command line PHP script.
     
     Set table
     
-    Options<span class="token operator">:</span>
-    <span class="token operator">-</span>path<span class="token operator">=</span><span class="token operator">[</span> <span class="token operator">]</span>
-    <span class="token operator">-</span>table<span class="token operator">=</span><span class="token operator">[</span> <span class="token operator">]</span>
+    Options:
+    -path=[ ]
+    -table=[ ]
     
-    Usage<span class="token operator">:</span>
-    php zend<span class="token operator">/</span>model<span class="token operator">.</span>php <span class="token operator">-</span>arg<span class="token operator">=</span>value
+    Usage:
+    php zend/model.php -arg=value
 </code></pre>
 <p><strong>Database Structure:</strong></p>
-<pre class="language-sql"><code class="language-sql">    CREATE TABLE users <span class="token operator">(</span>
-          Alias TEXT UNIQUE<span class="token operator">,</span>
-          Password TEXT<span class="token operator">,</span>
-          eMail TEXT<span class="token operator">,</span>
-          Avatar TEXT<span class="token operator">,</span>
-          Timezone TEXT<span class="token operator">,</span>
-          IP TEXT<span class="token operator">,</span>
-          count INTEGER<span class="token operator">,</span>
-          cookie TEXT<span class="token operator">,</span>
-          vars TEXT<span class="token operator">,</span>
-          status INTEGER DEFAULT <span class="token number">1</span><span class="token operator">,</span>
-          added date<span class="token operator">,</span>
-          updated datetime<span class="token operator">,</span>
-          PRIMARY KEY<span class="token operator">(</span>Alias<span class="token operator">)</span>
-    <span class="token operator">)</span><span class="token operator">;</span>
+<pre><code>    CREATE TABLE users (
+          Alias TEXT UNIQUE,
+          Password TEXT,
+          eMail TEXT,
+          Avatar TEXT,
+          Timezone TEXT,
+          IP TEXT,
+          count INTEGER,
+          cookie TEXT,
+          vars TEXT,
+          status INTEGER DEFAULT 1,
+          added date,
+          updated datetime,
+          PRIMARY KEY(Alias)
+    );
 </code></pre>
 <p><strong>Sample Output:</strong></p>
-<pre class="language-sh"><code class="language-sh">    
-    $ php zend<span class="token operator">/</span>model<span class="token operator">.</span>php <span class="token operator">-</span>path<span class="token operator">=</span><span class="token operator">/</span>var<span class="token operator">/</span>www<span class="token operator">/</span>TaMeR<span class="token operator">/</span>data<span class="token operator">/</span>tmp<span class="token operator">.</span>db3 <span class="token operator">-</span>table<span class="token operator">=</span>users
+<pre><code>    
+    $ php zend/model.php -path=/var/www/TaMeR/data/tmp.db3 -table=users
 
 
 
@@ -90,129 +90,129 @@
     
     
     class _Model_users
-    <span class="token operator">{</span>
-        protected $_Alias<span class="token operator">;</span>
-        protected $_Password<span class="token operator">;</span>
-        protected $_eMail<span class="token operator">;</span>
-        protected $_Avatar<span class="token operator">;</span>
-        protected $_Timezone<span class="token operator">;</span>
-        protected $_IP<span class="token operator">;</span>
-        protected $_count<span class="token operator">;</span>
-        protected $_cookie<span class="token operator">;</span>
-        protected $_vars<span class="token operator">;</span>
-        protected $_status<span class="token operator">;</span>
-        protected $_added<span class="token operator">;</span>
-        protected $_updated<span class="token operator">;</span>
+    {
+        protected $_Alias;
+        protected $_Password;
+        protected $_eMail;
+        protected $_Avatar;
+        protected $_Timezone;
+        protected $_IP;
+        protected $_count;
+        protected $_cookie;
+        protected $_vars;
+        protected $_status;
+        protected $_added;
+        protected $_updated;
     
     
-        public <span class="token keyword">function</span> setAlias<span class="token operator">(</span>$Alias<span class="token operator">)</span><span class="token operator">{</span>
-            $this<span class="token operator">-</span><span class="token operator">&gt;</span>_Alias <span class="token operator">=</span> <span class="token operator">(</span>string<span class="token operator">)</span> $Alias<span class="token operator">;</span>
-            <span class="token keyword">return</span> $this<span class="token operator">;</span>
-        <span class="token operator">}</span>
+        public function setAlias($Alias){
+            $this-&gt;_Alias = (string) $Alias;
+            return $this;
+        }
     
-        public <span class="token keyword">function</span> getAlias<span class="token operator">(</span>$Alias<span class="token operator">)</span><span class="token operator">{</span>
-            <span class="token keyword">return</span> $this<span class="token operator">-</span><span class="token operator">&gt;</span>_Alias<span class="token operator">;</span>
-        <span class="token operator">}</span>
+        public function getAlias($Alias){
+            return $this-&gt;_Alias;
+        }
     
-        public <span class="token keyword">function</span> setPassword<span class="token operator">(</span>$Password<span class="token operator">)</span><span class="token operator">{</span>
-            $this<span class="token operator">-</span><span class="token operator">&gt;</span>_Password <span class="token operator">=</span> <span class="token operator">(</span>string<span class="token operator">)</span> $Password<span class="token operator">;</span>
-            <span class="token keyword">return</span> $this<span class="token operator">;</span>
-        <span class="token operator">}</span>
+        public function setPassword($Password){
+            $this-&gt;_Password = (string) $Password;
+            return $this;
+        }
     
-        public <span class="token keyword">function</span> getPassword<span class="token operator">(</span>$Password<span class="token operator">)</span><span class="token operator">{</span>
-            <span class="token keyword">return</span> $this<span class="token operator">-</span><span class="token operator">&gt;</span>_Password<span class="token operator">;</span>
-        <span class="token operator">}</span>
+        public function getPassword($Password){
+            return $this-&gt;_Password;
+        }
     
-        public <span class="token keyword">function</span> seteMail<span class="token operator">(</span>$eMail<span class="token operator">)</span><span class="token operator">{</span>
-            $this<span class="token operator">-</span><span class="token operator">&gt;</span>_eMail <span class="token operator">=</span> <span class="token operator">(</span>string<span class="token operator">)</span> $eMail<span class="token operator">;</span>
-            <span class="token keyword">return</span> $this<span class="token operator">;</span>
-        <span class="token operator">}</span>
+        public function seteMail($eMail){
+            $this-&gt;_eMail = (string) $eMail;
+            return $this;
+        }
     
-        public <span class="token keyword">function</span> geteMail<span class="token operator">(</span>$eMail<span class="token operator">)</span><span class="token operator">{</span>
-            <span class="token keyword">return</span> $this<span class="token operator">-</span><span class="token operator">&gt;</span>_eMail<span class="token operator">;</span>
-        <span class="token operator">}</span>
+        public function geteMail($eMail){
+            return $this-&gt;_eMail;
+        }
     
-        public <span class="token keyword">function</span> setAvatar<span class="token operator">(</span>$Avatar<span class="token operator">)</span><span class="token operator">{</span>
-            $this<span class="token operator">-</span><span class="token operator">&gt;</span>_Avatar <span class="token operator">=</span> <span class="token operator">(</span>string<span class="token operator">)</span> $Avatar<span class="token operator">;</span>
-            <span class="token keyword">return</span> $this<span class="token operator">;</span>
-        <span class="token operator">}</span>
+        public function setAvatar($Avatar){
+            $this-&gt;_Avatar = (string) $Avatar;
+            return $this;
+        }
     
-        public <span class="token keyword">function</span> getAvatar<span class="token operator">(</span>$Avatar<span class="token operator">)</span><span class="token operator">{</span>
-            <span class="token keyword">return</span> $this<span class="token operator">-</span><span class="token operator">&gt;</span>_Avatar<span class="token operator">;</span>
-        <span class="token operator">}</span>
+        public function getAvatar($Avatar){
+            return $this-&gt;_Avatar;
+        }
     
-        public <span class="token keyword">function</span> setTimezone<span class="token operator">(</span>$Timezone<span class="token operator">)</span><span class="token operator">{</span>
-            $this<span class="token operator">-</span><span class="token operator">&gt;</span>_Timezone <span class="token operator">=</span> <span class="token operator">(</span>string<span class="token operator">)</span> $Timezone<span class="token operator">;</span>
-            <span class="token keyword">return</span> $this<span class="token operator">;</span>
-        <span class="token operator">}</span>
+        public function setTimezone($Timezone){
+            $this-&gt;_Timezone = (string) $Timezone;
+            return $this;
+        }
     
-        public <span class="token keyword">function</span> getTimezone<span class="token operator">(</span>$Timezone<span class="token operator">)</span><span class="token operator">{</span>
-            <span class="token keyword">return</span> $this<span class="token operator">-</span><span class="token operator">&gt;</span>_Timezone<span class="token operator">;</span>
-        <span class="token operator">}</span>
+        public function getTimezone($Timezone){
+            return $this-&gt;_Timezone;
+        }
     
-        public <span class="token keyword">function</span> setIP<span class="token operator">(</span>$IP<span class="token operator">)</span><span class="token operator">{</span>
-            $this<span class="token operator">-</span><span class="token operator">&gt;</span>_IP <span class="token operator">=</span> <span class="token operator">(</span>string<span class="token operator">)</span> $IP<span class="token operator">;</span>
-            <span class="token keyword">return</span> $this<span class="token operator">;</span>
-        <span class="token operator">}</span>
+        public function setIP($IP){
+            $this-&gt;_IP = (string) $IP;
+            return $this;
+        }
     
-        public <span class="token keyword">function</span> getIP<span class="token operator">(</span>$IP<span class="token operator">)</span><span class="token operator">{</span>
-            <span class="token keyword">return</span> $this<span class="token operator">-</span><span class="token operator">&gt;</span>_IP<span class="token operator">;</span>
-        <span class="token operator">}</span>
+        public function getIP($IP){
+            return $this-&gt;_IP;
+        }
     
-        public <span class="token keyword">function</span> setcount<span class="token operator">(</span>$count<span class="token operator">)</span><span class="token operator">{</span>
-            $this<span class="token operator">-</span><span class="token operator">&gt;</span>_count <span class="token operator">=</span> <span class="token operator">(</span>int<span class="token operator">)</span> $count<span class="token operator">;</span>
-            <span class="token keyword">return</span> $this<span class="token operator">;</span>
-        <span class="token operator">}</span>
+        public function setcount($count){
+            $this-&gt;_count = (int) $count;
+            return $this;
+        }
     
-        public <span class="token keyword">function</span> getcount<span class="token operator">(</span>$count<span class="token operator">)</span><span class="token operator">{</span>
-            <span class="token keyword">return</span> $this<span class="token operator">-</span><span class="token operator">&gt;</span>_count<span class="token operator">;</span>
-        <span class="token operator">}</span>
+        public function getcount($count){
+            return $this-&gt;_count;
+        }
     
-        public <span class="token keyword">function</span> setcookie<span class="token operator">(</span>$cookie<span class="token operator">)</span><span class="token operator">{</span>
-            $this<span class="token operator">-</span><span class="token operator">&gt;</span>_cookie <span class="token operator">=</span> <span class="token operator">(</span>string<span class="token operator">)</span> $cookie<span class="token operator">;</span>
-            <span class="token keyword">return</span> $this<span class="token operator">;</span>
-        <span class="token operator">}</span>
+        public function setcookie($cookie){
+            $this-&gt;_cookie = (string) $cookie;
+            return $this;
+        }
     
-        public <span class="token keyword">function</span> getcookie<span class="token operator">(</span>$cookie<span class="token operator">)</span><span class="token operator">{</span>
-            <span class="token keyword">return</span> $this<span class="token operator">-</span><span class="token operator">&gt;</span>_cookie<span class="token operator">;</span>
-        <span class="token operator">}</span>
+        public function getcookie($cookie){
+            return $this-&gt;_cookie;
+        }
     
-        public <span class="token keyword">function</span> setvars<span class="token operator">(</span>$vars<span class="token operator">)</span><span class="token operator">{</span>
-            $this<span class="token operator">-</span><span class="token operator">&gt;</span>_vars <span class="token operator">=</span> <span class="token operator">(</span>string<span class="token operator">)</span> $vars<span class="token operator">;</span>
-            <span class="token keyword">return</span> $this<span class="token operator">;</span>
-        <span class="token operator">}</span>
+        public function setvars($vars){
+            $this-&gt;_vars = (string) $vars;
+            return $this;
+        }
     
-        public <span class="token keyword">function</span> getvars<span class="token operator">(</span>$vars<span class="token operator">)</span><span class="token operator">{</span>
-            <span class="token keyword">return</span> $this<span class="token operator">-</span><span class="token operator">&gt;</span>_vars<span class="token operator">;</span>
-        <span class="token operator">}</span>
+        public function getvars($vars){
+            return $this-&gt;_vars;
+        }
     
-        public <span class="token keyword">function</span> setstatus<span class="token operator">(</span>$status<span class="token operator">)</span><span class="token operator">{</span>
-            $this<span class="token operator">-</span><span class="token operator">&gt;</span>_status <span class="token operator">=</span> <span class="token operator">(</span>int<span class="token operator">)</span> $status<span class="token operator">;</span>
-            <span class="token keyword">return</span> $this<span class="token operator">;</span>
-        <span class="token operator">}</span>
+        public function setstatus($status){
+            $this-&gt;_status = (int) $status;
+            return $this;
+        }
     
-        public <span class="token keyword">function</span> getstatus<span class="token operator">(</span>$status<span class="token operator">)</span><span class="token operator">{</span>
-            <span class="token keyword">return</span> $this<span class="token operator">-</span><span class="token operator">&gt;</span>_status<span class="token operator">;</span>
-        <span class="token operator">}</span>
+        public function getstatus($status){
+            return $this-&gt;_status;
+        }
     
-        public <span class="token keyword">function</span> setadded<span class="token operator">(</span>$added<span class="token operator">)</span><span class="token operator">{</span>
-            $this<span class="token operator">-</span><span class="token operator">&gt;</span>_added <span class="token operator">=</span> <span class="token operator">(</span>string<span class="token operator">)</span> $added<span class="token operator">;</span>
-            <span class="token keyword">return</span> $this<span class="token operator">;</span>
-        <span class="token operator">}</span>
+        public function setadded($added){
+            $this-&gt;_added = (string) $added;
+            return $this;
+        }
     
-        public <span class="token keyword">function</span> getadded<span class="token operator">(</span>$added<span class="token operator">)</span><span class="token operator">{</span>
-            <span class="token keyword">return</span> $this<span class="token operator">-</span><span class="token operator">&gt;</span>_added<span class="token operator">;</span>
-        <span class="token operator">}</span>
+        public function getadded($added){
+            return $this-&gt;_added;
+        }
     
-        public <span class="token keyword">function</span> setupdated<span class="token operator">(</span>$updated<span class="token operator">)</span><span class="token operator">{</span>
-            $this<span class="token operator">-</span><span class="token operator">&gt;</span>_updated <span class="token operator">=</span> <span class="token operator">(</span>string<span class="token operator">)</span> $updated<span class="token operator">;</span>
-            <span class="token keyword">return</span> $this<span class="token operator">;</span>
-        <span class="token operator">}</span>
+        public function setupdated($updated){
+            $this-&gt;_updated = (string) $updated;
+            return $this;
+        }
     
-        public <span class="token keyword">function</span> getupdated<span class="token operator">(</span>$updated<span class="token operator">)</span><span class="token operator">{</span>
-            <span class="token keyword">return</span> $this<span class="token operator">-</span><span class="token operator">&gt;</span>_updated<span class="token operator">;</span>
-        <span class="token operator">}</span>
-    <span class="token operator">}</span>
+        public function getupdated($updated){
+            return $this-&gt;_updated;
+        }
+    }
     
 </code></pre>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/cli.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">cli</a> <a href="/en/tags/php.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">php</a> <a href="/en/tags/zend.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">zend</a> </p></div>

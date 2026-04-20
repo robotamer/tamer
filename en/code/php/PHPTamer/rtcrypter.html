@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
+    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -42,15 +42,15 @@
             <h1>RTCrypter</h1>
             <p class="w3-large w3-text-grey"><i>RTCrypter allows for encryption and decryption on the fly using a simple method.</i></p>
             <p>RTCrypter does not require mcrypt, mhash or any other PHP extension, it uses only PHP.</p>
-<pre class="language-bash"><code class="language-bash">$crypt <span class="token operator">=</span> new RTCrypter<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">;</span>
-$crypt<span class="token operator">-</span><span class="token operator">&gt;</span>setCharacters<span class="token operator">(</span><span class="token string">&apos;#@|*-+.,!~`$%^&amp;&lt;&gt;{}[]()0/\123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz&apos;</span><span class="token operator">)</span><span class="token operator">;</span>
-$secretKey <span class="token operator">=</span> $crypt<span class="token operator">-</span><span class="token operator">&gt;</span>genKey<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">;</span>
+<pre><code>$crypt = new RTCrypter();
+$crypt-&gt;setCharacters('#@|*-+.,!~`$%^&amp;&lt;&gt;{}[]()0/\123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz');
+$secretKey = $crypt-&gt;genKey();
 
 
-$crypt <span class="token operator">=</span> new RTCrypter<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">;</span>
-$crypt<span class="token operator">-</span><span class="token operator">&gt;</span>useBase64<span class="token operator">(</span>FALSE<span class="token operator">)</span><span class="token operator">;</span> <span class="token operator">/</span><span class="token operator">/</span> TRUE is default
-$crypt<span class="token operator">-</span><span class="token operator">&gt;</span>setCharacters<span class="token operator">(</span><span class="token string">&apos;#@|*-+.,!~`$%^&amp;&lt;&gt;{}[]()0/\123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz&apos;</span><span class="token operator">)</span><span class="token operator">;</span>
-$crypt<span class="token operator">-</span><span class="token operator">&gt;</span>setScramble<span class="token operator">(</span>$secretKey<span class="token operator">)</span><span class="token operator">;</span>
+$crypt = new RTCrypter();
+$crypt-&gt;useBase64(FALSE); // TRUE is default
+$crypt-&gt;setCharacters('#@|*-+.,!~`$%^&amp;&lt;&gt;{}[]()0/\123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz');
+$crypt-&gt;setScramble($secretKey);
 </code></pre>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/phptamer.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">phptamer</a> </p></div>
             <hr>

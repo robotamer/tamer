@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
+    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -57,51 +57,51 @@
             <p>Little update (like 5 years later).<br>
 Just tried this on Windows and no it doesn't work.<br>
 I get following error:</p>
-<pre class="language-bash"><code class="language-bash"><span class="token string">`undefined: syscall.Stat_t`</span>
+<pre><code>`undefined: syscall.Stat_t`
 </code></pre>
 <p>This works on Linux.<br>
 Haven't tried on any other platform, please report if you do.</p>
 <p><a href="https://play.golang.org/p/vJFZ1o_qIp">https://play.golang.org/p/vJFZ1o_qIp</a></p>
-<pre class="language-go"><code class="language-go"><span class="token keyword">package</span> main
+<pre><code>package main
 
-<span class="token keyword">import</span><span class="token operator">(</span>
-    <span class="token string">&quot;fmt&quot;</span>
-    <span class="token string">&quot;os&quot;</span>
-    <span class="token string">&quot;time&quot;</span>
-    <span class="token string">&quot;syscall&quot;</span>
-<span class="token operator">)</span>
+import(
+    &quot;fmt&quot;
+    &quot;os&quot;
+    &quot;time&quot;
+    &quot;syscall&quot;
+)
 
-<span class="token keyword">type</span> FileTime <span class="token keyword">struct</span> <span class="token operator">{</span>
-    MTime time<span class="token operator">.</span>Time
-    CTime time<span class="token operator">.</span>Time
-    ATime time<span class="token operator">.</span>Time
-<span class="token operator">}</span>
+type FileTime struct {
+    MTime time.Time
+    CTime time.Time
+    ATime time.Time
+}
 
-<span class="token keyword">const</span> FILE <span class="token operator">=</span> <span class="token string">&quot;/opt/go/LICENSE&quot;</span>
+const FILE = &quot;/opt/go/LICENSE&quot;
 
-<span class="token keyword">func</span> main<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">{</span>
+func main(){
 
-    file<span class="token operator">,</span> err <span class="token operator">:</span><span class="token operator">=</span> FTime<span class="token operator">(</span>FILE<span class="token operator">)</span>
-    <span class="token keyword">if</span> err <span class="token operator">=</span><span class="token operator">=</span> <span class="token literal">nil</span> <span class="token operator">{</span>
-        fmt<span class="token operator">.</span>Println<span class="token operator">(</span><span class="token string">&quot;Mo Time&quot;</span><span class="token operator">,</span> file<span class="token operator">.</span>MTime<span class="token operator">)</span>
-        fmt<span class="token operator">.</span>Println<span class="token operator">(</span><span class="token string">&quot;Ac Time&quot;</span><span class="token operator">,</span> file<span class="token operator">.</span>ATime<span class="token operator">)</span>
-        fmt<span class="token operator">.</span>Println<span class="token operator">(</span><span class="token string">&quot;Cr Time&quot;</span><span class="token operator">,</span> file<span class="token operator">.</span>CTime<span class="token operator">)</span>
-    <span class="token operator">}</span>
-<span class="token operator">}</span>
+    file, err := FTime(FILE)
+    if err == nil {
+        fmt.Println(&quot;Mo Time&quot;, file.MTime)
+        fmt.Println(&quot;Ac Time&quot;, file.ATime)
+        fmt.Println(&quot;Cr Time&quot;, file.CTime)
+    }
+}
 
-<span class="token comment">// Gets the Modified, Create and Access time of a file</span>
-<span class="token keyword">func</span> FTime<span class="token operator">(</span>file <span class="token keyword2">string</span><span class="token operator">)</span> <span class="token operator">(</span>t <span class="token operator">*</span>FileTime<span class="token operator">,</span> err <span class="token keyword2">error</span><span class="token operator">)</span> <span class="token operator">{</span>
-    fileinfo<span class="token operator">,</span> err <span class="token operator">:</span><span class="token operator">=</span> os<span class="token operator">.</span>Stat<span class="token operator">(</span>file<span class="token operator">)</span>
-    <span class="token keyword">if</span> err <span class="token operator">!</span><span class="token operator">=</span> <span class="token literal">nil</span> <span class="token operator">{</span>
-        <span class="token keyword">return</span>
-    <span class="token operator">}</span>
-    t <span class="token operator">=</span> new<span class="token operator">(</span>FileTime<span class="token operator">)</span>
-    <span class="token keyword">var</span> stat <span class="token operator">=</span> fileinfo<span class="token operator">.</span>Sys<span class="token operator">(</span><span class="token operator">)</span><span class="token operator">.</span><span class="token operator">(</span><span class="token operator">*</span>syscall<span class="token operator">.</span>Stat_t<span class="token operator">)</span>
-    t<span class="token operator">.</span>ATime <span class="token operator">=</span> time<span class="token operator">.</span>Unix<span class="token operator">(</span>stat<span class="token operator">.</span>Atim<span class="token operator">.</span>Sec<span class="token operator">,</span> stat<span class="token operator">.</span>Atim<span class="token operator">.</span>Nsec<span class="token operator">)</span>
-    t<span class="token operator">.</span>CTime <span class="token operator">=</span> time<span class="token operator">.</span>Unix<span class="token operator">(</span>stat<span class="token operator">.</span>Ctim<span class="token operator">.</span>Sec<span class="token operator">,</span> stat<span class="token operator">.</span>Ctim<span class="token operator">.</span>Nsec<span class="token operator">)</span>
-    t<span class="token operator">.</span>MTime <span class="token operator">=</span> time<span class="token operator">.</span>Unix<span class="token operator">(</span>stat<span class="token operator">.</span>Mtim<span class="token operator">.</span>Sec<span class="token operator">,</span> stat<span class="token operator">.</span>Mtim<span class="token operator">.</span>Nsec<span class="token operator">)</span>
-    <span class="token keyword">return</span>
-<span class="token operator">}</span>
+// Gets the Modified, Create and Access time of a file
+func FTime(file string) (t *FileTime, err error) {
+    fileinfo, err := os.Stat(file)
+    if err != nil {
+        return
+    }
+    t = new(FileTime)
+    var stat = fileinfo.Sys().(*syscall.Stat_t)
+    t.ATime = time.Unix(stat.Atim.Sec, stat.Atim.Nsec)
+    t.CTime = time.Unix(stat.Ctim.Sec, stat.Ctim.Nsec)
+    t.MTime = time.Unix(stat.Mtim.Sec, stat.Mtim.Nsec)
+    return
+}
 </code></pre>
             
             <hr>

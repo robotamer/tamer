@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
+    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -51,79 +51,79 @@
             <h1>Linux Containers</h1>
             <p class="w3-large w3-text-grey"><i>Setting up and using Linux Containers (LXC) on Debian</i></p>
             <p>Linux Containers provide a Free Software virtualization system for computers running GNU/Linux. This is accomplished through kernel level isolation. It allows one to run multiple virtual units simultaneously. Those units, similar to chroots, are sufficiently isolated to guarantee the required security, but utilize available resources efficiently, as they run on the same kernel.</p>
-<pre class="language-bash"><code class="language-bash">apt<span class="token operator">-</span>get install lxc bridge<span class="token operator">-</span>utils debootstrap
+<pre><code>apt-get install lxc bridge-utils debootstrap
 </code></pre>
 <p>First we will setup our Bridge: <a href="Bridge-Utils.html">Linux:bridge-utils</a></p>
 <p>/etc/fstab</p>
-<pre class="language-bash"><code class="language-bash">cgroup          <span class="token operator">/</span>sys<span class="token operator">/</span>fs<span class="token operator">/</span>cgroup         cgroup  defaults        <span class="token number">0</span>       <span class="token number">0</span>
+<pre><code>cgroup          /sys/fs/cgroup         cgroup  defaults        0       0
 
-mount <span class="token operator">-</span>a
+mount -a
 
 
-LXCDIR<span class="token operator">=</span><span class="token operator">/</span>var<span class="token operator">/</span>lib<span class="token operator">/</span>lxc
-<span class="token keyword">cd</span> $LXCDIR
-nano vm0<span class="token operator">.</span>cfg
+LXCDIR=/var/lib/lxc
+cd $LXCDIR
+nano vm0.cfg
 </code></pre>
 <p>Following is a template config file. If you are also looking at other howto's, don't get coughed up at the fstab mount option. The debian script takes care of that. You will at leased have to change the IP address.</p>
 <p><strong>vm0.cfg</strong></p>
-<pre class="language-bash"><code class="language-bash">lxc<span class="token operator">.</span>utsname <span class="token operator">=</span> vm0
-lxc<span class="token operator">.</span>rootfs <span class="token operator">=</span> <span class="token operator">/</span>var<span class="token operator">/</span>lib<span class="token operator">/</span>lxc<span class="token operator">/</span>vm0<span class="token operator">/</span>rootfs
+<pre><code>lxc.utsname = vm0
+lxc.rootfs = /var/lib/lxc/vm0/rootfs
 
-lxc<span class="token operator">.</span>tty <span class="token operator">=</span> <span class="token number">4</span>
-lxc<span class="token operator">.</span>network<span class="token operator">.</span><span class="token keyword">type</span> <span class="token operator">=</span> veth
-lxc<span class="token operator">.</span>network<span class="token operator">.</span>flags <span class="token operator">=</span> up
-lxc<span class="token operator">.</span>network<span class="token operator">.</span>link <span class="token operator">=</span> br0
-lxc<span class="token operator">.</span>network<span class="token operator">.</span>name <span class="token operator">=</span> eth0
-lxc<span class="token operator">.</span>network<span class="token operator">.</span>mtu <span class="token operator">=</span> <span class="token number">1500</span>
+lxc.tty = 4
+lxc.network.type = veth
+lxc.network.flags = up
+lxc.network.link = br0
+lxc.network.name = eth0
+lxc.network.mtu = 1500
 
-<span class="token comment"># security parameter</span>
-lxc<span class="token operator">.</span>cgroup<span class="token operator">.</span>devices<span class="token operator">.</span>deny <span class="token operator">=</span> a <span class="token comment"># Deny all access to devices</span>
-lxc<span class="token operator">.</span>cgroup<span class="token operator">.</span>devices<span class="token operator">.</span>allow <span class="token operator">=</span> c <span class="token number">1</span><span class="token operator">:</span><span class="token number">3</span> rwm   <span class="token comment"># dev/null</span>
-lxc<span class="token operator">.</span>cgroup<span class="token operator">.</span>devices<span class="token operator">.</span>allow <span class="token operator">=</span> c <span class="token number">1</span><span class="token operator">:</span><span class="token number">5</span> rwm   <span class="token comment"># dev/zero</span>
-lxc<span class="token operator">.</span>cgroup<span class="token operator">.</span>devices<span class="token operator">.</span>allow <span class="token operator">=</span> c <span class="token number">5</span><span class="token operator">:</span><span class="token number">1</span> rwm   <span class="token comment"># dev/console</span>
-lxc<span class="token operator">.</span>cgroup<span class="token operator">.</span>devices<span class="token operator">.</span>allow <span class="token operator">=</span> c <span class="token number">5</span><span class="token operator">:</span><span class="token number">0</span> rwm   <span class="token comment"># dev/tty</span>
-lxc<span class="token operator">.</span>cgroup<span class="token operator">.</span>devices<span class="token operator">.</span>allow <span class="token operator">=</span> c <span class="token number">4</span><span class="token operator">:</span><span class="token number">0</span> rwm   <span class="token comment"># dev/tty0</span>
-lxc<span class="token operator">.</span>cgroup<span class="token operator">.</span>devices<span class="token operator">.</span>allow <span class="token operator">=</span> c <span class="token number">4</span><span class="token operator">:</span><span class="token number">1</span> rwm   <span class="token comment"># dev/tty1</span>
-lxc<span class="token operator">.</span>cgroup<span class="token operator">.</span>devices<span class="token operator">.</span>allow <span class="token operator">=</span> c <span class="token number">4</span><span class="token operator">:</span><span class="token number">2</span> rwm   <span class="token comment"># dev/tty2</span>
-lxc<span class="token operator">.</span>cgroup<span class="token operator">.</span>devices<span class="token operator">.</span>allow <span class="token operator">=</span> c <span class="token number">1</span><span class="token operator">:</span><span class="token number">9</span> rwm   <span class="token comment"># dev/urandon</span>
-lxc<span class="token operator">.</span>cgroup<span class="token operator">.</span>devices<span class="token operator">.</span>allow <span class="token operator">=</span> c <span class="token number">1</span><span class="token operator">:</span><span class="token number">8</span> rwm   <span class="token comment"># dev/random</span>
-lxc<span class="token operator">.</span>cgroup<span class="token operator">.</span>devices<span class="token operator">.</span>allow <span class="token operator">=</span> c <span class="token number">136</span><span class="token operator">:</span><span class="token operator">*</span> rwm <span class="token comment"># dev/pts/*</span>
-lxc<span class="token operator">.</span>cgroup<span class="token operator">.</span>devices<span class="token operator">.</span>allow <span class="token operator">=</span> c <span class="token number">5</span><span class="token operator">:</span><span class="token number">2</span> rwm   <span class="token comment"># dev/pts/ptmx</span>
-lxc<span class="token operator">.</span>cgroup<span class="token operator">.</span>devices<span class="token operator">.</span>allow <span class="token operator">=</span> c <span class="token number">254</span><span class="token operator">:</span><span class="token number">0</span> rwm <span class="token comment"># dev/rtc</span>
+# security parameter
+lxc.cgroup.devices.deny = a # Deny all access to devices
+lxc.cgroup.devices.allow = c 1:3 rwm   # dev/null
+lxc.cgroup.devices.allow = c 1:5 rwm   # dev/zero
+lxc.cgroup.devices.allow = c 5:1 rwm   # dev/console
+lxc.cgroup.devices.allow = c 5:0 rwm   # dev/tty
+lxc.cgroup.devices.allow = c 4:0 rwm   # dev/tty0
+lxc.cgroup.devices.allow = c 4:1 rwm   # dev/tty1
+lxc.cgroup.devices.allow = c 4:2 rwm   # dev/tty2
+lxc.cgroup.devices.allow = c 1:9 rwm   # dev/urandon
+lxc.cgroup.devices.allow = c 1:8 rwm   # dev/random
+lxc.cgroup.devices.allow = c 136:* rwm # dev/pts/*
+lxc.cgroup.devices.allow = c 5:2 rwm   # dev/pts/ptmx
+lxc.cgroup.devices.allow = c 254:0 rwm # dev/rtc
 
-<span class="token comment"># mounts point</span>
-lxc<span class="token operator">.</span>mount<span class="token operator">.</span>entry<span class="token operator">=</span>proc   <span class="token operator">/</span>var<span class="token operator">/</span>lib<span class="token operator">/</span>lxc<span class="token operator">/</span>vm0<span class="token operator">/</span>rootfs<span class="token operator">/</span>proc proc nodev<span class="token operator">,</span>noexec<span class="token operator">,</span>nosuid <span class="token number">0</span> <span class="token number">0</span>
-lxc<span class="token operator">.</span>mount<span class="token operator">.</span>entry<span class="token operator">=</span>devpts <span class="token operator">/</span>var<span class="token operator">/</span>lib<span class="token operator">/</span>lxc<span class="token operator">/</span>vm0<span class="token operator">/</span>rootfs<span class="token operator">/</span>dev<span class="token operator">/</span>pts devpts defaults <span class="token number">0</span> <span class="token number">0</span>
-lxc<span class="token operator">.</span>mount<span class="token operator">.</span>entry<span class="token operator">=</span>sysfs  <span class="token operator">/</span>var<span class="token operator">/</span>lib<span class="token operator">/</span>lxc<span class="token operator">/</span>vm0<span class="token operator">/</span>rootfs<span class="token operator">/</span>sys sysfs defaults  <span class="token number">0</span> <span class="token number">0</span>
+# mounts point
+lxc.mount.entry=proc   /var/lib/lxc/vm0/rootfs/proc proc nodev,noexec,nosuid 0 0
+lxc.mount.entry=devpts /var/lib/lxc/vm0/rootfs/dev/pts devpts defaults 0 0
+lxc.mount.entry=sysfs  /var/lib/lxc/vm0/rootfs/sys sysfs defaults  0 0
 </code></pre>
 <p>Command</p>
-<pre class="language-bash"><code class="language-bash">lxc<span class="token operator">-</span>create <span class="token operator">-</span>f $LXCDIR<span class="token operator">/</span>vm0<span class="token operator">.</span>cfg <span class="token operator">-</span>n vm0
-cp <span class="token operator">/</span>usr<span class="token operator">/</span>lib<span class="token operator">/</span>lxc<span class="token operator">/</span>templates<span class="token operator">/</span>lxc<span class="token operator">-</span>debian $LXCDIR
+<pre><code>lxc-create -f $LXCDIR/vm0.cfg -n vm0
+cp /usr/lib/lxc/templates/lxc-debian $LXCDIR
 </code></pre>
 <p>At this point you might wont to make lxc-debian your own. At leased change the release from Lenny to Squeeze</p>
-<pre class="language-bash"><code class="language-bash"><span class="token operator">.</span><span class="token operator">/</span>lxc<span class="token operator">-</span>debian <span class="token operator">-</span>p vm0
+<pre><code>./lxc-debian -p vm0
 </code></pre>
 <p>The vm0 should have been created now. Your root password is root.
 Before we start it up we will make some config changes.</p>
 <p>First edit your network config</p>
-<pre class="language-bash"><code class="language-bash">nano $LXCDIR<span class="token operator">/</span>vm0<span class="token operator">/</span>rootfs<span class="token operator">/</span>etc<span class="token operator">/</span>network<span class="token operator">/</span>interfaces
+<pre><code>nano $LXCDIR/vm0/rootfs/etc/network/interfaces
 </code></pre>
 <p>File needs to look like this: // Note change the IP addresses to yours, if you don't know how, you know you shouldn't be here //</p>
-<pre class="language-bash"><code class="language-bash"><span class="token comment"># The loopback network interface</span>
+<pre><code># The loopback network interface
 auto lo
 iface lo inet loopback
-up route add <span class="token operator">-</span>net <span class="token number">127.0.0.0</span> netmask <span class="token number">255.0.0.0</span> dev lo
-down route add <span class="token operator">-</span>net <span class="token number">127.0.0.0</span> netmask <span class="token number">255.0.0.0</span> dev lo
+up route add -net 127.0.0.0 netmask 255.0.0.0 dev lo
+down route add -net 127.0.0.0 netmask 255.0.0.0 dev lo
 
 auto eth0
 iface eth0 inet static
-address <span class="token number">70.22.189.59</span>
-netmask <span class="token number">255.255.255.248</span>
-gateway <span class="token number">70.22.189.57</span>
+address 70.22.189.59
+netmask 255.255.255.248
+gateway 70.22.189.57
 </code></pre>
 <p>Now we will try to boot the system.</p>
-<pre class="language-bash"><code class="language-bash"><span class="token keyword">cd</span> $LXCDIR
-lxc<span class="token operator">-</span>start <span class="token operator">-</span>n vm0
+<pre><code>cd $LXCDIR
+lxc-start -n vm0
 </code></pre>
 <p>default password:</p>
 <ul>
@@ -131,28 +131,28 @@ lxc<span class="token operator">-</span>start <span class="token operator">-</sp
 <li>password: root</li>
 </ul>
 <p>Tip: copy your ~/.ssh folder to each server for passwordless login</p>
-<pre class="language-bash"><code class="language-bash">nano <span class="token operator">/</span>etc<span class="token operator">/</span>default<span class="token operator">/</span>locale
+<pre><code>nano /etc/default/locale
 </code></pre>
 <p>And add:</p>
-<pre class="language-bash"><code class="language-bash">LANG<span class="token operator">=</span>en_US<span class="token operator">.</span>UTF<span class="token operator">-</span><span class="token number">8</span>
+<pre><code>LANG=en_US.UTF-8
 </code></pre>
 <p>Configure locales</p>
-<pre class="language-bash"><code class="language-bash">dpkg<span class="token operator">-</span>reconfigure locales
+<pre><code>dpkg-reconfigure locales
 </code></pre>
 <p>Open  /etc/inittab and make sure you comment out like this:</p>
-<pre class="language-bash"><code class="language-bash"><span class="token number">1</span><span class="token operator">:</span><span class="token number">2345</span><span class="token operator">:</span>respawn<span class="token operator">:</span><span class="token operator">/</span>sbin<span class="token operator">/</span>getty <span class="token number">38400</span> console
-<span class="token comment">#c1:12345:respawn:/sbin/getty 38400 tty1 linux</span>
-<span class="token comment">#c2:12345:respawn:/sbin/getty 38400 tty2 linux</span>
-<span class="token comment">#c3:12345:respawn:/sbin/getty 38400 tty3 linux</span>
-<span class="token comment">#c4:12345:respawn:/sbin/getty 38400 tty4 linux</span>
+<pre><code>1:2345:respawn:/sbin/getty 38400 console
+#c1:12345:respawn:/sbin/getty 38400 tty1 linux
+#c2:12345:respawn:/sbin/getty 38400 tty2 linux
+#c3:12345:respawn:/sbin/getty 38400 tty3 linux
+#c4:12345:respawn:/sbin/getty 38400 tty4 linux
 </code></pre>
 <p>Now you should be at the vm0 login, try user root with pass root<br>
 Try to ping a domain you know works, and it should give you a response otherwise your network setup failed.</p>
 <p>Assuming it worked, let's make it permanent.</p>
-<pre class="language-bash"><code class="language-bash">ln <span class="token operator">-</span>s $LXCDIR<span class="token operator">/</span>vm0<span class="token operator">/</span>config <span class="token operator">/</span>etc<span class="token operator">/</span>lxc<span class="token operator">/</span>vm0<span class="token operator">.</span>conf
+<pre><code>ln -s $LXCDIR/vm0/config /etc/lxc/vm0.conf
 </code></pre>
 <p>Turn this on and add vm0 to the container variable.</p>
-<pre class="language-bash"><code class="language-bash"><span class="token keyword">cd</span> <span class="token operator">/</span>etc<span class="token operator">/</span>default<span class="token operator">/</span>
+<pre><code>cd /etc/default/
 nano lxc
 </code></pre>
 <p>Next we will setup the server:</p>

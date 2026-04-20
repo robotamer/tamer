@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
+    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -53,12 +53,12 @@
             <h4>Git Alias:</h4>
 <p>I thought this deserves it's own little page.</p>
 <p>Following will create an alias for git add, commit, and push</p>
-<pre class="language-bash"><code class="language-bash">git config <span class="token keyword">alias</span><span class="token operator">.</span>acp <span class="token string">&apos;! acp() { git add . &amp;&amp; git commit -m \&quot;$1\&quot; &amp;&amp; git push ; } ; acp&apos;</span>  
+<pre><code>git config alias.acp '! acp() { git add . &amp;&amp; git commit -m \&quot;$1\&quot; &amp;&amp; git push ; } ; acp'  
 </code></pre>
 <p>Use it like this:</p>
-<pre class="language-bash"><code class="language-bash">git acp <span class="token string">&quot;your commit message&quot;</span>
+<pre><code>git acp &quot;your commit message&quot;
 </code></pre>
-<p>Depending on your setup, you may also want to add <code class="language-bash">git pull</code> before you <code class="language-bash">git add</code>, but I am sure you can figure out how to do that. Isn't this something?</p>
+<p>Depending on your setup, you may also want to add <code>git pull</code> before you <code>git add</code>, but I am sure you can figure out how to do that. Isn't this something?</p>
 <p>{{&lt; lastmod &gt;}}</p>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/howto.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">howto</a> <a href="/en/tags/git.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">git</a> </p></div>
             <hr>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
+    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -50,10 +50,10 @@
 <p>The openssl toolkit is used to generate an RSA Private Key and CSR (Certificate Signing Request). It can also be used to generate self-signed certificates which can be used for testing purposes or internal usage.</p>
 <p>The first step is to create your RSA Private Key. This key is a 1024 bit RSA key which is encrypted
 using Triple-DES and stored in a PEM format so that it is readable as ASCII text.</p>
-<pre class="language-bash"><code class="language-bash">openssl genrsa <span class="token operator">-</span>des3 <span class="token operator">-</span>out server<span class="token operator">.</span>key <span class="token number">1024</span>
+<pre><code>openssl genrsa -des3 -out server.key 1024
 
-Generating RSA private key<span class="token operator">,</span> <span class="token number">1024</span> bit long modulus
-<span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span><span class="token operator">.</span>
+Generating RSA private key, 1024 bit long modulus
+.........................................................
 </code></pre>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/linux.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">linux</a> <a href="/en/tags/ssl.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">ssl</a> </p></div>
             <hr>

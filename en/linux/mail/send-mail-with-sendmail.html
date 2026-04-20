@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
+    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -42,18 +42,18 @@
         <div class="w3-container w3-white w3-card-4 w3-padding-32">
             <h1>Send mail with sendmail</h1>
             <p class="w3-large w3-text-grey"><i>A howto on sending email via the linux sendmail command</i></p>
-            <pre class="language-bash"><code class="language-bash">    <span class="token comment">#!/bin/bash</span>
+            <pre><code>    #!/bin/bash
 
-    SENDMAIL<span class="token operator">=</span><span class="token operator">/</span>usr<span class="token operator">/</span>sbin<span class="token operator">/</span>sendmail
-    RECIPIENT<span class="token operator">=</span>tosomeone@example<span class="token operator">.</span>com
-    FROM<span class="token operator">=</span>me@example<span class="token operator">.</span>com
+    SENDMAIL=/usr/sbin/sendmail
+    RECIPIENT=tosomeone@example.com
+    FROM=me@example.com
     
-    cat <span class="token operator">&lt;</span><span class="token operator">&lt;</span>EOF <span class="token operator">|</span> $SENDMAIL <span class="token operator">-</span>t $<span class="token operator">{</span>RECIPIENT<span class="token operator">}</span>
-    From<span class="token operator">:</span> $<span class="token operator">{</span>FROM<span class="token operator">}</span> 
-    To<span class="token operator">:</span> $<span class="token operator">{</span>RECIPIENT<span class="token operator">}</span>
-    Subject<span class="token operator">:</span> testmail
+    cat &lt;&lt;EOF | $SENDMAIL -t ${RECIPIENT}
+    From: ${FROM} 
+    To: ${RECIPIENT}
+    Subject: testmail
      
-    some <span class="token keyword">test</span> text as body of the email<span class="token operator">.</span>
+    some test text as body of the email.
     EOF
 </code></pre>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/howto.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">howto</a> <a href="/en/tags/linux.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">linux</a> <a href="/en/tags/debian.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">debian</a> <a href="/en/tags/desktop.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">desktop</a> <a href="/en/tags/server.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">server</a> <a href="/en/tags/mail.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">mail</a> <a href="/en/tags/smtp.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">smtp</a> <a href="/en/tags/bash.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">bash</a> </p></div>

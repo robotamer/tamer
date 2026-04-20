@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css">
+    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -41,12 +41,12 @@
             <h1>git branch on bash line</h1>
             
             <p>This little code, if placed in to your ~/.bash_profile file will reveal what git branch you are working on.</p>
-<pre class="language-bash"><code class="language-bash">parse_git_branch<span class="token operator">(</span><span class="token operator">)</span> <span class="token operator">{</span>
-        git branch <span class="token number">2</span><span class="token operator">&gt;</span> <span class="token operator">/</span>dev<span class="token operator">/</span>null <span class="token operator">|</span> sed <span class="token operator">-</span>e <span class="token string">&apos;/^[^*]/d&apos;</span> <span class="token operator">-</span>e <span class="token string">&apos;s/* (.*)/(1)/&apos;</span>
-<span class="token operator">}</span>
-<span class="token keyword">if</span> <span class="token operator">[</span><span class="token operator">[</span> $EUID <span class="token operator">-</span>ne <span class="token number">0</span> <span class="token operator">]</span><span class="token operator">]</span><span class="token operator">;</span> <span class="token keyword">then</span>
-        PS1<span class="token operator">=</span><span class="token string">&quot;w$(parse_git_branch) $ &quot;</span>
-<span class="token keyword">fi</span>
+<pre><code>parse_git_branch() {
+        git branch 2&gt; /dev/null | sed -e '/^[^*]/d' -e 's/* (.*)/(1)/'
+}
+if [[ $EUID -ne 0 ]]; then
+        PS1=&quot;w$(parse_git_branch) $ &quot;
+fi
 </code></pre>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/Server.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">Server</a> <a href="/en/tags/bash.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">bash</a> <a href="/en/tags/git.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">git</a> </p></div>
             <hr>
