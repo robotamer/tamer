@@ -8,10 +8,10 @@
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
-    <title>Tag: v</title>
+    <title>Setup</title>
     <meta name="author" content="TaMeR">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
+    <meta name="description" content="Installing and Setting up V on Linux">
+    <meta name="keywords" content="v, code, howto">
     <style>
         .tag-cloud { line-height: 2.5; padding: 40px; background: white; border-radius: 8px; text-align: center; }
         .tag-item { transition: transform 0.2s; display: inline-block; text-decoration: none; margin: 0 10px; }
@@ -30,26 +30,87 @@
 <body class="w3-light-grey">
     <div class="w3-bar w3-black w3-card">
         <a href="/en/index.html" class="w3-bar-item w3-button">en Home</a>
+<a href="/en/code/v/highlighter.html" class="w3-bar-item w3-button">Highlighter</a>
+<a href="/en/code/v/md-html.html" class="w3-bar-item w3-button">Static site generator</a>
 
         <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
         <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
     </div>
     <div class="w3-content" style="max-width:1400px; margin:20px auto">
         <div class="w3-container w3-white w3-card-4 w3-padding-32">
-            <h1>Tag: v</h1>
-            
-            <h2>Posts tagged: v</h2><ul class="w3-ul w3-hoverable w3-white"><li><a href="/en/code/v/highlighter.html" style="text-decoration:none">
-				<span class="w3-large">Highlighter</span><br>
-				<span class="w3-small w3-text-grey">2026-04-12 22:24:06</span>
-			</a></li><li><a href="/en/code/v/md-html.html" style="text-decoration:none">
-				<span class="w3-large">Static site generator</span><br>
-				<span class="w3-small w3-text-grey">2026-04-09T18:15:57+0300</span>
-			</a></li><li><a href="/en/code/v/setup.html" style="text-decoration:none">
-				<span class="w3-large">Setup</span><br>
-				<span class="w3-small w3-text-grey">2026-04-20 13:27:24</span>
-			</a></li></ul>
-            
-            
+            <h1>Setup</h1>
+            <p class="w3-large w3-text-grey"><i>Installing and Setting up V on Linux</i></p>
+            <h1>V Language Setup</h1>
+<h2>Installing V</h2>
+<pre><code>mkdir -p /opt/nix
+chgrp users /opt/nix
+cd /opt/nix
+git clone --depth=1 https://github.com/vlang/v
+cd v
+make
+which v
+</code></pre>
+<p>Add to ~/.profile</p>
+<pre><code>if command -v v &amp;&gt; /dev/null
+then
+    export VROOT=/opt/nix/lib/v
+    export VMODULES=/opt/nix/lib/vmodules
+fi
+</code></pre>
+<h2>Offline Documentation</h2>
+<h3>V Language Documentation</h3>
+<pre><code>mkdir -p /opt/nix/lib/
+cd /opt/nix/lib
+git clone --branch generator --depth 1 https://github.com/vlang/docs v_docs_generator
+v run .
+mkdir -p /opt/nix/www
+/opt/nix/www
+ln -s ../lib/v_docs_generator/output vdocs
+</code></pre>
+<p>Access &amp; bookmark: file:///opt/nix/www/vdocs/index.html</p>
+<h3>V Module Documentation</h3>
+<pre><code>$ cat generate_vlib_docs.sh 
+#!/bin/sh
+
+set -eu
+
+# 1. Setup workspace
+WORKSPACE=/tmp/vdoc_workspace
+VDOCS=/opt/nix/www/vlibs
+
+# 1.1 cleanup
+if [ -L &quot;$WORKSPACE/vlib&quot; ]
+then
+    unlink $WORKSPACE/vlib
+    unlink $WORKSPACE/vmodules
+fi
+
+if [ -d &quot;$WORKSPACE&quot; ]
+then
+    rm -rf $WORKSPACE
+fi
+
+# 2. Symlink
+mkdir -p $WORKSPACE
+ln -s $VROOT/vlib $WORKSPACE/vlib
+ln -s $VMODULES $WORKSPACE/vmodules
+
+# 3 Generate vdocs
+rm -rf $VDOCS
+v doc -m -f html -readme -o $VDOCS $WORKSPACE
+
+# 4. Cleanup
+unlink $WORKSPACE/vlib
+unlink $WORKSPACE/vmodules
+rm -rf $WORKSPACE
+</code></pre>
+<p>Access &amp; bookmark: file:///opt/nix/www/vlibs/index.html</p>
+            <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/v.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">v</a> <a href="/en/tags/code.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">code</a> <a href="/en/tags/howto.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">howto</a> </p></div>
+            <hr>
+        <p class="w3-small w3-text-grey">
+			First Created: 2026-04-20 13:27:24<br>
+			Last Modified: 2026-04-20 10:31
+		</p>
         </div>
     </div>
     
