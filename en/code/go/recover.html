@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/w3.css">
+    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
+    <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
+    
+
+    <title>HDKeys Recover</title>
+    <meta name="author" content="TaMeR">
+    <meta name="description" content="Recover your bitcoin seed password">
+    <meta name="keywords" content="password, go, code, bitcoin, hdkeys, BIP39">
+    <style>
+        code, pre{ color: white; background: black; text-shadow:0 1px rgba(0,0,0,.3); 
+					font-size:1em; text-align:left; white-space:pre; word-spacing:normal; word-break:normal;
+					word-wrap:normal; line-height:1.5; -moz-tab-size:4; -o-tab-size:4; tab-size:4;
+					-webkit-hyphens:none; -moz-hyphens:none; -ms-hyphens:none; hyphens:none }
+        pre{ padding:1em; margin:.5em 0; overflow:auto; border-radius:.3em }
+        .tag-cloud { line-height: 2.5; padding: 40px; background: white; border-radius: 8px; text-align: center; }
+        .tag-item { transition: transform 0.2s; display: inline-block; text-decoration: none; margin: 0 10px; }
+        .tag-item:hover { transform: scale(1.1); color: #2196F3 !important; }
+        .tag-badge { 
+            font-size: 0.6rem; 
+            vertical-align: top; 
+            background: #e1e1e1; 
+            color: #555; 
+            padding: 2px 6px; 
+            border-radius: 10px; 
+            margin-left: 4px; 
+        }
+    </style>
+</head>
+<body class="w3-light-grey">
+    <div class="w3-bar w3-black w3-card">
+        <a href="/en/index.html" class="w3-bar-item w3-button">en Home</a>
+<a href="/en/code/go/smtp.html" class="w3-bar-item w3-button">Smtp</a>
+<a href="/en/code/go/﻿sometimes-i-fall-in-love-with-code.html" class="w3-bar-item w3-button">﻿Sometimes I fall in love with code</a>
+<a href="/en/code/go/jgdb.html" class="w3-bar-item w3-button">jgdb</a>
+<a href="/en/code/go/a-gopher-named-gophy.html" class="w3-bar-item w3-button">A Gopher named Gophy</a>
+<a href="/en/code/go/encode-decode-golang-data-to-gob-files.html" class="w3-bar-item w3-button">Encode/Decode Golang data to Gob files</a>
+<a href="/en/code/go/gowatch.html" class="w3-bar-item w3-button">GoWatch</a>
+<a href="/en/code/go/cfg.html" class="w3-bar-item w3-button">Cfg</a>
+<a href="/en/code/go/file-access-and-create-time.html" class="w3-bar-item w3-button">File Access and Create Time</a>
+<a href="/en/code/go/go-snippets.html" class="w3-bar-item w3-button">Go Snippets</a>
+<a href="/en/code/go/ping.html" class="w3-bar-item w3-button">Ping</a>
+<a href="/en/code/go/citadel-vcard-sync.html" class="w3-bar-item w3-button">Citadel vCard Sync</a>
+<a href="/en/code/go/your-everyday-go-tools.html" class="w3-bar-item w3-button">Your Everyday Go Tools</a>
+<a href="/en/code/go/cases.html" class="w3-bar-item w3-button">Cases</a>
+<a href="/en/code/go/conv.html" class="w3-bar-item w3-button">Conv</a>
+<a href="/en/code/go/go-jkl.html" class="w3-bar-item w3-button">Go jkl</a>
+<a href="/en/code/go/encode-decode-between-struct-and-byte-slice.html" class="w3-bar-item w3-button">Encode/Decode between struct and byte slice</a>
+<a href="/en/code/go/crypt.html" class="w3-bar-item w3-button">Crypt</a>
+<a href="/en/code/go/wordlist.html" class="w3-bar-item w3-button">HDKeys Wordlist</a>
+
+        <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
+        <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
+    </div>
+    <div class="w3-content" style="max-width:1400px; margin:20px auto">
+        <div class="w3-container w3-white w3-card-4 w3-padding-32">
+            <h1>HDKeys Recover</h1>
+            <p class="w3-large w3-text-grey"><i>Recover your bitcoin seed password</i></p>
+            <h3>Recover will run a wordlist against a Mnemonic seed phrase, and a public key to find a lost/forgotten BIP39 password.</h3>
+<p><a href="https://github.com/gotamer/hdkeys/">hdkeys repo</a></p>
+<p>If you are here because you lost your password. <strong>I will help you</strong>; don't worry if all this sounds too complicated.
+First remember <strong>Not your keys, not your coins</strong>. Don't share your mnemonic keys with anyone, including me.
+We will make this work for you, so that you can recover your password on your own computer.</p>
+<p>Before you can use &quot;HDKeys Recover&quot; you must have a wordlist of passwords.
+I have created a <a href="./wordlist.html">wordlist generator</a>, which should work for most passwords.</p>
+<h3>installation</h3>
+<p>You need go installed!</p>
+<p>Following will create hdkeys hdkeys_recover hdkeys_wordlist in to the ./bin folder</p>
+<pre><code>git clone https://github.com/gotamer/hdkeys
+cd hdkeys
+./make.sh build
+ls ./bin
+</code></pre>
+<h3>setup.sh</h3>
+<p>Once you have generated your wordlist. Modify your setup.sh file to include following.</p>
+<ul>
+<li><strong>HDKEYS_MNEMONIC</strong> you should know what that is.</li>
+<li><strong>HDKEYS_TARGET_KEY</strong> is a public key you know belongs to this account. You can find this in your wallet, on the blockchain, or just ask the person you received the coins from.</li>
+</ul>
+<p>setup.sh example</p>
+<pre><code>export HDKEYS_MNEMONIC='tree matrix federal video roof sniff great wheel valve rib daughter public'
+export HDKEYS_TARGET_KEY=&quot;3CN3xb1NFmUFZGQMMvS68jDcoi19RqC19S&quot;
+</code></pre>
+<p>Then in a shell run</p>
+<pre><code>hdkeys recover
+</code></pre>
+            <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/password.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">password</a> <a href="/en/tags/go.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">go</a> <a href="/en/tags/code.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">code</a> <a href="/en/tags/bitcoin.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">bitcoin</a> <a href="/en/tags/hdkeys.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">hdkeys</a> <a href="/en/tags/BIP39.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">BIP39</a> </p></div>
+            <hr>
+        <p class="w3-small w3-text-grey">
+			First Created: 2026-04-23 14:24:01<br>
+			Last Modified: 2026-04-23 16:56
+		</p>
+        </div>
+    </div>
+    
+    <script>
+    let idx = [];
+    async function init() { 
+        try {
+            const r = await fetch("/en/search.json"); 
+            idx = await r.json(); 
+        } catch(e) { console.error("Search index failed", e); }
+    }
+    init();
+    function search() {
+        const q = document.getElementById("si").value.toLowerCase();
+        const r = document.getElementById("sr");
+        if (q.length < 2) { r.style.display="none"; return; }
+        const m = idx.filter(i => 
+            i.t.toLowerCase().includes(q) || 
+            (i.g && i.g.toLowerCase().includes(q))
+        ).slice(0, 5);
+        if (m.length > 0) {
+            r.innerHTML = m.map(i => `<a href="${i.u}" class="w3-bar-item w3-button w3-white">${i.t}</a>`).join("");
+            r.style.display="block";
+        } else { r.style.display="none"; }
+    }
+    </script>
+</body>
+</html>

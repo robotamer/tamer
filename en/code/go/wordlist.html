@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/w3.css">
+    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
+    <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
+    
+
+    <title>HDKeys Wordlist</title>
+    <meta name="author" content="TaMeR">
+    <meta name="description" content="Creates a wordlist for bruteforce password recovery">
+    <meta name="keywords" content="password, go, code, bitcoin, hdkeys, BIP39">
+    <style>
+        code, pre{ color: white; background: black; text-shadow:0 1px rgba(0,0,0,.3); 
+					font-size:1em; text-align:left; white-space:pre; word-spacing:normal; word-break:normal;
+					word-wrap:normal; line-height:1.5; -moz-tab-size:4; -o-tab-size:4; tab-size:4;
+					-webkit-hyphens:none; -moz-hyphens:none; -ms-hyphens:none; hyphens:none }
+        pre{ padding:1em; margin:.5em 0; overflow:auto; border-radius:.3em }
+        .tag-cloud { line-height: 2.5; padding: 40px; background: white; border-radius: 8px; text-align: center; }
+        .tag-item { transition: transform 0.2s; display: inline-block; text-decoration: none; margin: 0 10px; }
+        .tag-item:hover { transform: scale(1.1); color: #2196F3 !important; }
+        .tag-badge { 
+            font-size: 0.6rem; 
+            vertical-align: top; 
+            background: #e1e1e1; 
+            color: #555; 
+            padding: 2px 6px; 
+            border-radius: 10px; 
+            margin-left: 4px; 
+        }
+    </style>
+</head>
+<body class="w3-light-grey">
+    <div class="w3-bar w3-black w3-card">
+        <a href="/en/index.html" class="w3-bar-item w3-button">en Home</a>
+<a href="/en/code/go/smtp.html" class="w3-bar-item w3-button">Smtp</a>
+<a href="/en/code/go/﻿sometimes-i-fall-in-love-with-code.html" class="w3-bar-item w3-button">﻿Sometimes I fall in love with code</a>
+<a href="/en/code/go/jgdb.html" class="w3-bar-item w3-button">jgdb</a>
+<a href="/en/code/go/a-gopher-named-gophy.html" class="w3-bar-item w3-button">A Gopher named Gophy</a>
+<a href="/en/code/go/encode-decode-golang-data-to-gob-files.html" class="w3-bar-item w3-button">Encode/Decode Golang data to Gob files</a>
+<a href="/en/code/go/gowatch.html" class="w3-bar-item w3-button">GoWatch</a>
+<a href="/en/code/go/cfg.html" class="w3-bar-item w3-button">Cfg</a>
+<a href="/en/code/go/file-access-and-create-time.html" class="w3-bar-item w3-button">File Access and Create Time</a>
+<a href="/en/code/go/go-snippets.html" class="w3-bar-item w3-button">Go Snippets</a>
+<a href="/en/code/go/ping.html" class="w3-bar-item w3-button">Ping</a>
+<a href="/en/code/go/citadel-vcard-sync.html" class="w3-bar-item w3-button">Citadel vCard Sync</a>
+<a href="/en/code/go/your-everyday-go-tools.html" class="w3-bar-item w3-button">Your Everyday Go Tools</a>
+<a href="/en/code/go/cases.html" class="w3-bar-item w3-button">Cases</a>
+<a href="/en/code/go/conv.html" class="w3-bar-item w3-button">Conv</a>
+<a href="/en/code/go/go-jkl.html" class="w3-bar-item w3-button">Go jkl</a>
+<a href="/en/code/go/encode-decode-between-struct-and-byte-slice.html" class="w3-bar-item w3-button">Encode/Decode between struct and byte slice</a>
+<a href="/en/code/go/crypt.html" class="w3-bar-item w3-button">Crypt</a>
+<a href="/en/code/go/recover.html" class="w3-bar-item w3-button">HDKeys Recover</a>
+
+        <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
+        <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
+    </div>
+    <div class="w3-content" style="max-width:1400px; margin:20px auto">
+        <div class="w3-container w3-white w3-card-4 w3-padding-32">
+            <h1>HDKeys Wordlist</h1>
+            <p class="w3-large w3-text-grey"><i>Creates a wordlist for bruteforce password recovery</i></p>
+            <p>This cli command was created for <a href="./recover.html">hdkeys_recover</a> but could be used otherwise
+hence the reason it is seperate.</p>
+<p>Wordlist will create a password list from provided words by combining them in every which way possible.</p>
+<ol>
+<li>copy the testdata folder anywhere you like.</li>
+<li>modify the words.txt file with words you may have used to create your password. One word per line.</li>
+<li>modify the setup.sh file (more about setup.sh below)</li>
+<li>run hdkeys_wordlist</li>
+<li>run hdkeys_recover</li>
+<li>add more words to the list if it was unsuccessful</li>
+<li>run hdkeys_wordlist again (This will create a history file, designed to not check the same phrases over and over)</li>
+<li>GOTO 5 until hdkeys_recover finds your password. (Good Luck)</li>
+</ol>
+<h3>setup.sh</h3>
+<ul>
+<li><p><code>HDKEYS_TARGET_KEY</code> is a public key you know belongs to this account.</p>
+</li>
+<li><p><code>HDKEYS_PASSWORD_WORDS_SEPERATOR</code> is a key you may have added between words.</p>
+</li>
+</ul>
+<p>For example if your seperator is <code>@</code> and word are &quot;one two six&quot;
+it will create passwords like one@twosix onetwo@six etc.</p>
+<ul>
+<li><code>HDKEYS_PASSWORD_MAX_LENGTH_WORDS</code> is to specify maximum number of words to combine
+from your words.txt list to create a password <code>2</code> will create onetwo, one@two, onesix one@six etc.</li>
+</ul>
+<p><a href="https://github.com/gotamer/hdkeys/">hdkeys repo</a></p>
+            <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/password.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">password</a> <a href="/en/tags/go.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">go</a> <a href="/en/tags/code.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">code</a> <a href="/en/tags/bitcoin.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">bitcoin</a> <a href="/en/tags/hdkeys.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">hdkeys</a> <a href="/en/tags/BIP39.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">BIP39</a> </p></div>
+            <hr>
+        <p class="w3-small w3-text-grey">
+			First Created: 2026-04-23 14:01:45<br>
+			Last Modified: 2026-04-23 16:56
+		</p>
+        </div>
+    </div>
+    
+    <script>
+    let idx = [];
+    async function init() { 
+        try {
+            const r = await fetch("/en/search.json"); 
+            idx = await r.json(); 
+        } catch(e) { console.error("Search index failed", e); }
+    }
+    init();
+    function search() {
+        const q = document.getElementById("si").value.toLowerCase();
+        const r = document.getElementById("sr");
+        if (q.length < 2) { r.style.display="none"; return; }
+        const m = idx.filter(i => 
+            i.t.toLowerCase().includes(q) || 
+            (i.g && i.g.toLowerCase().includes(q))
+        ).slice(0, 5);
+        if (m.length > 0) {
+            r.innerHTML = m.map(i => `<a href="${i.u}" class="w3-bar-item w3-button w3-white">${i.t}</a>`).join("");
+            r.style.display="block";
+        } else { r.style.display="none"; }
+    }
+    </script>
+</body>
+</html>

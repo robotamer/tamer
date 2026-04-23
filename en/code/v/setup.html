@@ -8,11 +8,16 @@
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
-    <title>Setup</title>
+    <title>V Language Setup</title>
     <meta name="author" content="TaMeR">
     <meta name="description" content="Installing and Setting up V on Linux">
     <meta name="keywords" content="v, code, howto">
     <style>
+        code, pre{ color: white; background: black; text-shadow:0 1px rgba(0,0,0,.3); 
+					font-size:1em; text-align:left; white-space:pre; word-spacing:normal; word-break:normal;
+					word-wrap:normal; line-height:1.5; -moz-tab-size:4; -o-tab-size:4; tab-size:4;
+					-webkit-hyphens:none; -moz-hyphens:none; -ms-hyphens:none; hyphens:none }
+        pre{ padding:1em; margin:.5em 0; overflow:auto; border-radius:.3em }
         .tag-cloud { line-height: 2.5; padding: 40px; background: white; border-radius: 8px; text-align: center; }
         .tag-item { transition: transform 0.2s; display: inline-block; text-decoration: none; margin: 0 10px; }
         .tag-item:hover { transform: scale(1.1); color: #2196F3 !important; }
@@ -38,37 +43,61 @@
     </div>
     <div class="w3-content" style="max-width:1400px; margin:20px auto">
         <div class="w3-container w3-white w3-card-4 w3-padding-32">
-            <h1>Setup</h1>
-            <p class="w3-large w3-text-grey"><i>Installing and Setting up V on Linux</i></p>
             <h1>V Language Setup</h1>
+            <p class="w3-large w3-text-grey"><i>Installing and Setting up V on Linux</i></p>
+            <p>I use as a gereral practice /opt/nix/{bin,cfg,etc,lib,scr,srv,sys,var,tmp} as location where I install software manually.
+You may change that.</p>
+<h4>Documentation Practice:</h4>
+<ul>
+<li><h1>run as root</h1>
+</li>
+<li>$ run as user</li>
+</ul>
 <h2>Installing V</h2>
-<pre><code>mkdir -p /opt/nix
-chgrp users /opt/nix
-cd /opt/nix
-git clone --depth=1 https://github.com/vlang/v
-cd v
-make
-which v
+<p>Installing bleeding edge code:</p>
+<pre><code>VROOT=/opt/nix/lib/v
+VMODULES=/opt/nix/lib/vmodules
+
+# mkdir -p /opt/nix/lib
+# chgrp users /opt/nix
+$ cd /opt/nix/lib
+$ git clone --depth=1 https://github.com/vlang/v
+$ cd $VROOT
+$ make
+$ which v
+$ v version
 </code></pre>
-<p>Add to ~/.profile</p>
+<p>Switching V to a stable release code:</p>
+<pre><code>$ cd $VROOT
+$ git tag -l # find the latest tag release as of writting it is 0.5.1
+$ git checkout 0.5.1
+$ v self -prod
+$ v version
+</code></pre>
+<hr>
+<p>Add following to ~/.profile</p>
 <pre><code>if command -v v &amp;&gt; /dev/null
 then
     export VROOT=/opt/nix/lib/v
     export VMODULES=/opt/nix/lib/vmodules
 fi
 </code></pre>
+<hr>
 <h2>Offline Documentation</h2>
+<p>Now we will create the V languade, and V module documentation for offline use.</p>
 <h3>V Language Documentation</h3>
 <pre><code>mkdir -p /opt/nix/lib/
 cd /opt/nix/lib
 git clone --branch generator --depth 1 https://github.com/vlang/docs v_docs_generator
 v run .
 mkdir -p /opt/nix/www
-/opt/nix/www
+cd /opt/nix/www
 ln -s ../lib/v_docs_generator/output vdocs
 </code></pre>
-<p>Access &amp; bookmark: file:///opt/nix/www/vdocs/index.html</p>
+<p><strong>Access &amp; bookmark:</strong> file:///opt/nix/www/vdocs/index.html</p>
+<hr>
 <h3>V Module Documentation</h3>
+<p>Create following script in /opt/nix/scr and run it.</p>
 <pre><code>$ cat generate_vlib_docs.sh 
 #!/bin/sh
 
@@ -104,12 +133,12 @@ unlink $WORKSPACE/vlib
 unlink $WORKSPACE/vmodules
 rm -rf $WORKSPACE
 </code></pre>
-<p>Access &amp; bookmark: file:///opt/nix/www/vlibs/index.html</p>
+<p><strong>Access &amp; bookmark:</strong> file:///opt/nix/www/vlibs/index.html</p>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/v.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">v</a> <a href="/en/tags/code.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">code</a> <a href="/en/tags/howto.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">howto</a> </p></div>
             <hr>
         <p class="w3-small w3-text-grey">
 			First Created: 2026-04-20 13:27:24<br>
-			Last Modified: 2026-04-20 16:32
+			Last Modified: 2026-04-21 12:26
 		</p>
         </div>
     </div>
