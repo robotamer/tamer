@@ -9,9 +9,10 @@ tags = ["password", "go", "code", "bitcoin", "hdkeys","BIP39"]
 
 [hdkeys repo](https://github.com/gotamer/hdkeys/)
 
-If you are here because you lost your password. **I will help you**; don't worry if all this sounds too complicated.
-First remember **Not your keys, not your coins**. Don't share your mnemonic keys with anyone, including me.
-We will make this work for you, so that you can recover your password on your own computer.
+> If you are here because you lost your password. **I will help you**; don't worry if all this sounds too complicated.
+> First remember **Not your keys, not your coins**. Don't share your mnemonic keys with anyone, including me. 
+> Don't panic, don't hurry, your coins are save as long as you don't share your mnemonic keys!
+> We will make this work for you, so that you can recover your password on your own computer, with internet turned off.
 
 Before you can use "HDKeys Recover" you must have a wordlist of passwords. 
 I have created a [wordlist generator](./wordlist.html), which should work for most passwords.
@@ -26,6 +27,7 @@ git clone https://github.com/gotamer/hdkeys
 cd hdkeys
 ./make.sh build
 ls ./bin
+bin/hdkeys_recover -h
 ```
 
 ### setup.sh
@@ -42,6 +44,6 @@ export HDKEYS_TARGET_KEY="3CN3xb1NFmUFZGQMMvS68jDcoi19RqC19S"
 
 Then in a shell run
 ```sh
-hdkeys recover
+hdkeys_recover
 ```
 

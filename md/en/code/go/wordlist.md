@@ -24,12 +24,11 @@ Wordlist will create a password list from provided words by combining them in ev
 
 - `HDKEYS_TARGET_KEY` is a public key you know belongs to this account.
 
-- `HDKEYS_PASSWORD_WORDS_SEPERATOR` is a key you may have added between words.
-
-For example if your seperator is `@` and word are "one two six" 
+- `HDKEYS_PASSWORD_WORDS_SEPERATOR` is a key you may have added between words.  For example if your seperator is **@** and your words are "one two six" 
 it will create passwords like one@twosix onetwo@six etc.
 
 - `HDKEYS_PASSWORD_MAX_LENGTH_WORDS` is to specify maximum number of words to combine
-from your words.txt list to create a password `2` will create onetwo, one@two, onesix one@six etc. 
+from your words.txt list to create a password `2` will create oneTwo, One@two, onesix one@six etc. 
 
 [hdkeys repo](https://github.com/gotamer/hdkeys/)
+
