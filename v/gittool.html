@@ -86,11 +86,16 @@
 					<div class="doc-content">
 								<section id="readme_gittool" class="doc-node">
 			<div class="title"><h1> gittool <a href="#readme_gittool">#</a></h1></div>
-<p>A module (gittool) and a command line tool (commit); to git add, git tag, git commit, and git push. Including auto incrementing tags with semantic versioning.</p>
+<h3 id="this-is-called-gittool-but-it-turned-out-to-be-a-bid-more-then-just-a-git-tool">This is called gittool, but it turned out to be a bid more then just a git tool.</h3>
+<ol>
+<li>
+<p>A module (gittool) and a command line tool (commit); to git add, git tag, git commit, and git push.Including auto incrementing tags with semantic versioning.</p></li>
+<li>
+<p>A convention based build system largly for V language, although there is some flexibility build in so in can be used for other languages as well.</p></li></ol>
 <h2 id="installation">Installation</h2>
 <pre><code class="language-sh">v install https<span class="token punctuation">:</span><span class="token comment">//codeberg.org/tamer/gittool.git</span>
-<span class="token punctuation">.</span><span class="token operator">/</span>make<span class="token punctuation">.</span>vsh install</code></pre>
-<h2 id="usage-as-command">Usage as command</h2>
+<span class="token punctuation">.</span><span class="token operator">/</span>make<span class="token punctuation">.</span>vsh help</code></pre>
+<h2 id="usage-of-commit-as-standalone-cli-command">Usage of commit as standalone cli command</h2>
 <pre><code class="language-sh">$ commit help
 Usage<span class="token punctuation">:</span> commit <span class="token punctuation">[</span>flags<span class="token punctuation">]</span> <span class="token punctuation">[</span>commands<span class="token punctuation">]</span>
 
@@ -98,31 +103,61 @@ Git add<span class="token punctuation">,</span> tag<span class="token punctuatio
 
 Flags<span class="token punctuation">:</span>
   <span class="token operator">-</span>m  <span class="token operator">-</span>message        
-  <span class="token operator">-</span>i  <span class="token operator">-</span>increment      major<span class="token punctuation">,</span> minor<span class="token punctuation">,</span> patch
   <span class="token operator">-</span>d  <span class="token operator">-</span>dryrun         
-  <span class="token operator">-</span>n  <span class="token operator">-</span>nopush         
+  <span class="token operator">-</span>i  <span class="token operator">-</span>minor          increment minor
+  <span class="token operator">-</span>j  <span class="token operator">-</span>major          increment major
       <span class="token operator">-</span>help           Prints help information<span class="token punctuation">.</span>
       <span class="token operator">-</span>man            Prints the auto<span class="token operator">-</span>generated manpage<span class="token punctuation">.</span>
 
 Commands<span class="token punctuation">:</span>
   info                Print information
+  status              Print git status
   help                Prints help information<span class="token punctuation">.</span>
   man                 Prints the auto<span class="token operator">-</span>generated manpage<span class="token punctuation">.</span></code></pre>
+<h2 id="documentation">Documentation</h2>
+<ul>
+<li><a href="https://codeberg.org/tamer/gittool/src/branch/master/doc">markdown docs</a></li>
+<li><a href="http://tamer.pw/v/gittool.html">browser friendly docs</a></li></ul>
 <h2 id="usage-as-module">Usage as module</h2>
 <ul>
 <li>See doc folder for module documentation</li>
-<li>See make.vsh as example.</li></ul>
+<li>See make.vsh as example.</li>
+<li>Use make_temlate.vsh as template.</li></ul>
+<h2 id="the-convention-is-simple">The convention is simple.</h2>
+<p>Put all your commands in to ./cmd/folder/files.v</p>
+<h3 id="running-makevsh-build">running ./make.vsh build</h3>
+<p>Each folder becomes a binary, ./bim/foldername</p>
+<h3 id="running-makevsh-release">running ./make.vsh release</h3>
+<p>Each folder becomes a binary, ./bim/foldername-version-os-statis</p>
+<pre><code class="language-sh">$ <span class="token punctuation">.</span><span class="token operator">/</span>make<span class="token punctuation">.</span>vsh help
+<span class="token punctuation">:</span> help
+Tasks<span class="token punctuation">:</span>
+<span class="token operator">-</span> help<span class="token punctuation">:</span> Print <span class="token function">help</span> <span class="token punctuation">(</span>default<span class="token punctuation">)</span>
+<span class="token operator">-</span> fmt<span class="token punctuation">:</span> Run fmt on all v files
+<span class="token operator">-</span> build<span class="token punctuation">:</span> Build <span class="token keyword">for</span> dev
+<span class="token operator">-</span> release<span class="token punctuation">:</span> Build universal <span class="token keyword">static</span> binaries
+<span class="token operator">-</span> uninstall<span class="token punctuation">:</span> Remove symlink from bin dir
+<span class="token operator">-</span> doc<span class="token punctuation">:</span> create markdown docs <span class="token keyword">in</span> <span class="token punctuation">.</span><span class="token operator">/</span>doc
+<span class="token operator">-</span> vsh<span class="token punctuation">:</span> re<span class="token operator">-</span>build make<span class="token punctuation">.</span>vsh
+<span class="token operator">-</span> info<span class="token punctuation">:</span> View git and vmod info
+<span class="token operator">-</span> commit<span class="token punctuation">:</span> git <span class="token function">commit</span> <span class="token punctuation">(</span>Usage<span class="token punctuation">:</span> <span class="token punctuation">.</span><span class="token operator">/</span>make<span class="token punctuation">.</span>vsh commit <span class="token punctuation">[</span><span class="token operator">-</span>p<span class="token punctuation">]</span> your message here
+      default<span class="token punctuation">:</span> patch<span class="token punctuation">;</span> release<span class="token punctuation">:</span> minor <span class="token operator">&</span> push<span class="token punctuation">)</span></code></pre>
 <pre><code class="language-v"><span class="token keyword">import</span> build
 <span class="token keyword">import</span> v<span class="token punctuation">.</span>vmod
 <span class="token keyword">import</span> gittool
 
-<span class="token keyword">const</span> manifest <span class="token operator">=</span> vmod<span class="token punctuation">.</span><span class="token function">from_file</span><span class="token punctuation">(</span><span class="token string">'v.mod'</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span> <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">'Failed to decode embedded v.mod: </span><span class="token string_interp">$</span>{err}<span class="token string">'</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+<span class="token keyword">const</span> manifest <span class="token operator">=</span> vmod<span class="token punctuation">.</span><span class="token function">from_file</span><span class="token punctuation">(</span><span class="token string">'v.mod'</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span> <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">'Failed to decode v.mod: </span><span class="token string_interp">$</span>{err}<span class="token string">'</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
 
 <span class="token comment">// Make the build context</span>
 <span class="token keyword">mut</span> context <span class="token operator">:=</span> build<span class="token punctuation">.</span><span class="token function">context</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment">// help executes --task and is default if no args provided</span>
 gittool<span class="token punctuation">.</span><span class="token function">context_help</span><span class="token punctuation">(</span><span class="token keyword">mut</span> context<span class="token punctuation">)</span>
-gittool<span class="token punctuation">.</span><span class="token function">context_git</span><span class="token punctuation">(</span><span class="token keyword">mut</span> context<span class="token punctuation">,</span> manifest<span class="token punctuation">)</span>
-gittool<span class="token punctuation">.</span><span class="token function">context_v</span><span class="token punctuation">(</span><span class="token keyword">mut</span> context<span class="token punctuation">)</span> <span class="token comment">// context V is seperated so the build system can be used with other codding languages</span></code></pre>
+<span class="token comment">// context V is seperated so the build system can be used with other coding languages</span>
+gittool<span class="token punctuation">.</span><span class="token function">context_v</span><span class="token punctuation">(</span><span class="token keyword">mut</span> context<span class="token punctuation">)</span> 
+gittool<span class="token punctuation">.</span><span class="token function">context_git</span><span class="token punctuation">(</span><span class="token keyword">mut</span> context<span class="token punctuation">,</span> manifest<span class="token punctuation">)</span></code></pre>
+<h3 id="todo">Todo</h3>
+<ul>
+<li>install to system bin when running as root</li></ul>
 <h2 id="license">License</h2>
 <p>Distributed under the MIT License. See LICENSE for more information.</p>
 
@@ -139,7 +174,7 @@ gittool<span class="token punctuation">.</span><span class="token function">cont
 		<section id="check_state" class="doc-node">
 			<div class="title"><h2>fn check_state <a href="#check_state">#</a></h2></div>
 <pre class="signature">
-<code><span class="token keyword">fn</span> <span class="token function">check_state</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<code><span class="token keyword">fn</span> <span class="token function">check_state</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">bool</span></code></pre>
 
 
 </section>
@@ -163,7 +198,7 @@ gittool<span class="token punctuation">.</span><span class="token function">cont
 		<section id="context_v" class="doc-node">
 			<div class="title"><h2>fn context_v <a href="#context_v">#</a></h2></div>
 <pre class="signature">
-<code><span class="token keyword">fn</span> <span class="token function">context_v</span><span class="token punctuation">(</span><span class="token keyword">mut</span> context build<span class="token punctuation">.</span>BuildContext<span class="token punctuation">)</span></code></pre>
+<code><span class="token keyword">fn</span> <span class="token function">context_v</span><span class="token punctuation">(</span><span class="token keyword">mut</span> context build<span class="token punctuation">.</span>BuildContext<span class="token punctuation">,</span> manifest vmod<span class="token punctuation">.</span>Manifest<span class="token punctuation">)</span></code></pre>
 
 
 </section>
@@ -192,8 +227,16 @@ gittool<span class="token punctuation">.</span><span class="token function">cont
 	message  <span class="token builtin">string</span>
 	inc_type <span class="token builtin">string</span>
 	is_dry   <span class="token builtin">bool</span>
-	no_push  <span class="token builtin">bool</span>
+	push     <span class="token builtin">bool</span>
 <span class="token punctuation">}</span></code></pre>
+
+
+</section>
+
+		<section id="Config.fields" class="doc-node">
+			<div class="title"><h2>fn (Config) fields <a href="#Config.fields">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token punctuation">(</span>g Config<span class="token punctuation">)</span> <span class="token function">fields</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">string</span></code></pre>
 
 
 </section>
@@ -209,6 +252,7 @@ gittool<span class="token punctuation">.</span><span class="token function">cont
 	origin     <span class="token builtin">string</span>
 	remote     <span class="token builtin">string</span>
 	version    <span class="token builtin">string</span>
+	clean      <span class="token builtin">bool</span>
 <span class="token keyword">pub</span> <span class="token keyword">mut</span><span class="token punctuation">:</span>
 	new_version <span class="token builtin">string</span>
 <span class="token punctuation">}</span></code></pre>
@@ -233,7 +277,7 @@ gittool<span class="token punctuation">.</span><span class="token function">cont
 </section>
 
 
-						<div class="footer">Powered by vdoc. Generated on: 18 Apr 2026 17:55:57</div>
+						<div class="footer">Powered by vdoc. Generated on: 26 Apr 2026 23:13:37</div>
 					</div>
 					<div class="doc-toc"><ul><li class="open"><a href="#readme_gittool">README</a></li>
 <li class="open"><a href="#bump_version">fn bump_version</a>        <ul>
@@ -258,6 +302,7 @@ gittool<span class="token punctuation">.</span><span class="token function">cont
 </ul>
 </li>
 <li class="open"><a href="#Config">struct Config</a>        <ul>
+<li><a href="#Config.fields">fn fields</a></li>
 </ul>
 </li>
 <li class="open"><a href="#GitInfo">struct GitInfo</a>        <ul>

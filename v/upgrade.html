@@ -88,21 +88,29 @@
 			<div class="title"><h1> upgrade <a href="#readme_upgrade">#</a></h1></div>
 <h1 id="upgrade">upgrade</h1>
 <p>A lightweight V module to automatically rebuild and restart your application when the version in v.mod changes. Useful for development workflows, and self-updating applications.</p>
-<p>Features- <em>Native V:</em> No external dependencies beyond V standard library.</p>
+<h2 id="features">Features</h2>
 <ul>
+<li><em>Native V:</em> No external dependencies beyond V standard library.</li>
 <li><em>Compile-time embedding:</em> Version is baked into the binary at build time.</li>
 <li><em>Automatic detection:</em> Compares embedded version with on-disk v.mod on startup.</li>
 <li><em>In-place rebuilds:</em> Rebuilds the executable and restarts seamlessly.</li>
 <li><em>Remote sync:</em> Pull latest changes and rebuild with from_remote() repo.</li></ul>
+<h2 id="documentation">Documentation</h2>
+<ul>
+<li><a href="http://tamer.pw/v/upgrade.html">browser friendly docs</a></li></ul>
 <h2 id="installation">Installation</h2>
 <pre><code class="language-sh">v install https<span class="token punctuation">:</span><span class="token comment">//codeberg.org/tamer/upgrade.git</span></code></pre>
 <h2 id="usage">Usage</h2>
-<h3 id="as-a-module">As a Module</h3>
 <pre><code class="language-v"><span class="token keyword">import</span> upgrade
 <span class="token keyword">import</span> v<span class="token punctuation">.</span>vmod
 
 <span class="token comment">// Embed at compile time, manifest and git dir location to track the version the binary was compiled with</span>
-<span class="token keyword">const</span> manifest <span class="token operator">=</span> vmod<span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span>@<span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span> <span class="token function">panic</span><span class="token punctuation">(</span>err<span class="token punctuation">.</span><span class="token function">msg</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+
+<span class="token comment">// --- MANIFEST backed in to executable ---</span>
+<span class="token keyword">const</span> manifest_data <span class="token operator">=</span> $<span class="token function">embed_file</span><span class="token punctuation">(</span><span class="token string">'v.mod'</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> manifest <span class="token operator">=</span> vmod<span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span>manifest_data<span class="token punctuation">.</span><span class="token function">to_string</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span>
+    <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">'Failed to decode embedded v.mod: </span><span class="token string_interp">$</span>{err}<span class="token string">'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
 <span class="token keyword">const</span> dir_git <span class="token operator">=</span> os<span class="token punctuation">.</span><span class="token function">getwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
 <span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -157,7 +165,7 @@
 </section>
 
 
-						<div class="footer">Powered by vdoc. Generated on: 18 Apr 2026 17:55:57</div>
+						<div class="footer">Powered by vdoc. Generated on: 26 Apr 2026 23:13:37</div>
 					</div>
 					<div class="doc-toc"><ul><li class="open"><a href="#readme_upgrade">README</a></li>
 <li class="open"><a href="#run">fn run</a>        <ul>

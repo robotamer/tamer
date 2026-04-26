@@ -90,19 +90,12 @@
 <p>tamer/nix is Linux specific code, which some of it may run on bsd. It avoids distro and systemd specific code to be universaly Linux compadable.</p>
 <h1 id="alpha">alpha</h1>
 <p>This code is in alpha, do not use in production!</p>
-<h1 id="processes">processes()</h1>
-<p>Aggregates TCP and UDP listeners, then iterates to replace "inode=XXXX" with the process name if found. Returns an array of strings like "tcp 0.0.0.0:22 sshd", or leaves inode if not found; also leaves inode if execution isn't done by root. (check the cmd folder for more info on the command, and the docs folder for the module manual)</p>
-<h1 id="cmdtimezone-dsttimezone-dstv">cmd/timezone-dst/timezone-dst.v</h1>
-<p>Prints out timezone without considering dst; and N for North, S for South of equator. example output <code>+03:00N</code></p>
-<h1 id="userv">user.v</h1>
-<p>user dives in to /etc/passwd and /etc/group to get info. It has many helper functions such as:- <code>fn user_has_home(username string) bool</code> checks if the username has a home directory according to /etc/passwd</p>
+<h2 id="documentation">Documentation</h2>
 <ul>
-<li><code>fn user_in_group(username string, group_name string) bool</code> checks if the user has given group privliages</li>
-<li>check the docs in the doc folder ...</li></ul>
-<h2 id="install">Install:</h2>
-<p>v install --git <a href="https://codeberg.org/tamer/nix">https://codeberg.org/tamer/nix</a></p>
-<h2 id="docs">Docs:</h2>
-<p><a href="http://tamer.pw/v/nix/nix.html">module docs</a></p>
+<li><a href="http://tamer.pw/v/nix.html">browser friendly docs</a></li>
+<li><a href="./src/branch/master/doc">markdown docs</a></li></ul>
+<h2 id="installation">Installation</h2>
+<pre><code class="language-sh">v install <span class="token operator">--</span>git https<span class="token punctuation">:</span><span class="token comment">//codeberg.org/tamer/nix</span></code></pre>
 
 </section>
 
@@ -363,7 +356,7 @@
 </section>
 
 
-						<div class="footer">Powered by vdoc. Generated on: 18 Apr 2026 17:55:57</div>
+						<div class="footer">Powered by vdoc. Generated on: 26 Apr 2026 23:13:37</div>
 					</div>
 					<div class="doc-toc"><ul><li class="open"><a href="#readme_nix">README</a></li>
 <li class="open"><a href="#Constants">Constants</a></li>

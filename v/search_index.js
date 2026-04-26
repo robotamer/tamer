@@ -15,6 +15,7 @@ var searchIndex = [
 "fields",
 "commit",
 "Config",
+"fields",
 "get_info",
 "git_version",
 "bump_version",
@@ -101,7 +102,7 @@ var searchIndex = [
 
 var searchModuleData = [
 ["","index.html"],
-["A module (gittool) and a command line tool (commit); to git add, git tag, git co","gittool.html"],
+["1. A module (gittool) and a command line tool (commit); to git add, git tag, git","gittool.html"],
 ["A lightweight, native V module to inject (Prism-compatible css) syntax highlight","highlighter.html"],
 ["Markdown module for V. For now, it uses the [md4c](https://github.com/mity/md4c)","markdown.html"],
 ["tamer/nix","nix.html"],
@@ -116,6 +117,7 @@ var searchData = [
 ["gittool","","gittool.html#GitInfo.fields","fn (GitInfo)"],
 ["gittool","Attach the logic directly to GitInfo","gittool.html#GitInfo.commit","fn (GitInfo)"],
 ["gittool","","gittool.html#Config","struct "],
+["gittool","","gittool.html#Config.fields","fn (Config)"],
 ["gittool","","gittool.html#get_info","fn "],
 ["gittool","","gittool.html#git_version","fn "],
 ["gittool","","gittool.html#bump_version","fn "],
