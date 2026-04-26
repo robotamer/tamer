@@ -1,7 +1,7 @@
 +++
 title = "HDKeys Recover"
 date = "2026-04-23 14:24:01"
-description = "Recover your bitcoin seed password"
+description = "Recover bitcoin seed password"
 tags = ["password", "go", "code", "bitcoin", "hdkeys","BIP39"]
 +++
 
