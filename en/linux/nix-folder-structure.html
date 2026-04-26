@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
+    <!-- <link rel="stylesheet" href="/css/prism-okaidia.min.css"> -->
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -31,6 +31,7 @@
             margin-left: 4px; 
         }
     </style>
+    <link rel="stylesheet" href="https://unpkg.com/prismjs@1.30.0/themes/prism-okaidia.min.css">
 </head>
 <body class="w3-light-grey">
     <div class="w3-bar w3-black w3-card">
@@ -68,7 +69,7 @@
 <li><strong>usr</strong> user read-only user data</li>
 <li><strong>var</strong> variable data files, such as log files, mail spools etc</li>
 </ol>
-<pre><code>NIX=/opt/nix
+<pre><code class="language-sh">NIX=/opt/nix
 mkdir -p $NIX
 cd $NIX
 mkdir -p bin cfg etc lib scr srv sys tmp usr var
@@ -105,5 +106,7 @@ mkdir -p bin cfg etc lib scr srv sys tmp usr var
         } else { r.style.display="none"; }
     }
     </script>
+	<script src="https://unpkg.com/prismjs@1.30.0/components/prism-core.min.js"></script>
+	<script src="https://unpkg.com/prismjs@1.30.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>

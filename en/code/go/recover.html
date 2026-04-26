@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
+    <!-- <link rel="stylesheet" href="/css/prism-okaidia.min.css"> -->
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
     <title>HDKeys Recover</title>
     <meta name="author" content="TaMeR">
-    <meta name="description" content="Recover your bitcoin seed password">
+    <meta name="description" content="Recover bitcoin seed password">
     <meta name="keywords" content="password, go, code, bitcoin, hdkeys, BIP39">
     <style>
         code, pre{ color: white; background: black; text-shadow:0 1px rgba(0,0,0,.3); 
@@ -31,6 +31,7 @@
             margin-left: 4px; 
         }
     </style>
+    <link rel="stylesheet" href="https://unpkg.com/prismjs@1.30.0/themes/prism-okaidia.min.css">
 </head>
 <body class="w3-light-grey">
     <div class="w3-bar w3-black w3-card">
@@ -60,7 +61,7 @@
     <div class="w3-content" style="max-width:1400px; margin:20px auto">
         <div class="w3-container w3-white w3-card-4 w3-padding-32">
             <h1>HDKeys Recover</h1>
-            <p class="w3-large w3-text-grey"><i>Recover your bitcoin seed password</i></p>
+            <p class="w3-large w3-text-grey"><i>Recover bitcoin seed password</i></p>
             <h3>Recover will run a wordlist against a Mnemonic seed phrase, and a public key to find a lost/forgotten BIP39 password.</h3>
 <p><a href="https://github.com/gotamer/hdkeys/">hdkeys repo</a></p>
 <blockquote>
@@ -74,10 +75,11 @@ I have created a <a href="./wordlist.html">wordlist generator</a>, which should 
 <h3>installation</h3>
 <p>You need go installed!</p>
 <p>Following will create hdkeys hdkeys_recover hdkeys_wordlist in to the ./bin folder</p>
-<pre><code>git clone https://github.com/gotamer/hdkeys
+<pre><code class="language-sh">git clone https://github.com/gotamer/hdkeys
 cd hdkeys
 ./make.sh build
 ls ./bin
+bin/hdkeys_recover -h
 </code></pre>
 <h3>setup.sh</h3>
 <p>Once you have generated your wordlist. Modify your setup.sh file to include following.</p>
@@ -86,17 +88,17 @@ ls ./bin
 <li><strong>HDKEYS_TARGET_KEY</strong> is a public key you know belongs to this account. You can find this in your wallet, on the blockchain, or just ask the person you received the coins from.</li>
 </ul>
 <p>setup.sh example</p>
-<pre><code>export HDKEYS_MNEMONIC='tree matrix federal video roof sniff great wheel valve rib daughter public'
+<pre><code class="language-sh">export HDKEYS_MNEMONIC='tree matrix federal video roof sniff great wheel valve rib daughter public'
 export HDKEYS_TARGET_KEY=&quot;3CN3xb1NFmUFZGQMMvS68jDcoi19RqC19S&quot;
 </code></pre>
 <p>Then in a shell run</p>
-<pre><code>hdkeys recover
+<pre><code class="language-sh">hdkeys_recover
 </code></pre>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/password.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">password</a> <a href="/en/tags/go.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">go</a> <a href="/en/tags/code.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">code</a> <a href="/en/tags/bitcoin.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">bitcoin</a> <a href="/en/tags/hdkeys.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">hdkeys</a> <a href="/en/tags/BIP39.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">BIP39</a> </p></div>
             <hr>
         <p class="w3-small w3-text-grey">
 			First Created: 2026-04-23 14:24:01<br>
-			Last Modified: 2026-04-23 19:16
+			Last Modified: 2026-04-24 11:06
 		</p>
         </div>
     </div>
@@ -124,5 +126,7 @@ export HDKEYS_TARGET_KEY=&quot;3CN3xb1NFmUFZGQMMvS68jDcoi19RqC19S&quot;
         } else { r.style.display="none"; }
     }
     </script>
+	<script src="https://unpkg.com/prismjs@1.30.0/components/prism-core.min.js"></script>
+	<script src="https://unpkg.com/prismjs@1.30.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
+    <!-- <link rel="stylesheet" href="/css/prism-okaidia.min.css"> -->
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -31,6 +31,7 @@
             margin-left: 4px; 
         }
     </style>
+    <link rel="stylesheet" href="https://unpkg.com/prismjs@1.30.0/themes/prism-okaidia.min.css">
 </head>
 <body class="w3-light-grey">
     <div class="w3-bar w3-black w3-card">
@@ -45,7 +46,7 @@
             <p class="w3-large w3-text-grey"><i>A script to git add, git tag, git commit, and git push. Including auto incrementing tags with semantic versioning.</i></p>
             <p>Optionaly creates a meta data file.</p>
 <p><a href="https://gist.github.com/robotamer/35ef24fdd326626b7f5d8e9571e133c5">The script is in a Github Gist</a></p>
-<pre><code>NAME 
+<pre><code class="language-sh">NAME 
     commit - git add, tag, commit &amp; push
 SYNOPSIS
     commit OPTION...
@@ -110,5 +111,7 @@ EXAMPLES
         } else { r.style.display="none"; }
     }
     </script>
+	<script src="https://unpkg.com/prismjs@1.30.0/components/prism-core.min.js"></script>
+	<script src="https://unpkg.com/prismjs@1.30.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>

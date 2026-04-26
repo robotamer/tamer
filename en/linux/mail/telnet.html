@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
+    <!-- <link rel="stylesheet" href="/css/prism-okaidia.min.css"> -->
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -31,6 +31,7 @@
             margin-left: 4px; 
         }
     </style>
+    <link rel="stylesheet" href="https://unpkg.com/prismjs@1.30.0/themes/prism-okaidia.min.css">
 </head>
 <body class="w3-light-grey">
     <div class="w3-bar w3-black w3-card">
@@ -49,17 +50,17 @@
             <p class="w3-large w3-text-grey"><i>Telnet in to remote server</i></p>
             <p>Lets first create a variable, so you can just copy/paste the code.<br>
 Replace <em>mail.example.net</em> with your telnet destination domain name.</p>
-<pre><code>export REMOTE_SRV=mail.example.net
+<pre><code class="language-sh">export REMOTE_SRV=mail.example.net
 </code></pre>
 <h2>telnet start</h2>
-<pre><code>$ telnet $REMOTE_SRV 25
+<pre><code class="language-sh">$ telnet $REMOTE_SRV 25
 $ telnet $REMOTE_SRV 143
 </code></pre>
 <ul>
 <li>c = Client, this is what you will enter</li>
 <li>s = Server, response we receive.</li>
 </ul>
-<pre><code>c: telnet $REMOTE_SRV 587
+<pre><code class="language-sh">c: telnet $REMOTE_SRV 587
 s: Trying 107.189.21.115...
 s: Connected to mail.example.net.
 s: Escape character is '^]'.
@@ -79,18 +80,18 @@ s: 221 Goodbye...
 s: Connection closed by foreign host.
 </code></pre>
 <h2>To connect using the TLS/SSL protocol</h2>
-<pre><code>$ openssl s_client -debug -starttls smtp -crlf -showcerts -connect $REMOTE_SRV:25
+<pre><code class="language-sh">$ openssl s_client -debug -starttls smtp -crlf -showcerts -connect $REMOTE_SRV:25
 $ openssl s_client -debug -starttls smtp -crlf -connect $REMOTE_SRV:587
 </code></pre>
 <h2>IMAP Port 143 starttls</h2>
-<pre><code>$ openssl s_client -starttls imap -connect $REMOTE_SRV:143
+<pre><code class="language-sh">$ openssl s_client -starttls imap -connect $REMOTE_SRV:143
 </code></pre>
 <h2>To use SSL on port 465:</h2>
-<pre><code>$ openssl s_client -connect $REMOTE_SRV:465
+<pre><code class="language-sh">$ openssl s_client -connect $REMOTE_SRV:465
 $ openssl s_client -debug  -crlf -showcerts -connect $REMOTE_SRV:465
 </code></pre>
 <p>On most SMTP servers you will get a list of commands back when using the Extended Hello (EHLO) command:</p>
-<pre><code>250-smtp.sendgrid.net
+<pre><code class="language-sh">250-smtp.sendgrid.net
 250-8BITMIME
 250-PIPELINING
 250-SIZE 31457280
@@ -99,25 +100,25 @@ $ openssl s_client -debug  -crlf -showcerts -connect $REMOTE_SRV:465
 </code></pre>
 <h2>Using PLAIN</h2>
 <p>The PLAIN mechanism expects a base64 encoded string containing both username and password, each prefixed with a NULL byte. To generate this string using the base64 binary, run this command:</p>
-<pre><code>$ echo -ne &quot;\0username\0password&quot; | base64
+<pre><code class="language-sh">$ echo -ne &quot;\0username\0password&quot; | base64
 AHVzZXJuYW1lAHBhc3N3b3Jk
 </code></pre>
-<pre><code>AUTH PLAIN AHVzZXJuYW1lAHBhc3N3b3Jk
+<pre><code class="language-sh">AUTH PLAIN AHVzZXJuYW1lAHBhc3N3b3Jk
 235 Authentication successful
 </code></pre>
 <h2>Using LOGIN authentication</h2>
 <p>The LOGIN mechanism also expects base64 encoded username and password, but separately. First, generate the base64 encoded strings:</p>
-<pre><code>$ echo -ne &quot;username&quot; | base64
+<pre><code class="language-sh">$ echo -ne &quot;username&quot; | base64
 dXNlcm5hbWU=
 $ echo -ne &quot;password&quot; | base64
 cGFzc3dvcmQ=
 </code></pre>
 <p>and authenticate with the SMTP server:</p>
-<pre><code>AUTH LOGIN
+<pre><code class="language-sh">AUTH LOGIN
 </code></pre>
 <p>You will be prompted for the username first, then the password.</p>
 <h2>IMAP port 143 example</h2>
-<pre><code>C: a001 CAPABILITY
+<pre><code class="language-sh">C: a001 CAPABILITY
 S: * CAPABILITY IMAP4rev1 STARTTLS LOGINDISABLED
 S: a001 OK CAPABILITY completed
 C: a002 STARTTLS
@@ -131,7 +132,7 @@ S: a004 OK LOGIN completed
 C: Logout
 </code></pre>
 <h2>On more SMTP Example:</h2>
-<pre><code>$ telnet 172.16.6.165 25
+<pre><code class="language-sh">$ telnet 172.16.6.165 25
 Trying 172.16.6.165...
 Connected to my_esa.
 Escape character is '^]'.
@@ -242,5 +243,7 @@ Connection closed by foreign host.
         } else { r.style.display="none"; }
     }
     </script>
+	<script src="https://unpkg.com/prismjs@1.30.0/components/prism-core.min.js"></script>
+	<script src="https://unpkg.com/prismjs@1.30.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>

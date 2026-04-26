@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
+    <!-- <link rel="stylesheet" href="/css/prism-okaidia.min.css"> -->
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -31,6 +31,7 @@
             margin-left: 4px; 
         }
     </style>
+    <link rel="stylesheet" href="https://unpkg.com/prismjs@1.30.0/themes/prism-okaidia.min.css">
 </head>
 <body class="w3-light-grey">
     <div class="w3-bar w3-black w3-card">
@@ -57,7 +58,7 @@
 A info, error etc messenger class that allows you to add validation errors, statuses etc to flash data and then retrieve them in a nicely formatted way in your front-end. Automates the process a little when you're adding and retrieving messages, especially in a CRUD type environment. The formatting integrates well with Twitter's Bootstrap Alert formatting.</p>
 <p>This upgraded version works smoothly with the Laravel validation class</p>
 <p><a href="https://gist.github.com/robotamer/3007511#file-msg-php">gist id=3007511</a></p>
-<pre><code>&lt;?php
+<pre><code class="language-php">&lt;?php
 
 class Msg {
 
@@ -144,5 +145,7 @@ class Msg {
         } else { r.style.display="none"; }
     }
     </script>
+	<script src="https://unpkg.com/prismjs@1.30.0/components/prism-core.min.js"></script>
+	<script src="https://unpkg.com/prismjs@1.30.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>

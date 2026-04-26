@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
+    <!-- <link rel="stylesheet" href="/css/prism-okaidia.min.css"> -->
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -31,6 +31,7 @@
             margin-left: 4px; 
         }
     </style>
+    <link rel="stylesheet" href="https://unpkg.com/prismjs@1.30.0/themes/prism-okaidia.min.css">
 </head>
 <body class="w3-light-grey">
     <div class="w3-bar w3-black w3-card">
@@ -57,11 +58,11 @@ How to do that is out of this manuals scope.</li>
 </ul>
 <hr>
 <p>Next we will set some variables, <em>replace</em> with your domain and IP address then execute following in your servers shell.</p>
-<pre><code>export CIT_DOMAIN_ORG=mail.example.net
+<pre><code class="language-sh">export CIT_DOMAIN_ORG=mail.example.net
 export CIT_DOMAIN_NEW=mail.example.com
 </code></pre>
 <p>Change your <em>/etc/hosts</em> &amp; <em>lighttpd.conf</em> file replace old with new domain</p>
-<pre><code># Replace text in files
+<pre><code class="language-sh"># Replace text in files
 sed -i &quot;s|$CIT_DOMAIN_ORG|$CIT_DOMAIN_NEW|g&quot; /etc/hosts
 sed -i &quot;s|$CIT_DOMAIN_ORG|$CIT_DOMAIN_NEW|g&quot; /etc/lighttpd/lighttpd.conf
 
@@ -72,7 +73,7 @@ lighttpd -tt -f /etc/lighttpd/lighttpd.conf
 <ul>
 <li>No error continue</li>
 </ul>
-<pre><code>certbot certonly --agree-tos --non-interactive --text --rsa-key-size 4096 \
+<pre><code class="language-sh">certbot certonly --agree-tos --non-interactive --text --rsa-key-size 4096 \
     --email webmaster@${CIT_DOMAIN_NEW} \
     --webroot --webroot-path /srv/www/lighttpd \
     --domains ${CIT_DOMAIN_NEW}
@@ -91,14 +92,14 @@ cp /etc/letsencrypt/live/${CIT_DOMAIN_NEW}/fullchain.pem /usr/local/citadel/keys
 <ul>
 <li>No error continue</li>
 </ul>
-<pre><code>docker stop citadel
+<pre><code class="language-sh">docker stop citadel
 wait
 docker rename citadel citadel.net
 </code></pre>
 <ul>
 <li>No error continue</li>
 </ul>
-<pre><code>docker run -d --restart=unless-stopped --network host \
+<pre><code class="language-sh">docker run -d --restart=unless-stopped --network host \
     --volume=/usr/local/citadel:/citadel-data \
     --volume=/usr/local/webcit/.well-known:/usr/local/webcit/.well-known \
     --volume=/usr/local/webcit/static.local:/usr/local/webcit/static.local \
@@ -107,12 +108,12 @@ docker rename citadel citadel.net
 <ul>
 <li>No error continue</li>
 </ul>
-<pre><code>sv start lighttpd
+<pre><code class="language-sh">sv start lighttpd
 </code></pre>
 <ul>
 <li>Last we change the certbot post renewal hook</li>
 </ul>
-<pre><code>sed -i &quot;s|$CIT_DOMAIN_ORG|$CIT_DOMAIN_NEW|g&quot; /etc/letsencrypt/renewal-hooks/post/citadel.sh
+<pre><code class="language-sh">sed -i &quot;s|$CIT_DOMAIN_ORG|$CIT_DOMAIN_NEW|g&quot; /etc/letsencrypt/renewal-hooks/post/citadel.sh
 </code></pre>
 <p>All done check your new setup.<br>
 If you have a problem ask questions at <a href="https://uncensored.citadel.org/readfwd?go=Citadel%20Support">Citadel Support</a></p>
@@ -148,5 +149,7 @@ If you have a problem ask questions at <a href="https://uncensored.citadel.org/r
         } else { r.style.display="none"; }
     }
     </script>
+	<script src="https://unpkg.com/prismjs@1.30.0/components/prism-core.min.js"></script>
+	<script src="https://unpkg.com/prismjs@1.30.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>

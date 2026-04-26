@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
+    <!-- <link rel="stylesheet" href="/css/prism-okaidia.min.css"> -->
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -31,6 +31,7 @@
             margin-left: 4px; 
         }
     </style>
+    <link rel="stylesheet" href="https://unpkg.com/prismjs@1.30.0/themes/prism-okaidia.min.css">
 </head>
 <body class="w3-light-grey">
     <div class="w3-bar w3-black w3-card">
@@ -43,6 +44,7 @@
 <a href="/en/linux/backround-process.html" class="w3-bar-item w3-button">Linux backround process</a>
 <a href="/en/linux/network-safety-restart-bash-script.html" class="w3-bar-item w3-button">Network Safety Restart Bash Script</a>
 <a href="/en/linux/utf-8-character-list.html" class="w3-bar-item w3-button">UTF-8 Character List</a>
+<a href="/en/linux/nix-folder-structure.html" class="w3-bar-item w3-button">Nix File System Hierarchy</a>
 <a href="/en/linux/bridge-utils-for-lxc.html" class="w3-bar-item w3-button">Bridge-Utils for LXC</a>
 <a href="/en/linux/netbeans-error.html" class="w3-bar-item w3-button">Netbeans error</a>
 <a href="/en/linux/caldav-and-carddav-server.html" class="w3-bar-item w3-button">CalDAV and CardDAV Server</a>
@@ -60,34 +62,34 @@
 <a href="https://git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server">4.4 Git on the Server - Setting Up the Server</a></p>
 <h4>Remote Server</h4>
 <p>Go to your web root directory</p>
-<pre><code>cd /var/www/
+<pre><code class="language-bash">cd /var/www/
 </code></pre>
 <p>identify your self to git</p>
-<pre><code>git config --global user.name &quot;Your Name&quot;
+<pre><code class="language-bash">git config --global user.name &quot;Your Name&quot;
 git config --global user.email &quot;alias@example.com&quot;
 </code></pre>
 <p>Create git</p>
-<pre><code>git init
+<pre><code class="language-bash">git init
 </code></pre>
 <p>Create a live branch</p>
-<pre><code>git branch live
+<pre><code class="language-bash">git branch live
 </code></pre>
 <p>Make the live branch active</p>
-<pre><code>git checkout live
+<pre><code class="language-bash">git checkout live
 </code></pre>
 <h4>Local</h4>
 <p>Go to your working directory</p>
-<pre><code>cd /var/www/
+<pre><code class="language-bash">cd /var/www/
 </code></pre>
 <p>identify your self to git</p>
-<pre><code>git config --global user.name &quot;Dennis T Kaplan&quot;
+<pre><code class="language-bash">git config --global user.name &quot;Dennis T Kaplan&quot;
 git config --global user.email &quot;alias@example.com&quot;
 </code></pre>
 <p>Create git</p>
-<pre><code>git init
+<pre><code class="language-bash">git init
 </code></pre>
 <p>create the ignore file</p>
-<pre><code>nano .gitignore
+<pre><code class="language-bash">nano .gitignore
 </code></pre>
 <p>Place this in to your .gitignore file:</p>
 <pre><code># Packages #
@@ -125,36 +127,36 @@ Thumbs.db
 test*
 </code></pre>
 <p>Add your files to git</p>
-<pre><code>git add .
+<pre><code class="language-bash">git add .
 </code></pre>
 <p>Commit them</p>
-<pre><code>git commit -m 'init'
+<pre><code class="language-bash">git commit -m 'init'
 </code></pre>
 <p>Add your remote git server</p>
-<pre><code>git remote add ssh://username@example.com/var/www/.git
+<pre><code class="language-bash">git remote add ssh://username@example.com/var/www/.git
 </code></pre>
 <p>send your data to the remote server</p>
-<pre><code>git push
+<pre><code class="language-bash">git push
 </code></pre>
 <h4>Remote Server</h4>
 <p>Checkout master branch so we can test the changes</p>
-<pre><code>git checkout master
+<pre><code class="language-bash">git checkout master
 </code></pre>
 <p>see if it works and if it does go back to the live branch</p>
-<pre><code>git checkout live
+<pre><code class="language-bash">git checkout live
 </code></pre>
 <p>pull in master to live</p>
-<pre><code>git merge master
+<pre><code class="language-bash">git merge master
 </code></pre>
 <h4>Stop tracking a file but keep the file:</h4>
-<pre><code>git rm --cached filename
+<pre><code class="language-bash">git rm --cached filename
 </code></pre>
 <h4>Alias:</h4>
 <p>Following will create an alias for git add, commit and push</p>
-<pre><code>git config alias.acp '! acp() { git add . &amp;&amp; git commit -m \&quot;$1\&quot; &amp;&amp; git push ; } ; acp'  
+<pre><code class="language-bash">git config alias.acp '! acp() { git add . &amp;&amp; git commit -m \&quot;$1\&quot; &amp;&amp; git push ; } ; acp'  
 </code></pre>
 <p>Use it like this:</p>
-<pre><code>git acp &quot;your commit message&quot;
+<pre><code class="language-bash">git acp &quot;your commit message&quot;
 </code></pre>
 <p>{{&lt; lastmod &gt;}}</p>
             <div class="w3-padding-16"><p><b>Tags:</b> <a href="/en/tags/howto.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">howto</a> <a href="/en/tags/git.html" class="w3-tag w3-light-grey w3-small w3-margin-bottom" style="text-decoration:none">git</a> </p></div>
@@ -189,5 +191,7 @@ test*
         } else { r.style.display="none"; }
     }
     </script>
+	<script src="https://unpkg.com/prismjs@1.30.0/components/prism-core.min.js"></script>
+	<script src="https://unpkg.com/prismjs@1.30.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>

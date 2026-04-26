@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
+    <!-- <link rel="stylesheet" href="/css/prism-okaidia.min.css"> -->
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -31,6 +31,7 @@
             margin-left: 4px; 
         }
     </style>
+    <link rel="stylesheet" href="https://unpkg.com/prismjs@1.30.0/themes/prism-okaidia.min.css">
 </head>
 <body class="w3-light-grey">
     <div class="w3-bar w3-black w3-card">
@@ -70,16 +71,16 @@ Before each file you will find installation instructions that should work even f
 <hr>
 <h4>ZEND_ROOT/backstrap.php</h4>
 <p>Create acl object</p>
-<pre><code>include_once &quot;Tamer/Acl.php&quot;;
+<pre><code class="language-php">include_once &quot;Tamer/Acl.php&quot;;
 $acl = new Tamer_Acl();
 </code></pre>
 <p>Add the Tamer_Plugin_Auth to the Zend Front Controller</p>
-<pre><code>$front-&gt;setControllerDirectory(APPS . '/default/controllers')
+<pre><code class="language-php">$front-&gt;setControllerDirectory(APPS . '/default/controllers')
         -&gt;setBaseUrl($cfg-&gt;baseUrl)
         -&gt;registerPlugin(new Tamer_Plugin_Auth($auth, $acl))
 </code></pre>
 <h4>ZEND_ROOT/library/Tamer/Acl.php</h4>
-<pre><code>
+<pre><code class="language-php">
 &lt;?php
 require_once 'Zend/Acl.php';
 require_once 'Zend/Acl/Role.php';
@@ -327,7 +328,7 @@ class TamerFile_ACL
 ?&gt;
 </code></pre>
 <h4>ZEND_ROOT/library/Tamer/Plugin/Auth.php</h4>
-<pre><code>&lt;?php
+<pre><code class="language-php">&lt;?php
 
 class Tamer_Plugin_Auth extends Zend_Controller_Plugin_Abstract
 {
@@ -385,7 +386,7 @@ class Tamer_Plugin_Auth extends Zend_Controller_Plugin_Abstract
 ?&gt;
 </code></pre>
 <h4>ZEND_ROOT/db/config.sql</h4>
-<pre><code>DROP TABLE IF EXISTS acl_array;
+<pre><code class="language-sql">DROP TABLE IF EXISTS acl_array;
 DROP TABLE IF EXISTS acl_roles;
 DROP TABLE IF EXISTS acl_resources;
 DROP TABLE IF EXISTS acl_access;
@@ -472,5 +473,7 @@ COMMIT;
         } else { r.style.display="none"; }
     }
     </script>
+	<script src="https://unpkg.com/prismjs@1.30.0/components/prism-core.min.js"></script>
+	<script src="https://unpkg.com/prismjs@1.30.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>

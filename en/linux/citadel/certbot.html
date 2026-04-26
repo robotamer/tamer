@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
+    <!-- <link rel="stylesheet" href="/css/prism-okaidia.min.css"> -->
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -31,6 +31,7 @@
             margin-left: 4px; 
         }
     </style>
+    <link rel="stylesheet" href="https://unpkg.com/prismjs@1.30.0/themes/prism-okaidia.min.css">
 </head>
 <body class="w3-light-grey">
     <div class="w3-bar w3-black w3-card">
@@ -49,7 +50,7 @@
             <p class="w3-large w3-text-grey"><i>Configuring Citadel to use the Let's Encrypt Certificate Authority</i></p>
             <p>Signed TLS certificates are now available at no cost from the nonprofit <a href="https://letsencrypt.org/">Let's Encrypt Certificate Authority</a>.
 To use these on a Citadel system, you will need the <a href="https://certbot.eff.org">Certbot</a> utility installed.</p>
-<pre><code>export CIT_DOMAIN_NAME=mail.example.net
+<pre><code class="language-sh">export CIT_DOMAIN_NAME=mail.example.net
 
 certbot certonly --agree-tos --non-interactive --text --rsa-key-size 4096 \
     --email admin@${CIT_DOMAIN_NAME} \
@@ -62,13 +63,13 @@ cp /etc/letsencrypt/live/${CIT_DOMAIN_NAME}/fullchain.pem /usr/local/citadel/key
 <pre><code>cat /etc/letsencrypt/renewal-hooks/pre/citadel.sh
 </code></pre>
 <hr>
-<pre><code>#!/bin/sh
+<pre><code class="language-sh">#!/bin/sh
 docker stop citadel
 </code></pre>
 <pre><code># cat /etc/letsencrypt/renewal-hooks/post/citadel.sh
 </code></pre>
 <hr>
-<pre><code>#!/bin/sh
+<pre><code class="language-sh">#!/bin/sh
 cp /etc/letsencrypt/live/${CIT_DOMAIN_NAME}/fullchain.pem /usr/local/citadel/keys/citadel.cer
 cp /etc/letsencrypt/live/${CIT_DOMAIN_NAME}/privkey.pem /usr/local/citadel/keys/citadel.key
 wait
@@ -106,5 +107,7 @@ docker start citadel
         } else { r.style.display="none"; }
     }
     </script>
+	<script src="https://unpkg.com/prismjs@1.30.0/components/prism-core.min.js"></script>
+	<script src="https://unpkg.com/prismjs@1.30.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
+    <!-- <link rel="stylesheet" href="/css/prism-okaidia.min.css"> -->
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -31,12 +31,13 @@
             margin-left: 4px; 
         }
     </style>
+    <link rel="stylesheet" href="https://unpkg.com/prismjs@1.30.0/themes/prism-okaidia.min.css">
 </head>
 <body class="w3-light-grey">
     <div class="w3-bar w3-black w3-card">
         <a href="/en/index.html" class="w3-bar-item w3-button">en Home</a>
 <a href="/en/code/v/md-html.html" class="w3-bar-item w3-button">Static site generator</a>
-<a href="/en/code/v/setup.html" class="w3-bar-item w3-button">Setup</a>
+<a href="/en/code/v/setup.html" class="w3-bar-item w3-button">V Language Setup</a>
 
         <input type="text" id="si" class="w3-bar-item w3-input w3-right" placeholder="Search..." onkeyup="search()">
         <div id="sr" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0; top:40px; display:none; position:absolute; z-index:999;"></div>
@@ -57,21 +58,21 @@ static HTML files at build time. No client-side JavaScript required.</p>
 </ul>
 <h2>Installation</h2>
 <h3>For V Users</h3>
-<pre><code>v install https://codeberg.org/tamer/highlighter.git
+<pre><code class="language-sh">v install https://codeberg.org/tamer/highlighter.git
 </code></pre>
 <h3>For C Users</h3>
-<pre><code>make compile_c_linux   - Build using GCC from the C file
+<pre><code class="language-sh">make compile_c_linux   - Build using GCC from the C file
 make compile_c_windows - Build for Win using MinGW from the C file
 </code></pre>
 <h2>Usage</h2>
 <h3>As a CLI tool</h3>
-<pre><code>highlight --verbose --force /var/www
+<pre><code class="language-sh">highlight --verbose --force /var/www
 </code></pre>
 <h3>As a Module</h3>
-<pre class="language-v"><code class="language-v"><span class="token keyword">import</span> highlighter
+<pre><code class="language-v">import highlighter
 
-<span class="token keyword">mut</span> hl <span class="token operator">:</span><span class="token operator">=</span> highlighter<span class="token operator">.</span>new_manager<span class="token operator">(</span><span class="token operator">)</span>
-html_output <span class="token operator">:</span><span class="token operator">=</span> hl<span class="token operator">.</span>highlight_html<span class="token operator">(</span>markdown_generated_html<span class="token operator">)</span>
+mut hl := highlighter.new_manager()
+html_output := hl.highlight_html(markdown_generated_html)
 </code></pre>
 <h2>Structure</h2>
 <pre><code>.
@@ -124,5 +125,7 @@ html_output <span class="token operator">:</span><span class="token operator">=<
         } else { r.style.display="none"; }
     }
     </script>
+	<script src="https://unpkg.com/prismjs@1.30.0/components/prism-core.min.js"></script>
+	<script src="https://unpkg.com/prismjs@1.30.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>

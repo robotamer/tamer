@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
+    <!-- <link rel="stylesheet" href="/css/prism-okaidia.min.css"> -->
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -31,6 +31,7 @@
             margin-left: 4px; 
         }
     </style>
+    <link rel="stylesheet" href="https://unpkg.com/prismjs@1.30.0/themes/prism-okaidia.min.css">
 </head>
 <body class="w3-light-grey">
     <div class="w3-bar w3-black w3-card">
@@ -57,7 +58,7 @@
 <p>And since I could find anything good, I had to figure it out by my self, here is the result.</p>
 <p><a href="https://gist.github.com/robotamer/3027247">gist id=3027247</a></p>
 <p>HowTo:</p>
-<pre><code>    &lt;?php
+<pre><code class="language-php">    &lt;?php
     # Adds your library to the beginning of the php include path
     addInclude('~/code/libs', FALSE);
 
@@ -75,7 +76,7 @@
     $loader -&gt; register();
     ?&gt;
 </code></pre>
-<pre><code>&lt;?php
+<pre><code class="language-php">&lt;?php
 /**
  * SplClassLoader implementation that implements the technical interoperability
  * standards for PHP 5.3 namespaces and class names.
@@ -317,7 +318,7 @@ class SplClassLoader implements SplAutoloader
 
 ?&gt;
 </code></pre>
-<pre><code>
+<pre><code class="language-php">
 &lt;?php
 /**
  * Adds a directory to the php include path
@@ -366,7 +367,7 @@ echo '&lt;br /&gt;';
 ?&gt;
 
 </code></pre>
-<pre><code>&lt;?php
+<pre><code class="language-php">&lt;?php
 
 function autoload($className)
 {
@@ -418,5 +419,7 @@ function autoload($className)
         } else { r.style.display="none"; }
     }
     </script>
+	<script src="https://unpkg.com/prismjs@1.30.0/components/prism-core.min.js"></script>
+	<script src="https://unpkg.com/prismjs@1.30.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/w3.css">
-    <link rel="stylesheet" href="/css/prism-okaidia.min.css">
+    <!-- <link rel="stylesheet" href="/css/prism-okaidia.min.css"> -->
     <link rel="alternate" type="application/rss+xml" title="en RSS Feed" href="/en/rss.xml">
     
 
@@ -31,6 +31,7 @@
             margin-left: 4px; 
         }
     </style>
+    <link rel="stylesheet" href="https://unpkg.com/prismjs@1.30.0/themes/prism-okaidia.min.css">
 </head>
 <body class="w3-light-grey">
     <div class="w3-bar w3-black w3-card">
@@ -55,7 +56,7 @@
             
             <p>This is a php cli script that will create a database model from the database provided</p>
 <p>Download via git from <a href="http://github.com/pzzazz/phpcli">github -&gt; phpcli</a></p>
-<pre><code>    php zend/model.php -h
+<pre><code class="language-php">    php zend/model.php -h
     
     This is a command line PHP script.
     
@@ -69,7 +70,7 @@
     php zend/model.php -arg=value
 </code></pre>
 <p><strong>Database Structure:</strong></p>
-<pre><code>    CREATE TABLE users (
+<pre><code class="language-sql">    CREATE TABLE users (
           Alias TEXT UNIQUE,
           Password TEXT,
           eMail TEXT,
@@ -86,7 +87,7 @@
     );
 </code></pre>
 <p><strong>Sample Output:</strong></p>
-<pre><code>    
+<pre><code class="language-sh">    
     $ php zend/model.php -path=/var/www/TaMeR/data/tmp.db3 -table=users
 
 
@@ -252,5 +253,7 @@
         } else { r.style.display="none"; }
     }
     </script>
+	<script src="https://unpkg.com/prismjs@1.30.0/components/prism-core.min.js"></script>
+	<script src="https://unpkg.com/prismjs@1.30.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>
