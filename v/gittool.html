@@ -72,7 +72,14 @@
 <div class="menu-row"><a href="./markdown.html">markdown</a></div>
 </li>
 <li class="open">
-<div class="menu-row"><a href="./nix.html">nix</a></div>
+<div class="menu-row"><svg xmlns="http://www.w3.org/2000/svg" class="dropdown-arrow" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7 10l5 5 5-5z"/></svg><a href="#">lib</a></div>
+<ul>
+<li><a href="./lib.aliases.html">aliases</a></li>
+<li><a href="./lib.host.html">host</a></li>
+<li><a href="./lib.paths.html">paths</a></li>
+<li><a href="./lib.processes.html">processes</a></li>
+<li><a href="./lib.user.html">user</a></li>
+</ul>
 </li>
 <li class="open">
 <div class="menu-row"><a href="./upgrade.html">upgrade</a></div>
@@ -98,8 +105,10 @@
 <h2 id="usage-of-commit-as-standalone-cli-command">Usage of commit as standalone cli command</h2>
 <pre><code class="language-sh">$ commit help
 Usage<span class="token punctuation">:</span> commit <span class="token punctuation">[</span>flags<span class="token punctuation">]</span> <span class="token punctuation">[</span>commands<span class="token punctuation">]</span>
+Default<span class="token punctuation">:</span> increment patch
 
 Git add<span class="token punctuation">,</span> tag<span class="token punctuation">,</span> commit <span class="token operator">&</span> push
+
 
 Flags<span class="token punctuation">:</span>
   <span class="token operator">-</span>m  <span class="token operator">-</span>message        
@@ -143,18 +152,16 @@ Tasks<span class="token punctuation">:</span>
 <span class="token operator">-</span> commit<span class="token punctuation">:</span> git <span class="token function">commit</span> <span class="token punctuation">(</span>Usage<span class="token punctuation">:</span> <span class="token punctuation">.</span><span class="token operator">/</span>make<span class="token punctuation">.</span>vsh commit <span class="token punctuation">[</span><span class="token operator">-</span>p<span class="token punctuation">]</span> your message here
       default<span class="token punctuation">:</span> patch<span class="token punctuation">;</span> release<span class="token punctuation">:</span> minor <span class="token operator">&</span> push<span class="token punctuation">)</span></code></pre>
 <pre><code class="language-v"><span class="token keyword">import</span> build
-<span class="token keyword">import</span> v<span class="token punctuation">.</span>vmod
 <span class="token keyword">import</span> gittool
-
-<span class="token keyword">const</span> manifest <span class="token operator">=</span> vmod<span class="token punctuation">.</span><span class="token function">from_file</span><span class="token punctuation">(</span><span class="token string">'v.mod'</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token punctuation">{</span> <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">'Failed to decode v.mod: </span><span class="token string_interp">$</span>{err}<span class="token string">'</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
 
 <span class="token comment">// Make the build context</span>
 <span class="token keyword">mut</span> context <span class="token operator">:=</span> build<span class="token punctuation">.</span><span class="token function">context</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token comment">// help executes --task and is default if no args provided</span>
 gittool<span class="token punctuation">.</span><span class="token function">context_help</span><span class="token punctuation">(</span><span class="token keyword">mut</span> context<span class="token punctuation">)</span>
 <span class="token comment">// context V is seperated so the build system can be used with other coding languages</span>
-gittool<span class="token punctuation">.</span><span class="token function">context_v</span><span class="token punctuation">(</span><span class="token keyword">mut</span> context<span class="token punctuation">)</span> 
-gittool<span class="token punctuation">.</span><span class="token function">context_git</span><span class="token punctuation">(</span><span class="token keyword">mut</span> context<span class="token punctuation">,</span> manifest<span class="token punctuation">)</span></code></pre>
+gittool<span class="token punctuation">.</span><span class="token function">context_v</span><span class="token punctuation">(</span><span class="token keyword">mut</span> context<span class="token punctuation">)</span>
+gittool<span class="token punctuation">.</span><span class="token function">context_git</span><span class="token punctuation">(</span><span class="token keyword">mut</span> context<span class="token punctuation">)</span>
+context<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
 <h3 id="todo">Todo</h3>
 <ul>
 <li>install to system bin when running as root</li></ul>
@@ -182,7 +189,7 @@ gittool<span class="token punctuation">.</span><span class="token function">cont
 		<section id="context_git" class="doc-node">
 			<div class="title"><h2>fn context_git <a href="#context_git">#</a></h2></div>
 <pre class="signature">
-<code><span class="token keyword">fn</span> <span class="token function">context_git</span><span class="token punctuation">(</span><span class="token keyword">mut</span> context build<span class="token punctuation">.</span>BuildContext<span class="token punctuation">,</span> manifest vmod<span class="token punctuation">.</span>Manifest<span class="token punctuation">)</span></code></pre>
+<code><span class="token keyword">fn</span> <span class="token function">context_git</span><span class="token punctuation">(</span><span class="token keyword">mut</span> context build<span class="token punctuation">.</span>BuildContext<span class="token punctuation">)</span></code></pre>
 
 
 </section>
@@ -198,7 +205,7 @@ gittool<span class="token punctuation">.</span><span class="token function">cont
 		<section id="context_v" class="doc-node">
 			<div class="title"><h2>fn context_v <a href="#context_v">#</a></h2></div>
 <pre class="signature">
-<code><span class="token keyword">fn</span> <span class="token function">context_v</span><span class="token punctuation">(</span><span class="token keyword">mut</span> context build<span class="token punctuation">.</span>BuildContext<span class="token punctuation">,</span> manifest vmod<span class="token punctuation">.</span>Manifest<span class="token punctuation">)</span></code></pre>
+<code><span class="token keyword">fn</span> <span class="token function">context_v</span><span class="token punctuation">(</span><span class="token keyword">mut</span> context build<span class="token punctuation">.</span>BuildContext<span class="token punctuation">)</span></code></pre>
 
 
 </section>
@@ -277,7 +284,7 @@ gittool<span class="token punctuation">.</span><span class="token function">cont
 </section>
 
 
-						<div class="footer">Powered by vdoc. Generated on: 26 Apr 2026 23:13:37</div>
+						<div class="footer">Powered by vdoc. Generated on: 27 Apr 2026 11:23:08</div>
 					</div>
 					<div class="doc-toc"><ul><li class="open"><a href="#readme_gittool">README</a></li>
 <li class="open"><a href="#bump_version">fn bump_version</a>        <ul>
