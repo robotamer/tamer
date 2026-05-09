@@ -105,7 +105,7 @@
 
 		<section id="" class="doc-node const">
 <pre class="signature">
-<code><span class="token keyword">const</span> file_aliases_default <span class="token operator">=</span> <span class="token string">'/etc/mail/aliases'</span></code></pre>
+<code><span class="token keyword">const</span> file_aliases_default <span class="token operator">=</span> <span class="token keyword">if</span> os<span class="token punctuation">.</span><span class="token function">is_dir</span><span class="token punctuation">(</span><span class="token string">'/cfg'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token string">'/cfg/mail/aliases'</span> <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span> <span class="token string">'/etc/aliases'</span> <span class="token punctuation">}</span></code></pre>
 
 
 </section>
@@ -175,7 +175,7 @@
 </section>
 
 
-						<div class="footer">Powered by vdoc. Generated on: 27 Apr 2026 11:23:08</div>
+						<div class="footer">Powered by vdoc. Generated on: 27 Apr 2026 13:49:53</div>
 					</div>
 					<div class="doc-toc"><ul><li class="open"><a href="#Constants">Constants</a></li>
 <li class="open"><a href="#is_email_address">fn is_email_address</a>        <ul>

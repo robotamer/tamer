@@ -16,9 +16,4 @@ tags = ["linux", "nix"]
 1. **usr** user read-only user data
 1. **var** variable data files, such as log files, mail spools etc 
 
-```sh
-NIX=/opt/nix
-mkdir -p $NIX
-cd $NIX
-mkdir -p bin cfg etc lib scr srv sys tmp usr var
-```
+<script src="https://gist.github.com/robotamer/4ca635b09b4a296a78afe1d1678b8f06.js"></script>
