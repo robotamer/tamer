@@ -1,10 +1,9 @@
 +++
 date = "2015-01-28T19:54:59Z"
-modified = "2022-06-17T02:22:18+03:00"
+modified = "2026-05-09T20:10:20+0300"
 title = "About me"
-linktitle = ""
 description = "My little space on the net"
-keywords = ["robotamer", "gotamer", "phptamer", "tamer"]
+keywords = ["meta"]
 language = "en"
 author = ""
 tags = ["meta"]
@@ -18,26 +17,14 @@ Today I do my personal computing exclusively on Linux.
 
 My hobbies include Server technologies like email server, web servers, database, LXC, etc..
 I also continued my programming hobby, after the Amiga 1200 I switched to PHP at first unfortunately.  
-These days I program in Go and Vanilla Javascript. (Which just means pure javascript)
-And I am learning slowly Lua and Nim  
+I like Go and Vanilla Javascript. (Which just means pure javascript)  
+These days I program in V [repo](https://codeberg.org/tamer)
 
-### Profession
-As a manufacturing engineer I specialized early on, on computer related topics. 
-Learned, and used NC Lathes in 1984, and moved soon to CNC Machines.
-
-When it comes to manufacturing, I am knowledgeable in topics like.
-
- - Multi Axis CNC Machines, including Sliding Headstock Machines
- - Robotics applied for manufacturing
- - Touch Probing
- - etc
-
-## My heroes and influencers
-<div class="w3-container w3-responsive">
+## My heroes, and influencers
 
 | Name / Entity | Date of Birth | Date of Death | Major Work / Association |
 |---|---|---|---|
-| Apostle Thomas | ~1st Century AD | ~72 AD | Disciple of Jesus; Missionary to India |
+| Apostle Thomas | ~1st Century AD | ~72 AD | Disciple of Jesus|
 | John Locke | August 29, 1632 | October 28, 1704 | Two Treatises of Government |
 | Thomas Paine | February 9, 1737 | June 8, 1809 | Common Sense; The Rights of Man |
 | Robert Yates (Brutus) | January 27, 1738 | September 9, 1801 | The Anti-Federalist Papers |
@@ -62,4 +49,3 @@ When it comes to manufacturing, I am knowledgeable in topics like.
 | Edward Snowden | June 21, 1983 | - | NSA Surveillance Whistleblower |
 | Aaron Bushnell | June 30, 1998 | Feb. 25, 2024 | U.S. Airman; Self-immolation protest |
 
-</div>
