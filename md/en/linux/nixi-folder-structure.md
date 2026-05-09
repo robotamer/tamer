@@ -1,8 +1,9 @@
 +++
-title = "Nix File System Hierarchy"
+title = "Nixi File System Hierarchy"
 date = "2022-04-20 13:27:24"
+modified = "2026-05-09T21:34:41+0300"
 description = "The way it should be"
-tags = ["linux", "nix"]
+tags = ["linux", "nixi"]
 +++
 
 1. **bin** binaries 

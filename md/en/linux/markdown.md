@@ -2,11 +2,9 @@
 date = "2015-01-28T20:07:00Z"
 modified = "2025-04-06"
 title = "Markdown Syntax"
-linktitle = ""
 description = ""
 keywords = ["linux", "howto", "markdown"]
 language = "en"
-author = "TaMeR"
 tags = ["howto", "markdown"]
 groups = ["linux"]
 categories = ["linux"]
