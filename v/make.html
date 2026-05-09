@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="x-ua-compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>gittool | vdoc</title>
+		<title>make | vdoc</title>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -62,11 +62,11 @@
 						<li class="open">
 <div class="menu-row"><a href="./index.html">README</a></div>
 </li>
-<li class="open active">
-<div class="menu-row"><a href="./gittool.html">gittool</a></div>
-</li>
 <li class="open">
 <div class="menu-row"><a href="./highlighter.html">highlighter</a></div>
+</li>
+<li class="open active">
+<div class="menu-row"><a href="./make.html">make</a></div>
 </li>
 <li class="open">
 <div class="menu-row"><a href="./markdown.html">markdown</a></div>
@@ -79,6 +79,7 @@
 <li><a href="./lib.paths.html">paths</a></li>
 <li><a href="./lib.processes.html">processes</a></li>
 <li><a href="./lib.user.html">user</a></li>
+<li><a href="./lib.utils.html">utils</a></li>
 </ul>
 </li>
 <li class="open">
@@ -91,16 +92,16 @@
 			<div class="doc-scrollview" tabindex="-1" id="main-content">
 				<div class="doc-container">
 					<div class="doc-content">
-								<section id="readme_gittool" class="doc-node">
-			<div class="title"><h1> gittool <a href="#readme_gittool">#</a></h1></div>
-<h3 id="this-is-called-gittool-but-it-turned-out-to-be-a-bid-more-then-just-a-git-tool">This is called gittool, but it turned out to be a bid more then just a git tool.</h3>
+								<section id="readme_make" class="doc-node">
+			<div class="title"><h1> make <a href="#readme_make">#</a></h1></div>
+<h3 id="this-is-was-called-gittool-but-it-turned-out-to-be-a-bid-more-then-just-a-git-tool-there-for-now-renamed-to-make">This is was called gittool, but it turned out to be a bid more then just a git tool, there for now renamed to make</h3>
 <ol>
 <li>
-<p>A module (gittool) and a command line tool (commit); to git add, git tag, git commit, and git push.Including auto incrementing tags with semantic versioning.</p></li>
+<p>A module (make) and a command line tool (commit); to git add, git tag, git commit, and git push.Including auto incrementing tags with semantic versioning.</p></li>
 <li>
-<p>A convention based build system largly for V language, although there is some flexibility build in so in can be used for other languages as well.</p></li></ol>
+<p>A convention based build system largly for V language, although there is some flexibility build in soit can be used for other languages as well.</p></li></ol>
 <h2 id="installation">Installation</h2>
-<pre><code class="language-sh">v install https<span class="token punctuation">:</span><span class="token comment">//codeberg.org/tamer/gittool.git</span>
+<pre><code class="language-sh">v install https<span class="token punctuation">:</span><span class="token comment">//codeberg.org/tamer/make.git</span>
 <span class="token punctuation">.</span><span class="token operator">/</span>make<span class="token punctuation">.</span>vsh help</code></pre>
 <h2 id="usage-of-commit-as-standalone-cli-command">Usage of commit as standalone cli command</h2>
 <pre><code class="language-sh">$ commit help
@@ -125,8 +126,8 @@ Commands<span class="token punctuation">:</span>
   man                 Prints the auto<span class="token operator">-</span>generated manpage<span class="token punctuation">.</span></code></pre>
 <h2 id="documentation">Documentation</h2>
 <ul>
-<li><a href="https://codeberg.org/tamer/gittool/src/branch/master/doc">markdown docs</a></li>
-<li><a href="http://tamer.pw/v/gittool.html">browser friendly docs</a></li></ul>
+<li><a href="https://codeberg.org/tamer/make/src/branch/master/doc">markdown docs</a></li>
+<li><a href="http://tamer.pw/v/make.html">browser friendly docs</a></li></ul>
 <h2 id="usage-as-module">Usage as module</h2>
 <ul>
 <li>See doc folder for module documentation</li>
@@ -152,15 +153,15 @@ Tasks<span class="token punctuation">:</span>
 <span class="token operator">-</span> commit<span class="token punctuation">:</span> git <span class="token function">commit</span> <span class="token punctuation">(</span>Usage<span class="token punctuation">:</span> <span class="token punctuation">.</span><span class="token operator">/</span>make<span class="token punctuation">.</span>vsh commit <span class="token punctuation">[</span><span class="token operator">-</span>p<span class="token punctuation">]</span> your message here
       default<span class="token punctuation">:</span> patch<span class="token punctuation">;</span> release<span class="token punctuation">:</span> minor <span class="token operator">&</span> push<span class="token punctuation">)</span></code></pre>
 <pre><code class="language-v"><span class="token keyword">import</span> build
-<span class="token keyword">import</span> gittool
+<span class="token keyword">import</span> make
 
 <span class="token comment">// Make the build context</span>
 <span class="token keyword">mut</span> context <span class="token operator">:=</span> build<span class="token punctuation">.</span><span class="token function">context</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token comment">// help executes --task and is default if no args provided</span>
-gittool<span class="token punctuation">.</span><span class="token function">context_help</span><span class="token punctuation">(</span><span class="token keyword">mut</span> context<span class="token punctuation">)</span>
+make<span class="token punctuation">.</span><span class="token function">context_help</span><span class="token punctuation">(</span><span class="token keyword">mut</span> context<span class="token punctuation">)</span>
 <span class="token comment">// context V is seperated so the build system can be used with other coding languages</span>
-gittool<span class="token punctuation">.</span><span class="token function">context_v</span><span class="token punctuation">(</span><span class="token keyword">mut</span> context<span class="token punctuation">)</span>
-gittool<span class="token punctuation">.</span><span class="token function">context_git</span><span class="token punctuation">(</span><span class="token keyword">mut</span> context<span class="token punctuation">)</span>
+make<span class="token punctuation">.</span><span class="token function">context_v</span><span class="token punctuation">(</span><span class="token keyword">mut</span> context<span class="token punctuation">)</span>
+make<span class="token punctuation">.</span><span class="token function">context_git</span><span class="token punctuation">(</span><span class="token keyword">mut</span> context<span class="token punctuation">)</span>
 context<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
 <h3 id="todo">Todo</h3>
 <ul>
@@ -284,9 +285,9 @@ context<span class="token punctuation">.</span><span class="token function">run<
 </section>
 
 
-						<div class="footer">Powered by vdoc. Generated on: 27 Apr 2026 13:49:53</div>
+						<div class="footer">Powered by vdoc. Generated on: 9 May 2026 20:31:57</div>
 					</div>
-					<div class="doc-toc"><ul><li class="open"><a href="#readme_gittool">README</a></li>
+					<div class="doc-toc"><ul><li class="open"><a href="#readme_make">README</a></li>
 <li class="open"><a href="#bump_version">fn bump_version</a>        <ul>
 </ul>
 </li>

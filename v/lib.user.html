@@ -63,10 +63,10 @@
 <div class="menu-row"><a href="./index.html">README</a></div>
 </li>
 <li class="open">
-<div class="menu-row"><a href="./gittool.html">gittool</a></div>
+<div class="menu-row"><a href="./highlighter.html">highlighter</a></div>
 </li>
 <li class="open">
-<div class="menu-row"><a href="./highlighter.html">highlighter</a></div>
+<div class="menu-row"><a href="./make.html">make</a></div>
 </li>
 <li class="open">
 <div class="menu-row"><a href="./markdown.html">markdown</a></div>
@@ -79,6 +79,7 @@
 <li><a href="./lib.paths.html">paths</a></li>
 <li><a href="./lib.processes.html">processes</a></li>
 <li class="active"><a href="./lib.user.html">user</a></li>
+<li><a href="./lib.utils.html">utils</a></li>
 </ul>
 </li>
 <li class="open">
@@ -113,11 +114,19 @@
 
 </section>
 
+		<section id="current" class="doc-node">
+			<div class="title"><h2>fn current <a href="#current">#</a></h2></div>
+<pre class="signature">
+<code><span class="token keyword">fn</span> <span class="token function">current</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
+
+
+</section>
+
 		<section id="dir_bin" class="doc-node">
 			<div class="title"><h2>fn dir_bin <a href="#dir_bin">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">fn</span> <span class="token function">dir_bin</span><span class="token punctuation">(</span>username <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">?</span><span class="token builtin">string</span></code></pre>
-
+<p>dir_bin gets the user bin folder</p>
 
 </section>
 
@@ -125,7 +134,7 @@
 			<div class="title"><h2>fn dir_config <a href="#dir_config">#</a></h2></div>
 <pre class="signature">
 <code><span class="token keyword">fn</span> <span class="token function">dir_config</span><span class="token punctuation">(</span>username <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">?</span><span class="token builtin">string</span></code></pre>
-
+<p>dir_config gets the user config folder</p>
 
 </section>
 
@@ -161,27 +170,19 @@
 
 </section>
 
-		<section id="uid_by_username" class="doc-node">
-			<div class="title"><h2>fn uid_by_username <a href="#uid_by_username">#</a></h2></div>
+		<section id="name_by_uid" class="doc-node">
+			<div class="title"><h2>fn name_by_uid <a href="#name_by_uid">#</a></h2></div>
 <pre class="signature">
-<code><span class="token keyword">fn</span> <span class="token function">uid_by_username</span><span class="token punctuation">(</span>username <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">int</span></code></pre>
-<p>uid_by_username gets the username from uid</p>
+<code><span class="token keyword">fn</span> <span class="token function">name_by_uid</span><span class="token punctuation">(</span>uid <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
+<p>name_by_uid gets the users username from uid</p>
 
 </section>
 
-		<section id="username_by_uid" class="doc-node">
-			<div class="title"><h2>fn username_by_uid <a href="#username_by_uid">#</a></h2></div>
+		<section id="uid_by_name" class="doc-node">
+			<div class="title"><h2>fn uid_by_name <a href="#uid_by_name">#</a></h2></div>
 <pre class="signature">
-<code><span class="token keyword">fn</span> <span class="token function">username_by_uid</span><span class="token punctuation">(</span>uid <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
-<p>username_by_uid gets the users username from uid</p>
-
-</section>
-
-		<section id="username_current" class="doc-node">
-			<div class="title"><h2>fn username_current <a href="#username_current">#</a></h2></div>
-<pre class="signature">
-<code><span class="token keyword">fn</span> <span class="token function">username_current</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span></code></pre>
-
+<code><span class="token keyword">fn</span> <span class="token function">uid_by_name</span><span class="token punctuation">(</span>username <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">int</span></code></pre>
+<p>uid_by_name gets the username from uid</p>
 
 </section>
 
@@ -221,12 +222,15 @@
 </section>
 
 
-						<div class="footer">Powered by vdoc. Generated on: 27 Apr 2026 13:49:53</div>
+						<div class="footer">Powered by vdoc. Generated on: 9 May 2026 20:31:57</div>
 					</div>
 					<div class="doc-toc"><ul><li class="open"><a href="#by_name">fn by_name</a>        <ul>
 </ul>
 </li>
 <li class="open"><a href="#by_uid">fn by_uid</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#current">fn current</a>        <ul>
 </ul>
 </li>
 <li class="open"><a href="#dir_bin">fn dir_bin</a>        <ul>
@@ -247,13 +251,10 @@
 <li class="open"><a href="#is_user">fn is_user</a>        <ul>
 </ul>
 </li>
-<li class="open"><a href="#uid_by_username">fn uid_by_username</a>        <ul>
+<li class="open"><a href="#name_by_uid">fn name_by_uid</a>        <ul>
 </ul>
 </li>
-<li class="open"><a href="#username_by_uid">fn username_by_uid</a>        <ul>
-</ul>
-</li>
-<li class="open"><a href="#username_current">fn username_current</a>        <ul>
+<li class="open"><a href="#uid_by_name">fn uid_by_name</a>        <ul>
 </ul>
 </li>
 <li class="open"><a href="#users">fn users</a>        <ul>
