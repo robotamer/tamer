@@ -33,6 +33,7 @@ When it comes to manufacturing, I am knowledgeable in topics like.
  - etc
 
 ## My heroes and influencers
+<div class="w3-container w3-responsive">
 
 | Name / Entity | Date of Birth | Date of Death | Major Work / Association |
 |---|---|---|---|
@@ -61,3 +62,4 @@ When it comes to manufacturing, I am knowledgeable in topics like.
 | Edward Snowden | June 21, 1983 | - | NSA Surveillance Whistleblower |
 | Aaron Bushnell | June 30, 1998 | Feb. 25, 2024 | U.S. Airman; Self-immolation protest |
 
+</div>
